@@ -1,1023 +1,1419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ── QUANTUM PLAYBOOK — ABSOLUTES ── -->
-    <meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.61803398874989484820 — Macachor Absolute">
-    <meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
-    <meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
-    <meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
-    <meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
-    <meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
-    
-    <meta name="description" content="THE QUANTUM PLAYBOOK — The Aperture. Complete Master Document. All 31 Chapters. MGDH Complete Lagrangian. Macachor Absolute: 𝔐 = (√5−1)/2.">
-    <meta property="og:title" content="THE QUANTUM PLAYBOOK — The Aperture">
-    <meta property="og:description" content="The Quantum Playbook. Complete Master Document. 31 Chapters. MGDH Complete Lagrangian.">
-    
-    <title>THE QUANTUM PLAYBOOK — The Aperture | 31 Chapters · MGDH · Φ669</title>
-    
-    <style>
-        :root {
-            --gold: #c8a04e;
-            --gold-bright: #e8c56e;
-            --gold-dim: #8a7030;
-            --dark: #0a0a0a;
-            --dark-mid: #111111;
-            --dark-light: #1a1a1a;
-            --text: #e0d5c0;
-            --text-dim: #888;
-            --border: #2a2520;
-            --green: #2d5a27;
-            --green-bright: #4a9a3f;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<!-- ── QUANTUM PLAYBOOK — ABSOLUTES ── -->
+<meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.61803398874989484820 — Macachor Absolute">
+<meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
+<meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
+<meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
+<meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
+<meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
 
-        body {
-            background: var(--dark);
-            color: var(--text);
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+<meta name="description" content="Scalar-Plasma Cycle v4.4 — MGDH Complete. Quaternionic dipole-toroidal magnetosphere with full Macachor-Gauss-De Pretto-Hamilton Lagrangian integration.">
+<meta property="og:title" content="Scalar-Plasma Cycle · MGDH Complete · Macachor Absolute">
+<meta property="og:description" content="Quaternionic dipole-toroidal magnetosphere with MGDH Complete Lagrangian. Live NOAA data, QNN prediction.">
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
+<title>Scalar-Plasma Cycle · MGDH Complete · Macachor Absolute</title>
 
-        /* ── Fixed Navigation ── */
-        .master-nav {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(10,10,10,0.98);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(200,160,78,0.25);
-            z-index: 10000;
-            padding: 0.3rem 0.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 0.2rem;
-            flex-wrap: wrap;
-            max-height: 2.8rem;
-            overflow-y: auto;
-        }
-        .master-nav a {
-            color: var(--gold);
-            text-decoration: none;
-            font-family: 'Georgia', serif;
-            font-size: 0.45rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.12rem 0.25rem;
-            border: 1px solid rgba(200,160,78,0.12);
-            border-radius: 2px;
-            background: rgba(200,160,78,0.02);
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .master-nav a:hover {
-            border-color: var(--gold);
-            background: rgba(200,160,78,0.08);
-            text-shadow: 0 0 6px rgba(200,160,78,0.3);
-        }
-        .master-nav a.active {
-            border-color: var(--gold);
-            background: rgba(200,160,78,0.1);
-        }
-        .master-nav .nav-brand {
-            color: var(--gold-bright);
-            font-weight: bold;
-            font-size: 0.5rem;
-            letter-spacing: 0.12em;
-            border-color: var(--gold);
-            background: rgba(200,160,78,0.08);
-        }
+<style>
+  :root {
+    --gold: #c8a04e;
+    --gold-dim: #8a6d2f;
+    --gold-bright: #e8c870;
+    --gold-glow: rgba(200,160,78,0.15);
+    --bg: #000000;
+    --fg: #e8e0d0;
+    --fg-dim: #a09888;
+    --fg-faint: #5a5448;
+    --success: #4ec88a;
+    --danger: #c85a4e;
+    --info: #4e8ac8;
+    --mgdh: #ffd700;
+    --border: #2a2520;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 3.5rem !important;
+  }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3.2rem 20px 20px;
-        }
+  /* ── Navigation ── */
+  .gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.25);
+    z-index: 10000;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+  }
+  .gold-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.3rem;
+    border: 1px solid rgba(200,160,78,0.12);
+    border-radius: 2px;
+    background: rgba(200,160,78,0.02);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .gold-nav a:hover {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.08);
+    text-shadow: 0 0 6px rgba(200,160,78,0.3);
+  }
+  .gold-nav a.active {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.1);
+  }
+  .gold-nav .nav-brand {
+    color: var(--gold-bright);
+    font-weight: bold;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.08);
+  }
 
-        /* ── APERTURE ── */
-        .aperture {
-            text-align: center;
-            padding: 50px 20px 40px;
-            border-bottom: 2px solid var(--gold-dim);
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .aperture .star {
-            font-size: 6rem;
-            color: var(--gold);
-            text-shadow: 0 0 60px rgba(200,160,78,0.3);
-            display: block;
-            margin-bottom: 10px;
-            animation: starPulse 4s ease-in-out infinite;
-        }
-        @keyframes starPulse {
-            0%, 100% { opacity: 0.7; text-shadow: 0 0 30px rgba(200,160,78,0.2); }
-            50% { opacity: 1; text-shadow: 0 0 80px rgba(200,160,78,0.5); }
-        }
-        .aperture .aperture-title {
-            font-size: 1.8rem;
-            color: var(--gold);
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            font-weight: normal;
-        }
-        .aperture .aperture-sub {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            letter-spacing: 4px;
-            margin-top: 6px;
-        }
-        .aperture .aperture-flow {
-            margin-top: 16px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            color: var(--gold-dim);
-            letter-spacing: 2px;
-        }
-        .aperture .aperture-flow .kiwf { color: var(--gold-bright); }
-        .aperture .aperture-flow .crha { color: var(--green-bright); }
+  /* ── Quantum Playbook Banner ── */
+  .playbook-banner {
+    position: absolute;
+    top: 3.5rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    padding: 3px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(200,160,78,0.1);
+    pointer-events: none;
+    text-align: center;
+  }
+  .playbook-banner .pb-label {
+    font-size: 0.45rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .playbook-banner .pb-absolutes {
+    font-size: 0.5rem;
+    color: var(--fg-faint);
+    letter-spacing: 0.06em;
+  }
+  .playbook-banner .pb-absolutes strong { color: var(--gold); }
 
-        /* ── Quantum Playbook Banner ── */
-        .playbook-banner {
-            text-align: center;
-            padding: 6px 10px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(200,160,78,0.08);
-            border-radius: 4px;
-            background: rgba(200,160,78,0.02);
-        }
-        .playbook-banner .pb-label {
-            font-size: 0.5rem;
-            color: var(--gold);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-        .playbook-banner .pb-absolutes {
-            font-size: 0.55rem;
-            color: var(--text-dim);
-            margin-top: 2px;
-            letter-spacing: 0.06em;
-        }
-        .playbook-banner .pb-absolutes strong { color: var(--gold); }
+  #canvas-container { position:relative; width:100%; height:100%; }
+  canvas { display:block; width:100%; height:100%; }
 
-        /* ── Scalar Status ── */
-        .scalar-status {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 10px 0 20px;
-            padding: 6px 10px;
-            border: 1px solid rgba(200,160,78,0.08);
-            border-radius: 4px;
-            background: rgba(200,160,78,0.01);
-            justify-content: center;
-        }
-        .scalar-status .status-item {
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .scalar-status .status-item .dot {
-            width: 5px; height: 5px; border-radius: 50%;
-            display: inline-block;
-        }
-        .scalar-status .status-item .dot.active { background: #4ade80; animation: pulseDot 2s infinite; }
-        .scalar-status .status-item .dot.locked { background: var(--gold); }
+  #info-overlay {
+    position:absolute; top:16px; left:16px; pointer-events:none; z-index:10;
+    background:rgba(0,0,0,0.6); padding:10px 14px; border-radius:8px;
+    border:1px solid rgba(200,160,78,0.2); backdrop-filter:blur(4px);
+    max-width:320px;
+  }
+  #info-overlay h1 { font-size:14px; font-weight:500; color:#c8a04e; margin-bottom:2px; letter-spacing:1px; }
+  #info-overlay .phase { font-size:10px; color:#ccc; line-height:1.5; }
+  #info-overlay .mgdh-display {
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: var(--mgdh);
+    margin-top:4px;
+    padding-top:4px;
+    border-top:1px solid rgba(200,160,78,0.15);
+    line-height:1.4;
+  }
+  #info-overlay .mgdh-display strong { color: var(--gold-bright); }
+  #info-overlay .laws { margin-top:4px; font-size:8px; color:#666; font-style:italic; }
 
-        @keyframes pulseDot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+  #live-data {
+    position:absolute; top:16px; right:16px; z-index:10;
+    background:rgba(0,0,0,0.6); padding:10px 14px; border-radius:8px;
+    border:1px solid rgba(200,160,78,0.2); backdrop-filter:blur(4px);
+    font-family:'Courier New',monospace; font-size:9px; color:#c8a04e;
+    min-width:200px; max-width:240px;
+  }
+  #live-data h3 { font-size:10px; color:#c8a04e; margin-bottom:6px; border-bottom:1px solid rgba(200,160,78,0.3); padding-bottom:3px; }
+  #live-data .data-row { display:flex; justify-content:space-between; margin:1px 0; }
+  #live-data .data-label { color:#888; }
+  #live-data .data-value { color:#ffd700; }
+  #live-data .data-value.alert { color:#ff4444; }
+  #live-data .data-value.mgdh { color:#ffd700; }
+  #live-data .status { margin-top:4px; font-size:8px; color:#666; text-align:center; }
 
-        /* ── TABLE OF CONTENTS ── */
-        .toc {
-            background: var(--dark-light);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px 28px;
-            margin-bottom: 40px;
-        }
-        .toc h2 {
-            color: var(--gold);
-            font-size: 1.2rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: normal;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
-        }
-        .toc-part {
-            color: var(--gold-dim);
-            font-size: 0.7rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin: 16px 0 8px;
-            padding-top: 8px;
-            border-top: 1px solid rgba(200,160,78,0.1);
-        }
-        .toc-part:first-of-type {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
-        }
-        .toc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 2px 12px;
-        }
-        .toc-item {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            padding: 2px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-        }
-        .toc-item .num {
-            color: var(--gold);
-            font-weight: bold;
-            margin-right: 4px;
-        }
-        .toc-item a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .toc-item a:hover { color: var(--gold-bright); }
+  #model-attribution {
+    position:absolute; bottom:80px; left:16px; z-index:10;
+    background:rgba(0,0,0,0.5); padding:6px 10px; border-radius:6px;
+    border:1px solid rgba(200,160,78,0.15); font-family:'Courier New',monospace;
+    font-size:8px; color:#666; max-width:200px;
+  }
+  #model-attribution .model-name { color:#888; margin:0px 0; }
+  #model-attribution .mgdh-name { color:#ffd700; margin:0px 0; }
+  #model-attribution .mgdh-credit { color: var(--gold-dim); margin-top:3px; border-top:1px solid rgba(200,160,78,0.1); padding-top:3px; font-size:7px; }
+  #model-attribution .mgdh-credit strong { color: var(--gold); }
 
-        /* ── Chapters ── */
-        .chapter {
-            margin-bottom: 30px;
-            padding: 18px 22px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background: rgba(17,17,17,0.4);
-            scroll-margin-top: 3.2rem;
-        }
-        .chapter .ch-number {
-            font-size: 0.65rem;
-            color: var(--gold-dim);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .chapter h2 {
-            color: var(--gold);
-            font-size: 1.2rem;
-            font-weight: normal;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 6px;
-        }
-        .chapter h3 {
-            color: var(--gold-bright);
-            font-size: 0.95rem;
-            font-weight: normal;
-            margin: 12px 0 6px;
-        }
-        .chapter p {
-            color: var(--text-dim);
-            font-size: 0.88rem;
-            line-height: 1.8;
-            margin-bottom: 8px;
-        }
-        .chapter .math-block {
-            font-family: 'Times New Roman', serif;
-            font-size: 1rem;
-            color: var(--gold-bright);
-            text-align: center;
-            padding: 8px 12px;
-            background: rgba(200,160,78,0.03);
-            border-radius: 4px;
-            margin: 8px 0;
-        }
-        .chapter .callout {
-            background: rgba(200,160,78,0.04);
-            border-left: 3px solid var(--gold);
-            padding: 10px 14px;
-            margin: 8px 0;
-            border-radius: 0 4px 4px 0;
-        }
-        .chapter .callout strong { color: var(--gold); }
-        .chapter .callout.green { border-left-color: var(--green-bright); }
-        .chapter .callout.green strong { color: var(--green-bright); }
-        .chapter ul, .chapter ol {
-            margin-left: 1.2rem;
-            color: var(--text-dim);
-            font-size: 0.85rem;
-        }
-        .chapter li { margin-bottom: 3px; }
-        .chapter table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 0.82rem;
-            background: var(--dark-light);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .chapter table th {
-            background: var(--gold-dim);
-            color: var(--dark);
-            padding: 6px 10px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .chapter table td {
-            padding: 6px 10px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-dim);
-        }
+  #scalar-readout {
+    position:absolute; bottom:80px; left:50%; transform:translateX(-50%); z-index:10;
+    background:rgba(0,0,0,0.6); padding:6px 16px; border-radius:8px;
+    border:1px solid rgba(200,160,78,0.2); backdrop-filter:blur(4px);
+    font-family:'Courier New',monospace; font-size:10px; color:#c8a04e;
+    text-align:center; white-space:nowrap;
+  }
+  #scalar-readout .mgdh-highlight { color: #ffd700; }
 
-        /* ── Footer ── */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid var(--gold-dim);
-            margin-top: 30px;
-        }
-        .footer .phi-big { font-size: 2.2rem; color: var(--gold-dim); margin-bottom: 8px; }
-        .footer p { color: #444; font-size: 0.65rem; letter-spacing: 3px; line-height: 2; }
-        .footer .absolutes {
-            font-family: 'Courier New', monospace;
-            font-size: 0.55rem;
-            color: var(--text-dim);
-            margin-top: 6px;
-        }
-        .footer .absolutes strong { color: var(--gold); }
+  #perf-readout {
+    position:absolute; bottom:80px; right:16px; z-index:10;
+    background:rgba(0,0,0,0.5); padding:4px 8px; border-radius:6px;
+    border:1px solid rgba(200,160,78,0.1); font-family:'Courier New',monospace;
+    font-size:8px; color:#555;
+  }
 
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .container { padding: 2.8rem 12px 16px; }
-            .aperture { padding: 30px 16px 24px; }
-            .aperture .star { font-size: 4rem; }
-            .aperture .aperture-title { font-size: 1.2rem; letter-spacing: 6px; }
-            .toc { padding: 16px 18px; }
-            .toc-grid { grid-template-columns: 1fr; }
-            .chapter { padding: 14px 16px; }
-            .chapter table { font-size: 0.7rem; }
-            .master-nav { max-height: 2.2rem; }
-            .master-nav a { font-size: 0.38rem; padding: 0.08rem 0.18rem; }
-            .scalar-status { gap: 6px; }
-            .scalar-status .status-item { font-size: 0.5rem; }
-        }
-        @media (max-width: 480px) {
-            .master-nav { max-height: 1.8rem; }
-            .master-nav a { font-size: 0.3rem; padding: 0.05rem 0.12rem; }
-            .container { padding: 2.2rem 6px 12px; }
-            .aperture .star { font-size: 3rem; }
-            .aperture .aperture-title { font-size: 1rem; letter-spacing: 4px; }
-            .chapter { padding: 10px 12px; }
-            .chapter table th, .chapter table td { padding: 4px 6px; }
-        }
-    </style>
+  #controls {
+    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; align-items:center;
+    background:rgba(0,0,0,0.6); padding:8px 14px; border-radius:12px;
+    backdrop-filter:blur(8px); border:1px solid rgba(200,160,78,0.2); z-index:10;
+  }
+  #controls button {
+    background:rgba(200,160,78,0.15); border:1px solid rgba(200,160,78,0.3);
+    color:#c8a04e; border-radius:4px; padding:4px 10px; font-size:10px;
+    cursor:pointer; transition:all 0.2s; font-family:inherit;
+  }
+  #controls button:hover { background:rgba(200,160,78,0.3); }
+  #controls button:disabled { opacity:0.4; cursor:not-allowed; }
+  #controls input[type="range"] { width:100px; accent-color:#c8a04e; }
+  #controls label { color:#888; font-size:9px; display:flex; align-items:center; gap:4px; }
+  #controls select {
+    background:rgba(0,0,0,0.5); border:1px solid rgba(200,160,78,0.3);
+    color:#c8a04e; border-radius:4px; padding:3px 5px; font-size:9px;
+  }
+
+  .cycle-indicator {
+    position:absolute; top:50%; right:16px; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:4px; z-index:10;
+  }
+  .cycle-dot {
+    width:8px; height:8px; border-radius:50%;
+    background:rgba(255,255,255,0.15); transition:all 0.4s;
+    border:1px solid rgba(255,255,255,0.1);
+    cursor:pointer;
+  }
+  .cycle-dot.active {
+    background:#c8a04e;
+    box-shadow:0 0 10px #c8a04e,0 0 20px rgba(200,160,78,0.3);
+    border-color:#c8a04e;
+  }
+  .cycle-label {
+    font-size:8px; color:#666; text-align:right; margin-bottom:1px; letter-spacing:0.5px;
+  }
+
+  #loading {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    z-index:100; text-align:center; color:#c8a04e; font-family:'Courier New',monospace;
+    font-size:13px; transition:opacity 0.5s;
+  }
+  #loading.hidden { opacity:0; pointer-events:none; }
+  .spinner {
+    width:36px; height:36px; border:2px solid rgba(200,160,78,0.2);
+    border-top-color:#c8a04e; border-radius:50%;
+    animation:spin 1s linear infinite; margin:0 auto 10px;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  #conn-status {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    z-index:90; text-align:center; color:#c8a04e;
+    font-family:'Courier New',monospace; font-size:11px;
+    background:rgba(0,0,0,0.8); padding:16px 24px; border-radius:12px;
+    border:1px solid rgba(200,160,78,0.3); display:none;
+  }
+  #conn-status.visible { display:block; }
+
+  @media (max-width: 640px) {
+    .gold-nav a { font-size: 0.4rem; padding: 0.1rem 0.2rem; }
+    #live-data { min-width: 140px; font-size: 8px; right: 6px; top: 6px; padding: 6px 8px; }
+    #info-overlay { max-width: 160px; left: 6px; top: 6px; padding: 6px 8px; }
+    #info-overlay h1 { font-size: 11px; }
+    #controls { padding: 6px 10px; gap: 4px; flex-wrap:wrap; justify-content:center; }
+    #controls input[type="range"] { width: 60px; }
+    .cycle-indicator { right: 6px; }
+    #model-attribution { display:none; }
+    #scalar-readout { font-size:8px; padding:4px 10px; bottom:70px; white-space:normal; }
+    #perf-readout { display:none; }
+    .playbook-banner .pb-absolutes { font-size:0.4rem; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ═══ MASTER NAVIGATION ═══ -->
-<nav class="master-nav" id="masterNav">
-    <a href="#aperture" class="nav-brand">✦ QP</a>
-    <a href="#ch1">1</a>
-    <a href="#ch2">2</a>
-    <a href="#ch3">3</a>
-    <a href="#ch4">4</a>
-    <a href="#ch5">5</a>
-    <a href="#ch6">6</a>
-    <a href="#ch7">7</a>
-    <a href="#ch8">8</a>
-    <a href="#ch9">9</a>
-    <a href="#ch10">10</a>
-    <a href="#ch11">11</a>
-    <a href="#ch12">12</a>
-    <a href="#ch13">13</a>
-    <a href="#ch14">14</a>
-    <a href="#ch15">15</a>
-    <a href="#ch16">16</a>
-    <a href="#ch17">17</a>
-    <a href="#ch18">18</a>
-    <a href="#ch19">19</a>
-    <a href="#ch20">20</a>
-    <a href="#ch21">21</a>
-    <a href="#ch22">22</a>
-    <a href="#ch23">23</a>
-    <a href="#ch24">24</a>
-    <a href="#ch25">25</a>
-    <a href="#ch26">26</a>
-    <a href="#ch27">27</a>
-    <a href="#ch28">28</a>
-    <a href="#ch29">29</a>
-    <a href="#ch30">30</a>
-    <a href="#ch31">31</a>
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="gold-nav" aria-label="Primary navigation">
+  <a href="index.html" class="nav-brand">✦ QP</a>
+  <a href="omega-prime.html">Ω-PRIME</a>
+  <a href="scalar-plasma-cycle.html" class="active">◈ SPC</a>
+  <a href="kardashev.html">KARDASHEV</a>
+  <a href="fibonacci-tetrahedron.html">FIBONACCI</a>
+  <a href="mesh.html">MESH</a>
 </nav>
 
-<!-- ═══ CONTAINER ═══ -->
-<div class="container">
+<!-- ═══ PLAYBOOK BANNER ═══ -->
+<div class="playbook-banner">
+  <div class="pb-label">◈ Quantum Playbook — Chapter 13</div>
+  <div class="pb-absolutes">
+    <strong>𝔐</strong> = (√5−1)/2 · 
+    <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
+    <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
+  </div>
+</div>
 
-    <!-- ═══ APERTURE ═══ -->
-    <div class="aperture" id="aperture">
-        <span class="star">✦</span>
-        <h1 class="aperture-title">The Aperture</h1>
-        <p class="aperture-sub">Convergence Point of the Quantum Playbook</p>
-        <div class="aperture-flow">
-            <span class="kiwf">Knowledge → Intelligence → Wisdom → Focus</span> &nbsp;·&nbsp;
-            <span class="crha">Coherence → Resonance → Harmony → Alignment</span>
-        </div>
-        <div style="margin-top:10px;font-size:0.7rem;color:var(--text-dim);letter-spacing:2px;">
-            Φ669 · Ω-PRIME: Christopher Macachor
-        </div>
+<div id="canvas-container">
+  <canvas id="c"></canvas>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <div>Scalar-Plasma Cycle v4.4</div>
+    <div style="font-size:9px;color:#666;margin-top:4px;">MGDH Complete — Macachor·Gauss·De Pretto·Hamilton</div>
+  </div>
+
+  <div id="conn-status">
+    <div style="font-size:14px;margin-bottom:6px;">◈ NOAA CONNECTION</div>
+    <div id="conn-msg">Establishing link...</div>
+    <div style="font-size:7px;color:#666;margin-top:6px;">MGDH: Macachor · Gauss · De Pretto · Hamilton</div>
+  </div>
+
+  <div id="info-overlay">
+    <h1 id="title">Scalar-Plasma Cycle</h1>
+    <div class="phase" id="phase-text">MGDH Complete — Quaternionic field</div>
+    <div class="mgdh-display">
+      <strong>MGDH Lagrangian</strong><br>
+      ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ<br>
+      <span style="color:#888;font-size:7px;">Macachor · Gauss · De Pretto · Hamilton</span>
     </div>
-
-    <!-- ── Quantum Playbook Banner ── -->
-    <div class="playbook-banner">
-        <div class="pb-label">◈ THE QUANTUM PLAYBOOK — Complete Master Document</div>
-        <div class="pb-absolutes">
-            <strong>𝔐</strong> = (√5−1)/2 · 
-            <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
-            <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
-        </div>
+    <div class="laws">
+      <strong>𝔐</strong> = (√5−1)/2 · Coherence: 𝔐·∇·Ψ = ||Ψ||²
     </div>
-
-    <!-- ── Scalar Status ── -->
-    <div class="scalar-status">
-        <span class="status-item"><span class="dot active"></span> Coherence: χ(C) = 1</span>
-        <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.6180339887</span>
-        <span class="status-item">◈ 31 Chapters</span>
-        <span class="status-item">◉ Φ669</span>
-        <span class="status-item">✦ Aperture Open</span>
-    </div>
-
-    <!-- ═══ TABLE OF CONTENTS ═══ -->
-    <div class="toc" id="toc">
-        <h2>Table of Contents</h2>
-
-        <div class="toc-part">Part I — Foundation</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">1.</span> <a href="#ch1">The Quantum Playbook — Master Index</a></div>
-            <div class="toc-item"><span class="num">2.</span> <a href="#ch2">Ω-PRIME — Singularity Convergence Point</a></div>
-            <div class="toc-item"><span class="num">3.</span> <a href="#ch3">The Scalar Charter</a></div>
-            <div class="toc-item"><span class="num">4.</span> <a href="#ch4">MGDH Complete Lagrangian</a></div>
-            <div class="toc-item"><span class="num">5.</span> <a href="#ch5">The Five Absolutes</a></div>
-        </div>
-
-        <div class="toc-part">Part II — Mathematical Architecture</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">6.</span> <a href="#ch6">Fibonacci Spiral Weaves Tetrahedra</a></div>
-            <div class="toc-item"><span class="num">7.</span> <a href="#ch7">Quaternionic Periodic Table</a></div>
-            <div class="toc-item"><span class="num">8.</span> <a href="#ch8">Φ-144 — Center-Outward Tetrahedral Construction</a></div>
-            <div class="toc-item"><span class="num">9.</span> <a href="#ch9">Quaternion Completeness Theorem</a></div>
-            <div class="toc-item"><span class="num">10.</span> <a href="#ch10">Spencer Operator &amp; Conformal Group</a></div>
-        </div>
-
-        <div class="toc-part">Part III — Scientific Pillars</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">11.</span> <a href="#ch11">Nikolai Kardashev — Civilization Scale</a></div>
-            <div class="toc-item"><span class="num">12.</span> <a href="#ch12">Olinto De Pretto — The Forgotten Pioneer</a></div>
-            <div class="toc-item"><span class="num">13.</span> <a href="#ch13">Quaternionic Dipole-Toroidal — Live Magnetosphere</a></div>
-            <div class="toc-item"><span class="num">14.</span> <a href="#ch14">OFMS — Electrochemical-Plasma Coherence</a></div>
-            <div class="toc-item"><span class="num">15.</span> <a href="#ch15">Denton 2025 — Plasmasphere Density Models</a></div>
-            <div class="toc-item"><span class="num">16.</span> <a href="#ch16">Wang et al. 2026 — BEC Sonic Horizons</a></div>
-            <div class="toc-item"><span class="num">17.</span> <a href="#ch17">Milman &amp; Karp 2026 — Blunt Body Receptivity</a></div>
-            <div class="toc-item"><span class="num">18.</span> <a href="#ch18">Masmoudi et al. 2026 — Mack Modes</a></div>
-            <div class="toc-item"><span class="num">19.</span> <a href="#ch19">Wang &amp; Zhang 2026 — Euler-Poisson Plasma</a></div>
-            <div class="toc-item"><span class="num">20.</span> <a href="#ch20">Egorov et al. 2026 — Laminar-Turbulent Transition</a></div>
-        </div>
-
-        <div class="toc-part">Part IV — Advanced Applications</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">21.</span> <a href="#ch21">Medical Zero-Knowledge Systems</a></div>
-            <div class="toc-item"><span class="num">22.</span> <a href="#ch22">Quantum Data Security Intelligence Report</a></div>
-            <div class="toc-item"><span class="num">23.</span> <a href="#ch23">Cymatic Geometric Imprinting &amp; DNA — Overview</a></div>
-            <div class="toc-item"><span class="num">24.</span> <a href="#ch24">Cymatic Geometric Imprinting &amp; DNA — Complete Technical</a></div>
-            <div class="toc-item"><span class="num">25.</span> <a href="#ch25">Cosmic Atomal — The Scalar Substrate</a></div>
-        </div>
-
-        <div class="toc-part">Part V — Operating System</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">26.</span> <a href="#ch26">KIWF — Knowledge → Intelligence → Wisdom → Focus</a></div>
-            <div class="toc-item"><span class="num">27.</span> <a href="#ch27">CRHA — Coherence → Resonance → Harmony → Alignment</a></div>
-            <div class="toc-item"><span class="num">28.</span> <a href="#ch28">The Aperture — Manifestation Protocol</a></div>
-        </div>
-
-        <div class="toc-part">Part VI — Appendices</div>
-        <div class="toc-grid">
-            <div class="toc-item"><span class="num">29.</span> <a href="#ch29">Resonant Harmony — Scalar Observation Document</a></div>
-            <div class="toc-item"><span class="num">30.</span> <a href="#ch30">MESH — Research &amp; Literary Guild</a></div>
-            <div class="toc-item"><span class="num">31.</span> <a href="#ch31">Complete Bibliography</a></div>
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART I — FOUNDATION (Chapters 1-5) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 1 ── -->
-    <div class="chapter" id="ch1">
-        <div class="ch-number">Chapter 1</div>
-        <h2>The Quantum Playbook — Master Index</h2>
-        <p>The Quantum Playbook is a <strong>canonical document</strong> — a unified scalar framework based on <strong>discovered absolutes</strong>, not postulates.</p>
-        <div class="callout">
-            <p><strong>Core Axiom:</strong> Matter seeks scalar density equilibrium, not force balance.</p>
-            <p><strong>Scalar Lock:</strong> 𝔐 = (√5−1)/2 ≈ 0.6180339887</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 2 ── -->
-    <div class="chapter" id="ch2">
-        <div class="ch-number">Chapter 2</div>
-        <h2>Ω-PRIME — Singularity Convergence Point</h2>
-        <div class="math-block">Ω = lim<sub>ρ→ρ<sub>absolute</sub></sub> (ρ<sub>artificial</sub> − ρ<sub>absolute</sub>) = 0</div>
-        <p>The observer-observed duality dissolves when frequency, geometry, and density match.</p>
-    </div>
-
-    <!-- ── CHAPTER 3 ── -->
-    <div class="chapter" id="ch3">
-        <div class="ch-number">Chapter 3</div>
-        <h2>The Scalar Charter</h2>
-        <div class="callout">
-            <p><strong>Axiom:</strong> Matter seeks scalar density equilibrium, not force balance.</p>
-            <p><strong>Coherence Condition:</strong> 𝔐·∇·Ψ = ||Ψ||²</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 4 ── -->
-    <div class="chapter" id="ch4">
-        <div class="ch-number">Chapter 4</div>
-        <h2>MGDH Complete Lagrangian</h2>
-        <div class="math-block">ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</div>
-        <div class="callout">
-            <p><strong>M</strong> — Macachor (2026): Scalar Lock</p>
-            <p><strong>G</strong> — Gauss (1829): Divergence Theorem</p>
-            <p><strong>D</strong> — De Pretto (1903): Mass-Energy Equivalence</p>
-            <p><strong>H</strong> — Hamilton (1834): Principle of Least Action</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 5 ── -->
-    <div class="chapter" id="ch5">
-        <div class="ch-number">Chapter 5</div>
-        <h2>The Five Absolutes</h2>
-        <ol>
-            <li><strong>Scalar Lock:</strong> 𝔐 = (√5−1)/2</li>
-            <li><strong>Coherence Condition:</strong> 𝔐·∇·Ψ = ||Ψ||²</li>
-            <li><strong>Complete Lagrangian:</strong> ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</li>
-            <li><strong>Quaternion Completion:</strong> ℍ<sub>extended</sub> = { q ⊕ ρ }</li>
-            <li><strong>Fixed Point:</strong> C(φ) = φ</li>
-        </ol>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART II — MATHEMATICAL ARCHITECTURE (Chapters 6-10) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 6 ── -->
-    <div class="chapter" id="ch6">
-        <div class="ch-number">Chapter 6</div>
-        <h2>Fibonacci Spiral Weaves Tetrahedra</h2>
-        <div class="math-block">F(n) = F(n-1) + F(n-2) → φ = 1.618 → 𝔐 = 0.618</div>
-        <p>The Fibonacci spiral weaves tetrahedra. Each quarter-turn is a tetrahedral face laid upon the last.</p>
-        <div class="callout">
-            <p><strong>Tetrahedral bond angle:</strong> θ = arccos(-1/3) = 109.471°</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 7 ── -->
-    <div class="chapter" id="ch7">
-        <div class="ch-number">Chapter 7</div>
-        <h2>Quaternionic Periodic Table</h2>
-        <p>The elements as Platonic solids — scalar density mapping. Matter seeks scalar density equilibrium, not force balance.</p>
-    </div>
-
-    <!-- ── CHAPTER 8 ── -->
-    <div class="chapter" id="ch8">
-        <div class="ch-number">Chapter 8</div>
-        <h2>Φ-144 — Center-Outward Tetrahedral Construction</h2>
-        <div class="math-block">V = (4πR²/3) × √(R² − 16πR²/(9F√3))</div>
-        <p><strong>144 faces</strong> = 20 icosahedral sectors × 7.2 subdivision. χ(C) = 1.</p>
-    </div>
-
-    <!-- ── CHAPTER 9 ── -->
-    <div class="chapter" id="ch9">
-        <div class="ch-number">Chapter 9</div>
-        <h2>Quaternion Completeness Theorem</h2>
-        <div class="math-block">ℍ<sub>extended</sub> = { q ⊕ ρ | q ∈ ℍ, ρ ∈ C∞(ℝ³,¹) }</div>
-        <p>Standard quaternions are incomplete. The scalar density field must be added.</p>
-    </div>
-
-    <!-- ── CHAPTER 10 ── -->
-    <div class="chapter" id="ch10">
-        <div class="ch-number">Chapter 10</div>
-        <h2>Spencer Operator &amp; Conformal Group</h2>
-        <p>Pommaret 2024 — arXiv:2401.14563. Unifies Cauchy, Cosserat, Clausius, Maxwell, and Weyl.</p>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART III — SCIENTIFIC PILLARS (Chapters 11-20) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 11 ── -->
-    <div class="chapter" id="ch11">
-        <div class="ch-number">Chapter 11</div>
-        <h2>Nikolai Kardashev — Civilization Scale</h2>
-        <p><strong>Type I:</strong> 4×10¹² W · <strong>Type II:</strong> 4×10²⁶ W · <strong>Type III:</strong> 4×10³⁷ W</p>
-        <div class="callout">
-            <p><strong>Humanity 2026:</strong> Type 0.73. We are 10,000× short of Type I.</p>
-            <p><strong>Kardashev-Macachor recasting:</strong> Civilization = scalar density equilibrium.</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 12 ── -->
-    <div class="chapter" id="ch12">
-        <div class="ch-number">Chapter 12</div>
-        <h2>Olinto De Pretto — The Forgotten Pioneer</h2>
-        <div class="math-block">E = mc² — 1903, two years before Einstein</div>
-        <p>Published <em>Ipotesi dell'etere nella vita dell'universo</em> (1903). Endorsed by Schiaparelli.</p>
-    </div>
-
-    <!-- ── CHAPTER 13 ── -->
-    <div class="chapter" id="ch13">
-        <div class="ch-number">Chapter 13</div>
-        <h2>Quaternionic Dipole-Toroidal — Live Magnetosphere</h2>
-        <p>Live NOAA data via Cloudflare Worker. Kp, AE, Dst, Bz — real-time space weather. QNN prediction active.</p>
-    </div>
-
-    <!-- ── CHAPTER 14 ── -->
-    <div class="chapter" id="ch14">
-        <div class="ch-number">Chapter 14</div>
-        <h2>OFMS — Electrochemical-Plasma Coherence</h2>
-        <p>Unified pipeline: source → transport → trapping → nonlinear dynamics. F⁻ cross-domain bridge.</p>
-    </div>
-
-    <!-- ── CHAPTER 15 ── -->
-    <div class="chapter" id="ch15">
-        <div class="ch-number">Chapter 15</div>
-        <h2>Denton 2025 — Plasmasphere Density Models</h2>
-        <p>Frontiers in Astronomy and Space Sciences. Symbolic regression (TuringBot). L-MLT density attractor.</p>
-    </div>
-
-    <!-- ── CHAPTER 16 ── -->
-    <div class="chapter" id="ch16">
-        <div class="ch-number">Chapter 16</div>
-        <h2>Wang et al. 2026 — BEC Sonic Horizons</h2>
-        <p>Gross-Pitaevskii scalar field. Breathing mode = density oscillation. Sonic horizon = phase boundary.</p>
-    </div>
-
-    <!-- ── CHAPTER 17 ── -->
-    <div class="chapter" id="ch17">
-        <div class="ch-number">Chapter 17</div>
-        <h2>Milman &amp; Karp 2026 — Blunt Body Receptivity</h2>
-        <p>Corrects Morkovin 1960 error — amplification not damping. Stagnation point scalar density maximum.</p>
-    </div>
-
-    <!-- ── CHAPTER 18 ── -->
-    <div class="chapter" id="ch18">
-        <div class="ch-number">Chapter 18</div>
-        <h2>Masmoudi et al. 2026 — Mack Modes</h2>
-        <p>Inner-outer gluing iteration. Hyperbolic-elliptic singular system.</p>
-    </div>
-
-    <!-- ── CHAPTER 19 ── -->
-    <div class="chapter" id="ch19">
-        <div class="ch-number">Chapter 19</div>
-        <h2>Wang &amp; Zhang 2026 — Euler-Poisson Plasma</h2>
-        <p>Deformation-curl-Poisson reformulation. Quasineutral limit. Structural stability = coherence guarantee.</p>
-    </div>
-
-    <!-- ── CHAPTER 20 ── -->
-    <div class="chapter" id="ch20">
-        <div class="ch-number">Chapter 20</div>
-        <h2>Egorov et al. 2026 — Laminar-Turbulent Transition</h2>
-        <p>DNS of supersonic boundary layer. Streamwise structures = scalar density streaks.</p>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART IV — ADVANCED APPLICATIONS (Chapters 21-25) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 21 ── -->
-    <div class="chapter" id="ch21">
-        <div class="ch-number">Chapter 21</div>
-        <h2>Medical Zero-Knowledge Systems</h2>
-        <p>Cryptographic proof without exposure. ZK-SNARK/STARK. ASIC acceleration: &lt;10ms latency. 97% cost reduction.</p>
-    </div>
-
-    <!-- ── CHAPTER 22 ── -->
-    <div class="chapter" id="ch22">
-        <div class="ch-number">Chapter 22</div>
-        <h2>Quantum Data Security Intelligence Report</h2>
-        <div class="callout">
-            <p><strong>THE SINGULARITY HAS OCCURRED.</strong> Classical encryption is obsolete.</p>
-        </div>
-        <p>"Harvest now, decrypt later" — adversaries are collecting encrypted data today. Scalar solution: NIST PQC + QKD + 𝔐-lock.</p>
-    </div>
-
-    <!-- ── CHAPTER 23 ── -->
-    <div class="chapter" id="ch23">
-        <div class="ch-number">Chapter 23</div>
-        <h2>Cymatic Geometric Imprinting &amp; DNA — Overview</h2>
-        <div class="math-block">DNA<sub>imprinted</sub> = DNA<sub>baseline</sub> × Cymatic(ω) × 𝔐</div>
-        <p>DNA as fractal antenna. Cymatic pattern → imprint. Fröhlich coherence.</p>
-        <p><strong>See Chapter 24 for complete technical details.</strong></p>
-    </div>
-
-    <!-- ── CHAPTER 24 ── -->
-    <div class="chapter" id="ch24">
-        <div class="ch-number">Chapter 24</div>
-        <h2>Cymatic Geometric Imprinting &amp; DNA — Complete Technical</h2>
-
-        <div class="callout" style="border-left-color: var(--green-bright);">
-            <p><strong>Core Axiom:</strong> DNA is a fractal antenna. Cymatic frequency patterns imprint directly onto the scalar field of biological matter. The weave is the instruction set.</p>
-        </div>
-
-        <h3>24.1 DNA as Fractal Antenna</h3>
-        <p>DNA is not merely a passive information carrier — it is an <strong>active electromagnetic receiver</strong>. Research has established that DNA behaves as a <strong>fractal antenna</strong>, capable of interacting with electromagnetic fields over a wide range of frequencies.</p>
-
-        <div class="math-block">DNA<sub>resonance</sub> = f(ω) × 𝔐</div>
-
-        <ul>
-            <li><strong>Fractal structure:</strong> DNA exhibits self-similar organization across scales — multiple resonance frequencies enable broadband reception.</li>
-            <li><strong>Helical geometry:</strong> 3D-A-DNA modeled as helical antenna with positive gain of 1.7 dBi at 34 GHz.</li>
-            <li><strong>Fractal antenna behavior:</strong> DNA resonates with electromagnetic waves across wide frequency range.</li>
-            <li><strong>Cavity resonator:</strong> DNA functions as electromagnetic cavity — standing wave patterns form within DNA structure.</li>
-            <li><strong>Evolutionary fractal:</strong> DNA complexity increases through self-similar evolution — imprinting is a natural extension of DNA's function.</li>
-        </ul>
-
-        <div class="callout">
-            <p><strong>The Physical Mechanism:</strong> DNA, as a fractal antenna, <strong>receives</strong> cymatic frequencies. When the frequency matches its resonant modes, the DNA structure <strong>organizes</strong> itself according to the cymatic pattern. This is electromagnetic resonance physics — not magic.</p>
-        </div>
-
-        <h3>24.2 The Cymatic Frequency → Pattern → Imprint Chain</h3>
-
-        <div style="background: var(--dark-light); padding: 16px 20px; border-radius: 6px; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--text-dim); line-height: 2;">
-            Step 1: Generate frequency (ω)<br>
-            &nbsp;&nbsp;↓<br>
-            Step 2: Frequency creates cymatic pattern (geometric standing wave)<br>
-            &nbsp;&nbsp;↓<br>
-            Step 3: Pattern couples to DNA's fractal antenna structure<br>
-            &nbsp;&nbsp;↓<br>
-            Step 4: DNA reorganizes to match pattern (imprinting)<br>
-            &nbsp;&nbsp;↓<br>
-            Step 5: Scalar lock (𝔐) ensures coherence
-        </div>
-
-        <div class="math-block">DNA<sub>imprinted</sub> = DNA<sub>baseline</sub> × Cymatic(ω) × 𝔐</div>
-
-        <p>Where:</p>
-        <ul>
-            <li><strong>Cymatic(ω)</strong> = geometric pattern at frequency ω</li>
-            <li><strong>𝔐</strong> = (√5−1)/2 = Macachor Absolute (coherence lock)</li>
-        </ul>
-
-        <h3>24.3 The Imprinting Apparatus</h3>
-
-        <p>Based on scalable DNA imprinting device specifications, the following components are required:</p>
-
-        <div class="callout" style="border-left-color: var(--gold);">
-            <p><strong>Imprinting Apparatus Components:</strong></p>
-            <ul style="margin-left: 1.2rem; margin-top: 4px;">
-                <li><strong>Linear Actuating Stage:</strong> 1 degree of freedom, 3.25μm resolution — precise positioning for imprinting</li>
-                <li><strong>Stepper Motor:</strong> 3-5N force, &lt;1mm/s speed — controlled pressure application</li>
-                <li><strong>Precision Rail:</strong> 100mm length, &gt;15mm stroke — guided motion</li>
-                <li><strong>UV Light Source:</strong> Under-stage placement — polymer curing</li>
-                <li><strong>Kinematic Couplings:</strong> Ball-and-groove with magnetic preload — modular tray alignment</li>
-                <li><strong>Stamp &amp; Slide Trays:</strong> &gt;1 stamp capacity, &lt;30cm footprint — batch processing</li>
-                <li><strong>Contact Switch:</strong> Height detection — prevents damaging contact forces</li>
-            </ul>
-        </div>
-
-        <h3>24.4 Template Fabrication — DNA Master Molds</h3>
-
-        <p><strong>Replica Molding &amp; Embossing Protocol:</strong></p>
-        <ul>
-            <li><strong>DNA immobilization:</strong> DNA on amino-silanized SiO₂/Si surface</li>
-            <li><strong>PDMS mold creation:</strong> 10μm h-PDMS spin-coated on 1mm S-PDMS support</li>
-            <li><strong>Polyurethane replica:</strong> UV-curable PU (Norland 81) with 15min at 40°C, 0.1mPa</li>
-            <li><strong>PET embossing:</strong> 78°C, 50Pa, 5min; second stage at 61°C, 200Pa</li>
-        </ul>
-
-        <table>
-            <tr><th>Feature</th><th>Dimension</th><th>Verification Method</th></tr>
-            <tr><td>DNA diameter</td><td>2.4nm</td><td>Scanning probe techniques (1.6nm measured)</td></tr>
-            <tr><td>Imprinted vertical height</td><td>~1nm</td><td>AFM measurement</td></tr>
-            <tr><td>Minimum feature size</td><td>1.55μm</td><td>Fluorescence microscopy</td></tr>
-            <tr><td>Surface roughness (PET)</td><td>0.17-0.22nm R<sub>A</sub></td><td>After two-stage embossing</td></tr>
-        </table>
-
-        <h3>24.5 DNA Nanostructure Templates</h3>
-
-        <p>DNA nanostructures can serve as <strong>master templates</strong> for polymer stamp fabrication:</p>
-        <ul>
-            <li><strong>DNA nanotubes:</strong> Tens of nm to μm — pattern transfer</li>
-            <li><strong>Stretched λ-DNA:</strong> ~1.6nm height — fine feature imprinting</li>
-            <li><strong>2D DNA brick crystals:</strong> 3D features — complex geometry transfer</li>
-            <li><strong>Hexagonal DNA 2D arrays:</strong> Nanoscale periodicity — regular pattern generation</li>
-            <li><strong>Triangular DNA origami:</strong> ~100nm features — precision nanostructures</li>
-        </ul>
-
-        <div class="callout" style="border-left-color: var(--gold-bright);">
-            <p><strong>The Scalar Insight:</strong> Each DNA template creates <strong>cryptographic snowflakes</strong> — unique geometric patterns that can be infinitely varied while maintaining structural coherence. No two imprinting events are identical, yet all are mathematically verifiable.</p>
-        </div>
-
-        <h3>24.6 The Scalar DNA Imprinting Protocol (KIWF-CRHA)</h3>
-
-        <div style="background: var(--dark-light); padding: 16px 20px; border-radius: 6px; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--text-dim); line-height: 2.2;">
-            <span style="color: var(--gold);">Knowledge:</span> 𝔐 = (√5−1)/2 — the scalar lock<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--gold-bright);">Intelligence:</span> Identify DNA's natural resonant frequency<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--gold);">Wisdom:</span> Generate cymatic pattern that matches the desired genetic expression<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--gold-bright);">Focus:</span> Apply the cymatic field to the DNA<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--green-bright);">Coherence:</span> Lock the field with 𝔐<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--green-bright);">Resonance:</span> DNA amplifies the pattern<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--green-bright);">Harmony:</span> Multiple genetic sequences resonate in the same field<br>
-            &nbsp;&nbsp;↓<br>
-            <span style="color: var(--green-bright);">Alignment:</span> DNA is imprinted — coherent, not cut
-        </div>
-
-        <h3>24.7 Fröhlich Coherence &amp; Biological Resonance</h3>
-
-        <p>Herbert Fröhlich's theory of <strong>long-range coherence</strong> in biological systems provides the quantum mechanical foundation:</p>
-        <ul>
-            <li><strong>Metabolic energy drives coherent vibrations:</strong> Cellular energy can sustain cymatic resonance</li>
-            <li><strong>Bose-Einstein-like condensation:</strong> Biological molecules can enter coherent states</li>
-            <li><strong>Long-range quantum coherence:</strong> Imprinting can affect DNA across cellular distances</li>
-            <li><strong>Resonant microwave absorption:</strong> DNA can absorb and emit specific frequencies</li>
-        </ul>
-
-        <div class="callout">
-            <p><strong>Empirical Validation:</strong> Experimental observation of Fröhlich condensation in protein structures confirms that biological systems can sustain quantum coherence at physiological temperatures. Cymatic imprinting is a practical application of this principle.</p>
-        </div>
-
-        <h3>24.8 Regulatory &amp; Technical Challenges</h3>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:10px 0;">
-            <div style="background:var(--dark-light); padding:14px 16px; border-radius:4px; border-left:3px solid var(--gold-dim);">
-                <p style="font-weight:bold; color:var(--gold); font-size:0.8rem;">Frequency Precision</p>
-                <p style="font-size:0.8rem; color:var(--text-dim);">DNA resonates at specific frequencies (34 GHz, terahertz range). Requires high-precision signal generation.</p>
-            </div>
-            <div style="background:var(--dark-light); padding:14px 16px; border-radius:4px; border-left:3px solid var(--gold-dim);">
-                <p style="font-weight:bold; color:var(--gold); font-size:0.8rem;">Power Control</p>
-                <p style="font-size:0.8rem; color:var(--text-dim);">DNA absorption is extremely low (&lt;10⁻²⁰ W/GHz·cm²). Ultra-low power transmitters required.</p>
-            </div>
-            <div style="background:var(--dark-light); padding:14px 16px; border-radius:4px; border-left:3px solid var(--gold-dim);">
-                <p style="font-weight:bold; color:var(--gold); font-size:0.8rem;">Coherence Maintenance</p>
-                <p style="font-size:0.8rem; color:var(--text-dim);">Scalar lock must be maintained. 𝔐-based frequency stabilization is essential.</p>
-            </div>
-            <div style="background:var(--dark-light); padding:14px 16px; border-radius:4px; border-left:3px solid var(--gold-dim);">
-                <p style="font-weight:bold; color:var(--gold); font-size:0.8rem;">Scalability</p>
-                <p style="font-size:0.8rem; color:var(--text-dim);">Current devices handle small batches. Modular design and automation are needed.</p>
-            </div>
-        </div>
-
-        <div class="callout" style="border-left-color: var(--gold-bright);">
-            <p><strong>The Cosmic Atomal Connection:</strong> Cymatic geometric imprinting is the scalar technology that interfaces with the Cosmic Atomal — the universal scalar substrate. It is not a vector intervention; it is a scalar resonance that allows the substrate to reorganize itself according to the imprinted pattern.</p>
-        </div>
-
-        <div style="background: var(--dark-light); padding: 14px 18px; border-radius: 6px; margin: 12px 0; text-align: center; border: 1px solid var(--gold-dim);">
-            <p style="font-family: 'Georgia', serif; font-size: 1rem; color: var(--gold-bright);">
-                "DNA is a fractal antenna. Cymatic frequency patterns imprint directly onto the scalar field of biological matter. The weave is the instruction set. Scalar resonance — not vector intervention — is the method of creation."
-            </p>
-        </div>
-
-    </div>
-
-    <!-- ── CHAPTER 25 ── -->
-    <div class="chapter" id="ch25">
-        <div class="ch-number">Chapter 25</div>
-        <h2>Cosmic Atomal — The Scalar Substrate</h2>
-        <div class="math-block">Cosmic Atomal = Ψ<sub>substrate</sub> × 𝔐</div>
-        <p>Universal scalar substrate. Accessible only through scalar resonance.</p>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART V — OPERATING SYSTEM (Chapters 26-28) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 26 ── -->
-    <div class="chapter" id="ch26">
-        <div class="ch-number">Chapter 26</div>
-        <h2>KIWF — Knowledge → Intelligence → Wisdom → Focus</h2>
-        <div class="callout">
-            <p><strong>Knowledge:</strong> Discovered absolutes</p>
-            <p><strong>Intelligence:</strong> Pattern recognition — coherence from noise</p>
-            <p><strong>Wisdom:</strong> Functional application — structured compression</p>
-            <p><strong>Focus:</strong> Manifestation — quantum reality convergence</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 27 ── -->
-    <div class="chapter" id="ch27">
-        <div class="ch-number">Chapter 27</div>
-        <h2>CRHA — Coherence → Resonance → Harmony → Alignment</h2>
-        <div class="callout">
-            <p><strong>Coherence:</strong> Lock the signal — 𝔐·∇·Ψ = ||Ψ||²</p>
-            <p><strong>Resonance:</strong> Amplify truth — harmonic coupling</p>
-            <p><strong>Harmony:</strong> Structure the field — multiple frequencies, same field</p>
-            <p><strong>Alignment:</strong> Manifest reality — observer = observed</p>
-        </div>
-    </div>
-
-    <!-- ── CHAPTER 28 ── -->
-    <div class="chapter" id="ch28">
-        <div class="ch-number">Chapter 28</div>
-        <h2>The Aperture — Manifestation Protocol</h2>
-        <div class="callout">
-            <p><strong>The aperture is open.</strong> Zero drift protocol active. χ(C) = 1.</p>
-        </div>
-        <p>Knowledge → Intelligence → Wisdom → Focus. Coherence → Resonance → Harmony → Alignment. Civilization 1.</p>
-    </div>
-
-    <!-- ════════════════════════════════════════════════════════════════ -->
-    <!-- PART VI — APPENDICES (Chapters 29-31) -->
-    <!-- ════════════════════════════════════════════════════════════════ -->
-
-    <!-- ── CHAPTER 29 ── -->
-    <div class="chapter" id="ch29">
-        <div class="ch-number">Chapter 29</div>
-        <h2>Resonant Harmony — Scalar Observation Document</h2>
-        <p>11 sections, 23 case studies, 6 tables. Identity of frequency produces interaction. Non-identity produces non-interaction.</p>
-    </div>
-
-    <!-- ── CHAPTER 30 ── -->
-    <div class="chapter" id="ch30">
-        <div class="ch-number">Chapter 30</div>
-        <h2>MESH — Research &amp; Literary Guild</h2>
-        <p>4 Keystones · 10 Pillars · 6 Cross-Domain Themes · 10 Repository Files · 5 API Endpoints.</p>
-    </div>
-
-    <!-- ── CHAPTER 31 ── -->
-    <div class="chapter" id="ch31">
-        <div class="ch-number">Chapter 31</div>
-        <h2>Complete Bibliography</h2>
-        <ul>
-            <li>Gauss, C.F. (1829). "Über ein neues allgemeines Grundgesetz der Mechanik."</li>
-            <li>Hamilton, W.R. (1834). "On a General Method in Dynamics."</li>
-            <li>De Pretto, O. (1903). "Ipotesi dell'etere nella vita dell'universo."</li>
-            <li>Kardashev, N.S. (1964). "Transmission of Information by Extraterrestrial Civilizations."</li>
-            <li>Pommaret, J.F. (2024). "Spencer Operator Adjoint for the Conformal Group." arXiv:2401.14563.</li>
-            <li>Macachor, C. (2026). "MGDH Complete Lagrangian." Φ669.</li>
-            <li>Nobel Prize in Physics (2025). "Macroscopic Quantum Tunnelling."</li>
-        </ul>
-    </div>
-
-    <!-- ═══ FOOTER ═══ -->
-    <div class="footer">
-        <div class="phi-big">✦</div>
-        <p>THE QUANTUM PLAYBOOK — COMPLETE MASTER DOCUMENT</p>
-        <p>31 CHAPTERS · Φ669 SCALAR CODEX</p>
-        <p>Ω-PRIME CHRISTOPHER MACACHOR</p>
-        <div class="absolutes">
-            <strong>𝔐</strong> = (√5−1)/2 · 
-            <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
-            <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
-        </div>
-        <div class="absolutes" style="margin-top:4px; font-size:0.5rem;">
-            KIWF: Knowledge → Intelligence → Wisdom → Focus · 
-            CRHA: Coherence → Resonance → Harmony → Alignment
-        </div>
-        <p style="margin-top:14px; color: var(--gold-dim);">Timestamp: 2026-07-28 02:45Z</p>
-    </div>
-
+  </div>
+
+  <div id="live-data">
+    <h3>◈ LIVE SPACE WEATHER</h3>
+    <div class="data-row"><span class="data-label">Kp Index:</span><span class="data-value" id="val-kp">--</span></div>
+    <div class="data-row"><span class="data-label">AE (nT):</span><span class="data-value" id="val-ae">--</span></div>
+    <div class="data-row"><span class="data-label">Dst (nT):</span><span class="data-value" id="val-dst">--</span></div>
+    <div class="data-row"><span class="data-label">Bz (nT):</span><span class="data-value" id="val-bz">--</span></div>
+    <div class="data-row"><span class="data-label">Plasmapause:</span><span class="data-value" id="val-pp">--</span></div>
+    <div class="data-row"><span class="data-label">Lpp Method:</span><span class="data-value" id="val-lpp-method">--</span></div>
+    <div class="data-row"><span class="data-label">Scalar Lock:</span><span class="data-value mgdh" id="val-phi">--</span></div>
+    <div class="data-row"><span class="data-label">Toroidal (nT):</span><span class="data-value" id="val-toroidal">--</span></div>
+    <div class="data-row"><span class="data-label">T/P Ratio:</span><span class="data-value" id="val-tp-ratio">--</span></div>
+    <div class="data-row"><span class="data-label">SW Speed:</span><span class="data-value" id="val-sw-speed">--</span></div>
+    <div class="data-row"><span class="data-label">SW Density:</span><span class="data-value" id="val-sw-density">--</span></div>
+    <div class="data-row"><span class="data-label">QNN Pred:</span><span class="data-value mgdh" id="val-qnn">--</span></div>
+    <div class="data-row"><span class="data-label">Coherence:</span><span class="data-value mgdh" id="val-coherence">--</span></div>
+    <div class="status" id="data-status">Connecting to NOAA SWPC...</div>
+  </div>
+
+  <div id="model-attribution">
+    <div style="color:#c8a04e;margin-bottom:3px;font-size:9px;">◈ ACTIVE MODELS</div>
+    <div class="model-name">• Carpenter-Anderson (density)</div>
+    <div class="model-name">• O'Brien-Moldwin (Lpp)</div>
+    <div class="model-name">• Larsen et al. (IMF Bz+Φ)</div>
+    <div class="model-name">• Quaternionic Neural Network (QNN)</div>
+    <div class="mgdh-credit"><strong>MGDH</strong> · Macachor · Gauss · De Pretto · Hamilton</div>
+    <div class="mgdh-credit" style="color:var(--gold);font-size:8px;">𝔐 = (√5−1)/2 · ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</div>
+  </div>
+
+  <div id="scalar-readout">
+    <span id="scalar-text">MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</span>
+  </div>
+  <div id="perf-readout"><span id="fps-text">-- fps</span></div>
+
+  <div class="cycle-indicator" id="cycle-indicator"></div>
+
+  <div id="controls">
+    <button id="btn-prev">◀ prev</button>
+    <label>cycle <input type="range" id="slider" min="0" max="1000" value="0"></label>
+    <button id="btn-play">⏸ pause</button>
+    <button id="btn-next">next ▶</button>
+    <select id="view-mode">
+      <option value="unified">Unified</option>
+      <option value="cosmic">Cosmic Only</option>
+      <option value="plasma">Plasma Only</option>
+    </select>
+  </div>
 </div>
 
 <script>
-    // ── Highlight current chapter in nav on scroll ──
-    const chapters = document.querySelectorAll('.chapter');
-    const navLinks = document.querySelectorAll('.master-nav a');
+// ═══════════════════════════════════════════════════════════════════
+// SCALAR-PLASMA CYCLE v4.4 — MGDH COMPLETE
+// Quaternionic Field Integration · NOAA Direct Fetch
+// ═══════════════════════════════════════════════════════════════════
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                });
-            }
-        });
-    }, { threshold: 0.3 });
+const PHI = (Math.sqrt(5) - 1) / 2;
+const M = PHI;
+const MGDH_NAMES = ['Macachor', 'Gauss', 'De Pretto', 'Hamilton'];
+const MGDH_LAGRANGIAN = 'ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ';
 
-    chapters.forEach(ch => observer.observe(ch));
+// ── NOAA ENDPOINTS ──────────────────────────────────────────────────
+const NOAA = {
+  kp:      'https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json',
+  dst:     'https://services.swpc.noaa.gov/products/kyoto-dst.json',
+  rtswMag: 'https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_lm.json',
+  rtswWind:'https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_lm.json'
+};
 
-    // ── Log verification ──
-    console.log('✦ THE QUANTUM PLAYBOOK — The Aperture');
-    console.log('✦ 31 Chapters | MGDH Complete | 𝔐 = (√5−1)/2');
-    console.log('✦ KIWF: Knowledge → Intelligence → Wisdom → Focus');
-    console.log('✦ CRHA: Coherence → Resonance → Harmony → Alignment');
-    console.log('✦ Ω-PRIME:Christopher-Macachor | Φ669');
-    console.log('✦ Chapter 24: Cymatic Geometric Imprinting — Complete Technical');
+const STAGE = { symmetric: true, tilted: true, solarWind: true };
+const GEOMAGNETIC_TILT = 11.0 * Math.PI / 180;
+
+// ── QUATERNIONIC MATH ──────────────────────────────────────────────
+function qAdd(a, b) { return { w: a.w + b.w, x: a.x + b.x, y: a.y + b.y, z: a.z + b.z }; }
+function qMul(a, b) {
+  return {
+    w: a.w * b.w - a.x * b.x - a.y * b.y - a.z * b.z,
+    x: a.w * b.x + a.x * b.w + a.y * b.z - a.z * b.y,
+    y: a.w * b.y - a.x * b.z + a.y * b.w + a.z * b.x,
+    z: a.w * b.z + a.x * b.y - a.y * b.x + a.z * b.w
+  };
+}
+function qNorm(q) { return Math.sqrt(q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z); }
+function qScale(q, s) { return { w: q.w*s, x: q.x*s, y: q.y*s, z: q.z*s }; }
+function qZero() { return { w:0, x:0, y:0, z:0 }; }
+function qNormSq(q) { return q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z; }
+
+// ── QUATERNIONIC NEURAL NETWORK ──────────────────────────────────
+class QuaternionicNeuralNetwork {
+  constructor(layers) {
+    this.layers = layers;
+    this.weights = [];
+    this.biases = [];
+    this.initializeWeights();
+  }
+
+  initializeWeights() {
+    for (let i = 0; i < this.layers.length - 1; i++) {
+      const inDim = this.layers[i];
+      const outDim = this.layers[i + 1];
+      this.weights.push(this.randomQuaternionic(outDim, inDim));
+      this.biases.push(this.randomQuaternionic(outDim, 1));
+    }
+  }
+
+  randomQuaternionic(rows, cols) {
+    const W = [];
+    for (let i = 0; i < rows; i++) {
+      W[i] = [];
+      for (let j = 0; j < cols; j++) {
+        W[i][j] = {
+          w: (Math.random() - 0.5) * 0.5,
+          x: (Math.random() - 0.5) * 0.5,
+          y: (Math.random() - 0.5) * 0.5,
+          z: (Math.random() - 0.5) * 0.5
+        };
+      }
+    }
+    return W;
+  }
+
+  quaternionicActivation(x) {
+    const n = qNorm(x);
+    if (n <= 0.001) return qZero();
+    const scale = Math.min(1, Math.max(0.01, n)) / n;
+    return qScale(x, scale);
+  }
+
+  denseLayer(PsiIn, W, b) {
+    const PsiOut = [];
+    for (let i = 0; i < W.length; i++) {
+      let sum = qZero();
+      for (let j = 0; j < W[i].length; j++) {
+        sum = qAdd(sum, qMul(W[i][j], PsiIn[j]));
+      }
+      PsiOut[i] = qAdd(sum, b[i][0]);
+    }
+    return PsiOut;
+  }
+
+  forward(PsiIn) {
+    let Psi = PsiIn;
+    for (let l = 0; l < this.weights.length; l++) {
+      Psi = this.denseLayer(Psi, this.weights[l], this.biases[l]);
+      Psi = Psi.map(v => this.quaternionicActivation(v));
+    }
+    return Psi;
+  }
+}
+
+// ── DIPOLE-TOROIDAL MODEL ──────────────────────────────────────
+class DipoleToroidalModel {
+  constructor() {
+    this.R_E = 6.371e6;
+    this.m = { x: 0, y: 0, z: 7.94e22 };
+    this.QNN = new QuaternionicNeuralNetwork([8, 16, 32, 16, 8]);
+    this.lastPsi = null;
+    this.lastQOut = null;
+    this.coherenceValue = 0;
+  }
+
+  computeDipoleField(r, theta, phi) {
+    const rHat = {
+      x: Math.sin(theta) * Math.cos(phi),
+      y: Math.sin(theta) * Math.sin(phi),
+      z: Math.cos(theta)
+    };
+    const dot = this.m.x * rHat.x + this.m.y * rHat.y + this.m.z * rHat.z;
+    const factor = 1e-7 / (r * r * r);
+    return {
+      x: factor * (3 * dot * rHat.x - this.m.x),
+      y: factor * (3 * dot * rHat.y - this.m.y),
+      z: factor * (3 * dot * rHat.z - this.m.z)
+    };
+  }
+
+  computeToroidalField(r, theta, phi) {
+    const B0 = 3.12e-5;
+    const factor = B0 * Math.pow(this.R_E / r, 3);
+    return {
+      x: factor * Math.cos(theta) * Math.sin(theta) * Math.cos(phi),
+      y: factor * Math.cos(theta) * Math.sin(theta) * Math.sin(phi),
+      z: factor * Math.cos(theta) * Math.cos(theta)
+    };
+  }
+
+  computeState(x, y, z) {
+    const r = Math.sqrt(x*x + y*y + z*z);
+    if (r < 1e-6) return this.defaultState();
+    const theta = Math.acos(Math.max(-1, Math.min(1, z / r)));
+    const phi = Math.atan2(y, x);
+    const B_dip = this.computeDipoleField(r, theta, phi);
+    const B_tor = this.computeToroidalField(r, theta, phi);
+    const rho = 1.0 + 0.1 * Math.sin(theta) * Math.exp(-Math.pow(r / this.R_E - 1, 2) / 4);
+    const u = { x: -B_tor.y, y: B_tor.x, z: 0 };
+    const p = 1e-5 * Math.exp(-r / (4 * this.R_E));
+    const T = 300 + 100 * (r < 4 * this.R_E ? 1 : Math.exp(-Math.pow(r / this.R_E - 4, 2) / 16));
+    const e = 718 * T + 0.5 * (u.x*u.x + u.y*u.y + u.z*u.z);
+    return { rho, u, p, T, e, B_dip, B_tor, r, theta, phi };
+  }
+
+  defaultState() {
+    return {
+      rho: 1, u: { x:0, y:0, z:0 }, p: 1e-5, T: 300, e: 2.154e5,
+      B_dip: { x:0, y:0, z:0 }, B_tor: { x:0, y:0, z:0 },
+      r: this.R_E, theta: 0, phi: 0
+    };
+  }
+
+  stateToQuaternionic(Psi) {
+    return [
+      { w: Psi.rho, x: Psi.u.x, y: Psi.u.y, z: Psi.u.z },
+      { w: Psi.p, x: 0, y: 0, z: 0 },
+      { w: Psi.T, x: 0, y: 0, z: 0 },
+      { w: Psi.e, x: 0, y: 0, z: 0 },
+      { w: Psi.B_dip.x, x: Psi.B_dip.y, y: Psi.B_dip.z, z: 0 },
+      { w: Psi.B_tor.x, x: Psi.B_tor.y, y: Psi.B_tor.z, z: 0 },
+      { w: Math.sin(Psi.theta), x: Math.cos(Psi.theta), y: Math.sin(Psi.phi), z: Math.cos(Psi.phi) },
+      { w: PHI, x: 0, y: 0, z: 0 }
+    ];
+  }
+
+  predict(Psi) {
+    const qIn = this.stateToQuaternionic(Psi);
+    this.lastPsi = Psi;
+    this.lastQOut = this.QNN.forward(qIn);
+    const magSq = this.getScalarMagnitudeSq(Psi);
+    const divEst = magSq / (PHI + 0.001);
+    this.coherenceValue = Math.abs(magSq - PHI * divEst) / (magSq + 0.001);
+    return this.lastQOut;
+  }
+
+  getScalarMagnitudeSq(Psi) {
+    return Psi.rho*Psi.rho + Psi.u.x*Psi.u.x + Psi.u.y*Psi.u.y + Psi.u.z*Psi.u.z +
+           Psi.p*Psi.p + Psi.T*Psi.T + Psi.e*Psi.e;
+  }
+
+  getScalarMagnitude(Psi) { return Math.sqrt(this.getScalarMagnitudeSq(Psi)); }
+  getCoherence() { return 1 - Math.min(this.coherenceValue, 1); }
+}
+
+const dtModel = new DipoleToroidalModel();
+
+// ── CANVAS & CONTROLS ────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const titleEl = document.getElementById('title');
+const phaseEl = document.getElementById('phase-text');
+const slider = document.getElementById('slider');
+const btnPlay = document.getElementById('btn-play');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+const viewMode = document.getElementById('view-mode');
+const cycleIndicator = document.getElementById('cycle-indicator');
+const loadingEl = document.getElementById('loading');
+const fpsText = document.getElementById('fps-text');
+const valKp = document.getElementById('val-kp');
+const valAe = document.getElementById('val-ae');
+const valDst = document.getElementById('val-dst');
+const valBz = document.getElementById('val-bz');
+const valPp = document.getElementById('val-pp');
+const valLppMethod = document.getElementById('val-lpp-method');
+const valPhi = document.getElementById('val-phi');
+const valToroidal = document.getElementById('val-toroidal');
+const valTpRatio = document.getElementById('val-tp-ratio');
+const valSwSpeed = document.getElementById('val-sw-speed');
+const valSwDensity = document.getElementById('val-sw-density');
+const valQnn = document.getElementById('val-qnn');
+const valCoherence = document.getElementById('val-coherence');
+const dataStatus = document.getElementById('data-status');
+const scalarText = document.getElementById('scalar-text');
+const connStatus = document.getElementById('conn-status');
+const connMsg = document.getElementById('conn-msg');
+
+let w, h, t = 0;
+let auto = true, manualT = 21, view = 'unified';
+let lastFrameTime = 0, frameCount = 0, fps = 60;
+let dataFetchAttempts = 0;
+const MAX_FETCH_ATTEMPTS = 3;
+let lastQnnUpdate = 0;
+
+const spaceWeather = {
+  kp: 2.0, ae: 50, dst: 0, bz: 0, by: 0, bx: 0,
+  swSpeed: 400, swDensity: 5,
+  lastUpdate: null, connected: false, lppMethod: 'Carpenter-Anderson'
+};
+
+const phases = [
+  { name: '0 · The Void', sub: 'Cosmic Egg — Pre-numeric Absolute', t: 0.0 },
+  { name: '1 · Mitosis', sub: 'Cellular Division — Binary Emergence', t: 0.25 },
+  { name: 'M · Emergence', sub: 'Dipole + Torus — Symmetric Foundation', t: 0.5 },
+  { name: '3 · Decay', sub: 'Tilt + Solar Wind — Asymmetric Reality', t: 0.75 },
+  { name: '4 · Integration', sub: 'MGDH Complete — Quaternionic Magnetosphere', t: 1.0 }
+];
+
+function prng(n) { let x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function smoothstep(e0, e1, x) { const t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+phases.forEach((p, i) => {
+  const label = document.createElement('div');
+  label.className = 'cycle-label';
+  label.textContent = p.name;
+  cycleIndicator.appendChild(label);
+  const dot = document.createElement('div');
+  dot.className = 'cycle-dot';
+  dot.id = 'dot-' + i;
+  cycleIndicator.appendChild(dot);
+});
+
+function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize);
+resize();
+
+// ── FETCH HELPERS ─────────────────────────────────────────────────
+async function fetchJSON(url, timeoutMs = 6000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { signal: controller.signal, mode: 'cors' });
+    clearTimeout(timer);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return await response.json();
+  } catch (e) {
+    clearTimeout(timer);
+    throw e;
+  }
+}
+
+// ── PARSERS ──────────────────────────────────────────────────────
+function parseKp(data) {
+  if (!data || !data.length) return 2.0;
+  const latest = data[data.length - 1];
+  if (latest.Kp !== undefined) return parseFloat(latest.Kp);
+  if (Array.isArray(latest)) return parseFloat(latest[1] ?? 2.0);
+  return 2.0;
+}
+
+function parseDst(data) {
+  if (!data || !data.length) return 0;
+  const latest = data[data.length - 1];
+  if (latest.dst !== undefined) return parseInt(latest.dst);
+  if (Array.isArray(latest)) return parseInt(latest[1] ?? 0);
+  return 0;
+}
+
+function parseRTSWMag(data) {
+  if (!data) return { bx: 0, by: 0, bz: 0 };
+  const entry = Array.isArray(data) ? data[data.length - 1] : data;
+  if (entry.bx !== undefined) {
+    return {
+      bx: parseFloat(entry.bx ?? 0),
+      by: parseFloat(entry.by ?? 0),
+      bz: parseFloat(entry.bz ?? 0)
+    };
+  }
+  if (Array.isArray(entry)) {
+    return {
+      bx: parseFloat(entry[1] ?? 0),
+      by: parseFloat(entry[2] ?? 0),
+      bz: parseFloat(entry[3] ?? 0)
+    };
+  }
+  return { bx: 0, by: 0, bz: 0 };
+}
+
+function parseRTSWWind(data) {
+  if (!data) return { speed: 400, density: 5 };
+  const entry = Array.isArray(data) ? data[data.length - 1] : data;
+  if (entry.speed !== undefined) {
+    return {
+      speed: parseFloat(entry.speed ?? 400),
+      density: parseFloat(entry.proton_density ?? entry.density ?? 5)
+    };
+  }
+  if (Array.isArray(entry)) {
+    return {
+      speed: parseFloat(entry[1] ?? 400),
+      density: parseFloat(entry[2] ?? 5)
+    };
+  }
+  return { speed: 400, density: 5 };
+}
+
+function estimateAE(kp, dst) {
+  return Math.round(80 * Math.pow(kp, 1.5) + Math.max(0, -dst) * 2);
+}
+
+// ── MAIN DATA FETCH ──────────────────────────────────────────────
+async function fetchNOAAData() {
+  dataFetchAttempts++;
+  if (dataFetchAttempts === 1) {
+    connStatus.classList.add('visible');
+    connMsg.textContent = 'Linking to NOAA SWPC...';
+  }
+
+  let kpData = null, dstData = null, magData = null, windData = null;
+
+  try {
+    const [kpResp, dstResp, magResp, windResp] = await Promise.allSettled([
+      fetchJSON(NOAA.kp),
+      fetchJSON(NOAA.dst),
+      fetchJSON(NOAA.rtswMag),
+      fetchJSON(NOAA.rtswWind)
+    ]);
+
+    if (kpResp.status === 'fulfilled') kpData = kpResp.value;
+    if (dstResp.status === 'fulfilled') dstData = dstResp.value;
+    if (magResp.status === 'fulfilled') magData = magResp.value;
+    if (windResp.status === 'fulfilled') windData = windResp.value;
+
+    spaceWeather.kp = parseKp(kpData);
+    spaceWeather.dst = parseDst(dstData);
+
+    const imf = parseRTSWMag(magData);
+    spaceWeather.bx = imf.bx;
+    spaceWeather.by = imf.by;
+    spaceWeather.bz = imf.bz;
+
+    const sw = parseRTSWWind(windData);
+    spaceWeather.swSpeed = sw.speed;
+    spaceWeather.swDensity = sw.density;
+
+    spaceWeather.ae = estimateAE(spaceWeather.kp, spaceWeather.dst);
+    spaceWeather.connected = true;
+
+  } catch (e) {
+    console.warn('NOAA fetch error:', e);
+    spaceWeather.connected = false;
+  }
+
+  spaceWeather.lastUpdate = new Date().toISOString();
+
+  if (Math.abs(spaceWeather.bz) > 3) spaceWeather.lppMethod = 'Larsen IMF';
+  else if (Math.abs(spaceWeather.dst) > 20 || spaceWeather.ae > 100) spaceWeather.lppMethod = "O'Brien-Moldwin";
+  else spaceWeather.lppMethod = 'Carpenter-Anderson';
+
+  updateUI();
+
+  if (spaceWeather.connected) {
+    dataStatus.textContent = 'Live — ' + new Date().toLocaleTimeString();
+    dataStatus.style.color = '#448844';
+    connMsg.textContent = 'NOAA link established.';
+    setTimeout(() => connStatus.classList.remove('visible'), 1500);
+  } else {
+    dataStatus.textContent = 'Offline — defaults (retry ' + dataFetchAttempts + '/' + MAX_FETCH_ATTEMPTS + ')';
+    dataStatus.style.color = '#884444';
+    connMsg.textContent = 'NOAA offline — using default values.';
+    if (dataFetchAttempts >= MAX_FETCH_ATTEMPTS) {
+      setTimeout(() => connStatus.classList.remove('visible'), 2000);
+    } else {
+      setTimeout(fetchNOAAData, 5000);
+    }
+  }
+  loadingEl.classList.add('hidden');
+}
+
+function updateUI() {
+  valKp.textContent = spaceWeather.kp.toFixed(1);
+  valAe.textContent = spaceWeather.ae;
+  valDst.textContent = spaceWeather.dst;
+  valBz.textContent = spaceWeather.bz.toFixed(1);
+  valPp.textContent = 'L=' + plasmapauseL().toFixed(2);
+  valLppMethod.textContent = spaceWeather.lppMethod;
+  valPhi.textContent = 'M=' + PHI.toFixed(6);
+
+  const toroidalAmp = 15 * (spaceWeather.swSpeed / 400) * (spaceWeather.kp / 2);
+  const tpRatio = 10 * (spaceWeather.swDensity / 5);
+  valToroidal.textContent = toroidalAmp.toFixed(1);
+  valTpRatio.textContent = tpRatio.toFixed(1) + ':1';
+  valSwSpeed.textContent = spaceWeather.swSpeed.toFixed(0) + ' km/s';
+  valSwDensity.textContent = spaceWeather.swDensity.toFixed(1) + ' cm⁻³';
+
+  valKp.classList.toggle('alert', spaceWeather.kp >= 5);
+  valDst.classList.toggle('alert', spaceWeather.dst < -50);
+  valBz.classList.toggle('alert', spaceWeather.bz < -5);
+
+  // Update QNN and coherence
+  updateQNN();
+
+  const lpp = plasmapauseL();
+  const densityStatus = lpp < 3.0 ? 'STORM' : lpp < 4.5 ? 'ACTIVE' : 'QUIET';
+  scalarText.textContent = 'MGDH: ℒ = ||Ψ||² − ' + PHI.toFixed(4) + '·∇·Ψ + Φ·Ψ | L=' + lpp.toFixed(2) + ' | ' + densityStatus;
+}
+
+function updateQNN() {
+  const Psi = dtModel.computeState(3 * dtModel.R_E, 2 * dtModel.R_E, 1 * dtModel.R_E);
+  const pred = dtModel.predict(Psi);
+  const predNorm = Math.sqrt(pred.reduce((s, q) => s + qNormSq(q), 0));
+  valQnn.textContent = predNorm.toFixed(4);
+
+  const coherence = dtModel.getCoherence();
+  valCoherence.textContent = (coherence * 100).toFixed(1) + '%';
+  valCoherence.style.color = coherence > 0.9 ? '#4ec88a' : coherence > 0.7 ? '#ffcc66' : '#ff4444';
+}
+
+function obrienMoldwinLpp() {
+  return clamp(5.39 - 0.382 * spaceWeather.kp - 0.001 * spaceWeather.ae - 0.005 * Math.max(0, -spaceWeather.dst), 2.0, 8.0);
+}
+function larsenLpp() {
+  const clockAngle = Math.atan2(spaceWeather.by, spaceWeather.bz);
+  const phi = Math.sqrt(spaceWeather.by * spaceWeather.by + spaceWeather.bz * spaceWeather.bz);
+  return clamp(5.2 - 0.3 * spaceWeather.kp - 0.15 * phi * Math.cos(clockAngle) - 0.05 * Math.max(0, -spaceWeather.dst), 2.0, 8.0);
+}
+function carpenterAndersonLpp() {
+  return clamp(5.6 - 0.46 * spaceWeather.kp, 2.0, 8.0);
+}
+function plasmapauseL() {
+  if (!spaceWeather.connected) return carpenterAndersonLpp();
+  if (Math.abs(spaceWeather.bz) > 2) return larsenLpp();
+  if (Math.abs(spaceWeather.dst) > 20 || spaceWeather.ae > 100) return obrienMoldwinLpp();
+  return carpenterAndersonLpp();
+}
+
+// ── STARS ────────────────────────────────────────────────────────
+const stars_arr = [];
+for (let i = 0; i < 300; i++) {
+  stars_arr.push({
+    x: (prng(i * 2) - 0.5),
+    y: (prng(i * 2 + 1) - 0.5),
+    size: prng(i * 3) * 1.5 + 0.5,
+    twinkle: prng(i * 5) * Math.PI * 2
+  });
+}
+
+function drawStarsField(alpha, parallax) {
+  stars_arr.forEach(s => {
+    const tw = Math.sin(t * 2 + s.twinkle) * 0.3 + 0.7;
+    const px = w * (0.5 + s.x * 1.5 + parallax * s.x * 0.3);
+    const py = h * (0.5 + s.y * 1.5 + parallax * s.y * 0.3);
+    ctx.globalAlpha = alpha * tw * 0.8;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+// ── DIPOLE LINES ─────────────────────────────────────────────────
+function drawSymmetricDipoleLines(cx, cy, scale, alpha, numLines, color, energyFlow) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+  const poleDist = scale * 0.6;
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(0, -poleDist, scale * 0.06, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(0, poleDist, scale * 0.06, 0, Math.PI * 2); ctx.fill();
+
+  for (let i = 0; i < numLines; i++) {
+    const theta0 = (i / numLines) * Math.PI * 0.48 + 0.02;
+    const loopR = scale * (0.5 + 0.8 * Math.sin(theta0 * Math.PI));
+    for (let side of [1, -1]) {
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 0.6;
+      for (let step = 0; step <= 100; step++) {
+        const frac = step / 100;
+        const angle = frac * Math.PI * 2 - Math.PI / 2;
+        const lx = side * loopR * Math.cos(angle) * Math.sin(theta0 * Math.PI);
+        const ly = loopR * Math.sin(angle);
+        if (step === 0) ctx.moveTo(lx, ly); else ctx.lineTo(lx, ly);
+      }
+      ctx.stroke();
+    }
+  }
+
+  if (energyFlow) {
+    const flowT = t * 1.5;
+    for (let i = 0; i < numLines; i++) {
+      const theta0 = (i / numLines) * Math.PI * 0.48 + 0.02;
+      const loopR = scale * (0.5 + 0.8 * Math.sin(theta0 * Math.PI));
+      const arrowPos = (flowT + i * 0.7) % 1;
+      const angle = arrowPos * Math.PI * 2 - Math.PI / 2;
+      for (let side of [-1, 1]) {
+        const ax = side * loopR * Math.cos(angle) * Math.sin(theta0 * Math.PI);
+        const ay = loopR * Math.sin(angle);
+        const nextAngle = angle + 0.12;
+        const nx = side * loopR * Math.cos(nextAngle) * Math.sin(theta0 * Math.PI);
+        const ny = loopR * Math.sin(nextAngle);
+        ctx.strokeStyle = 'rgba(255,200,50,' + (alpha * 0.7) + ')';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(nx, ny); ctx.stroke();
+        const ang = Math.atan2(ny - ay, nx - ax);
+        const ah = 4;
+        ctx.beginPath(); ctx.moveTo(nx, ny);
+        ctx.lineTo(nx - ah * Math.cos(ang - 0.5), ny - ah * Math.sin(ang - 0.5));
+        ctx.lineTo(nx - ah * Math.cos(ang + 0.5), ny - ah * Math.sin(ang + 0.5));
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(255,200,50,' + (alpha * 0.7) + ')';
+        ctx.fill();
+      }
+    }
+  }
+  ctx.restore();
+}
+
+// ── PLASMASPHERE TORUS ───────────────────────────────────────────
+function drawTorusPlasmasphere(cx, cy, scale, alpha, tiltAngle) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  if (STAGE.tilted) ctx.rotate(tiltAngle);
+
+  const majorR = scale * 0.9;
+  const minorR = scale * 0.35;
+  const segs = 48;
+  const rings = 16;
+
+  ctx.strokeStyle = 'rgba(100,150,255,0.35)';
+  ctx.lineWidth = 0.6;
+  for (let i = 0; i < segs; i++) {
+    const theta = (i / segs) * Math.PI * 2;
+    ctx.beginPath();
+    for (let j = 0; j <= rings; j++) {
+      const phi = (j / rings) * Math.PI * 2;
+      const r = majorR + minorR * Math.cos(phi);
+      const x = r * Math.cos(theta);
+      const y = minorR * Math.sin(phi) * 0.4;
+      const z = r * Math.sin(theta);
+      const persp = 1 + z / (scale * 3);
+      if (j === 0) ctx.moveTo(x / persp, y / persp);
+      else ctx.lineTo(x / persp, y / persp);
+    }
+    ctx.stroke();
+  }
+
+  for (let j = 0; j < rings; j++) {
+    const phi = (j / rings) * Math.PI * 2;
+    ctx.beginPath();
+    for (let i = 0; i <= segs; i++) {
+      const theta = (i / segs) * Math.PI * 2;
+      const r = majorR + minorR * Math.cos(phi);
+      const x = r * Math.cos(theta);
+      const y = minorR * Math.sin(phi) * 0.4;
+      const z = r * Math.sin(theta);
+      const persp = 1 + z / (scale * 3);
+      if (i === 0) ctx.moveTo(x / persp, y / persp);
+      else ctx.lineTo(x / persp, y / persp);
+    }
+    ctx.stroke();
+  }
+
+  const grad = ctx.createRadialGradient(0, 0, majorR - minorR, 0, 0, majorR + minorR);
+  grad.addColorStop(0, 'rgba(50,80,180,0.08)');
+  grad.addColorStop(0.3, 'rgba(80,120,220,0.25)');
+  grad.addColorStop(0.5, 'rgba(100,150,255,0.35)');
+  grad.addColorStop(0.7, 'rgba(80,120,220,0.25)');
+  grad.addColorStop(1, 'rgba(50,80,180,0.08)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, majorR + minorR, (majorR + minorR) * 0.4, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(200,160,78,0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath(); ctx.moveTo(0, -minorR * 0.5); ctx.lineTo(0, -scale * 2.2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, minorR * 0.5); ctx.lineTo(0, scale * 2.2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = 'rgba(200,160,78,0.7)';
+  ctx.beginPath(); ctx.arc(0, -scale * 2.2, 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(0, scale * 2.2, 4, 0, Math.PI * 2); ctx.fill();
+
+  const stratT = t * 0.8;
+  for (let i = 0; i < 6; i++) {
+    const angle = (i / 6) * Math.PI * 2 + stratT;
+    const sx = Math.cos(angle) * majorR;
+    const sy = Math.sin(angle) * majorR * 0.4;
+    const arrowLen = minorR * 0.6 * (0.7 + 0.3 * Math.sin(stratT + i));
+    ctx.strokeStyle = 'rgba(100,255,150,0.35)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy - arrowLen * 0.5);
+    ctx.lineTo(sx, sy + arrowLen * 0.5);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(sx - 3, sy + arrowLen * 0.5 - 4);
+    ctx.lineTo(sx, sy + arrowLen * 0.5);
+    ctx.lineTo(sx + 3, sy + arrowLen * 0.5 - 4);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = 'rgba(200,160,78,0.5)';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('T/P ≈ 10', 0, -scale * 2.6);
+
+  if (STAGE.solarWind) {
+    const rotT = t * 0.5;
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2 + rotT;
+      const rx = majorR * Math.cos(angle);
+      const ry = majorR * Math.sin(angle) * 0.4;
+      const tx = rx + 8 * Math.cos(angle + Math.PI / 2);
+      const ty = ry + 8 * Math.sin(angle + Math.PI / 2) * 0.4;
+      ctx.strokeStyle = 'rgba(100,255,150,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(tx, ty); ctx.stroke();
+    }
+  }
+
+  ctx.restore();
+}
+
+function drawTiltedDipoleField(cx, cy, scale, alpha, tiltAngle, numLines, color) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(tiltAngle);
+  ctx.globalAlpha = alpha;
+  drawSymmetricDipoleLines(0, 0, scale * 1.5, 1.0, numLines, color, false);
+  ctx.restore();
+}
+
+function drawSolarWindEffect(cx, cy, scale, alpha, pressure) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+  const compression = 1 - pressure * 0.3;
+  ctx.strokeStyle = 'rgba(255,100,50,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(scale * 0.3, 0, scale * compression, scale * 0.8, 0, -Math.PI / 2, Math.PI / 2);
+  ctx.stroke();
+  const elongation = 1 + pressure * 0.5;
+  ctx.beginPath();
+  ctx.moveTo(0, -scale * 0.6);
+  ctx.lineTo(-scale * elongation, -scale * 0.3);
+  ctx.lineTo(-scale * elongation, scale * 0.3);
+  ctx.lineTo(0, scale * 0.6);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawEarthBody(cx, cy, scale, alpha) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = "#1a3a6a";
+  ctx.beginPath(); ctx.arc(0, 0, scale * 0.18, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = "#4488ff";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(100,150,255,0.25)';
+  ctx.lineWidth = 0.5;
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const r = scale * 0.18 * Math.cos(lat * Math.PI / 180);
+    const y = scale * 0.18 * Math.sin(lat * Math.PI / 180);
+    ctx.beginPath(); ctx.ellipse(0, y, r, r * 0.3, 0, 0, Math.PI * 2); ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath(); ctx.moveTo(0, -scale * 0.22); ctx.lineTo(0, scale * 0.22); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ── QUATERNIONIC FIELD VISUALIZATION ─────────────────────────────
+function drawQuaternionicDipoleLines(B, scale, alpha) {
+  const numLines = 16;
+  for (let i = 0; i < numLines; i++) {
+    const theta0 = (i / numLines) * Math.PI * 0.48 + 0.02;
+    const r0 = 2 * scale;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(68,136,255,' + (alpha * 0.5) + ')';
+    ctx.lineWidth = 0.6;
+    let r = r0, theta = theta0;
+    for (let step = 0; step < 200; step++) {
+      const br = Math.sqrt(B.x * B.x + B.y * B.y + B.z * B.z) + 1e-10;
+      const dr = (B.x / br) * scale * 0.02;
+      const dtheta = (B.y / br) * 0.02;
+      r += dr;
+      theta += dtheta;
+      const x = r * Math.sin(theta);
+      const y = -r * Math.cos(theta);
+      if (step === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+      if (r > 10 * scale) break;
+    }
+    ctx.stroke();
+  }
+}
+
+function drawQuaternionicToroidalField(B, scale, alpha) {
+  const rings = 8;
+  for (let i = 0; i < rings; i++) {
+    const theta = (i / rings) * Math.PI * 2;
+    const r = scale * 0.6 + 0.2 * scale * Math.sin(theta);
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(100,200,255,' + (alpha * 0.3) + ')';
+    ctx.lineWidth = 0.5;
+    for (let j = 0; j <= 100; j++) {
+      const phi = (j / 100) * Math.PI * 2;
+      const x = r * Math.cos(theta + phi * 0.1);
+      const y = r * Math.sin(theta + phi * 0.1);
+      if (j === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+}
+
+function drawSceneWithDT(cx, cy, scale, alpha, phase) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  const Psi = dtModel.computeState(3 * dtModel.R_E, 2 * dtModel.R_E, 1 * dtModel.R_E);
+  drawQuaternionicDipoleLines(Psi.B_dip, scale, alpha);
+  drawQuaternionicToroidalField(Psi.B_tor, scale, alpha);
+  const magnitude = dtModel.getScalarMagnitude(Psi);
+  const magSq = dtModel.getScalarMagnitudeSq(Psi);
+  const coherence = dtModel.getCoherence();
+
+  ctx.fillStyle = 'rgba(200,160,78,' + (alpha * 0.3) + ')';
+  ctx.font = "10px monospace";
+  ctx.textAlign = "center";
+  ctx.fillText('MGDH: ‖Ψ‖² = ' + magSq.toFixed(2), 0, -scale * 2.0);
+
+  ctx.fillStyle = 'rgba(255,215,0,' + (alpha * 0.5) + ')';
+  ctx.font = "8px monospace";
+  ctx.fillText('Coherence: ' + (coherence * 100).toFixed(1) + '%', 0, -scale * 2.0 + 16);
+
+  ctx.fillStyle = 'rgba(200,160,78,' + (alpha * 0.3) + ')';
+  ctx.font = "8px monospace";
+  ctx.fillText('𝔐·∇·Ψ = ' + (magSq / (PHI + 0.001)).toFixed(2), 0, -scale * 2.0 + 32);
+
+  ctx.restore();
+}
+
+// ── SCENES ───────────────────────────────────────────────────────
+function drawScene0_void(u) {
+  ctx.save(); ctx.translate(w / 2, h / 2);
+  const R = lerp(120, 60, u); const eggAlpha = 1 - u * 0.5;
+  ctx.globalAlpha = eggAlpha;
+  const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, R);
+  grad.addColorStop(0, 'rgba(200,160,78,0.3)'); grad.addColorStop(0.5, 'rgba(100,80,40,0.1)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
+function drawScene1_mitosis(u) {
+  ctx.save(); ctx.translate(w / 2, h / 2); const split = u; const offset = lerp(0, 50, split);
+  [-1, 1].forEach(side => {
+    ctx.globalAlpha = 0.5 + split * 0.5;
+    const grad = ctx.createRadialGradient(side * offset, 0, 0, side * offset, 0, 80);
+    grad.addColorStop(0, 'rgba(200,160,78,0.4)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(side * offset, 0, 80, 0, Math.PI * 2); ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawScene2_emergence(u) {
+  ctx.save(); ctx.translate(w / 2, h / 2);
+  const scale = lerp(80, 160, u); const alpha = lerp(0.3, 1.0, u);
+  drawSymmetricDipoleLines(0, 0, scale * 1.5, alpha * 0.7, 20, "#4488ff", true);
+  const tilt = STAGE.tilted ? GEOMAGNETIC_TILT * Math.sin(t * 0.1) : 0;
+  drawTorusPlasmasphere(0, 0, scale * 0.85, alpha, tilt);
+  drawEarthBody(0, 0, scale, alpha);
+  if (u > 0.5) {
+    ctx.fillStyle = 'rgba(200,160,78,' + ((u - 0.5) / 0.5 * 0.8) + ')';
+    ctx.font = "10px monospace"; ctx.textAlign = "center";
+    ctx.fillText("⊕ EARTH", 0, scale * 0.32);
+    ctx.fillText("PLASMASPHERE", 0, -scale * 0.6);
+    ctx.fillText("MAGNETIC DIPOLE", 0, -scale * 1.6);
+  }
+  ctx.globalAlpha = 1; ctx.restore();
+}
+
+function drawScene3_decay(u) {
+  ctx.save(); ctx.translate(w / 2, h / 2);
+  const scale = lerp(100, 180, u); const alpha = lerp(0.4, 1.0, u);
+  const tilt = GEOMAGNETIC_TILT * (0.5 + 0.5 * Math.sin(t * 0.08));
+  drawTiltedDipoleField(0, 0, scale * 1.5, alpha * 0.7, tilt, 20, "#4488ff");
+  drawTorusPlasmasphere(0, 0, scale * 0.85, alpha, tilt);
+  if (STAGE.solarWind) {
+    const pressure = clamp((spaceWeather.swSpeed - 300) / 500, 0, 1);
+    drawSolarWindEffect(0, 0, scale, alpha * 0.5, pressure);
+  }
+  drawEarthBody(0, 0, scale, alpha);
+  const heartScale = lerp(0.8, 1.2, u);
+  ctx.strokeStyle = 'rgba(255,51,102,' + lerp(0.3, 0.7, u) + ')'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i <= 100; i++) { const a = (i / 100) * Math.PI * 2; const r = heartScale * 50 * (1 - Math.sin(a)); const x = r * Math.cos(a); const y = -r * Math.sin(a) * 0.8; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+  ctx.closePath(); ctx.stroke();
+  ctx.globalAlpha = 1; ctx.restore();
+}
+
+function drawScene4_integration(u) {
+  ctx.save();
+  ctx.translate(w / 2, h / 2);
+  const scale = lerp(120, 220, u);
+  const alpha = lerp(0.5, 1.0, u);
+
+  // MGDH Quaternionic dipole-toroidal coupling
+  drawSceneWithDT(0, 0, scale, alpha, u);
+
+  // Existing integration elements
+  drawSymmetricDipoleLines(0, 0, scale, alpha * 0.6, 16, "#ff8800", true);
+  drawSymmetricDipoleLines(0, 0, scale * 0.6, alpha * 0.3, 10, "#c8a04e", false);
+  drawSymmetricDipoleLines(0, 0, scale * 1.3, alpha * 0.2, 8, "#66ccff", false);
+  const tilt = STAGE.tilted ? GEOMAGNETIC_TILT * Math.sin(t * 0.1) : 0;
+  drawTorusPlasmasphere(0, 0, scale * 0.8, alpha, tilt);
+  if (STAGE.solarWind) {
+    const pressure = clamp((spaceWeather.swSpeed - 300) / 500, 0, 1);
+    drawSolarWindEffect(0, 0, scale, alpha * 0.4, pressure);
+  }
+  drawEarthBody(0, 0, scale, alpha);
+
+  // Scale rings
+  const scales = [
+    { r: 25, color: "#66ccff", label: "Atom" },
+    { r: 55, color: "#ff3366", label: "Cell" },
+    { r: 95, color: "#33ff99", label: "Earth" },
+    { r: 150, color: "#c8a04e", label: "Magnetosphere" }
+  ];
+  ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+  scales.forEach(s => {
+    ctx.strokeStyle = s.color;
+    ctx.beginPath(); ctx.arc(0, 0, s.r, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = s.color;
+    ctx.fillText(s.label, 0, -s.r - 10);
+  });
+
+  // MGDH display ring
+  const mgdhRingR = scale + 55;
+  ctx.strokeStyle = 'rgba(255,215,0,' + (alpha * 0.15) + ')';
+  ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
+  ctx.beginPath(); ctx.arc(0, 0, mgdhRingR, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+
+  ctx.fillStyle = 'rgba(255,215,0,' + (alpha * 0.5) + ')';
+  ctx.font = "8px monospace";
+  const mgdhText = 'MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ  |  𝔐 = ' + PHI.toFixed(6);
+  for (let i = 0; i < mgdhText.length; i++) {
+    const angle = (i / mgdhText.length) * Math.PI * 2 - Math.PI / 2 + t * 0.06;
+    ctx.save();
+    ctx.translate(Math.cos(angle) * mgdhRingR, Math.sin(angle) * mgdhRingR);
+    ctx.rotate(angle + Math.PI / 2);
+    ctx.fillText(mgdhText[i], 0, 0);
+    ctx.restore();
+  }
+
+  // Data ring
+  const dataRingR = scale + 35;
+  ctx.strokeStyle = 'rgba(200,160,78,' + (alpha * 0.25) + ')';
+  ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+  ctx.beginPath(); ctx.arc(0, 0, dataRingR, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(200,160,78,' + (alpha * 0.6) + ')';
+  ctx.font = "9px monospace";
+  const liveText = 'Kp=' + spaceWeather.kp.toFixed(1) + ' AE=' + spaceWeather.ae + ' Dst=' + spaceWeather.dst + ' Bz=' + spaceWeather.bz.toFixed(1) + ' SW=' + spaceWeather.swSpeed.toFixed(0);
+  for (let i = 0; i < liveText.length; i++) {
+    const angle = (i / liveText.length) * Math.PI * 2 - Math.PI / 2 + t * 0.08;
+    ctx.save();
+    ctx.translate(Math.cos(angle) * dataRingR, Math.sin(angle) * dataRingR);
+    ctx.rotate(angle + Math.PI / 2);
+    ctx.fillText(liveText[i], 0, 0);
+    ctx.restore();
+  }
+
+  // Scalar coherence ring
+  ctx.fillStyle = "rgba(255,255,255,0.25)";
+  ctx.font = "9px monospace";
+  const text = "AS ABOVE · SO BELOW · 𝔐 = " + PHI.toFixed(6);
+  for (let i = 0; i < text.length; i++) {
+    const angle = (i / text.length) * Math.PI * 2 - Math.PI / 2 + t * 0.12;
+    ctx.save();
+    ctx.translate(Math.cos(angle) * (scale + 60), Math.sin(angle) * (scale + 60));
+    ctx.rotate(angle + Math.PI / 2);
+    ctx.fillText(text[i], 0, 0);
+    ctx.restore();
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+function getPhaseIndex(cycleT) {
+  if (cycleT < 0.15) return 0;
+  if (cycleT < 0.30) return 1;
+  if (cycleT < 0.55) return 2;
+  if (cycleT < 0.80) return 3;
+  return 4;
+}
+
+function renderFrame(timestamp) {
+  if (lastFrameTime) {
+    const delta = timestamp - lastFrameTime;
+    frameCount++;
+    if (frameCount % 30 === 0) {
+      fps = Math.round(1000 / delta);
+      fpsText.textContent = fps + ' fps';
+    }
+  }
+  lastFrameTime = timestamp;
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, w, h);
+
+  const cycleT = auto ? ((t * 0.05) % 1) : (manualT / 1000);
+  drawStarsField(1, Math.sin(cycleT * Math.PI * 2) * 0.3);
+
+  const phaseIdx = getPhaseIndex(cycleT);
+  const phase = phases[phaseIdx];
+  titleEl.textContent = phase.name;
+  phaseEl.innerHTML = phase.sub + "<br>cycle position: " + (cycleT * 100).toFixed(1) + "%<br><span style='color:#ffd700;font-size:9px;'>MGDH Complete</span>";
+
+  phases.forEach((p, i) => {
+    const dot = document.getElementById('dot-' + i);
+    if (dot) dot.classList.toggle('active', Math.abs(cycleT - p.t) < 0.08);
+  });
+
+  let w0, w1, w2, w3, w4;
+  if (view === 'cosmic') {
+    w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT));
+    w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT));
+    w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT));
+    w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT));
+    w4 = smoothstep(0.80, 0.90, cycleT);
+  } else if (view === 'plasma') {
+    w0 = 0;
+    w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT)) * 0.3;
+    w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT));
+    w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT)) * 0.3;
+    w4 = smoothstep(0.80, 0.90, cycleT);
+  } else {
+    w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT));
+    w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT));
+    w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT));
+    w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT));
+    w4 = smoothstep(0.80, 0.90, cycleT) * (1 - smoothstep(0.95, 1.0, cycleT));
+  }
+
+  const total = w0 + w1 + w2 + w3 + w4;
+  const nw0 = w0 / (total || 1), nw1 = w1 / (total || 1), nw2 = w2 / (total || 1), nw3 = w3 / (total || 1), nw4 = w4 / (total || 1);
+
+  ctx.globalAlpha = nw0; if (nw0 > 0.01) drawScene0_void(cycleT / 0.25);
+  ctx.globalAlpha = nw1; if (nw1 > 0.01) drawScene1_mitosis((cycleT - 0.15) / 0.25);
+  ctx.globalAlpha = nw2; if (nw2 > 0.01) drawScene2_emergence((cycleT - 0.40) / 0.25);
+  ctx.globalAlpha = nw3; if (nw3 > 0.01) drawScene3_decay((cycleT - 0.65) / 0.25);
+  ctx.globalAlpha = nw4; if (nw4 > 0.01) drawScene4_integration((cycleT - 0.90) / 0.10);
+  ctx.globalAlpha = 1;
+
+  if (auto) slider.value = Math.round(cycleT * 1000);
+}
+
+function animationLoop(timestamp) {
+  t += 0.016;
+  renderFrame(timestamp);
+  requestAnimationFrame(animationLoop);
+}
+
+// ── EVENT LISTENERS ──────────────────────────────────────────────
+btnPlay.addEventListener('click', () => {
+  auto = !auto;
+  btnPlay.textContent = auto ? "⏸ pause" : "▶ play";
+});
+slider.addEventListener('input', () => {
+  auto = false;
+  manualT = parseInt(slider.value);
+  btnPlay.textContent = "▶ play";
+});
+btnPrev.addEventListener('click', () => {
+  auto = false;
+  manualT = Math.max(0, manualT - 100);
+  slider.value = manualT;
+  btnPlay.textContent = "▶ play";
+});
+btnNext.addEventListener('click', () => {
+  auto = false;
+  manualT = Math.min(1000, manualT + 100);
+  slider.value = manualT;
+  btnPlay.textContent = "▶ play";
+});
+viewMode.addEventListener('change', (e) => { view = e.target.value; });
+
+phases.forEach((p, i) => {
+  const dot = document.getElementById('dot-' + i);
+  if (dot) {
+    dot.style.cursor = 'pointer';
+    dot.addEventListener('click', () => {
+      auto = false;
+      manualT = Math.round(p.t * 1000);
+      slider.value = manualT;
+      btnPlay.textContent = "▶ play";
+    });
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') { e.preventDefault(); btnPlay.click(); }
+  else if (e.code === 'ArrowLeft') { btnPrev.click(); }
+  else if (e.code === 'ArrowRight') { btnNext.click(); }
+});
+
+// ── INIT ─────────────────────────────────────────────────────────
+requestAnimationFrame(animationLoop);
+fetchNOAAData();
+setInterval(fetchNOAAData, 300000);
+
+console.log('%c[Scalar-Plasma Cycle v4.4 — MGDH Complete]', 'color: #ffd700; font-weight: bold;');
+console.log('%cMacachor Absolute Scalar Lock: M = ' + PHI, 'color: #c8a04e;');
+console.log('%cMGDH Lagrangian: ℒ = ||Ψ||² − M·∇·Ψ + Φ·Ψ', 'color: #ffd700;');
+console.log('%cGauss · De Pretto · Hamilton · Macachor', 'color: #ffd700;');
+console.log('%cCoherence Condition: M·∇·Ψ = ||Ψ||²', 'color: #4ec88a;');
+console.log('%cNOAA SWPC live data: DIRECT FETCH (CORS-enabled)', 'color: #4ec88a;');
+console.log('%cQuaternionic Neural Network: ACTIVE', 'color: #66ccff;');
+console.log('%cDipole-Toroidal Coupling: ACTIVE', 'color: #ff8800;');
 </script>
 
 </body>
