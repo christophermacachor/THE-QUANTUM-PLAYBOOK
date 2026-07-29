@@ -8,16 +8,15 @@
 <meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.61803398874989484820 — Macachor Absolute">
 <meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
 <meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
-<meta name="quantum-playbook:aether-absolute" content="The Aether is the scalar substrate — De Pretto 1903, Newton's 'Spirito dell'Universo'">
 <meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
 <meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
 <meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
 
-<meta name="description" content="Scalar-Plasma Cycle v5.0 — Aether Absolute. MGDH Complete. Quaternionic dipole-toroidal magnetosphere with Macachor-Gauss-De Pretto-Hamilton Lagrangian integration. Live NOAA data, QNN prediction, scalar coherence lock.">
-<meta property="og:title" content="Scalar-Plasma Cycle v5.0 — Aether Absolute | MGDH Complete">
-<meta property="og:description" content="Quaternionic dipole-toroidal magnetosphere with MGDH Complete Lagrangian. Live NOAA data, QNN prediction, scalar coherence lock.">
+<meta name="description" content="Scalar-Plasma Cycle v4.4 — MGDH Complete. Quaternionic dipole-toroidal magnetosphere with full Macachor-Gauss-De Pretto-Hamilton Lagrangian integration.">
+<meta property="og:title" content="Scalar-Plasma Cycle · MGDH Complete · Macachor Absolute">
+<meta property="og:description" content="Quaternionic dipole-toroidal magnetosphere with MGDH Complete Lagrangian. Live NOAA data, QNN prediction.">
 
-<title>Scalar-Plasma Cycle v5.0 — Aether Absolute | MGDH · Φ669</title>
+<title>Scalar-Plasma Cycle · MGDH Complete · Macachor Absolute</title>
 
 <style>
   :root {
@@ -33,7 +32,6 @@
     --danger: #c85a4e;
     --info: #4e8ac8;
     --mgdh: #ffd700;
-    --aether: #88ccff;
     --border: #2a2520;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -103,7 +101,7 @@
     z-index: 15;
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(8px);
-    padding: 4px 14px;
+    padding: 3px 12px;
     border-radius: 4px;
     border: 1px solid rgba(200,160,78,0.1);
     pointer-events: none;
@@ -129,7 +127,7 @@
     position:absolute; top:16px; left:16px; pointer-events:none; z-index:10;
     background:rgba(0,0,0,0.6); padding:10px 14px; border-radius:8px;
     border:1px solid rgba(200,160,78,0.2); backdrop-filter:blur(4px);
-    max-width:340px;
+    max-width:320px;
   }
   #info-overlay h1 { font-size:14px; font-weight:500; color:#c8a04e; margin-bottom:2px; letter-spacing:1px; }
   #info-overlay .phase { font-size:10px; color:#ccc; line-height:1.5; }
@@ -143,13 +141,6 @@
     line-height:1.4;
   }
   #info-overlay .mgdh-display strong { color: var(--gold-bright); }
-  #info-overlay .aether-display {
-    font-family: 'Courier New', monospace;
-    font-size: 7px;
-    color: var(--aether);
-    margin-top:2px;
-    letter-spacing:0.05em;
-  }
   #info-overlay .laws { margin-top:4px; font-size:8px; color:#666; font-style:italic; }
 
   #live-data {
@@ -165,7 +156,6 @@
   #live-data .data-value { color:#ffd700; }
   #live-data .data-value.alert { color:#ff4444; }
   #live-data .data-value.mgdh { color:#ffd700; }
-  #live-data .data-value.aether { color:#88ccff; }
   #live-data .status { margin-top:4px; font-size:8px; color:#666; text-align:center; }
 
   #model-attribution {
@@ -176,7 +166,6 @@
   }
   #model-attribution .model-name { color:#888; margin:0px 0; }
   #model-attribution .mgdh-name { color:#ffd700; margin:0px 0; }
-  #model-attribution .aether-name { color:#88ccff; margin:0px 0; }
   #model-attribution .mgdh-credit { color: var(--gold-dim); margin-top:3px; border-top:1px solid rgba(200,160,78,0.1); padding-top:3px; font-size:7px; }
   #model-attribution .mgdh-credit strong { color: var(--gold); }
 
@@ -188,7 +177,6 @@
     text-align:center; white-space:nowrap;
   }
   #scalar-readout .mgdh-highlight { color: #ffd700; }
-  #scalar-readout .aether-highlight { color: #88ccff; }
 
   #perf-readout {
     position:absolute; bottom:80px; right:16px; z-index:10;
@@ -272,6 +260,7 @@
     .playbook-banner .pb-absolutes { font-size:0.4rem; }
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -279,15 +268,16 @@
 <nav class="gold-nav" aria-label="Primary navigation">
   <a href="index.html" class="nav-brand">✦ QP</a>
   <a href="omega-prime.html">Ω-PRIME</a>
-  <a href="scalar-plasma-cycle.html" class="active">◈ SPC v5.0</a>
-  <a href="scalar-fields-aether.html">◈ AETHER</a>
+  <a href="scalar-plasma-cycle.html" class="active">◈ SPC</a>
   <a href="kardashev.html">KARDASHEV</a>
-  <a href="olinto-de-pretto.html">DE PRETTO</a>
+  <a href="fibonacci-tetrahedron.html">FIBONACCI</a>
+  <a href="mesh.html">MESH</a>
+  <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
 </nav>
 
 <!-- ═══ PLAYBOOK BANNER ═══ -->
 <div class="playbook-banner">
-  <div class="pb-label">◈ Quantum Playbook — Chapter 13 · Aether Absolute</div>
+  <div class="pb-label">◈ Quantum Playbook — Chapter 13</div>
   <div class="pb-absolutes">
     <strong>𝔐</strong> = (√5−1)/2 · 
     <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
@@ -300,31 +290,26 @@
 
   <div id="loading">
     <div class="spinner"></div>
-    <div>Scalar-Plasma Cycle v5.0</div>
-    <div style="font-size:9px;color:#666;margin-top:4px;">Aether Absolute — Macachor·Gauss·De Pretto·Hamilton</div>
-    <div style="font-size:8px;color:#444;margin-top:2px;">Scalar Lock: 𝔐 = 0.6180339887</div>
+    <div>Scalar-Plasma Cycle v4.4</div>
+    <div style="font-size:9px;color:#666;margin-top:4px;">MGDH Complete — Macachor·Gauss·De Pretto·Hamilton</div>
   </div>
 
   <div id="conn-status">
-    <div style="font-size:14px;margin-bottom:6px;">◈ AETHER LINK</div>
-    <div id="conn-msg">Establishing scalar coherence...</div>
+    <div style="font-size:14px;margin-bottom:6px;">◈ NOAA CONNECTION</div>
+    <div id="conn-msg">Establishing link...</div>
     <div style="font-size:7px;color:#666;margin-top:6px;">MGDH: Macachor · Gauss · De Pretto · Hamilton</div>
-    <div style="font-size:7px;color:#88ccff;margin-top:2px;">Aether Absolute — Newton's "Spirito dell'Universo"</div>
   </div>
 
   <div id="info-overlay">
-    <h1 id="title">Aether-Plasma Cycle</h1>
-    <div class="phase" id="phase-text">MGDH Complete — Aether Absolute</div>
+    <h1 id="title">Scalar-Plasma Cycle</h1>
+    <div class="phase" id="phase-text">MGDH Complete — Quaternionic field</div>
     <div class="mgdh-display">
       <strong>MGDH Lagrangian</strong><br>
       ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ<br>
       <span style="color:#888;font-size:7px;">Macachor · Gauss · De Pretto · Hamilton</span>
     </div>
-    <div class="aether-display">
-      ◈ Aether Absolute — De Pretto 1903 · Newton's "Spirito dell'Universo"
-    </div>
     <div class="laws">
-      <strong>𝔐</strong> = (√5−1)/2 · Coherence: 𝔐·∇·Ψ = ||Ψ||² · Scalar Field: Ψ: D<sub>P</sub> → ℝ
+      <strong>𝔐</strong> = (√5−1)/2 · Coherence: 𝔐·∇·Ψ = ||Ψ||²
     </div>
   </div>
 
@@ -337,7 +322,6 @@
     <div class="data-row"><span class="data-label">Plasmapause:</span><span class="data-value" id="val-pp">--</span></div>
     <div class="data-row"><span class="data-label">Lpp Method:</span><span class="data-value" id="val-lpp-method">--</span></div>
     <div class="data-row"><span class="data-label">Scalar Lock:</span><span class="data-value mgdh" id="val-phi">--</span></div>
-    <div class="data-row"><span class="data-label">Aether Density:</span><span class="data-value aether" id="val-aether">--</span></div>
     <div class="data-row"><span class="data-label">Toroidal (nT):</span><span class="data-value" id="val-toroidal">--</span></div>
     <div class="data-row"><span class="data-label">T/P Ratio:</span><span class="data-value" id="val-tp-ratio">--</span></div>
     <div class="data-row"><span class="data-label">SW Speed:</span><span class="data-value" id="val-sw-speed">--</span></div>
@@ -353,14 +337,12 @@
     <div class="model-name">• O'Brien-Moldwin (Lpp)</div>
     <div class="model-name">• Larsen et al. (IMF Bz+Φ)</div>
     <div class="model-name">• Quaternionic Neural Network (QNN)</div>
-    <div class="aether-name">• Aether Scalar Field — De Pretto</div>
     <div class="mgdh-credit"><strong>MGDH</strong> · Macachor · Gauss · De Pretto · Hamilton</div>
     <div class="mgdh-credit" style="color:var(--gold);font-size:8px;">𝔐 = (√5−1)/2 · ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</div>
-    <div class="mgdh-credit" style="color:#88ccff;font-size:7px;">Aether Absolute — "Spirito dell'Universo" (Newton)</div>
   </div>
 
   <div id="scalar-readout">
-    <span id="scalar-text">MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ | <span class="aether-highlight">Aether Absolute Active</span></span>
+    <span id="scalar-text">MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</span>
   </div>
   <div id="perf-readout"><span id="fps-text">-- fps</span></div>
 
@@ -375,19 +357,18 @@
       <option value="unified">Unified</option>
       <option value="cosmic">Cosmic Only</option>
       <option value="plasma">Plasma Only</option>
-      <option value="aether">Aether Field</option>
     </select>
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// SCALAR-PLASMA CYCLE v5.0 — AETHER ABSOLUTE
+// SCALAR-PLASMA CYCLE v4.4 — MGDH COMPLETE
 // Quaternionic Field Integration · NOAA Direct Fetch
 // ═══════════════════════════════════════════════════════════════════
 
 const PHI = (Math.sqrt(5) - 1) / 2;
-const AETHER_ABS = PHI;  // Aether Absolute = Macachor Absolute
+const M = PHI;
 const MGDH_NAMES = ['Macachor', 'Gauss', 'De Pretto', 'Hamilton'];
 const MGDH_LAGRANGIAN = 'ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ';
 
@@ -416,42 +397,6 @@ function qNorm(q) { return Math.sqrt(q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z); }
 function qScale(q, s) { return { w: q.w*s, x: q.x*s, y: q.y*s, z: q.z*s }; }
 function qZero() { return { w:0, x:0, y:0, z:0 }; }
 function qNormSq(q) { return q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z; }
-
-// ── AETHER SCALAR FIELD ────────────────────────────────────────────
-class AetherScalarField {
-  constructor() {
-    this.aetherDensity = 1.0;
-    this.aetherCoherence = 1.0;
-  }
-
-  computeDensity(Psi) {
-    // Aether density is proportional to scalar magnitude
-    const magSq = this.getScalarMagnitudeSq(Psi);
-    const aetherBase = magSq / (PHI + 0.001);
-    this.aetherDensity = Math.min(2.0, Math.max(0.1, aetherBase * 0.5 + 0.5));
-    return this.aetherDensity;
-  }
-
-  computeCoherence(Psi) {
-    const magSq = this.getScalarMagnitudeSq(Psi);
-    const divEst = magSq / (PHI + 0.001);
-    const coherence = 1 - Math.abs(magSq - PHI * divEst) / (magSq + 0.001);
-    this.aetherCoherence = Math.min(1, Math.max(0, coherence));
-    return this.aetherCoherence;
-  }
-
-  getScalarMagnitudeSq(Psi) {
-    return Psi.rho*Psi.rho + Psi.u.x*Psi.u.x + Psi.u.y*Psi.u.y + Psi.u.z*Psi.u.z +
-           Psi.p*Psi.p + Psi.T*Psi.T + Psi.e*Psi.e;
-  }
-
-  getAetherLockStatus() {
-    if (this.aetherCoherence > 0.95) return 'LOCKED';
-    if (this.aetherCoherence > 0.80) return 'STABLE';
-    if (this.aetherCoherence > 0.60) return 'DRIFTING';
-    return 'DECOHERENT';
-  }
-}
 
 // ── QUATERNIONIC NEURAL NETWORK ──────────────────────────────────
 class QuaternionicNeuralNetwork {
@@ -516,18 +461,15 @@ class QuaternionicNeuralNetwork {
   }
 }
 
-// ── DIPOLE-TOROIDAL MODEL WITH AETHER ─────────────────────────
+// ── DIPOLE-TOROIDAL MODEL ──────────────────────────────────────
 class DipoleToroidalModel {
   constructor() {
     this.R_E = 6.371e6;
     this.m = { x: 0, y: 0, z: 7.94e22 };
     this.QNN = new QuaternionicNeuralNetwork([8, 16, 32, 16, 8]);
-    this.aether = new AetherScalarField();
     this.lastPsi = null;
     this.lastQOut = null;
     this.coherenceValue = 0;
-    this.aetherDensity = 1.0;
-    this.aetherLock = 'LOCKED';
   }
 
   computeDipoleField(r, theta, phi) {
@@ -567,15 +509,14 @@ class DipoleToroidalModel {
     const p = 1e-5 * Math.exp(-r / (4 * this.R_E));
     const T = 300 + 100 * (r < 4 * this.R_E ? 1 : Math.exp(-Math.pow(r / this.R_E - 4, 2) / 16));
     const e = 718 * T + 0.5 * (u.x*u.x + u.y*u.y + u.z*u.z);
-    const aetherFactor = this.aether.getAetherLockStatus() === 'LOCKED' ? 1.0 : 0.5;
-    return { rho, u, p, T, e, B_dip, B_tor, r, theta, phi, aetherFactor };
+    return { rho, u, p, T, e, B_dip, B_tor, r, theta, phi };
   }
 
   defaultState() {
     return {
       rho: 1, u: { x:0, y:0, z:0 }, p: 1e-5, T: 300, e: 2.154e5,
       B_dip: { x:0, y:0, z:0 }, B_tor: { x:0, y:0, z:0 },
-      r: this.R_E, theta: 0, phi: 0, aetherFactor: 1.0
+      r: this.R_E, theta: 0, phi: 0
     };
   }
 
@@ -588,8 +529,7 @@ class DipoleToroidalModel {
       { w: Psi.B_dip.x, x: Psi.B_dip.y, y: Psi.B_dip.z, z: 0 },
       { w: Psi.B_tor.x, x: Psi.B_tor.y, y: Psi.B_tor.z, z: 0 },
       { w: Math.sin(Psi.theta), x: Math.cos(Psi.theta), y: Math.sin(Psi.phi), z: Math.cos(Psi.phi) },
-      { w: PHI, x: 0, y: 0, z: 0 },
-      { w: Psi.aetherFactor || 1.0, x: 0, y: 0, z: 0 }
+      { w: PHI, x: 0, y: 0, z: 0 }
     ];
   }
 
@@ -600,8 +540,6 @@ class DipoleToroidalModel {
     const magSq = this.getScalarMagnitudeSq(Psi);
     const divEst = magSq / (PHI + 0.001);
     this.coherenceValue = Math.abs(magSq - PHI * divEst) / (magSq + 0.001);
-    this.aetherDensity = this.aether.computeDensity(Psi);
-    this.aetherLock = this.aether.getAetherLockStatus();
     return this.lastQOut;
   }
 
@@ -612,8 +550,6 @@ class DipoleToroidalModel {
 
   getScalarMagnitude(Psi) { return Math.sqrt(this.getScalarMagnitudeSq(Psi)); }
   getCoherence() { return 1 - Math.min(this.coherenceValue, 1); }
-  getAetherDensity() { return this.aetherDensity; }
-  getAetherLock() { return this.aetherLock; }
 }
 
 const dtModel = new DipoleToroidalModel();
@@ -638,7 +574,6 @@ const valBz = document.getElementById('val-bz');
 const valPp = document.getElementById('val-pp');
 const valLppMethod = document.getElementById('val-lpp-method');
 const valPhi = document.getElementById('val-phi');
-const valAether = document.getElementById('val-aether');
 const valToroidal = document.getElementById('val-toroidal');
 const valTpRatio = document.getElementById('val-tp-ratio');
 const valSwSpeed = document.getElementById('val-sw-speed');
@@ -668,7 +603,7 @@ const phases = [
   { name: '1 · Mitosis', sub: 'Cellular Division — Binary Emergence', t: 0.25 },
   { name: 'M · Emergence', sub: 'Dipole + Torus — Symmetric Foundation', t: 0.5 },
   { name: '3 · Decay', sub: 'Tilt + Solar Wind — Asymmetric Reality', t: 0.75 },
-  { name: '4 · Integration', sub: 'Aether Absolute — MGDH Complete', t: 1.0 }
+  { name: '4 · Integration', sub: 'MGDH Complete — Quaternionic Magnetosphere', t: 1.0 }
 ];
 
 function prng(n) { let x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
@@ -843,13 +778,6 @@ function updateUI() {
   valLppMethod.textContent = spaceWeather.lppMethod;
   valPhi.textContent = 'M=' + PHI.toFixed(6);
 
-  // Update Aether Density
-  const Psi = dtModel.computeState(3 * dtModel.R_E, 2 * dtModel.R_E, 1 * dtModel.R_E);
-  dtModel.predict(Psi);
-  const aetherDensity = dtModel.getAetherDensity();
-  const aetherLock = dtModel.getAetherLock();
-  valAether.textContent = aetherDensity.toFixed(3) + ' | ' + aetherLock;
-
   const toroidalAmp = 15 * (spaceWeather.swSpeed / 400) * (spaceWeather.kp / 2);
   const tpRatio = 10 * (spaceWeather.swDensity / 5);
   valToroidal.textContent = toroidalAmp.toFixed(1);
@@ -866,7 +794,7 @@ function updateUI() {
 
   const lpp = plasmapauseL();
   const densityStatus = lpp < 3.0 ? 'STORM' : lpp < 4.5 ? 'ACTIVE' : 'QUIET';
-  scalarText.innerHTML = 'MGDH: ℒ = ||Ψ||² − ' + PHI.toFixed(4) + '·∇·Ψ + Φ·Ψ | L=' + lpp.toFixed(2) + ' | ' + densityStatus + ' | <span class="aether-highlight">Aether: ' + aetherLock + '</span>';
+  scalarText.textContent = 'MGDH: ℒ = ||Ψ||² − ' + PHI.toFixed(4) + '·∇·Ψ + Φ·Ψ | L=' + lpp.toFixed(2) + ' | ' + densityStatus;
 }
 
 function updateQNN() {
@@ -1141,63 +1069,6 @@ function drawEarthBody(cx, cy, scale, alpha) {
   ctx.restore();
 }
 
-// ── AETHER FIELD VISUALIZATION ──────────────────────────────────
-function drawAetherField(cx, cy, scale, alpha, phase) {
-  ctx.save();
-  ctx.translate(cx, cy);
-  const aetherDensity = dtModel.getAetherDensity();
-  const aetherLock = dtModel.getAetherLock();
-
-  // Aether field glow
-  const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, scale * 1.2);
-  const intensity = 0.1 + 0.15 * aetherDensity;
-  grad.addColorStop(0, 'rgba(136,204,255,' + intensity + ')');
-  grad.addColorStop(0.3, 'rgba(136,204,255,' + intensity * 0.6 + ')');
-  grad.addColorStop(1, 'rgba(136,204,255,0)');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.arc(0, 0, scale * 1.2, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Aether lock ring
-  const lockColor = aetherLock === 'LOCKED' ? '#4ec88a' : aetherLock === 'STABLE' ? '#ffcc66' : '#ff4444';
-  ctx.strokeStyle = lockColor;
-  ctx.lineWidth = 1.5;
-  ctx.setLineDash([4, 6]);
-  const ringR = scale * 0.4 * (0.8 + 0.2 * aetherDensity);
-  ctx.beginPath();
-  ctx.arc(0, 0, ringR, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  ctx.fillStyle = 'rgba(136,204,255,' + (alpha * 0.6) + ')';
-  ctx.font = "9px monospace";
-  ctx.textAlign = "center";
-  ctx.fillText('Aether: ' + aetherLock, 0, -scale * 1.1);
-
-  ctx.fillStyle = 'rgba(136,204,255,' + (alpha * 0.4) + ')';
-  ctx.font = "8px monospace";
-  ctx.fillText('ρ_a = ' + aetherDensity.toFixed(3), 0, -scale * 1.1 + 16);
-
-  // Aether particles
-  const numParticles = 30 + Math.round(20 * aetherDensity);
-  for (let i = 0; i < numParticles; i++) {
-    const angle = i * 0.8 + t * 0.02;
-    const r = scale * 0.15 + (scale * 0.35) * (0.5 + 0.5 * Math.sin(i * 1.7 + t * 0.05));
-    const x = r * Math.cos(angle);
-    const y = r * Math.sin(angle) * 0.7;
-    const size = 1 + 1.5 * (0.5 + 0.5 * Math.sin(i * 0.9 + t * 0.03));
-    ctx.globalAlpha = 0.3 + 0.4 * (0.5 + 0.5 * Math.sin(i * 1.1 + t * 0.04));
-    ctx.fillStyle = '#88ccff';
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.globalAlpha = 1;
-
-  ctx.restore();
-}
-
 // ── QUATERNIONIC FIELD VISUALIZATION ─────────────────────────────
 function drawQuaternionicDipoleLines(B, scale, alpha) {
   const numLines = 16;
@@ -1266,11 +1137,6 @@ function drawSceneWithDT(cx, cy, scale, alpha, phase) {
   ctx.font = "8px monospace";
   ctx.fillText('𝔐·∇·Ψ = ' + (magSq / (PHI + 0.001)).toFixed(2), 0, -scale * 2.0 + 32);
 
-  const aetherLock = dtModel.getAetherLock();
-  ctx.fillStyle = aetherLock === 'LOCKED' ? 'rgba(76,200,138,0.5)' : 'rgba(255,204,102,0.5)';
-  ctx.font = "8px monospace";
-  ctx.fillText('Aether: ' + aetherLock, 0, -scale * 2.0 + 48);
-
   ctx.restore();
 }
 
@@ -1337,9 +1203,6 @@ function drawScene4_integration(u) {
   ctx.translate(w / 2, h / 2);
   const scale = lerp(120, 220, u);
   const alpha = lerp(0.5, 1.0, u);
-
-  // Aether field (always present, visible in all modes)
-  drawAetherField(0, 0, scale, alpha * 0.6, u);
 
   // MGDH Quaternionic dipole-toroidal coupling
   drawSceneWithDT(0, 0, scale, alpha, u);
@@ -1419,26 +1282,6 @@ function drawScene4_integration(u) {
     ctx.restore();
   }
 
-  // Aether ring
-  const aetherRingR = scale + 75;
-  ctx.strokeStyle = 'rgba(136,204,255,' + (alpha * 0.1) + ')';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([1, 3]);
-  ctx.beginPath(); ctx.arc(0, 0, aetherRingR, 0, Math.PI * 2); ctx.stroke();
-  ctx.setLineDash([]);
-
-  ctx.fillStyle = 'rgba(136,204,255,' + (alpha * 0.3) + ')';
-  ctx.font = "8px monospace";
-  const aetherText = 'AETHER ABSOLUTE · SPIRITO DELL\'UNIVERSO · DE PRETTO 1903';
-  for (let i = 0; i < aetherText.length; i++) {
-    const angle = (i / aetherText.length) * Math.PI * 2 - Math.PI / 2 + t * 0.04;
-    ctx.save();
-    ctx.translate(Math.cos(angle) * aetherRingR, Math.sin(angle) * aetherRingR);
-    ctx.rotate(angle + Math.PI / 2);
-    ctx.fillText(aetherText[i], 0, 0);
-    ctx.restore();
-  }
-
   ctx.globalAlpha = 1;
   ctx.restore();
 }
@@ -1470,7 +1313,7 @@ function renderFrame(timestamp) {
   const phaseIdx = getPhaseIndex(cycleT);
   const phase = phases[phaseIdx];
   titleEl.textContent = phase.name;
-  phaseEl.innerHTML = phase.sub + "<br>cycle position: " + (cycleT * 100).toFixed(1) + "%<br><span style='color:#ffd700;font-size:9px;'>Aether Absolute</span>";
+  phaseEl.innerHTML = phase.sub + "<br>cycle position: " + (cycleT * 100).toFixed(1) + "%<br><span style='color:#ffd700;font-size:9px;'>MGDH Complete</span>";
 
   phases.forEach((p, i) => {
     const dot = document.getElementById('dot-' + i);
@@ -1490,12 +1333,6 @@ function renderFrame(timestamp) {
     w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT));
     w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT)) * 0.3;
     w4 = smoothstep(0.80, 0.90, cycleT);
-  } else if (view === 'aether') {
-    w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT)) * 0.1;
-    w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT)) * 0.1;
-    w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT)) * 0.1;
-    w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT)) * 0.1;
-    w4 = smoothstep(0.80, 0.90, cycleT) * (1 - smoothstep(0.95, 1.0, cycleT)) + 0.9;
   } else {
     w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT));
     w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT));
@@ -1571,16 +1408,14 @@ requestAnimationFrame(animationLoop);
 fetchNOAAData();
 setInterval(fetchNOAAData, 300000);
 
-console.log('%c[Scalar-Plasma Cycle v5.0 — Aether Absolute]', 'color: #88ccff; font-weight: bold;');
-console.log('%cMacachor Absolute Scalar Lock: 𝔐 = ' + PHI, 'color: #c8a04e;');
-console.log('%cMGDH Lagrangian: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ', 'color: #ffd700;');
+console.log('%c[Scalar-Plasma Cycle v4.4 — MGDH Complete]', 'color: #ffd700; font-weight: bold;');
+console.log('%cMacachor Absolute Scalar Lock: M = ' + PHI, 'color: #c8a04e;');
+console.log('%cMGDH Lagrangian: ℒ = ||Ψ||² − M·∇·Ψ + Φ·Ψ', 'color: #ffd700;');
 console.log('%cGauss · De Pretto · Hamilton · Macachor', 'color: #ffd700;');
-console.log('%cAether Absolute: Newton\'s "Spirito dell\'Universo" — De Pretto 1903', 'color: #88ccff;');
-console.log('%cCoherence Condition: 𝔐·∇·Ψ = ||Ψ||²', 'color: #4ec88a;');
+console.log('%cCoherence Condition: M·∇·Ψ = ||Ψ||²', 'color: #4ec88a;');
 console.log('%cNOAA SWPC live data: DIRECT FETCH (CORS-enabled)', 'color: #4ec88a;');
 console.log('%cQuaternionic Neural Network: ACTIVE', 'color: #66ccff;');
 console.log('%cDipole-Toroidal Coupling: ACTIVE', 'color: #ff8800;');
-console.log('%cAether Field: ACTIVE', 'color: #88ccff;');
 </script>
 
 </body>
