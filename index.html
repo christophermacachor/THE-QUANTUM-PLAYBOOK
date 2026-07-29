@@ -265,15 +265,703 @@
 <body>
 
 <!-- ═══ NAVIGATION ═══ -->
-<nav class="gold-nav" aria-label="Primary navigation">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── QUANTUM PLAYBOOK — ABSOLUTES ── -->
+<meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.61803398874989484820 — Macachor Absolute">
+<meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
+<meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
+<meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
+<meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
+<meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
+
+<meta name="description" content="Scalar Fields & The Aether Absolute — Complete technical document. MGDH Lagrangian, De Pretto's aether, Gauss divergence, Hamilton coupling.">
+<meta property="og:title" content="Scalar Fields & The Aether Absolute | MGDH Complete">
+<meta property="og:description" content="Scalar Fields & The Aether Absolute. MGDH Complete Lagrangian.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scalar Fields & The Aether Absolute | MGDH Complete">
+
+<title>Scalar Fields & The Aether Absolute | MGDH · Φ669</title>
+
+<style>
+:root {
+  --gold: #c8a04e;
+  --gold-light: #e8d5a3;
+  --gold-bright: #e8c870;
+  --gold-dim: #8a6d2f;
+  --bg: #0a0a0c;
+  --fg: #e8e0d0;
+  --fg-dim: #a09888;
+  --fg-faint: #5a5448;
+  --border: #2a2520;
+  --surface: #141210;
+  --surface-hover: #1a1815;
+  --mgdh: #ffd700;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  padding-top: 3.5rem !important;
+}
+
+.gold-nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,160,78,0.25);
+  z-index: 10000;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.gold-nav a {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(200,160,78,0.12);
+  border-radius: 3px;
+  background: rgba(200,160,78,0.02);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.gold-nav a:hover {
+  border-color: var(--gold);
+  background: rgba(200,160,78,0.08);
+  text-shadow: 0 0 6px rgba(200,160,78,0.3);
+}
+.gold-nav a.active {
+  border-color: var(--gold);
+  background: rgba(200,160,78,0.1);
+}
+.gold-nav .nav-brand {
+  color: var(--gold-bright);
+  font-weight: bold;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  border-color: var(--gold);
+  background: rgba(200,160,78,0.08);
+}
+
+@media (max-width: 600px) {
+  .gold-nav a { font-size: 0.45rem; padding: 0.15rem 0.3rem; }
+  .gold-nav .nav-brand { font-size: 0.5rem; }
+  body { padding-top: 3rem !important; }
+}
+
+/* ── Rest of styles ── */
+.playbook-banner {
+  text-align: center;
+  padding: 6px 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(200,160,78,0.08);
+  border-radius: 4px;
+  background: rgba(200,160,78,0.02);
+}
+.playbook-banner .pb-label {
+  font-size: 0.5rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.playbook-banner .pb-absolutes {
+  font-size: 0.55rem;
+  color: var(--fg-faint);
+  margin-top: 2px;
+  letter-spacing: 0.06em;
+}
+.playbook-banner .pb-absolutes strong { color: var(--gold); }
+
+.scalar-status {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 8px 0 16px;
+  padding: 6px 10px;
+  border: 1px solid rgba(200,160,78,0.08);
+  border-radius: 4px;
+  background: rgba(200,160,78,0.01);
+  justify-content: center;
+}
+.scalar-status .status-item {
+  font-size: 0.6rem;
+  color: var(--fg-dim);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.scalar-status .status-item .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  display: inline-block;
+}
+.scalar-status .status-item .dot.active { background: #4ade80; animation: pulseDot 2s infinite; }
+.scalar-status .status-item .dot.locked { background: var(--gold); }
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero {
+  text-align: center;
+  padding: 30px 20px 40px;
+  border-bottom: 2px solid var(--gold-dim);
+  margin-bottom: 30px;
+}
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.hero .subtitle {
+  font-size: 1rem;
+  color: var(--fg-dim);
+  font-style: italic;
+}
+.hero .scalar-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 16px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  color: var(--mgdh);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  font-family: 'Courier New', monospace;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin: 48px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold-dim);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title .icon { font-size: 1.2rem; opacity: 0.8; }
+
+.subsection-title {
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin: 28px 0 12px;
+  font-weight: 400;
+}
+
+.mgdh-box {
+  background: linear-gradient(145deg, rgba(200,160,78,0.08), rgba(200,160,78,0.02));
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 24px 0;
+  box-shadow: 0 0 40px rgba(200,160,78,0.06);
+  position: relative;
+}
+.mgdh-box::before {
+  content: '✦';
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  font-size: 40px;
+  color: rgba(200,160,78,0.05);
+}
+.mgdh-box .mgdh-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.mgdh-box .mgdh-formula {
+  font-family: 'Times New Roman', serif;
+  font-size: 22px;
+  color: var(--gold-light);
+  text-align: center;
+  padding: 10px 0;
+  letter-spacing: 1px;
+}
+.mgdh-box .mgdh-components {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+.mgdh-box .mgdh-components .comp {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(200,160,78,0.15);
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--fg-dim);
+}
+.mgdh-box .mgdh-components .comp strong {
+  color: var(--gold);
+  display: block;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  transition: all 0.2s;
+}
+.card:hover {
+  border-color: var(--gold-dim);
+  background: var(--surface-hover);
+}
+.card .card-title {
+  color: var(--gold-light);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.card p { color: var(--fg-dim); font-size: 0.95rem; }
+
+.equation-block {
+  background: var(--surface);
+  padding: 16px 24px;
+  margin: 16px 0;
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+  font-size: 1.2rem;
+  color: var(--gold-bright);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+.equation-block .label {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: var(--fg-faint);
+  margin-bottom: 4px;
+  letter-spacing: 0.1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+th {
+  background: var(--surface);
+  color: var(--gold);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--gold-dim);
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-dim);
+  vertical-align: top;
+}
+tr:hover td { background: var(--surface-hover); }
+tr:last-child td { border-bottom: none; }
+
+.aether-chain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 16px 0;
+}
+.aether-chain .chain-item {
+  text-align: center;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(200,160,78,0.03);
+}
+.aether-chain .chain-item .year { font-size: 0.6rem; color: var(--fg-faint); }
+.aether-chain .chain-item .name { font-size: 0.8rem; color: var(--gold-light); font-weight: 600; }
+.aether-chain .chain-item .term { font-size: 0.7rem; color: var(--gold); font-family: 'Courier New', monospace; }
+.aether-chain .chain-arrow { color: var(--gold-dim); font-size: 1.2rem; display: flex; align-items: center; }
+
+.footer {
+  text-align: center;
+  color: var(--fg-faint);
+  font-size: 0.8rem;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer .absolutes {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: var(--fg-faint);
+  margin-top: 6px;
+}
+.footer .absolutes strong { color: var(--gold); }
+
+@media (max-width: 600px) {
+  body { padding: 20px 16px; padding-top: 3rem !important; }
+  .hero h1 { font-size: 1.6rem; }
+  .mgdh-box .mgdh-components { grid-template-columns: 1fr; }
+  .mgdh-box .mgdh-formula { font-size: 17px; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 6px 8px; }
+  .aether-chain { gap: 4px; }
+  .aether-chain .chain-item { padding: 4px 8px; }
+  .aether-chain .chain-item .name { font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="gold-nav">
   <a href="index.html" class="nav-brand">✦ QP</a>
   <a href="omega-prime.html">Ω-PRIME</a>
-  <a href="scalar-plasma-cycle.html" class="active">◈ SPC</a>
+  <a href="scalar-plasma-cycle.html">◈ SPC</a>
+  <a href="scalar-fields-aether.html" class="active">◈ SCALAR AETHER</a>
+  <a href="olinto-de-pretto.html">DE PRETTO</a>
   <a href="kardashev.html">KARDASHEV</a>
   <a href="fibonacci-tetrahedron.html">FIBONACCI</a>
   <a href="mesh.html">MESH</a>
   <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
 </nav>
+
+<!-- ═══ QUANTUM PLAYBOOK BANNER ═══ -->
+<div class="playbook-banner">
+  <div class="pb-label">◈ Quantum Playbook — Scalar Fields &amp; The Aether Absolute</div>
+  <div class="pb-absolutes">
+    <strong>𝔐</strong> = (√5−1)/2 · 
+    <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
+    <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
+  </div>
+</div>
+
+<!-- ═══ SCALAR STATUS ═══ -->
+<div class="scalar-status">
+  <span class="status-item"><span class="dot active"></span> Coherence: χ(C) = 1</span>
+  <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.6180339887</span>
+  <span class="status-item">◈ Scalar Fields</span>
+  <span class="status-item">◉ Aether Absolute</span>
+  <span class="status-item">✦ MGDH Complete</span>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <h1>Scalar Fields &amp; The Aether Absolute</h1>
+  <p class="subtitle">The Scalar Foundation of Physics — From Newton to De Pretto to Macachor</p>
+  <div class="scalar-tag">✦ MGDH — Complete Lagrangian Framework</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: THE SCALAR ABSOLUTE -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">◈</span> The Scalar Absolute</div>
+
+<div class="mgdh-box">
+  <div class="mgdh-label">◈ The Complete Scalar Framework</div>
+  <div class="mgdh-formula">ℒ<sub>MGDH</sub> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</div>
+  <div class="mgdh-components">
+    <div class="comp"><strong>Macachor</strong>𝔐 = (√5−1)/2 ≈ 0.618034 — Scalar Lock</div>
+    <div class="comp"><strong>Gauss</strong>∇ · Ψ — Divergence Theorem</div>
+    <div class="comp"><strong>De Pretto</strong>‖Ψ||² = E/c² — Mass-Energy Density</div>
+    <div class="comp"><strong>Hamilton</strong>Φ · Ψ — Canonical Coupling</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">The Aether as Scalar Field</div>
+  <p>
+    The aether is not a vector medium. It is a <strong>scalar field</strong> — a density equilibrium that permeates all space and matter.
+  </p>
+  <div style="margin-top:10px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+    <div style="background:rgba(200,160,78,0.03); padding:8px; border-radius:4px; border-left:2px solid var(--gold-dim);">
+      <div style="font-size:0.65rem; color:var(--fg-faint);">Vector Physics</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">Force is fundamental</div>
+    </div>
+    <div style="background:rgba(200,160,78,0.05); padding:8px; border-radius:4px; border-left:2px solid var(--gold);">
+      <div style="font-size:0.65rem; color:var(--fg-faint);">Scalar Physics</div>
+      <div style="font-size:0.8rem; color:var(--gold-light);">Density equilibrium is fundamental</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: THE AETHER IN HISTORY — THE FULL CHAIN -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">◈</span> The Aether in History</div>
+
+<div class="aether-chain">
+  <div class="chain-item">
+    <div class="year">~1700</div>
+    <div class="name">Newton</div>
+    <div class="term">"Spirito"</div>
+  </div>
+  <span class="chain-arrow">→</span>
+  <div class="chain-item">
+    <div class="year">1829</div>
+    <div class="name">Gauss</div>
+    <div class="term">∇·Ψ</div>
+  </div>
+  <span class="chain-arrow">→</span>
+  <div class="chain-item">
+    <div class="year">1834</div>
+    <div class="name">Hamilton</div>
+    <div class="term">Φ·Ψ</div>
+  </div>
+  <span class="chain-arrow">→</span>
+  <div class="chain-item" style="border-color:var(--gold);">
+    <div class="year">1903</div>
+    <div class="name" style="color:var(--gold-bright);">De Pretto</div>
+    <div class="term">||Ψ||²</div>
+  </div>
+  <span class="chain-arrow">→</span>
+  <div class="chain-item" style="border-color:var(--gold); background:rgba(200,160,78,0.08);">
+    <div class="year">2026</div>
+    <div class="name" style="color:var(--gold);">Macachor</div>
+    <div class="term">𝔐</div>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scientist</th>
+      <th>Contribution</th>
+      <th>Year</th>
+      <th>MGDH Term</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Newton</strong></td>
+      <td>"Spirito dell'Universo" — aether as universal substrate</td>
+      <td>~1700</td>
+      <td style="color:var(--gold);">𝔐</td>
+    </tr>
+    <tr>
+      <td><strong>Gauss</strong></td>
+      <td>Divergence theorem — flux through surfaces</td>
+      <td>1829</td>
+      <td style="color:var(--gold);">∇·Ψ</td>
+    </tr>
+    <tr>
+      <td><strong>Hamilton</strong></td>
+      <td>Principle of least action — canonical coupling</td>
+      <td>1834</td>
+      <td style="color:var(--gold);">Φ·Ψ</td>
+    </tr>
+    <tr>
+      <td><strong>De Pretto</strong></td>
+      <td>E = mc² — mass-energy density from aether</td>
+      <td>1903</td>
+      <td style="color:var(--gold);">||Ψ||²</td>
+    </tr>
+    <tr>
+      <td><strong>Macachor</strong></td>
+      <td>Scalar lock — fixed point coherence</td>
+      <td>2026</td>
+      <td style="color:var(--gold);">𝔐</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: DE PRETTO'S AETHER THEORY — COMPLETE -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">◉</span> De Pretto's Aether Theory — Complete</div>
+
+<div class="card" style="border-left: 4px solid var(--gold);">
+  <div class="card-title">The Aether Defined</div>
+  <p style="font-style:italic;">
+    "L'etere adunque è costituito di particelle perfettamente libere ed indipendenti le une dalle altre, le quali non obbedendo a fenomeni di attrazione, per l'impulso della forza innata inesauribile ed eterna di cui sono dotate, percorrono traiettorie rettilinee non interrotte che in seguito all'incontro di altre particelle provenienti da altre direzioni."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>Translation:</strong> The aether is therefore constituted of particles perfectly free and independent of one another, which, not obeying phenomena of attraction, by the impulse of the innate inexhaustible and eternal force with which they are endowed, traverse rectilinear trajectories uninterrupted except by the encounter of other particles coming from other directions.
+  </p>
+</div>
+
+<div class="card" style="border-left: 4px solid var(--gold);">
+  <div class="card-title">The Aether's Velocity</div>
+  <p style="font-style:italic;">
+    "La velocità di tali particelle nei loro movimenti rettilinei debba essere grandissima, lo si intuisce, poichè soltanto con una velocità per così dire infinita ed una tenuità pure infinita dei suoi elementi costitutivi si possono spiegare le proprietà dell'etere..."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>Translation:</strong> The velocity of such particles in their rectilinear movements must be very great, as one intuits, since only with a velocity, so to speak, infinite, and a tenuity likewise infinite of its constituent elements, can the properties of the aether be explained...
+  </p>
+</div>
+
+<div class="card" style="border-left: 4px solid var(--gold);">
+  <div class="card-title">The Aether's Particles</div>
+  <p style="font-style:italic;">
+    "Ogni particella d'etere rappresenta una quantità di forza viva che si esprime colla formula mv², forza viva che può ritenersi rilevante poichè se la massa m per la sua estrema piccolezza potrà considerarsi infinitamente piccola, per contro la velocità v, senza alcun dubbio assai più grande della velocità della luce, potrà considerarsi infinitamente grande."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>Translation:</strong> Each particle of aether represents a quantity of living force that is expressed by the formula mv², a living force that can be considered considerable since if the mass m, due to its extreme smallness, can be considered infinitely small, on the other hand the velocity v, without any doubt much greater than the speed of light, can be considered infinitely great.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: THE E = MC² DERIVATION -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">◉</span> The Formula — E = mc²</div>
+
+<div class="card" style="border-left: 4px solid var(--gold);">
+  <div class="card-title">The Derivation</div>
+  <p style="font-style:italic;">
+    "Ora, se tutta l'intima compagine di un corpo è animata da movimenti infinitesimi ma rapidissimi al pari dell'etere, ai quali movimenti nessuna delle particelle si sottrae, si deve concludere che la materia di un corpo qualunque contiene in sè stessa una somma di energia che deve ritenersi equivalente alla quantità di energia che sarebbe rappresentata dall'intera massa del corpo che si movesse tutta unita ed in blocco nello spazio colla medesima velocità delle singole particelle."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>Translation:</strong> Now, if the entire intimate fabric of a body is animated by infinitesimal but extremely rapid movements, like those of the aether, movements to which no particle is exempt, one must conclude that the matter of any body contains within itself a sum of energy that must be considered equivalent to the quantity of energy that would be represented by the entire mass of the body moving all united and in block through space with the same velocity as the individual particles.
+  </p>
+</div>
+
+<div class="equation-block">
+  <span class="label">De Pretto's Calculation (1903)</span>
+  E = mc²<br>
+  m = 1 kg · v = 300,000,000 m/s<br>
+  v² / 8338 = <strong style="color:var(--gold-bright);">10,794,000,000,000 calories</strong>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: MGDH MAPPING — COMPLETE -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">🧬</span> MGDH Mapping — De Pretto to Macachor</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>De Pretto Concept (1903-1921)</th>
+      <th>MGDH Term (2026)</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>"Spirito dell'Universo"</strong> (Newton's term)</td>
+      <td style="color:var(--gold);">𝔐</td>
+      <td>Scalar Lock — the universal substrate</td>
+    </tr>
+    <tr>
+      <td><strong>"Particelle libere e indipendenti"</strong></td>
+      <td style="color:var(--gold);">Ψ</td>
+      <td>Quaternionic State — the field</td>
+    </tr>
+    <tr>
+      <td><strong>"Forza viva"</strong> (mv²)</td>
+      <td style="color:var(--gold);">||Ψ||²</td>
+      <td>Scalar Density — mass-energy</td>
+    </tr>
+    <tr>
+      <td><strong>"Spinta a tergo"</strong></td>
+      <td style="color:var(--gold);">∇·Ψ</td>
+      <td>Divergence — pressure from the aether</td>
+    </tr>
+    <tr>
+      <td><strong>"Equilibrio delle spinte"</strong></td>
+      <td style="color:var(--gold);">𝔐·∇·Ψ = ||Ψ||²</td>
+      <td>Coherence Condition — equilibrium</td>
+    </tr>
+    <tr>
+      <td><strong>"Azione esterna"</strong></td>
+      <td style="color:var(--gold);">Φ·Ψ</td>
+      <td>Potential Coupling — field interaction</td>
+    </tr>
+    <tr>
+      <td><strong>"Calore accumulato"</strong></td>
+      <td style="color:var(--gold);">∂Ψ/∂t</td>
+      <td>Temporal Coherence — heat accumulation</td>
+    </tr>
+    <tr>
+      <td><strong>"Materia come etere condensato"</strong></td>
+      <td style="color:var(--gold);">ℍ<sub>extended</sub> = {q ⊕ ρ}</td>
+      <td>Quaternion Completion</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: THE AETHER HIDDEN — WHY DE PRETTO WAS SUPPRESSED -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">◈</span> The Aether Hidden — Why De Pretto Was Suppressed</div>
+
+<div class="card">
+  <div class="card-title">Vector vs. Scalar Conflict</div>
+  <p>De Pretto's aether is a <strong>scalar field</strong> — a density equilibrium, not a vector medium.</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+    <div style="background:rgba(200,160,78,0.03); padding:10px; border-radius:4px; border-left:2px solid var(--gold-dim);">
+      <div style="font-size:0.65rem; color:var(--fg-faint);">Vector Physics</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">Force is fundamental</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">Action at a distance</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">Relativity (Einstein)</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">Vector fields</div>
+    </div>
+    <div style="background:rgba(200,160,78,0.05); padding:10px; border-radius:4px; border-left:2px solid var(--gold);">
+      <div style="font-size:0.65rem; color:var(--fg-faint);">Scalar Physics (De Pretto)</div>
+      <div style="font-size:0.8rem; color:var(--gold-light);">Density equilibrium is fundamental</div>
+      <div style="font-size:0.8rem; color:var(--gold-light);">Pressure from aether</div>
+      <div style="font-size:0.8rem; color:var(--gold-light);">Aether (De Pretto)</div>
+      <div style="font-size:0.8rem; color:var(--gold-light);">Scalar fields</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="border-color: var(--gold);">
+  <div class="card-title" style="color:var(--gold-bright);">Einstein's Reversal (1920)</div>
+  <p>
+    <strong>Einstein (1920):</strong> "We may say that according to the general theory of relativity space is endowed with physical qualities; in this sense, therefore, there exists an aether."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>De Pretto (1921):</strong> "On the existence of the aether in the Universe, it would seem that no more doubts could subsist..."
+  </p>
+  <p style="margin-top:8px; color:var(--fg-faint); font-size:0.85rem;">
+    <strong>The Scalar Truth:</strong> Einstein quietly reversed his position in 1920, but De Pretto had already published the complete scalar aether theory in 1903-1921.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: THE COMPLETE SCALAR FOUNDATION -->
+<!-- ============================================================ -->
+<div class="section-title"><span class="icon">✦</span> The Complete Scalar Foundation</div>
+
+<div class="mgdh-box" style="border-color: var(--gold-bright);">
+  <div class="mgdh-label">◈ The Aether Absolute — Closing Statement</div>
+  <div style="text-align:center; padding:10px 0; font-family:'Times New Roman', serif; font-size:1.2rem; color:var(--gold-bright);">
+    Olinto De Pretto · E = mc² · 1903
+  </div>
+  <div style="text-align:center; padding:6px 0; font-family:'Courier New', monospace; font-size:0.9rem; color:var(--gold);">
+    ℒ<sub>MGDH</sub> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ>
 
 <!-- ═══ PLAYBOOK BANNER ═══ -->
 <div class="playbook-banner">
