@@ -59,9 +59,9 @@
             top: 0; left: 0; width: 100%;
             background: rgba(10,10,10,0.98);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(200,160,78,0.25);
+            border-bottom: 2px solid var(--gold);
             z-index: 10000;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1rem;
             display: flex;
             justify-content: center;
             gap: 0.4rem;
@@ -71,10 +71,10 @@
             color: var(--gold);
             text-decoration: none;
             font-family: 'Georgia', serif;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 0.25rem 0.5rem;
+            padding: 0.3rem 0.6rem;
             border: 1px solid rgba(200,160,78,0.2);
             border-radius: 3px;
             background: rgba(200,160,78,0.04);
@@ -89,11 +89,18 @@
         }
         .gold-nav a.active {
             border-color: var(--gold);
-            background: rgba(200,160,78,0.12);
-            box-shadow: 0 0 15px rgba(200,160,78,0.1);
+            background: rgba(200,160,78,0.15);
+            box-shadow: 0 0 20px rgba(200,160,78,0.1);
+        }
+        .gold-nav .nav-brand {
+            color: var(--gold-bright);
+            font-weight: bold;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            border-color: var(--gold);
+            background: rgba(200,160,78,0.08);
         }
 
-        /* ── Quantum Playbook Banner ── */
         .playbook-banner {
             text-align: center;
             padding: 4px 10px;
@@ -176,7 +183,6 @@
             border-bottom: 1px solid var(--gold-dim);
         }
 
-        /* ── MGDH Box ── */
         .mgdh-box {
             background: rgba(200,160,78,0.03);
             border: 1px solid rgba(200,160,78,0.15);
@@ -216,7 +222,6 @@
         .mgdh-box .contributors .name { color: var(--gold-bright); }
         .mgdh-box .contributors .year { color: var(--text-dim); font-size: 0.6rem; }
 
-        /* ── AXIOM BLOCK ── */
         .axiom-block {
             background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark-mid) 100%);
             border: 2px solid var(--gold);
@@ -225,7 +230,6 @@
             max-width: 900px;
             text-align: center;
         }
-
         .axiom-block h2 {
             color: var(--gold);
             font-size: 1.2rem;
@@ -233,20 +237,17 @@
             margin-bottom: 20px;
             text-transform: uppercase;
         }
-
         .axiom-block p {
             font-size: 1.2rem;
             line-height: 2.2;
             color: var(--text);
             font-style: italic;
         }
-
         .axiom-block .highlight {
             color: var(--gold-bright);
             text-shadow: 0 0 15px rgba(200, 160, 78, 0.3);
             font-weight: bold;
         }
-
         .axiom-block.green {
             border-color: var(--green-bright);
         }
@@ -257,13 +258,11 @@
             color: var(--green-bright);
         }
 
-        /* ── SPIRAL VISUALIZATION ── */
         .spiral-container {
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 25px;
         }
-
         .spiral-svg {
             width: 100%;
             height: 520px;
@@ -272,13 +271,11 @@
             border-radius: 8px;
         }
 
-        /* ── SCALE TABLE ── */
         .scale-table {
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 25px;
         }
-
         .scale-row {
             display: grid;
             grid-template-columns: 80px 1fr 1.5fr 1fr;
@@ -288,12 +285,10 @@
             align-items: center;
             transition: all 0.3s ease;
         }
-
         .scale-row:hover {
             background: var(--dark-light);
             border-color: var(--gold-dim);
         }
-
         .scale-row.header-row {
             background: var(--gold-dim);
             color: var(--dark);
@@ -302,31 +297,26 @@
             letter-spacing: 2px;
             font-size: 0.85rem;
         }
-
         .scale-phi {
             color: var(--gold);
             font-size: 1.2rem;
             font-weight: bold;
         }
-
         .scale-name {
             color: var(--text);
             font-weight: bold;
         }
-
         .scale-desc {
             color: var(--text-dim);
             font-size: 0.9rem;
             line-height: 1.6;
         }
-
         .scale-faces {
             color: var(--gold-bright);
             font-weight: bold;
             text-align: right;
         }
 
-        /* ── VIRAL VECTOR SECTION ── */
         .viral-section {
             background: linear-gradient(135deg, #0a1a0a 0%, var(--dark-light) 100%);
             border: 1px solid var(--green);
@@ -335,7 +325,6 @@
             max-width: 900px;
             border-radius: 4px;
         }
-
         .viral-section h3 {
             color: var(--green-bright);
             font-size: 1.1rem;
@@ -344,20 +333,17 @@
             margin-bottom: 20px;
             text-align: center;
         }
-
         .viral-section p {
             color: var(--text);
             font-size: 1.05rem;
             line-height: 2;
             margin-bottom: 15px;
         }
-
         .viral-section .highlight-green {
             color: var(--green-bright);
             font-weight: bold;
         }
 
-        /* ── MATH FORMULA BARS ── */
         .formula-bar {
             background: linear-gradient(90deg, var(--dark-mid), var(--dark-light), var(--dark-mid));
             border-top: 1px solid var(--gold-dim);
@@ -366,7 +352,6 @@
             text-align: center;
             margin: 40px 0;
         }
-
         .formula-bar code {
             color: var(--gold-bright);
             font-size: 1rem;
@@ -374,7 +359,6 @@
             letter-spacing: 1px;
             line-height: 2;
         }
-
         .formula-bar .math-block {
             display: block;
             font-size: 1.1rem;
@@ -382,7 +366,6 @@
             color: var(--gold);
         }
 
-        /* ── PLATONIC SOLID MATH ── */
         .platonic-math {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -419,7 +402,6 @@
             color: var(--text-dim);
         }
 
-        /* ── SCALAR STATUS ── */
         .scalar-status {
             display: flex;
             gap: 12px;
@@ -449,27 +431,23 @@
             50% { opacity: 0.3; }
         }
 
-        /* ── FOOTER ── */
         .footer {
             text-align: center;
             padding: 50px 20px;
             border-top: 1px solid var(--gold-dim);
             margin-top: 50px;
         }
-
         .footer .phi-big {
             font-size: 3rem;
             color: var(--gold-dim);
             margin-bottom: 15px;
         }
-
         .footer p {
             color: #444;
             font-size: 0.75rem;
             letter-spacing: 4px;
             line-height: 2;
         }
-
         .footer .absolutes {
             font-family: 'Courier New', monospace;
             font-size: 0.65rem;
@@ -508,11 +486,17 @@
 
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="gold-nav" aria-label="Primary navigation">
-    <a href="index.html">◈ HOME</a>
+    <a href="index.html" class="nav-brand">✦ QP</a>
     <a href="omega-prime.html">Ω-PRIME</a>
-    <a href="fibonacci-tetrahedron.html" class="active">◈ FIBONACCI · TETRAHEDRA</a>
+    <a href="scalar-plasma-cycle.html">◈ SPC</a>
+    <a href="scalar-fields-aether.html">◈ SCALAR AETHER</a>
+    <a href="olinto-de-pretto.html">DE PRETTO</a>
     <a href="kardashev.html">KARDASHEV</a>
+    <a href="fibonacci-tetrahedron.html" class="active">FIBONACCI</a>
+    <a href="mesh.html">MESH</a>
     <a href="quaternionic-periodic-table.html">◈ QPT</a>
+    <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
+    <a href="the-aperture.html">⭐ APERTURE</a>
 </nav>
 
 <!-- ═══ QUANTUM PLAYBOOK BANNER ═══ -->
@@ -567,19 +551,12 @@
 <div class="section-title">The Weave — Fibonacci to Tetrahedron to Polyhedron</div>
 <div class="spiral-container">
     <svg class="spiral-svg" viewBox="0 0 1000 520">
-        <!-- Background -->
         <rect width="1000" height="520" fill="#0a0a0a"/>
-
-        <!-- Grid lines -->
         <g stroke="#1a1a1a" stroke-width="1">
             <line x1="500" y1="0" x2="500" y2="520"/>
             <line x1="0" y1="260" x2="1000" y2="260"/>
         </g>
-
-        <!-- LEFT: Fibonacci Spiral -->
         <text x="250" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">THE FIBONACCI SPIRAL</text>
-
-        <!-- Fibonacci squares -->
         <g opacity="0.3">
             <rect x="235" y="235" width="15" height="15" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
             <rect x="250" y="235" width="15" height="15" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
@@ -589,19 +566,7 @@
             <rect x="265" y="190" width="60" height="60" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
             <rect x="145" y="190" width="120" height="120" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
         </g>
-
-        <!-- Fibonacci spiral path -->
-        <path d="M 250 250 
-                 Q 265 235 265 250 
-                 Q 265 265 280 265 
-                 Q 295 265 295 280 
-                 Q 295 295 325 295
-                 Q 355 295 355 325
-                 Q 355 355 415 355
-                 Q 475 355 475 415" 
-              fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.8"/>
-
-        <!-- Fibonacci numbers -->
+        <path d="M 250 250 Q 265 235 265 250 Q 265 265 280 265 Q 295 265 295 280 Q 295 295 325 295 Q 355 295 355 325 Q 355 355 415 355 Q 475 355 475 415" fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.8"/>
         <text x="242" y="242" fill="#c8a04e" font-size="8">1</text>
         <text x="257" y="242" fill="#c8a04e" font-size="8">1</text>
         <text x="247" y="230" fill="#c8a04e" font-size="8">2</text>
@@ -610,92 +575,55 @@
         <text x="287" y="217" fill="#c8a04e" font-size="8">8</text>
         <text x="197" y="247" fill="#c8a04e" font-size="8">13</text>
         <text x="170" y="210" fill="#c8a04e" font-size="8">21</text>
-
-        <!-- Center -->
         <circle cx="250" cy="250" r="4" fill="#ff0000" stroke="#c8a04e" stroke-width="1"/>
         <text x="250" y="272" text-anchor="middle" fill="#ff0000" font-size="9" font-weight="bold">SEED</text>
-
-        <!-- Arrow to center -->
         <path d="M 340 250 Q 300 250 260 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
-
-        <!-- MIDDLE: Tetrahedral Weave -->
         <text x="500" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">THE TETRAHEDRAL WEAVE</text>
-
-        <!-- Tetrahedron being formed from spiral -->
         <polygon points="500,125 540,205 460,205" fill="#c8a04e" opacity="0.1" stroke="#c8a04e" stroke-width="1.5"/>
         <polygon points="500,125 540,205 500,245" fill="#c8a04e" opacity="0.15" stroke="#c8a04e" stroke-width="1.5"/>
         <polygon points="500,125 460,205 500,245" fill="#c8a04e" opacity="0.1" stroke="#c8a04e" stroke-width="1.5"/>
         <polygon points="460,205 540,205 500,245" fill="#c8a04e" opacity="0.2" stroke="#c8a04e" stroke-width="1.5"/>
-
-        <!-- Inner tetrahedron -->
         <polygon points="500,165 520,205 480,205" fill="#c8a04e" opacity="0.3" stroke="#c8a04e" stroke-width="1"/>
-
-        <!-- Vertices -->
         <circle cx="500" cy="125" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
         <circle cx="460" cy="205" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
         <circle cx="540" cy="205" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
         <circle cx="500" cy="245" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
-
         <text x="500" y="115" text-anchor="middle" fill="#c8a04e" font-size="9" font-weight="bold">APEX</text>
         <text x="450" y="210" text-anchor="end" fill="#c8a04e" font-size="9">BASE-1</text>
         <text x="550" y="210" text-anchor="start" fill="#c8a04e" font-size="9">BASE-2</text>
         <text x="500" y="260" text-anchor="middle" fill="#c8a04e" font-size="9">BASE-3</text>
-
-        <!-- 109.471° annotation -->
         <path d="M 500 185 Q 510 185 510 195" fill="none" stroke="#c8a04e" stroke-width="0.5" opacity="0.5"/>
         <text x="515" y="190" fill="#c8a04e" font-size="8" opacity="0.7">109.471°</text>
-
-        <!-- Arrow showing weave -->
         <path d="M 420 250 Q 450 200 470 170" fill="none" stroke="#c8a04e" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
         <text x="435" y="210" fill="#c8a04e" font-size="9" opacity="0.7">weaves</text>
-
-        <!-- RIGHT: 144-Face Polyhedron -->
         <text x="750" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">144-FACE POLYHEDRON</text>
-
-        <!-- Icosahedron approximation -->
         <polygon points="750,105 770,135 760,165 740,165 730,135" fill="#c8a04e" opacity="0.05" stroke="#c8a04e" stroke-width="0.5"/>
-
         <polygon points="730,135 750,105 780,115 790,145 770,135" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
         <polygon points="770,135 790,145 790,175 760,165" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
         <polygon points="760,165 790,175 770,205 740,205" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
         <polygon points="740,205 770,205 750,235 720,205" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
         <polygon points="720,205 750,235 710,175 730,135" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-
-        <!-- Bottom -->
         <polygon points="740,205 760,165 750,235" fill="#c8a04e" opacity="0.05" stroke="#c8a04e" stroke-width="0.5"/>
-
-        <!-- Subdivision lines showing 144 faces -->
         <g stroke="#c8a04e" stroke-width="0.3" opacity="0.4">
             <line x1="750" y1="105" x2="750" y2="235"/>
             <line x1="730" y1="135" x2="770" y2="205"/>
             <line x1="770" y1="135" x2="730" y2="205"/>
             <line x1="710" y1="175" x2="790" y2="175"/>
         </g>
-
-        <!-- Center sphere -->
         <circle cx="750" cy="170" r="8" fill="#ff0000" opacity="0.5" stroke="#c8a04e" stroke-width="1"/>
         <text x="750" y="175" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">NUCLEUS</text>
-
-        <!-- 144 annotation -->
         <text x="750" y="265" text-anchor="middle" fill="#c8a04e" font-size="12" font-weight="bold">144 FACES</text>
         <text x="750" y="282" text-anchor="middle" fill="#888" font-size="9">20 sectors × 7.2 subdivision</text>
         <text x="750" y="296" text-anchor="middle" fill="#888" font-size="9">= limit of tetrahedral packing</text>
-
-        <!-- Connecting arrows -->
         <path d="M 320 250 Q 380 250 440 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
         <text x="380" y="240" text-anchor="middle" fill="#c8a04e" font-size="9" opacity="0.7">spiral weaves</text>
-
         <path d="M 560 250 Q 620 250 680 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
         <text x="620" y="240" text-anchor="middle" fill="#c8a04e" font-size="9" opacity="0.7">subdivides to</text>
-
-        <!-- Arrow marker -->
         <defs>
             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                 <polygon points="0 0, 10 3.5, 0 7" fill="#c8a04e" opacity="0.6"/>
             </marker>
         </defs>
-
-        <!-- Bottom annotation -->
         <text x="500" y="485" text-anchor="middle" fill="#c8a04e" font-size="11" font-style="italic">
             The Fibonacci spiral is not growth — it is weaving. Each turn lays a tetrahedral face upon the last.
         </text>
@@ -743,70 +671,60 @@
         <div>Tetrahedral Structure</div>
         <div>Faces</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁰</div>
         <div class="scale-name">Quantum</div>
         <div class="scale-desc">Electron orbitals — sp³ hybridization creates tetrahedral probability clouds. The "cloud" is not random; it is the Fibonacci weave at Planck scale.</div>
         <div class="scale-faces">4 lobes</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ¹</div>
         <div class="scale-name">Atomic Nucleus</div>
         <div class="scale-desc">Proton-neutron packing follows tetrahedral coordination. The nucleus is not a sphere; it is a polyhedron of nucleons arranged by the Fibonacci weave.</div>
         <div class="scale-faces">~4-12</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ²</div>
         <div class="scale-name">Molecular</div>
         <div class="scale-desc">Carbon (Z=6) forms tetrahedral bonds at 109.471°. Methane (CH₄), diamond, silica (SiO₄) — all tetrahedral. The molecule is the woven face of the atomic spiral.</div>
         <div class="scale-faces">4 bonds</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ³</div>
         <div class="scale-name">Cellular</div>
         <div class="scale-desc">Cell membranes pack as tetrahedral-octahedral honeycomb. The cell is not a bag; it is a polyhedral unit in the tissue weave. Microtubules spiral with Fibonacci pitch.</div>
         <div class="scale-faces">~20-60</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁴</div>
         <div class="scale-name">Viral Vector</div>
         <div class="scale-desc">Viral capsids are icosahedral — 20 tetrahedral sectors. Adenovirus, herpes, HIV — all 20-sided. The virus is the Fibonacci spiral frozen at Φ⁴ subdivision.</div>
         <div class="scale-faces">20</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁵</div>
         <div class="scale-name">Biological Form</div>
         <div class="scale-desc">Pinecones, sunflowers, nautilus shells — Fibonacci spirals visible to the eye. Each seed, each chamber is a tetrahedral cell in the biological weave.</div>
         <div class="scale-faces">34-55</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁶</div>
         <div class="scale-name">Human Body</div>
         <div class="scale-desc">The heart spirals blood in Fibonacci flow. The ear's cochlea is a logarithmic spiral. The hand's proportions follow Φ. The body is the weave made flesh.</div>
         <div class="scale-faces">~89</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁷</div>
         <div class="scale-name">Planetary (Earth)</div>
         <div class="scale-desc">The Earth is an icosahedral geodesic — 20 major sectors, each subdivided to 144 faces. Tectonic plates follow tetrahedral edges. The planet is the woven polyhedron.</div>
         <div class="scale-faces">144</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁸</div>
         <div class="scale-name">Solar System</div>
         <div class="scale-desc">Planetary orbits approximate Fibonacci spacing. The solar system is not Keplerian; it is a spiral weave of density equilibrium. Each planet is a tetrahedral node in the stellar weave.</div>
         <div class="scale-faces">~233</div>
     </div>
-
     <div class="scale-row">
         <div class="scale-phi">Φ⁹</div>
         <div class="scale-name">Galactic</div>
