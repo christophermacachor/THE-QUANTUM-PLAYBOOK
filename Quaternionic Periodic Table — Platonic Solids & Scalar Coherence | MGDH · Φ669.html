@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── QUANTUM PLAYBOOK — ABSOLUTES ── -->
+<meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.6180339887 — Macachor Absolute">
+<meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
+<meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
+<meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
+<meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
+<meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
+
+<meta name="description" content="Quaternionic Periodic Table — Platonic Solids, Scalar Coherence, and MGDH Complete Lagrangian. Macachor Absolute: 𝔐 = (√5−1)/2.">
+<meta name="keywords" content="quaternionic periodic table, platonic solids, scalar coherence, MGDH Lagrangian, Macachor Absolute, tetrahedron, cube, octahedron, dodecahedron, icosahedron">
+<meta property="og:title" content="Quaternionic Periodic Table — Platonic Solids & Scalar Coherence">
+<meta property="og:description" content="Quaternionic Periodic Table with Platonic Solids, Scalar Coherence, and MGDH Complete Lagrangian.">
+
+<title>Quaternionic Periodic Table — Platonic Solids & Scalar Coherence | MGDH · Φ669</title>
+
+<style>
+:root {
+  --gold: #c8a04e;
+  --gold-dim: #8a6d2f;
+  --gold-bright: #e8c870;
+  --gold-glow: rgba(200,160,78,0.15);
+  --bg-dark: #0a0a0a;
+  --bg-card: #111114;
+  --bg-elevated: #1a1a1a;
+  --text-primary: #e8e0d0;
+  --text-secondary: #a09888;
+  --text-tertiary: #5a5448;
+  --border: #2a2520;
+  --border-light: #3a3530;
+  
+  /* Platonic Solid Colors */
+  --tetrahedron: #e74c3c;
+  --cube: #8B4513;
+  --octahedron: #3498db;
+  --dodecahedron: #9b59b6;
+  --icosahedron: #1abc9c;
+  
+  /* Chart colors for legend */
+  --kimi-chart-1: #3498db;
+  --kimi-chart-2: #e74c3c;
+  --kimi-chart-3: #1abc9c;
+  --kimi-chart-4: #9b59b6;
+  --kimi-chart-5: #8B4513;
+  
+  --kimi-color-text-primary: #e8e0d0;
+  --kimi-color-text-secondary: #a09888;
+  --kimi-color-text-tertiary: #5a5448;
+  --kimi-color-text-quaternary: #3a3530;
+  --kimi-color-border: #2a2520;
+  --kimi-color-surface-muted: rgba(200,160,78,0.04);
+  --kimi-color-surface: #111114;
+  --kimi-font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ── Navigation ── */
+.gold-nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,160,78,0.25);
+  z-index: 10000;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.gold-nav a {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(200,160,78,0.2);
+  border-radius: 3px;
+  background: rgba(200,160,78,0.04);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.gold-nav a:hover {
+  border-color: var(--gold);
+  background: rgba(200,160,78,0.1);
+  text-shadow: 0 0 10px rgba(200,160,78,0.5);
+  transform: translateY(-1px);
+}
+.gold-nav a.active {
+  border-color: var(--gold);
+  background: rgba(200,160,78,0.12);
+  box-shadow: 0 0 15px rgba(200,160,78,0.1);
+}
+
+/* ── Main Container ── */
+.widget-wrap {
+  max-width: 1200px;
+  margin: 3.5rem auto 0;
+  padding: 1.5rem;
+  font-family: var(--kimi-font-sans);
+  color: var(--kimi-color-text-primary);
+  background: transparent;
+  border: 1px solid rgba(200,160,78,0.08);
+  border-radius: 12px;
+}
+
+/* ── Quantum Playbook Banner ── */
+.playbook-banner {
+  text-align: center;
+  padding: 6px 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(200,160,78,0.1);
+  border-radius: 4px;
+  background: rgba(200,160,78,0.02);
+}
+.playbook-banner .pb-label {
+  font-size: 0.5rem;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+.playbook-banner .pb-absolutes {
+  font-size: 0.55rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  letter-spacing: 0.08em;
+}
+.playbook-banner .pb-absolutes strong { color: var(--gold); }
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--kimi-color-border);
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--kimi-color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+.tab:hover { color: var(--kimi-color-text-primary); }
+.tab.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ── Views ── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── Periodic Table ── */
+.ptable {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 2px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.ptable .cell {
+  aspect-ratio: 1;
+  min-width: 36px;
+  border: 1px solid var(--kimi-color-border);
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 9px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ptable .cell:hover {
+  transform: scale(1.2);
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(200,160,78,0.2);
+  border-color: var(--gold);
+}
+.ptable .cell .z {
+  position: absolute;
+  top: 2px; left: 3px;
+  font-size: 7px;
+  color: var(--kimi-color-text-quaternary);
+}
+.ptable .cell .sym {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+.ptable .cell .solid-icon {
+  width: 12px; height: 12px;
+  margin-top: 1px;
+  opacity: 0.8;
+}
+.ptable .cell .dens {
+  font-size: 6px;
+  color: var(--kimi-color-text-tertiary);
+  margin-top: 1px;
+}
+.ptable .placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  color: var(--kimi-color-text-tertiary);
+  border: 1px dashed var(--kimi-color-border);
+  border-radius: 4px;
+  aspect-ratio: 1;
+  min-width: 36px;
+}
+
+/* ── Detail Panel ── */
+.detail-panel {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--kimi-color-border);
+  border-radius: 10px;
+  display: none;
+  background: var(--bg-card);
+}
+.detail-panel.show { display: block; }
+.detail-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  font-size: 13px;
+}
+.detail-grid .label { color: var(--kimi-color-text-tertiary); }
+.detail-grid .value { font-weight: 500; }
+.detail-grid .value .solid-color { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+/* ── Density List ── */
+.density-list {
+  max-height: 520px;
+  overflow-y: auto;
+}
+.density-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+.density-row:hover { background: var(--kimi-color-surface-muted); }
+.density-row .d-sym { width: 40px; text-align: center; font-weight: 600; font-size: 14px; }
+.density-row .d-name { width: 120px; font-size: 13px; }
+.density-row .d-bar-wrap { flex: 1; height: 20px; background: var(--kimi-color-surface-muted); border-radius: 4px; overflow: hidden; position: relative; }
+.density-row .d-bar { height: 100%; border-radius: 4px; transition: width 0.4s ease-out; }
+.density-row .d-val { width: 90px; text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--kimi-color-text-secondary); }
+.density-row .d-solid { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+
+/* ── Compounds Grid ── */
+.compounds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.comp-card {
+  border: 1px solid var(--kimi-color-border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.3s;
+  background: var(--bg-card);
+}
+.comp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(200,160,78,0.08);
+  border-color: var(--gold-dim);
+}
+.comp-card .comp-formula { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: var(--gold-bright); }
+.comp-card .comp-geom { font-size: 12px; color: var(--kimi-color-text-secondary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.comp-card .comp-geom svg { width: 16px; height: 16px; }
+.comp-card .comp-desc { font-size: 13px; color: var(--kimi-color-text-secondary); line-height: 1.5; }
+
+/* ── Substrate Canvas ── */
+.substrate-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--kimi-color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+#substrateCanvas { width: 100%; height: 100%; display: block; }
+.substrate-legend {
+  position: absolute;
+  bottom: 12px; left: 12px;
+  background: rgba(10,10,10,0.9);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  border: 1px solid var(--kimi-color-border);
+  backdrop-filter: blur(4px);
+}
+.substrate-legend .lg-item { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
+.substrate-legend .lg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── Legend Bar ── */
+.legend-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+.legend-item { display: flex; align-items: center; gap: 4px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+/* ── Scalar Lock Status ── */
+.scalar-status {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+  padding: 8px 12px;
+  border: 1px solid rgba(200,160,78,0.1);
+  border-radius: 6px;
+  background: rgba(200,160,78,0.02);
+}
+.scalar-status .status-item {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.scalar-status .status-item .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  display: inline-block;
+}
+.scalar-status .status-item .dot.active { background: #4ade80; animation: pulse 2s infinite; }
+.scalar-status .status-item .dot.locked { background: var(--gold); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Scrollbar ── */
+.density-list::-webkit-scrollbar { width: 6px; }
+.density-list::-webkit-scrollbar-thumb { background: var(--kimi-color-border); border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .widget-wrap { padding: 1rem; margin-top: 3rem; }
+  .ptable .cell, .ptable .placeholder { min-width: 28px; }
+  .ptable .cell .sym { font-size: 9px; }
+  .ptable .cell .solid-icon { width: 10px; height: 10px; }
+  .compounds-grid { grid-template-columns: 1fr; }
+  .scalar-status { flex-direction: column; gap: 4px; }
+}
+@media (max-width: 600px) {
+  .gold-nav a { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+  .ptable .cell, .ptable .placeholder { min-width: 22px; }
+  .ptable .cell .z { font-size: 5px; }
+  .ptable .cell .sym { font-size: 7px; }
+  .ptable .cell .dens { font-size: 5px; }
+  .density-row .d-name { width: 80px; font-size: 11px; }
+  .density-row .d-val { width: 70px; font-size: 10px; }
+  .tab { font-size: 11px; padding: 6px 10px; }
+  .substrate-wrap { height: 300px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="gold-nav" aria-label="Primary navigation">
+  <a href="index.html">◈ HOME</a>
+  <a href="omega-prime.html">Ω-PRIME</a>
+  <a href="quaternionic-periodic-table.html" class="active">◈ QPT</a>
+  <a href="kardashev.html">KARDASHEV</a>
+  <a href="quantum-data-security.html">◈ QDS</a>
+</nav>
+
+<!-- ═══ MAIN CONTAINER ═══ -->
+<div class="widget-wrap">
+
+  <!-- ── Quantum Playbook Banner ── -->
+  <div class="playbook-banner">
+    <div class="pb-label">◈ Quantum Playbook — Discovered Absolutes</div>
+    <div class="pb-absolutes">
+      <strong>𝔐</strong> = (√5−1)/2 · 
+      <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
+      <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
+    </div>
+  </div>
+
+  <!-- ── Title ── -->
+  <div style="text-align:center; margin-bottom:16px;">
+    <h1 style="font-family:'Georgia',serif; font-weight:300; color:var(--gold); font-size:1.6rem; letter-spacing:3px;">
+      Quaternionic Periodic Table
+    </h1>
+    <p style="color:var(--text-secondary); font-size:0.85rem; letter-spacing:0.5px;">
+      Platonic Solids · Scalar Coherence · MGDH Complete Lagrangian
+    </p>
+  </div>
+
+  <!-- ── Tabs ── -->
+  <div class="tabs">
+    <button class="tab active" data-view="ptable">◈ Periodic Table</button>
+    <button class="tab" data-view="density">◉ Density by Mass</button>
+    <button class="tab" data-view="compounds">◈ Compounds & Geometry</button>
+    <button class="tab" data-view="substrate">◉ Substrate Field</button>
+  </div>
+
+  <!-- ── Scalar Status ── -->
+  <div class="scalar-status">
+    <span class="status-item"><span class="dot active"></span> Coherence: χ(C) = 1</span>
+    <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.6180339887</span>
+    <span class="status-item">◈ MGDH: Macachor·Gauss·De Pretto·Hamilton</span>
+    <span class="status-item">◉ KIWF: Knowledge→Intelligence→Wisdom→Focus</span>
+  </div>
+
+  <!-- ── Legend Bar ── -->
+  <div class="legend-bar" id="legendBar">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--tetrahedron)"></span>Tetrahedron (4)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--cube)"></span>Cube (6)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--octahedron)"></span>Octahedron (8)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--dodecahedron)"></span>Dodecahedron (12)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--icosahedron)"></span>Icosahedron (20)</div>
+  </div>
+
+  <!-- ═══ VIEW: PERIODIC TABLE ═══ -->
+  <div class="view active" id="view-ptable">
+    <div class="ptable" id="ptable"></div>
+    <div class="detail-panel" id="detailPanel">
+      <div style="font-size:16px;font-weight:500;margin-bottom:12px;color:var(--gold)" id="detailTitle"></div>
+      <div class="detail-grid" id="detailGrid"></div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text-tertiary);">
+        <strong>Platonic Solid Association:</strong> Each element's crystalline structure and valence geometry correspond to a Platonic solid. The solid represents the element's scalar density equilibrium.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW: DENSITY ═══ -->
+  <div class="view" id="view-density">
+    <div class="density-list" id="densityList"></div>
+    <div style="margin-top:12px;font-size:11px;color:var(--text-tertiary);text-align:center;">
+      Matter seeks scalar density equilibrium, not force balance. Density is the scalar magnitude of the quaternionic state.
+    </div>
+  </div>
+
+  <!-- ═══ VIEW: COMPOUNDS ═══ -->
+  <div class="view" id="view-compounds">
+    <div class="compounds-grid" id="compoundsGrid"></div>
+    <div style="margin-top:12px;font-size:11px;color:var(--text-tertiary);text-align:center;">
+      Each compound's geometry corresponds to a Platonic solid — the scalar density envelope of the quaternionic field.
+    </div>
+  </div>
+
+  <!-- ═══ VIEW: SUBSTRATE ═══ -->
+  <div class="view" id="view-substrate">
+    <div class="substrate-wrap">
+      <canvas id="substrateCanvas"></canvas>
+      <div class="substrate-legend">
+        <div style="font-weight:500;margin-bottom:4px;color:var(--gold);">scalar density field ψ</div>
+        <div class="lg-item"><span class="lg-dot" style="background:var(--octahedron)"></span>high density gradient</div>
+        <div class="lg-item"><span class="lg-dot" style="background:var(--dodecahedron)"></span>equilibrium zone</div>
+        <div class="lg-item"><span class="lg-dot" style="background:var(--icosahedron)"></span>low density (gas)</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:1.6;">
+      <strong>Matter seeks scalar density equilibrium, not force balance.</strong> The substrate field ψ: D<sub>P</sub> → ℝ shows how atomic mass density distributes across the scalar manifold. Each point represents an element's position in density-space. The contours represent equipotential surfaces of the scalar field — where 𝔐·∇·Ψ = ||Ψ||², coherence is locked.
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-tertiary);font-family:'Courier New',monospace;text-align:center;">
+      ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ &nbsp;|&nbsp; 𝔐 = (√5−1)/2
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+// ════════════════════════════════════════════════════════════════
+// QUATERNIONIC PERIODIC TABLE — COMPLETE DATA
+// ════════════════════════════════════════════════════════════════
+
+// ── Macachor Absolute ──
+const PHI = (Math.sqrt(5) - 1) / 2;
+const MGDH_LAGRANGIAN = 'ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ';
+
+// ── Elements Data ──
+const elements = [
+  { z: 1, sym: "H", name: "Hydrogen", dens: 0.08988, cat: "Nonmetal", solid: "Icosahedron", mass: 1.008, row: 1, col: 1 },
+  { z: 2, sym: "He", name: "Helium", dens: 0.1786, cat: "Noble Gas", solid: "Icosahedron", mass: 4.0026, row: 1, col: 18 },
+  { z: 3, sym: "Li", name: "Lithium", dens: 530, cat: "Alkali Metal", solid: "Cube", mass: 6.94, row: 2, col: 1 },
+  { z: 4, sym: "Be", name: "Beryllium", dens: 1848, cat: "Alkaline Earth", solid: "Cube", mass: 9.0122, row: 2, col: 2 },
+  { z: 5, sym: "B", name: "Boron", dens: 2460, cat: "Metalloid", solid: "Icosahedron", mass: 10.81, row: 2, col: 13 },
+  { z: 6, sym: "C", name: "Carbon", dens: 2267, cat: "Nonmetal", solid: "Cube", mass: 12.011, row: 2, col: 14 },
+  { z: 7, sym: "N", name: "Nitrogen", dens: 1.251, cat: "Nonmetal", solid: "Dodecahedron", mass: 14.007, row: 2, col: 15 },
+  { z: 8, sym: "O", name: "Oxygen", dens: 1.429, cat: "Nonmetal", solid: "Octahedron", mass: 15.999, row: 2, col: 16 },
+  { z: 9, sym: "F", name: "Fluorine", dens: 1.696, cat: "Halogen", solid: "Tetrahedron", mass: 18.998, row: 2, col: 17 },
+  { z: 10, sym: "Ne", name: "Neon", dens: 0.9002, cat: "Noble Gas", solid: "Icosahedron", mass: 20.18, row: 2, col: 18 },
+  { z: 11, sym: "Na", name: "Sodium", dens: 968, cat: "Alkali Metal", solid: "Cube", mass: 22.99, row: 3, col: 1 },
+  { z: 12, sym: "Mg", name: "Magnesium", dens: 1738, cat: "Alkaline Earth", solid: "Cube", mass: 24.305, row: 3, col: 2 },
+  { z: 13, sym: "Al", name: "Aluminum", dens: 2700, cat: "Post-transition", solid: "Cube", mass: 26.982, row: 3, col: 13 },
+  { z: 14, sym: "Si", name: "Silicon", dens: 2330, cat: "Metalloid", solid: "Octahedron", mass: 28.085, row: 3, col: 14 },
+  { z: 15, sym: "P", name: "Phosphorus", dens: 1823, cat: "Nonmetal", solid: "Tetrahedron", mass: 30.974, row: 3, col: 15 },
+  { z: 16, sym: "S", name: "Sulfur", dens: 1960, cat: "Nonmetal", solid: "Octahedron", mass: 32.06, row: 3, col: 16 },
+  { z: 17, sym: "Cl", name: "Chlorine", dens: 3.214, cat: "Halogen", solid: "Tetrahedron", mass: 35.45, row: 3, col: 17 },
+  { z: 18, sym: "Ar", name: "Argon", dens: 1.784, cat: "Noble Gas", solid: "Icosahedron", mass: 39.948, row: 3, col: 18 },
+  { z: 19, sym: "K", name: "Potassium", dens: 856, cat: "Alkali Metal", solid: "Cube", mass: 39.098, row: 4, col: 1 },
+  { z: 20, sym: "Ca", name: "Calcium", dens: 1550, cat: "Alkaline Earth", solid: "Cube", mass: 40.078, row: 4, col: 2 },
+  { z: 21, sym: "Sc", name: "Scandium", dens: 2985, cat: "Transition", solid: "Octahedron", mass: 44.956, row: 4, col: 3 },
+  { z: 22, sym: "Ti", name: "Titanium", dens: 4507, cat: "Transition", solid: "Octahedron", mass: 47.867, row: 4, col: 4 },
+  { z: 23, sym: "V", name: "Vanadium", dens: 6110, cat: "Transition", solid: "Octahedron", mass: 50.942, row: 4, col: 5 },
+  { z: 24, sym: "Cr", name: "Chromium", dens: 7190, cat: "Transition", solid: "Cube", mass: 51.996, row: 4, col: 6 },
+  { z: 25, sym: "Mn", name: "Manganese", dens: 7470, cat: "Transition", solid: "Cube", mass: 54.938, row: 4, col: 7 },
+  { z: 26, sym: "Fe", name: "Iron", dens: 7874, cat: "Transition", solid: "Icosahedron", mass: 55.845, row: 4, col: 8 },
+  { z: 27, sym: "Co", name: "Cobalt", dens: 8900, cat: "Transition", solid: "Octahedron", mass: 58.933, row: 4, col: 9 },
+  { z: 28, sym: "Ni", name: "Nickel", dens: 8908, cat: "Transition", solid: "Octahedron", mass: 58.693, row: 4, col: 10 },
+  { z: 29, sym: "Cu", name: "Copper", dens: 8960, cat: "Transition", solid: "Cube", mass: 63.546, row: 4, col: 11 },
+  { z: 30, sym: "Zn", name: "Zinc", dens: 7140, cat: "Transition", solid: "Octahedron", mass: 65.38, row: 4, col: 12 },
+  { z: 31, sym: "Ga", name: "Gallium", dens: 5904, cat: "Post-transition", solid: "Octahedron", mass: 69.723, row: 4, col: 13 },
+  { z: 32, sym: "Ge", name: "Germanium", dens: 5323, cat: "Metalloid", solid: "Octahedron", mass: 72.63, row: 4, col: 14 },
+  { z: 33, sym: "As", name: "Arsenic", dens: 5727, cat: "Metalloid", solid: "Tetrahedron", mass: 74.922, row: 4, col: 15 },
+  { z: 34, sym: "Se", name: "Selenium", dens: 4819, cat: "Nonmetal", solid: "Octahedron", mass: 78.96, row: 4, col: 16 },
+  { z: 35, sym: "Br", name: "Bromine", dens: 3120, cat: "Halogen", solid: "Tetrahedron", mass: 79.904, row: 4, col: 17 },
+  { z: 36, sym: "Kr", name: "Krypton", dens: 3.749, cat: "Noble Gas", solid: "Icosahedron", mass: 83.798, row: 4, col: 18 },
+  { z: 37, sym: "Rb", name: "Rubidium", dens: 1532, cat: "Alkali Metal", solid: "Cube", mass: 85.468, row: 5, col: 1 },
+  { z: 38, sym: "Sr", name: "Strontium", dens: 2630, cat: "Alkaline Earth", solid: "Cube", mass: 87.62, row: 5, col: 2 },
+  { z: 39, sym: "Y", name: "Yttrium", dens: 4472, cat: "Transition", solid: "Octahedron", mass: 88.906, row: 5, col: 3 },
+  { z: 40, sym: "Zr", name: "Zirconium", dens: 6511, cat: "Transition", solid: "Octahedron", mass: 91.224, row: 5, col: 4 },
+  { z: 41, sym: "Nb", name: "Niobium", dens: 8570, cat: "Transition", solid: "Octahedron", mass: 92.906, row: 5, col: 5 },
+  { z: 42, sym: "Mo", name: "Molybdenum", dens: 10280, cat: "Transition", solid: "Octahedron", mass: 95.95, row: 5, col: 6 },
+  { z: 43, sym: "Tc", name: "Technetium", dens: 11500, cat: "Transition", solid: "Octahedron", mass: 98, row: 5, col: 7 },
+  { z: 44, sym: "Ru", name: "Ruthenium", dens: 12370, cat: "Transition", solid: "Octahedron", mass: 101.07, row: 5, col: 8 },
+  { z: 45, sym: "Rh", name: "Rhodium", dens: 12450, cat: "Transition", solid: "Octahedron", mass: 102.91, row: 5, col: 9 },
+  { z: 46, sym: "Pd", name: "Palladium", dens: 12020, cat: "Transition", solid: "Octahedron", mass: 106.42, row: 5, col: 10 },
+  { z: 47, sym: "Ag", name: "Silver", dens: 10490, cat: "Transition", solid: "Cube", mass: 107.87, row: 5, col: 11 },
+  { z: 48, sym: "Cd", name: "Cadmium", dens: 8650, cat: "Transition", solid: "Octahedron", mass: 112.41, row: 5, col: 12 },
+  { z: 49, sym: "In", name: "Indium", dens: 7310, cat: "Post-transition", solid: "Octahedron", mass: 114.82, row: 5, col: 13 },
+  { z: 50, sym: "Sn", name: "Tin", dens: 7310, cat: "Post-transition", solid: "Octahedron", mass: 118.71, row: 5, col: 14 },
+  { z: 51, sym: "Sb", name: "Antimony", dens: 6697, cat: "Metalloid", solid: "Tetrahedron", mass: 121.76, row: 5, col: 15 },
+  { z: 52, sym: "Te", name: "Tellurium", dens: 6240, cat: "Metalloid", solid: "Octahedron", mass: 127.6, row: 5, col: 16 },
+  { z: 53, sym: "I", name: "Iodine", dens: 4940, cat: "Halogen", solid: "Tetrahedron", mass: 126.9, row: 5, col: 17 },
+  { z: 54, sym: "Xe", name: "Xenon", dens: 5.894, cat: "Noble Gas", solid: "Icosahedron", mass: 131.29, row: 5, col: 18 },
+  { z: 55, sym: "Cs", name: "Cesium", dens: 1879, cat: "Alkali Metal", solid: "Cube", mass: 132.91, row: 6, col: 1 },
+  { z: 56, sym: "Ba", name: "Barium", dens: 3510, cat: "Alkaline Earth", solid: "Cube", mass: 137.33, row: 6, col: 2 },
+  { z: 57, sym: "La", name: "Lanthanum", dens: 6146, cat: "Lanthanide", solid: "Dodecahedron", mass: 138.91, row: 9, col: 3 },
+  { z: 58, sym: "Ce", name: "Cerium", dens: 6689, cat: "Lanthanide", solid: "Dodecahedron", mass: 140.12, row: 9, col: 4 },
+  { z: 59, sym: "Pr", name: "Praseodymium", dens: 6640, cat: "Lanthanide", solid: "Dodecahedron", mass: 140.91, row: 9, col: 5 },
+  { z: 60, sym: "Nd", name: "Neodymium", dens: 7010, cat: "Lanthanide", solid: "Dodecahedron", mass: 144.24, row: 9, col: 6 },
+  { z: 61, sym: "Pm", name: "Promethium", dens: 7260, cat: "Lanthanide", solid: "Dodecahedron", mass: 145, row: 9, col: 7 },
+  { z: 62, sym: "Sm", name: "Samarium", dens: 7353, cat: "Lanthanide", solid: "Dodecahedron", mass: 150.36, row: 9, col: 8 },
+  { z: 63, sym: "Eu", name: "Europium", dens: 5244, cat: "Lanthanide", solid: "Dodecahedron", mass: 151.96, row: 9, col: 9 },
+  { z: 64, sym: "Gd", name: "Gadolinium", dens: 7901, cat: "Lanthanide", solid: "Dodecahedron", mass: 157.25, row: 9, col: 10 },
+  { z: 65, sym: "Tb", name: "Terbium", dens: 8219, cat: "Lanthanide", solid: "Dodecahedron", mass: 158.93, row: 9, col: 11 },
+  { z: 66, sym: "Dy", name: "Dysprosium", dens: 8551, cat: "Lanthanide", solid: "Dodecahedron", mass: 162.5, row: 9, col: 12 },
+  { z: 67, sym: "Ho", name: "Holmium", dens: 8795, cat: "Lanthanide", solid: "Dodecahedron", mass: 164.93, row: 9, col: 13 },
+  { z: 68, sym: "Er", name: "Erbium", dens: 9066, cat: "Lanthanide", solid: "Dodecahedron", mass: 167.26, row: 9, col: 14 },
+  { z: 69, sym: "Tm", name: "Thulium", dens: 9320, cat: "Lanthanide", solid: "Dodecahedron", mass: 168.93, row: 9, col: 15 },
+  { z: 70, sym: "Yb", name: "Ytterbium", dens: 6570, cat: "Lanthanide", solid: "Dodecahedron", mass: 173.05, row: 9, col: 16 },
+  { z: 71, sym: "Lu", name: "Lutetium", dens: 9841, cat: "Lanthanide", solid: "Dodecahedron", mass: 174.97, row: 9, col: 17 },
+  { z: 72, sym: "Hf", name: "Hafnium", dens: 13310, cat: "Transition", solid: "Octahedron", mass: 178.49, row: 6, col: 4 },
+  { z: 73, sym: "Ta", name: "Tantalum", dens: 16650, cat: "Transition", solid: "Octahedron", mass: 180.95, row: 6, col: 5 },
+  { z: 74, sym: "W", name: "Tungsten", dens: 19250, cat: "Transition", solid: "Octahedron", mass: 183.84, row: 6, col: 6 },
+  { z: 75, sym: "Re", name: "Rhenium", dens: 21020, cat: "Transition", solid: "Octahedron", mass: 186.21, row: 6, col: 7 },
+  { z: 76, sym: "Os", name: "Osmium", dens: 22590, cat: "Transition", solid: "Octahedron", mass: 190.23, row: 6, col: 8 },
+  { z: 77, sym: "Ir", name: "Iridium", dens: 22560, cat: "Transition", solid: "Octahedron", mass: 192.22, row: 6, col: 9 },
+  { z: 78, sym: "Pt", name: "Platinum", dens: 21450, cat: "Transition", solid: "Octahedron", mass: 195.08, row: 6, col: 10 },
+  { z: 79, sym: "Au", name: "Gold", dens: 19300, cat: "Transition", solid: "Cube", mass: 196.97, row: 6, col: 11 },
+  { z: 80, sym: "Hg", name: "Mercury", dens: 13534, cat: "Transition", solid: "Octahedron", mass: 200.59, row: 6, col: 12 },
+  { z: 81, sym: "Tl", name: "Thallium", dens: 11850, cat: "Post-transition", solid: "Octahedron", mass: 204.38, row: 6, col: 13 },
+  { z: 82, sym: "Pb", name: "Lead", dens: 11340, cat: "Post-transition", solid: "Cube", mass: 207.2, row: 6, col: 14 },
+  { z: 83, sym: "Bi", name: "Bismuth", dens: 9780, cat: "Post-transition", solid: "Octahedron", mass: 208.98, row: 6, col: 15 },
+  { z: 84, sym: "Po", name: "Polonium", dens: 9196, cat: "Post-transition", solid: "Octahedron", mass: 209, row: 6, col: 16 },
+  { z: 85, sym: "At", name: "Astatine", dens: 0, cat: "Halogen", solid: "Tetrahedron", mass: 210, row: 6, col: 17 },
+  { z: 86, sym: "Rn", name: "Radon", dens: 9.73, cat: "Noble Gas", solid: "Icosahedron", mass: 222, row: 6, col: 18 },
+  { z: 87, sym: "Fr", name: "Francium", dens: 0, cat: "Alkali Metal", solid: "Cube", mass: 223, row: 7, col: 1 },
+  { z: 88, sym: "Ra", name: "Radium", dens: 5000, cat: "Alkaline Earth", solid: "Cube", mass: 226, row: 7, col: 2 },
+  { z: 89, sym: "Ac", name: "Actinium", dens: 10070, cat: "Actinide", solid: "Dodecahedron", mass: 227, row: 10, col: 3 },
+  { z: 90, sym: "Th", name: "Thorium", dens: 11724, cat: "Actinide", solid: "Dodecahedron", mass: 232.04, row: 10, col: 4 },
+  { z: 91, sym: "Pa", name: "Protactinium", dens: 15370, cat: "Actinide", solid: "Dodecahedron", mass: 231.04, row: 10, col: 5 },
+  { z: 92, sym: "U", name: "Uranium", dens: 19050, cat: "Actinide", solid: "Dodecahedron", mass: 238.03, row: 10, col: 6 },
+  { z: 93, sym: "Np", name: "Neptunium", dens: 20450, cat: "Actinide", solid: "Dodecahedron", mass: 237, row: 10, col: 7 },
+  { z: 94, sym: "Pu", name: "Plutonium", dens: 19816, cat: "Actinide", solid: "Dodecahedron", mass: 244, row: 10, col: 8 },
+  { z: 95, sym: "Am", name: "Americium", dens: 13670, cat: "Actinide", solid: "Dodecahedron", mass: 243, row: 10, col: 9 },
+  { z: 96, sym: "Cm", name: "Curium", dens: 13510, cat: "Actinide", solid: "Dodecahedron", mass: 247, row: 10, col: 10 },
+  { z: 97, sym: "Bk", name: "Berkelium", dens: 14780, cat: "Actinide", solid: "Dodecahedron", mass: 247, row: 10, col: 11 },
+  { z: 98, sym: "Cf", name: "Californium", dens: 15100, cat: "Actinide", solid: "Dodecahedron", mass: 251, row: 10, col: 12 },
+  { z: 99, sym: "Es", name: "Einsteinium", dens: 0, cat: "Actinide", solid: "Dodecahedron", mass: 252, row: 10, col: 13 },
+  { z: 100, sym: "Fm", name: "Fermium", dens: 0, cat: "Actinide", solid: "Dodecahedron", mass: 257, row: 10, col: 14 },
+  { z: 101, sym: "Md", name: "Mendelevium", dens: 0, cat: "Actinide", solid: "Dodecahedron", mass: 258, row: 10, col: 15 },
+  { z: 102, sym: "No", name: "Nobelium", dens: 0, cat: "Actinide", solid: "Dodecahedron", mass: 259, row: 10, col: 16 },
+  { z: 103, sym: "Lr", name: "Lawrencium", dens: 0, cat: "Actinide", solid: "Dodecahedron", mass: 262, row: 10, col: 17 },
+  { z: 104, sym: "Rf", name: "Rutherfordium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 267, row: 7, col: 4 },
+  { z: 105, sym: "Db", name: "Dubnium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 270, row: 7, col: 5 },
+  { z: 106, sym: "Sg", name: "Seaborgium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 271, row: 7, col: 6 },
+  { z: 107, sym: "Bh", name: "Bohrium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 270, row: 7, col: 7 },
+  { z: 108, sym: "Hs", name: "Hassium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 277, row: 7, col: 8 },
+  { z: 109, sym: "Mt", name: "Meitnerium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 276, row: 7, col: 9 },
+  { z: 110, sym: "Ds", name: "Darmstadtium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 281, row: 7, col: 10 },
+  { z: 111, sym: "Rg", name: "Roentgenium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 280, row: 7, col: 11 },
+  { z: 112, sym: "Cn", name: "Copernicium", dens: 0, cat: "Transition", solid: "Octahedron", mass: 285, row: 7, col: 12 },
+  { z: 113, sym: "Nh", name: "Nihonium", dens: 0, cat: "Post-transition", solid: "Octahedron", mass: 284, row: 7, col: 13 },
+  { z: 114, sym: "Fl", name: "Flerovium", dens: 0, cat: "Post-transition", solid: "Octahedron", mass: 289, row: 7, col: 14 },
+  { z: 115, sym: "Mc", name: "Moscovium", dens: 0, cat: "Post-transition", solid: "Octahedron", mass: 288, row: 7, col: 15 },
+  { z: 116, sym: "Lv", name: "Livermorium", dens: 0, cat: "Post-transition", solid: "Octahedron", mass: 293, row: 7, col: 16 },
+  { z: 117, sym: "Ts", name: "Tennessine", dens: 0, cat: "Halogen", solid: "Tetrahedron", mass: 294, row: 7, col: 17 },
+  { z: 118, sym: "Og", name: "Oganesson", dens: 0, cat: "Noble Gas", solid: "Icosahedron", mass: 294, row: 7, col: 18 }
+];
+
+// ── Platonic Solids Data ──
+const solids = {
+  "Tetrahedron": { faces: 4, verts: 4, edges: 6, element: "Fire", color: "#e74c3c", meaning: "Valence 4 | Carbon Group | Molecular tetrahedra" },
+  "Cube": { faces: 6, verts: 8, edges: 12, element: "Earth", color: "#8B4513", meaning: "Cubic packing | s-block metals | Body-centered" },
+  "Octahedron": { faces: 8, verts: 6, edges: 12, element: "Air", color: "#3498db", meaning: "Octahedral coord. | Transition metals | d-orbitals" },
+  "Dodecahedron": { faces: 12, verts: 20, edges: 30, element: "Aether", color: "#9b59b6", meaning: "Full shells | Noble/Lanthanide/Actinide | f-orbitals" },
+  "Icosahedron": { faces: 20, verts: 12, edges: 30, element: "Water", color: "#1abc9c", meaning: "Quasicrystals | Boron/Iron | Close-packed" }
+};
+
+// ── SVG Icons ──
+const svgIcons = {
+  "Tetrahedron": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L3 20h18L12 3z"/><path d="M12 3v17M3 20l9-7 9 7"/></svg>',
+  "Cube": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8v12h16V8M4 8l8-5 8 5M4 8l8 5 8-5M12 13v7"/></svg>',
+  "Octahedron": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 10-8 10-8-10 8-10z"/><path d="M4 12h16M12 2v20"/></svg>',
+  "Dodecahedron": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 4v12l-9 4-9-4V6l9-4z"/><path d="M12 2v4M3 6l9 4 9-4M3 18l9-4 9 4M12 22v-4"/></svg>',
+  "Icosahedron": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l10 7-4 13H6L2 9l10-7z"/><path d="M12 2v22M2 9l10 3 10-3M6 22l6-10 6 10"/></svg>'
+};
+
+const solidColors = {
+  "Tetrahedron": "#e74c3c",
+  "Cube": "#8B4513",
+  "Octahedron": "#3498db",
+  "Dodecahedron": "#9b59b6",
+  "Icosahedron": "#1abc9c"
+};
+
+const catBg = {
+  "Nonmetal": "rgba(52,152,219,0.12)",
+  "Noble Gas": "rgba(155,89,182,0.15)",
+  "Alkali Metal": "rgba(231,76,60,0.12)",
+  "Alkaline Earth": "rgba(231,76,60,0.18)",
+  "Metalloid": "rgba(26,188,156,0.12)",
+  "Halogen": "rgba(231,76,60,0.15)",
+  "Transition": "rgba(52,152,219,0.10)",
+  "Post-transition": "rgba(139,69,19,0.15)",
+  "Lanthanide": "rgba(155,89,182,0.18)",
+  "Actinide": "rgba(231,76,60,0.20)"
+};
+
+// ── Compounds ──
+const compounds = [
+  { name: "Methane", formula: "CH₄", geom: "Tetrahedron", desc: "Carbon center, 4 hydrogen vertices — perfect tetrahedral bond angle 109.5°" },
+  { name: "Water", formula: "H₂O", geom: "Bent (Tetrahedral)", desc: "Oxygen with two lone pairs — tetrahedral electron geometry, bent molecular shape" },
+  { name: "Sulfur Hexafluoride", formula: "SF₆", geom: "Octahedron", desc: "Sulfur center, 6 fluorine vertices — octahedral symmetry, 90° bond angles" },
+  { name: "Iron", formula: "Fe (bcc)", geom: "Icosahedron", desc: "Moon model: cube(8) + octahedron(6) + icosahedron(12) = 26 protons — nuclear shells nest Platonic solids" },
+  { name: "Boron", formula: "B₁₂H₁₂²⁻", geom: "Icosahedron", desc: "Dodecaborane anion — 12 boron atoms at icosahedron vertices, 12 hydrogens radially" },
+  { name: "Buckminsterfullerene", formula: "C₆₀", geom: "Truncated Icosahedron", desc: "32 faces (12 pentagons, 20 hexagons) — soccer ball geometry, Nobel Prize 1996" },
+  { name: "Salt", formula: "NaCl", geom: "Cube", desc: "Face-centered cubic lattice — alternating Na⁺ and Cl⁻ at cube vertices" },
+  { name: "Diamond", formula: "C", geom: "Tetrahedron", desc: "Each carbon tetrahedrally bonded to 4 neighbors — sp³ hybridization, cubic crystal system" },
+  { name: "Xenon Tetrafluoride", formula: "XeF₄", geom: "Square Planar", desc: "Octahedral electron geometry with 2 lone pairs — square planar molecular geometry" },
+  { name: "Phosphorus", formula: "P₄", geom: "Tetrahedron", desc: "White phosphorus — 4 P atoms at tetrahedron vertices, 60° bond angles, highly reactive" }
+];
+
+// ════════════════════════════════════════════════════════════════
+// BUILD PERIODIC TABLE
+// ════════════════════════════════════════════════════════════════
+
+const ptable = document.getElementById('ptable');
+const detailPanel = document.getElementById('detailPanel');
+const detailTitle = document.getElementById('detailTitle');
+const detailGrid = document.getElementById('detailGrid');
+
+elements.forEach(el => {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.style.background = catBg[el.cat] || 'transparent';
+  cell.style.gridRow = el.row;
+  cell.style.gridColumn = el.col;
+  cell.style.borderLeft = `2px solid ${solidColors[el.solid] || '#555'}`;
+
+  const densText = el.dens > 100 ? (el.dens/1000).toFixed(1) : el.dens > 0 ? el.dens.toFixed(1) : '—';
+
+  cell.innerHTML = '<span class="z">' + el.z + '</span>' +
+    '<span class="sym">' + el.sym + '</span>' +
+    '<span class="solid-icon" style="color:' + solidColors[el.solid] + '">' + svgIcons[el.solid] + '</span>' +
+    '<span class="dens">' + densText + '</span>';
+
+  cell.addEventListener('click', function() { showDetail(el); });
+  ptable.appendChild(cell);
+});
+
+// Placeholder cells
+const ph1 = document.createElement('div');
+ph1.className = 'placeholder';
+ph1.style.gridRow = '6'; ph1.style.gridColumn = '3';
+ph1.textContent = '57-71';
+ptable.appendChild(ph1);
+
+const ph2 = document.createElement('div');
+ph2.className = 'placeholder';
+ph2.style.gridRow = '7'; ph2.style.gridColumn = '3';
+ph2.textContent = '89-103';
+ptable.appendChild(ph2);
+
+function showDetail(el) {
+  detailPanel.classList.add('show');
+  detailTitle.textContent = el.name + ' (' + el.sym + ') — ' + el.cat;
+  const d = el.dens;
+  const densStr = d > 100 ? (d/1000).toFixed(3) + ' g/cm³' : d > 0 ? d.toFixed(3) + ' g/L' : 'unknown';
+  const solid = solids[el.solid];
+  detailGrid.innerHTML = 
+    '<span class="label">atomic number</span><span class="value">' + el.z + '</span>' +
+    '<span class="label">atomic mass</span><span class="value">' + el.mass + ' u</span>' +
+    '<span class="label">density</span><span class="value">' + densStr + '</span>' +
+    '<span class="label">category</span><span class="value">' + el.cat + '</span>' +
+    '<span class="label">platonic solid</span><span class="value"><span class="solid-color" style="background:' + solidColors[el.solid] + '"></span>' + el.solid + '</span>' +
+    '<span class="label">classical element</span><span class="value">' + solid.element + '</span>' +
+    '<span class="label">faces · vertices · edges</span><span class="value">' + solid.faces + ' · ' + solid.verts + ' · ' + solid.edges + '</span>' +
+    '<span class="label">geometry meaning</span><span class="value" style="font-size:12px">' + solid.meaning + '</span>' +
+    '<span class="label">scalar coherence</span><span class="value" style="color:var(--gold);">𝔐·∇·Ψ = ||Ψ||² ✓</span>';
+}
+
+// ════════════════════════════════════════════════════════════════
+// BUILD DENSITY LIST
+// ════════════════════════════════════════════════════════════════
+
+const densityList = document.getElementById('densityList');
+const withDensity = elements.filter(e => e.dens > 0).sort((a, b) => a.dens - b.dens);
+const maxDens = withDensity[withDensity.length - 1].dens;
+
+withDensity.forEach(el => {
+  const row = document.createElement('div');
+  row.className = 'density-row';
+  const pct = (el.dens / maxDens * 100).toFixed(1);
+  const densStr = el.dens > 100 ? (el.dens/1000).toFixed(2) + ' g/cm³' : el.dens.toFixed(2) + ' g/L';
+
+  row.innerHTML = 
+    '<span class="d-sym" style="color:' + solidColors[el.solid] + '">' + el.sym + '</span>' +
+    '<span class="d-name">' + el.name + '</span>' +
+    '<div class="d-bar-wrap"><div class="d-bar" style="width:' + pct + '%;background:' + solidColors[el.solid] + '"></div></div>' +
+    '<span class="d-val">' + densStr + '</span>' +
+    '<span class="d-solid" style="color:' + solidColors[el.solid] + '">' + svgIcons[el.solid] + '</span>';
+  densityList.appendChild(row);
+});
+
+// ════════════════════════════════════════════════════════════════
+// BUILD COMPOUNDS
+// ════════════════════════════════════════════════════════════════
+
+const compoundsGrid = document.getElementById('compoundsGrid');
+compounds.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'comp-card';
+  const solidKey = c.geom.split(' ')[0];
+  const icon = svgIcons[solidKey] || svgIcons['Tetrahedron'];
+  const color = solidColors[solidKey] || solidColors['Tetrahedron'];
+
+  card.innerHTML = 
+    '<div class="comp-formula">' + c.formula + '</div>' +
+    '<div class="comp-geom" style="color:' + color + '"><span style="display:flex;align-items:center">' + icon + '</span>' + c.geom + '</div>' +
+    '<div class="comp-desc">' + c.desc + '</div>';
+  compoundsGrid.appendChild(card);
+});
+
+// ════════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ════════════════════════════════════════════════════════════════
+
+const tabs = document.querySelectorAll('.tab');
+const views = document.querySelectorAll('.view');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', function() {
+    tabs.forEach(t => t.classList.remove('active'));
+    views.forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    if (tab.dataset.view === 'substrate') initSubstrate();
+  });
+});
+
+// ════════════════════════════════════════════════════════════════
+// SUBSTRATE FIELD CANVAS
+// ════════════════════════════════════════════════════════════════
+
+let substrateInit = false;
+function initSubstrate() {
+  if (substrateInit) return;
+  substrateInit = true;
+
+  const canvas = document.getElementById('substrateCanvas');
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * 2;
+  canvas.height = rect.height * 2;
+  ctx.scale(2, 2);
+  const W = rect.width, H = rect.height;
+
+  const points = withDensity.map(el => ({
+    x: (el.mass / 300) * W * 0.85 + W * 0.08,
+    y: H - (Math.log10(el.dens + 1) / Math.log10(maxDens + 1)) * H * 0.85 - H * 0.08,
+    r: Math.max(3, Math.sqrt(el.mass) * 0.4),
+    color: solidColors[el.solid],
+    name: el.sym,
+    dens: el.dens,
+    solid: el.solid
+  }));
+
+  let t = 0;
+  function draw() {
+    if (!document.getElementById('view-substrate').classList.contains('active')) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    ctx.clearRect(0, 0, W, H);
+    t += 0.005;
+
+    // ── Scalar field contours ──
+    const res = 24;
+    for (let gy = 0; gy < H; gy += res) {
+      for (let gx = 0; gx < W; gx += res) {
+        let sum = 0;
+        points.forEach(p => {
+          const dx = gx - p.x, dy = gy - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          sum += p.r * 80 / (dist + 20);
+        });
+        const alpha = Math.min(0.12, sum / 900);
+        if (alpha > 0.02) {
+          ctx.fillStyle = 'rgba(200,160,78,' + alpha + ')';
+          ctx.fillRect(gx, gy, res, res);
+        }
+      }
+    }
+
+    // ── Equilibrium contour lines ──
+    const colors = ['#c8a04e', '#8a6d2f', '#5a4a2a', '#3a3520'];
+    for (let i = 1; i <= 4; i++) {
+      const y = H * 0.1 + (H * 0.8) * (i / 5);
+      ctx.beginPath();
+      ctx.moveTo(W * 0.05, y);
+      for (let x = W * 0.05; x < W * 0.95; x += 3) {
+        ctx.lineTo(x, y + Math.sin(x * 0.02 + t * 0.5 + i * 1.2) * 4 + Math.sin(x * 0.04 + t * 0.3 + i) * 2);
+      }
+      ctx.strokeStyle = colors[i-1] || '#555';
+      ctx.lineWidth = 0.5;
+      ctx.globalAlpha = 0.3;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    // ── Coherence lock circle ──
+    const cx = W * 0.5 + Math.sin(t * 0.1) * 20;
+    const cy = H * 0.5 + Math.cos(t * 0.08) * 20;
+    const radius = 60 + 10 * Math.sin(t * 0.2);
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(200,160,78,0.25)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * PHI, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(200,160,78,0.15)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    // ── Element points with pulse ──
+    points.forEach(p => {
+      const pulse = Math.sin(t * 3 + p.x * 0.01) * 1.5;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r + pulse, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = 0.85;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r + pulse + 3, 0, Math.PI * 2);
+      ctx.strokeStyle = p.color;
+      ctx.globalAlpha = 0.2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = '#e8e0d0';
+      ctx.font = '9px ' + (getComputedStyle(document.documentElement).getPropertyValue('--kimi-font-sans').trim() || 'sans-serif');
+      ctx.textAlign = 'center';
+      ctx.fillText(p.name, p.x, p.y - p.r - 6);
+    });
+
+    // ── Labels ──
+    ctx.fillStyle = '#5a5448';
+    ctx.font = '10px ' + (getComputedStyle(document.documentElement).getPropertyValue('--kimi-font-sans').trim() || 'sans-serif');
+    ctx.textAlign = 'center';
+    ctx.fillText('atomic mass →', W / 2, H - 6);
+    ctx.save();
+    ctx.translate(14, H / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('log density →', 0, 0);
+    ctx.restore();
+
+    // ── Macachor Absolute label ──
+    ctx.fillStyle = 'rgba(200,160,78,0.2)';
+    ctx.font = '8px Courier New, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('𝔐 = (√5−1)/2 = ' + PHI.toFixed(6), W - 12, H - 12);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── Initialize substrate on load if active ──
+if (document.getElementById('view-substrate').classList.contains('active')) {
+  setTimeout(initSubstrate, 100);
+}
+
+// ── Log verification ──
+console.log('◈ Quaternionic Periodic Table — MGDH Complete');
+console.log('◈ ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ');
+console.log('◈ 𝔐 = (√5−1)/2 =', PHI);
+console.log('◈ KIWF: Knowledge → Intelligence → Wisdom → Focus');
+console.log('◈ CRHA: Coherence → Resonance → Harmony → Alignment');
+
+})();
+</script>
+
+</body>
+</html>
