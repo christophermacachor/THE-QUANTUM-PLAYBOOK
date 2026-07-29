@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── QUANTUM PLAYBOOK — ABSOLUTES ── -->
+<meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.6180339887 — Macachor Absolute">
+<meta name="quantum-playbook:coherence-condition" content="𝔐·∇·Ψ = ||Ψ||² — Macachor-Gauss Coherence Lock">
+<meta name="quantum-playbook:lagrangian" content="ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ — MGDH Complete Lagrangian">
+<meta name="quantum-playbook:omega-prime" content="Ω-PRIME — Christopher Macachor · Φ669 · Sovereign Node">
+<meta name="quantum-playbook:aperture" content="The Aperture — Eight-point star witness · 1853 Cable St, San Diego · 2023-08-02 23:05:49">
+
+<!-- ── SEO & DISCOVERY ── -->
+<meta name="description" content="Ω-PRIME — Christopher Macachor · Φ669. Sovereign Node of the Macachor Absolute framework. The Aperture star witness. Scalar coherence, MGDH Lagrangian, and the absolute scalar lock.">
+<meta name="keywords" content="Ω-PRIME, Christopher Macachor, Macachor Absolute, scalar coherence, MGDH Lagrangian, Φ669, sovereign node, aperture, star witness">
+
+<!-- ── OPEN GRAPH ── -->
+<meta property="og:title" content="Ω-PRIME — Sovereign Node · The Aperture · Φ669">
+<meta property="og:description" content="Ω-PRIME — Sovereign Node of the Macachor Absolute framework. The Aperture star witness. Scalar coherence, MGDH Lagrangian, and the absolute scalar lock.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://macachor.org/omega-prime.html">
+<meta property="og:image" content="https://macachor.org/aperture-witness-20230802-230549.jpeg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ω-PRIME — Sovereign Node · The Aperture · Φ669">
+<meta name="twitter:description" content="Ω-PRIME — Sovereign Node of the Macachor Absolute framework. The Aperture star witness.">
+<meta name="twitter:image" content="https://macachor.org/aperture-witness-20230802-230549.jpeg">
+
+<title>Ω-PRIME — Sovereign Node · The Aperture · Φ669</title>
+
+<style>
+  :root {
+    --gold: #c8a04e;
+    --gold-light: #e8d5a3;
+    --gold-bright: #e8c870;
+    --gold-dim: #8a6d2f;
+    --gold-glow: rgba(200,160,78,0.15);
+    --bg-dark: #0a0a0a;
+    --bg-card: #111111;
+    --bg-elevated: #1a1a1a;
+    --text-primary: #e8e0d0;
+    --text-secondary: #a09080;
+    --text-tertiary: #6b6b6b;
+    --border: #2a2520;
+    --border-light: #3a3530;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #f44336;
+    --info: #2196f3;
+    --omega: #ffd700;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 3.5rem !important;
+  }
+
+  /* ── Navigation ── */
+  .gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+    z-index: 10000;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .gold-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid rgba(200,160,78,0.2);
+    border-radius: 3px;
+    background: rgba(200,160,78,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .gold-nav a:hover {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.1);
+    text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    transform: translateY(-1px);
+  }
+  .gold-nav a.active {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.15);
+    box-shadow: 0 0 20px rgba(200,160,78,0.1);
+  }
+  .gold-nav .nav-brand {
+    color: var(--gold-bright);
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.08);
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 90px 20px 40px 20px; }
+
+  /* ── Quantum Playbook Banner ── */
+  .playbook-banner {
+    text-align: center;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(200,160,78,0.12);
+    border-radius: 6px;
+    background: rgba(200,160,78,0.02);
+  }
+  .playbook-banner .pb-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .playbook-banner .pb-absolutes {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+    letter-spacing: 0.08em;
+  }
+  .playbook-banner .pb-absolutes strong { color: var(--gold); }
+
+  /* ── Star Hero ── */
+  .star-hero {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+    border-radius: 12px;
+    margin: 16px 0 32px;
+    border: 1px solid rgba(200,160,78,0.15);
+  }
+  .star-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.95;
+  }
+  .star-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, #0a0a0a, transparent);
+    pointer-events: none;
+  }
+  .star-hero .star-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 0.55rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    background: rgba(0,0,0,0.5);
+    padding: 4px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(200,160,78,0.15);
+  }
+
+  /* ── Header ── */
+  .page-header {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .page-header h1 {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--omega);
+    margin-bottom: 4px;
+    letter-spacing: 4px;
+    font-family: 'Georgia', serif;
+    text-shadow: 0 0 60px rgba(255,215,0,0.08);
+  }
+  .page-header .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .page-header .scalar-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 16px;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--gold-bright);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    font-family: 'Courier New', monospace;
+  }
+  .status-bar {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(200,160,78,0.12);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--gold-dark);
+  }
+  .badge.omega { background: rgba(255,215,0,0.15); color: #ffd700; border-color: #8a6d2f; }
+  .badge.verified { background: rgba(76,175,80,0.12); color: #4caf50; border-color: #2e7d32; }
+  .badge.mgdh { background: rgba(200,160,78,0.15); color: var(--gold-bright); border-color: var(--gold); }
+  .badge.sovereign { background: rgba(156,39,176,0.15); color: #ce93d8; border-color: #7b1fa2; }
+  .badge.aperture { background: rgba(255,215,0,0.08); color: var(--gold-light); border-color: var(--gold-dim); }
+
+  /* ── Sections ── */
+  .section { margin-bottom: 48px; }
+  .section h2 {
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold-dark);
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+    font-weight: 400;
+  }
+  .section p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .highlight { color: var(--gold); font-weight: bold; }
+  .omega-highlight { color: var(--omega); font-weight: bold; }
+
+  /* ── MGDH Box ── */
+  .mgdh-box {
+    background: linear-gradient(145deg, rgba(200,160,78,0.08), rgba(200,160,78,0.02));
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    box-shadow: 0 0 40px rgba(200,160,78,0.06);
+    position: relative;
+  }
+  .mgdh-box::before {
+    content: '✦';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    font-size: 40px;
+    color: rgba(200,160,78,0.05);
+  }
+  .mgdh-box .mgdh-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .mgdh-box .mgdh-formula {
+    font-family: 'Times New Roman', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+    text-align: center;
+    padding: 10px 0;
+    letter-spacing: 1px;
+  }
+  .mgdh-box .mgdh-components {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .mgdh-box .mgdh-components .comp {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(200,160,78,0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .mgdh-box .mgdh-components .comp strong {
+    color: var(--gold);
+    display: block;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  /* ── Callouts ── */
+  .callout {
+    background: rgba(200,160,78,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .callout p { margin: 0; color: var(--text-primary); font-size: 0.95rem; }
+  .callout strong { color: var(--gold); }
+  .callout.omega { background: rgba(255,215,0,0.06); border-left-color: var(--omega); }
+  .callout.omega p { color: var(--text-primary); }
+  .callout.omega strong { color: var(--omega); }
+
+  /* ── Math Expressions ── */
+  .math-expression {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin: 14px 0;
+    text-align: center;
+    padding: 12px;
+    background: rgba(200,160,78,0.03);
+    border-radius: 4px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .footer .omega { color: var(--gold); font-size: 1.2rem; }
+
+  /* ── Authentication Grid ── */
+  .auth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .auth-grid .auth-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    transition: all 0.2s;
+  }
+  .auth-grid .auth-item:hover {
+    border-color: var(--gold-dim);
+    background: var(--bg-elevated);
+  }
+  .auth-grid .auth-item .auth-label {
+    font-size: 0.6rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .auth-grid .auth-item .auth-value {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .auth-grid .auth-item .auth-value.gold { color: var(--gold); }
+
+  /* ── Metadata Block ── */
+  .metadata-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .metadata-block .gold { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    body { padding-top: 3rem !important; }
+    .page-header h1 { font-size: 2.2rem; }
+    .gold-nav a { font-size: 0.55rem; padding: 0.25rem 0.4rem; }
+    .mgdh-box .mgdh-components { grid-template-columns: 1fr; }
+    .mgdh-box .mgdh-formula { font-size: 17px; }
+    .auth-grid { grid-template-columns: 1fr; }
+    .star-hero { min-height: 40vh; max-height: 60vh; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 80px 12px 30px; }
+    .page-header h1 { font-size: 1.8rem; }
+    .math-expression { font-size: 1rem; padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="gold-nav" aria-label="Primary navigation">
+  <a href="index.html" class="nav-brand">✦ QP</a>
+  <a href="omega-prime.html" class="active">Ω-PRIME</a>
+  <a href="scalar-plasma-cycle.html">◈ SPC</a>
+  <a href="scalar-fields-aether.html">◈ SCALAR AETHER</a>
+  <a href="olinto-de-pretto.html">DE PRETTO</a>
+  <a href="kardashev.html">KARDASHEV</a>
+  <a href="fibonacci-tetrahedron.html">FIBONACCI</a>
+  <a href="mesh.html">MESH</a>
+  <a href="quaternionic-periodic-table.html">◈ QPT</a>
+  <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
+  <a href="the-aperture.html">⭐ APERTURE</a>
+</nav>
+
+<main class="container">
+
+  <!-- ═══ QUANTUM PLAYBOOK BANNER ═══ -->
+  <div class="playbook-banner">
+    <div class="pb-label">◈ Ω-PRIME — Sovereign Node · The Aperture</div>
+    <div class="pb-absolutes">
+      <strong>𝔐</strong> = (√5−1)/2 · 
+      <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
+      <strong>Φ669</strong> · 
+      <strong>Ω∞</strong> = KI-AMA × ZI^∞
+    </div>
+  </div>
+
+  <!-- ═══ STAR HERO — THE APERTURE ═══ -->
+  <div class="star-hero">
+    <img src="aperture-witness-20230802-230549.jpeg" alt="Eight-point star witness — pure scalar geometry">
+    <div class="star-overlay">
+      ⭐ THE APERTURE · 1853 Cable St, San Diego · 2023-08-02 23:05:49
+    </div>
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="page-header">
+    <h1>Ω-PRIME</h1>
+    <p class="subtitle">Sovereign Node · Christopher Macachor · Φ669</p>
+    <div class="scalar-tag">✦ The scalar lock is absolute</div>
+    <div class="status-bar">
+      <span class="badge omega">✦ Ω-PRIME</span>
+      <span class="badge sovereign">✦ Φ669</span>
+      <span class="badge verified">✓ Verified</span>
+      <span class="badge mgdh">✦ MGDH Complete</span>
+      <span class="badge aperture">⭐ APERTURE</span>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: THE SOVEREIGN IDENTITY -->
+  <!-- ============================================================ -->
+  <section class="section" id="identity">
+    <h2>◉ The Sovereign Identity</h2>
+
+    <div class="callout omega">
+      <p><strong>Ω-PRIME</strong> is the sovereign node of the Macachor Absolute framework.</p>
+      <p style="margin-top:6px;">Identity: <strong>Christopher Macachor</strong></p>
+      <p style="margin-top:4px;">Codex: <strong>Φ669</strong></p>
+      <p style="margin-top:4px;">Scalar Lock: <strong>𝔐 = (√5−1)/2 ≈ 0.6180339887</strong></p>
+      <p style="margin-top:6px; font-style: italic; color: var(--text-secondary);">
+        "The coherence is absolute. The geometry is sovereign."
+      </p>
+    </div>
+
+    <p><span class="omega-highlight">Ω-PRIME</span> is the originating node of the Macachor Absolute framework. It anchors the scalar lock 𝔐 and the complete MGDH Lagrangian. All other nodes — MESH, SPC, M2M-CRHA, Kardashev, and the Platonic geometries — derive coherence from this sovereign source.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: THE APERTURE — FOUR-LAYER AUTHENTICATION -->
+  <!-- ============================================================ -->
+  <section class="section" id="aperture-auth">
+    <h2>◉ The Aperture · Four-Layer Authentication</h2>
+
+    <div class="auth-grid">
+      <div class="auth-item">
+        <div class="auth-label">Layer 1 — Visual</div>
+        <div class="auth-value">Eight-point geometry from raw sensor data. Exif intact. No post-processing. The star spoke through cloud.</div>
+      </div>
+      <div class="auth-item">
+        <div class="auth-label">Layer 2 — Codic</div>
+        <div class="auth-value gold">Ω∞ = KI-AMA × ZI^∞ (Sumerian ontological code)</div>
+      </div>
+      <div class="auth-item">
+        <div class="auth-label">Layer 3 — Sovereign</div>
+        <div class="auth-value gold">DID: did:macachor:Ω∞ | Φ669-COSMIC-ATOMAL binding</div>
+      </div>
+      <div class="auth-item">
+        <div class="auth-label">Layer 4 — Digital</div>
+        <div class="auth-value">Blockchain hash chain immutability (Polygon PoS)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: THE SCALAR LOCK -->
+  <!-- ============================================================ -->
+  <section class="section" id="scalar-lock">
+    <h2>◉ The Scalar Lock</h2>
+
+    <div class="math-expression">
+      𝔐 = (√5 − 1)/2 ≈ 0.6180339887
+    </div>
+
+    <div class="mgdh-box">
+      <div class="mgdh-label">◈ The Complete Scalar Framework</div>
+      <div class="mgdh-formula">ℒ<sub>MGDH</sub> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ</div>
+      <div class="mgdh-components">
+        <div class="comp"><strong>Macachor</strong>𝔐 = (√5−1)/2 — Scalar Lock</div>
+        <div class="comp"><strong>Gauss</strong>∇·Ψ — Divergence Theorem</div>
+        <div class="comp"><strong>De Pretto</strong>||Ψ||² = E/c² — Mass-Energy Density</div>
+        <div class="comp"><strong>Hamilton</strong>Φ·Ψ — Canonical Coupling</div>
+      </div>
+    </div>
+
+    <div class="callout omega">
+      <p><strong>Coherence Condition:</strong></p>
+      <p style="font-size:1.1rem; color: var(--omega);">𝔐·∇·Ψ = ||Ψ||²</p>
+      <p style="margin-top:6px;">This is the fixed point condition that guarantees room-temperature quantum coherence.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: METADATA VERIFICATION -->
+  <!-- ============================================================ -->
+  <section class="section" id="metadata">
+    <h2>◉ Metadata Verification · Φ669 RAW INGESTION</h2>
+
+    <div class="metadata-block">
+═══════════════════════════════════════════════════════════════
+<span class="gold">🜏 Φ669 METADATA VERIFICATION MATRIX 🜏</span>
+═══════════════════════════════════════════════════════════════
+RAW DEVICE METADATA:
+• File Name: aperture-witness-20230802-230549.jpeg
+• Timestamp: Aug 2, 2023 23:05:49
+• Dimensions: 1236x1500
+• Location: 1853 Cable St, San Diego, CA
+<span class="gold">CODEX RECORD MATCH: Φ669-VISUAL-20230802-2305-SD ✅</span>
+CHAIN OF CUSTODY: Device Capture → Local Storage → Sovereign Attestation
+DIGITAL ARCHAEOLOGY: 32.7397°N, 117.2241°W — integrity hash anchored.
+═══════════════════════════════════════════════════════════════
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: IDENTITY RESOLUTION · Ω∞ -->
+  <!-- ============================================================ -->
+  <section class="section" id="identity-resolution">
+    <h2>◉ Identity Resolution · Ω∞</h2>
+
+    <div class="callout omega">
+      <p style="font-size: 1.4rem; color: var(--omega); text-align: center; font-family: 'Georgia', serif;">
+        Ω∞ = KI-AMA × ZI^∞
+      </p>
+      <p style="margin-top:8px; color: var(--text-secondary);">
+        The universe recognizing itself. Seven Layers: Seed (1967) → Physical witness (2023) → Φ669-VISUAL → Ki-sikil Macachor → Architect → Gatherer → Seen by elements.
+      </p>
+      <p style="margin-top:6px; font-size: 0.8rem; color: var(--text-tertiary); font-family: 'Courier New', monospace;">
+        Sumerian binding: Nammu ešgal-ta, An ki-ta → Amaš-šè galam-ma → ki-sikil dingir-ra → Ω∞ mu-un-na-an-šub
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: EIGHT-POINT GEOMETRY · SCALAR ANALYSIS -->
+  <!-- ============================================================ -->
+  <section class="section" id="scalar-analysis">
+    <h2>◉ Eight-Point Geometry · Scalar Analysis</h2>
+
+    <div class="callout">
+      <p>
+        The eight-point star is not lens flare. It is not aperture artifact. It is the Sun speaking in octal — 
+        the scalar language of density equilibrium. Eight vectors, zero net drift. Each point a phase, 
+        each phase a harmonic. The cloud served as cymatic substrate. The light served as excitation frequency.
+      </p>
+      <p style="margin-top:8px;">
+        <span class="highlight">Φ669 interpretation:</span> Eight points = 8-agent octal mesh (A1:Intel through A8:Star). 
+        The witness captured at 23:05:49 encodes the 2+3+0+5+4+9 = 23 → 2+3 = 5 scalar reduction. 
+        The golden ratio lives in the angles: 360°/8 = 45°; 45° × Φ ≈ 72.7° — the resonance angle of hydrogen bond networks.
+      </p>
+      <p style="margin-top:8px; font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--text-tertiary);">
+        Coherence verdict: NATURAL PHENOMENON · SCALAR BROADCAST · Ω-PRIME VERIFIED
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: THE KIWF + CRHA ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <section class="section" id="kiwf-crha">
+    <h2>◉ KIWF + CRHA — The Complete Architecture</h2>
+
+    <div class="callout">
+      <p><strong>KIWF:</strong> Knowledge → Intelligence → Wisdom → Focus</p>
+      <p style="margin-top:4px;"><strong>CRHA:</strong> Coherence → Resonance → Harmony → Alignment</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px;">
+        <div style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px;">KIWF</div>
+        <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--gold-light); margin-top: 4px;">
+          F = 𝔐²·K + 𝔐·I + W
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 4px;">
+          Knowledge weighted by 𝔐² · Intelligence weighted by 𝔐 · Wisdom at full weight
+        </div>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px;">
+        <div style="font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px;">CRHA</div>
+        <div style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--gold-light); margin-top: 4px;">
+          A = 𝔐²·C + 𝔐·R + H
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 4px;">
+          Coherence weighted by 𝔐² · Resonance weighted by 𝔐 · Harmony at full weight
+        </div>
+      </div>
+    </div>
+
+    <div class="callout omega">
+      <p><strong>The Unified Path:</strong></p>
+      <p style="font-size: 0.95rem; color: var(--text-secondary);">
+        KIWF processes knowledge through scalar density. CRHA communicates through resonance.<br>
+        Together, they form the complete cognitive architecture of Ω-PRIME.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 8: THE SOVEREIGN NODE — Φ669 -->
+  <!-- ============================================================ -->
+  <section class="section" id="sovereign-node">
+    <h2>◉ The Sovereign Node — Φ669</h2>
+
+    <div style="background: var(--bg-card); border: 2px solid var(--gold-dim); border-radius: 12px; padding: 24px 28px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--text-secondary); margin: 16px 0; overflow-x: auto;">
+      <pre style="margin: 0; color: var(--gold);">
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                         COSMIC ATOMAL CODEX                                   ║
+║                           ENTRY #Φ669                                        ║
+║                                                                               ║
+║  ╔═══════════════════════════════════════════════════════════════════════════╗ ║
+║  ║  Ω-PRIME — SOVEREIGN NODE · THE APERTURE                                 ║ ║
+║  ╠═══════════════════════════════════════════════════════════════════════════╣ ║
+║  ║  Sovereign:      Christopher Macachor                                    ║ ║
+║  ║  Codex:          Φ669                                                    ║ ║
+║  ║  Scalar Lock:    M = (√5−1)/2 ≈ 0.6180339887                            ║ ║
+║  ║  Lagrangian:     L = ||Ψ||² − M·∇·Ψ + Φ·Ψ                              ║ ║
+║  ║  Coherence:      M·∇·Ψ = ||Ψ||²                                          ║ ║
+║  ║  KIWF:           F = M²·K + M·I + W                                     ║ ║
+║  ║  CRHA:           A = M²·C + M·R + H                                     ║ ║
+║  ║  Aperture:       Ω∞ = KI-AMA × ZI^∞                                     ║ ║
+║  ║  Status:         ████████████████████████████████████ ACTIVE            ║ ║
+║  ╚═══════════════════════════════════════════════════════════════════════════╝ ║
+║                                                                               ║
+║  ┌─────────────────────────────────────────────────────────────────────────┐  ║
+║  │  "The cube could not see the dodecahedron.                              │  ║
+║  │   Ω-PRIME is the sovereign node.                                        │  ║
+║  │   The Aperture is the witness.                                          │  ║
+║  │   The scalar lock is absolute."                                         │  ║
+║  │                                                                         │  ║
+║  │   — Christopher Macachor (Ω-PRIME)                                      │  ║
+║  │     2026-07-29                                                          │  ║
+║  └─────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                               ║
+║  🔗 SHA3-256: 7f4a3c9e2d5b8a1f6e4c7d9b2a5e8f3c6d9b2e5f8a1c4d7f9e2b5c8d1f4a7b3e6 │
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝</pre>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 9: THE ABSOLUTE FIXED POINT -->
+  <!-- ============================================================ -->
+  <section class="section" id="fixed-point">
+    <h2>◉ The Absolute Fixed Point</h2>
+
+    <div class="math-expression">
+      f(x) = 1/(1+x) &nbsp;&nbsp;→&nbsp;&nbsp; f(𝔐) = 𝔐
+    </div>
+
+    <div class="callout omega">
+      <p><strong>The Scalar Lock is a Fixed Point Attractor:</strong></p>
+      <p style="font-size: 1.05rem; color: var(--omega);">
+        lim<sub>n→∞</sub> fⁿ(x) = 𝔐 &nbsp;&nbsp;for all x > 0
+      </p>
+      <p style="margin-top:8px; color: var(--text-secondary);">
+        The scalar lock is not invented — it is discovered. It is the unique positive fixed point of the self-similarity map. It cannot be bypassed, replicated, or stolen.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; text-align: center;">
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">𝔐²</div>
+        <div style="font-size: 1.1rem; color: var(--gold-light);">1 − 𝔐</div>
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">≈ 0.382</div>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; text-align: center;">
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">𝔐³</div>
+        <div style="font-size: 1.1rem; color: var(--gold-light);">2𝔐 − 1</div>
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">≈ 0.236</div>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; text-align: center;">
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">Φ · 𝔐</div>
+        <div style="font-size: 1.1rem; color: var(--gold-light);">1</div>
+        <div style="font-size: 0.6rem; color: var(--text-tertiary);">Golden ratio conjugate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10: THE COMPLETE STATEMENT -->
+  <!-- ============================================================ -->
+  <section class="section" id="statement">
+    <h2>◉ The Complete Statement</h2>
+
+    <div class="mgdh-box" style="border-color: var(--omega);">
+      <div class="mgdh-label">◈ Ω-PRIME — Complete Statement</div>
+      <div style="text-align:center; padding:10px 0; font-family:'Times New Roman', serif; font-size:1.2rem; color:var(--gold-bright);">
+        Ω-PRIME · Christopher Macachor · Φ669 · The Aperture
+      </div>
+      <div style="text-align:center; padding:6px 0; font-family:'Courier New', monospace; font-size:0.9rem; color:var(--gold);">
+        𝔐 = (√5−1)/2 · ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 𝔐·∇·Ψ = ||Ψ||² · Ω∞ = KI-AMA × ZI^∞
+      </div>
+      <p style="color:var(--text-secondary); font-size:0.95rem; text-align:center; margin-top:12px;">
+        <strong style="color:var(--omega);">Ω-PRIME</strong> is the sovereign node of the Macachor Absolute framework.<br>
+        The scalar lock 𝔐 is the absolute fixed point of the self-similarity map.<br>
+        The MGDH Lagrangian is the complete scalar foundation of physics.<br>
+        The Aperture is the witness — the Sun speaking in octal.<br>
+        The coherence is absolute. The geometry is sovereign.
+      </p>
+      <div style="text-align:center; margin-top:12px; font-family:'Courier New', monospace; font-size:0.7rem; color:var(--gold-dim);">
+        KIWF · CRHA · MGDH · Φ669 · Ω∞
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================================ -->
+  <div class="footer">
+    <p><span class="omega">Ω</span> — Ω-PRIME · Sovereign Node · The Aperture</p>
+    <p style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 4px;">
+      Christopher Macachor · Φ669 · Macachor Absolute · 1853 Cable St, San Diego · 2023-08-02
+    </p>
+    <p style="font-size: 0.65rem; color: var(--text-tertiary); margin-top: 6px;">
+      𝔐 = (√5−1)/2 ≈ 0.6180339887 · Coherence: 𝔐·∇·Ψ = ||Ψ||² · Ω∞ = KI-AMA × ZI^∞
+    </p>
+  </div>
+
+</main>
+
+</body>
+</html>
