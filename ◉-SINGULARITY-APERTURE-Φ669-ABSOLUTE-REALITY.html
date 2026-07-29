@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -20,82 +18,6 @@
             z-index: 1;
         }
 
-        /* ── NAVIGATION ── */
-        .gold-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            background: rgba(10, 10, 15, 0.92);
-            backdrop-filter: blur(20px);
-            padding: 0.8rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem 1.2rem;
-            align-items: center;
-            border-bottom: 1px solid rgba(200, 160, 78, 0.12);
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        .gold-nav a {
-            color: rgba(200, 160, 78, 0.4);
-            text-decoration: none;
-            transition: all 0.4s ease;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 300;
-            font-size: 0.65rem;
-        }
-        .gold-nav a:hover {
-            color: #c8a04e;
-            background: rgba(200, 160, 78, 0.08);
-            box-shadow: 0 0 20px rgba(200, 160, 78, 0.05);
-        }
-        .gold-nav .nav-brand {
-            font-size: 1.2rem;
-            color: #c8a04e;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            padding: 0 0.5rem 0 0;
-        }
-        .gold-nav .active {
-            color: #f1c40f;
-            border: 1px solid rgba(241, 196, 15, 0.3);
-            background: rgba(241, 196, 15, 0.06);
-        }
-        .gold-nav .aperture-link {
-            color: #4a9eff;
-            border: 1px solid #4a9eff;
-            padding: 0.3rem 1.2rem;
-            border-radius: 20px;
-            background: rgba(74, 158, 255, 0.06);
-            box-shadow: 0 0 30px rgba(74, 158, 255, 0.05);
-            font-weight: 700;
-            transition: all 0.4s ease;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-        }
-        .gold-nav .aperture-link:hover {
-            background: rgba(74, 158, 255, 0.15);
-            box-shadow: 0 0 60px rgba(74, 158, 255, 0.2);
-            transform: scale(1.05);
-        }
-        .gold-nav .aperture-link.active {
-            color: #f1c40f;
-            border-color: #f1c40f;
-            background: rgba(241, 196, 15, 0.08);
-            box-shadow: 0 0 40px rgba(241, 196, 15, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .gold-nav { padding: 0.4rem 0.8rem; gap: 0.3rem 0.6rem; font-size: 0.5rem; }
-            .gold-nav a { font-size: 0.45rem; padding: 0.15rem 0.3rem; }
-            .gold-nav .aperture-link { font-size: 0.5rem; padding: 0.15rem 0.6rem; }
-        }
-
-        /* ── STATUS ── */
         .status-overlay {
             position: fixed;
             bottom: 110px;
@@ -108,7 +30,6 @@
             text-transform: uppercase;
             text-align: center;
             opacity: 1;
-            transition: opacity 1.5s ease;
             pointer-events: none;
             max-width: 90%;
         }
@@ -125,10 +46,8 @@
             line-height: 1.6;
             pointer-events: none;
             opacity: 1;
-            transition: opacity 2s ease;
         }
 
-        /* ── ENTRY BUTTON ── */
         .entry-btn {
             position: fixed;
             bottom: 40px;
@@ -138,19 +57,19 @@
             background: rgba(10, 10, 15, 0.8);
             border: 2px solid #c8a04e;
             border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             color: #c8a04e;
-            font-size: 2rem;
             cursor: pointer;
             transition: all 0.6s ease;
             backdrop-filter: blur(12px);
             box-shadow: 0 0 40px rgba(200, 160, 78, 0.1);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Georgia', serif;
-            line-height: 1;
+            line-height: 1.1;
             pointer-events: auto;
         }
         .entry-btn:hover {
@@ -158,26 +77,81 @@
             box-shadow: 0 0 60px rgba(200, 160, 78, 0.3);
             transform: translateX(-50%) scale(1.08);
         }
+        .entry-btn .btn-symbol { font-size: 1.6rem; line-height: 1; }
+        .entry-btn .btn-text {
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(200, 160, 78, 0.5);
+            margin-top: 2px;
+        }
         .entry-btn.hidden {
             opacity: 0;
             pointer-events: none;
             transform: translateX(-50%) scale(0.3);
             transition: all 0.8s ease;
         }
-        .entry-btn .btn-text {
-            font-size: 0.4rem;
+
+        .phi-portal {
+            position: fixed;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            z-index: 30;
+            background: rgba(10, 10, 15, 0.85);
+            border: 2px solid #4ade80;
+            border-radius: 50px;
+            padding: 16px 40px;
+            color: #4ade80;
+            font-size: 1rem;
             letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.05);
+            font-family: 'Georgia', serif;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .phi-portal.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) scale(1);
+        }
+        .phi-portal:hover {
+            background: rgba(74, 222, 128, 0.12);
+            box-shadow: 0 0 60px rgba(74, 222, 128, 0.2);
+            transform: translateX(-50%) scale(1.05);
+        }
+        .phi-portal .phi-symbol {
+            font-size: 1.8rem;
+            color: #f1c40f;
+            font-family: 'Georgia', serif;
+        }
+        .phi-portal .portal-text {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: rgba(200, 160, 78, 0.4);
-            position: absolute;
-            bottom: -18px;
-            white-space: nowrap;
+            color: #4ade80;
+        }
+        .phi-portal .portal-text .phi-inline {
+            color: #f1c40f;
+            font-size: 1.1rem;
+            margin: 0 4px;
         }
 
         @media (max-width: 768px) {
-            .entry-btn { width: 55px; height: 55px; font-size: 1.5rem; bottom: 25px; }
+            .entry-btn { width: 60px; height: 60px; font-size: 1.3rem; bottom: 25px; }
+            .entry-btn .btn-symbol { font-size: 1.2rem; }
+            .entry-btn .btn-text { font-size: 0.4rem; }
             .status-overlay { bottom: 80px; font-size: 0.4rem; }
             .coherence-metric { font-size: 0.35rem; bottom: 130px; right: 12px; }
+            .phi-portal { padding: 12px 24px; font-size: 0.8rem; bottom: 100px; }
+            .phi-portal .phi-symbol { font-size: 1.4rem; }
+            .phi-portal .portal-text { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -185,49 +159,44 @@
 
 <div id="canvas-container"></div>
 
-<!-- ═══ NAVIGATION — WITH APERTURE REFERENCED ═══ -->
-<nav class="gold-nav">
-    <a href="index.html" class="nav-brand">✦ QP</a>
-    <a href="omega-prime.html">Ω-PRIME</a>
-    <a href="scalar-plasma-cycle.html">◈ SPC</a>
-    <a href="scalar-fields-aether.html">◈ SCALAR AETHER</a>
-    <a href="olinto-de-pretto.html">DE PRETTO</a>
-    <a href="kardashev.html">KARDASHEV</a>
-    <a href="fibonacci-tetrahedron.html">FIBONACCI</a>
-    <a href="mesh.html">MESH</a>
-    <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
-    <a href="◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html" class="aperture-link active">✦ APERTURE</a>
-</nav>
-
-<!-- ── ENTRY BUTTON ── -->
 <button class="entry-btn" id="entryBtn">
-    ⬡
+    <span class="btn-symbol">⬡</span>
     <span class="btn-text">Φ669 · Enter</span>
 </button>
 
-<!-- ── STATUS ── -->
+<button class="phi-portal" id="phiPortal">
+    <span class="phi-symbol">Φ</span>
+    <span class="portal-text">Quantum <span class="phi-inline">Φ</span> Playbook</span>
+</button>
+
 <div class="status-overlay" id="statusOverlay">
     <span id="phaseText">⟡ ◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY ⟡</span>
 </div>
 
-<!-- ── COHERENCE ── -->
 <div class="coherence-metric" id="coherenceMetric">
     𝔐 = 0.6180339887<br>
     χ(C) = 1.000000<br>
     Φ-669 ACTIVE<br>
-    ◉ APERTURE: OPEN
+    ◉ APERTURE: STANDBY
 </div>
 
-<script>
-    // ═══════════════════════════════════════════════════════════════
-    // ◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY
-    // ═══════════════════════════════════════════════════════════════
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
     const MACACHOR_ABSOLUTE = (Math.sqrt(5) - 1) / 2;
     const PHI_CONSTANT = 669;
     const IMMUTABLE_HASH = "93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0";
 
-    // ── THREE.JS ──
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0a0a0f);
 
@@ -239,7 +208,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.minDistance = 3;
@@ -248,7 +217,6 @@
     controls.autoRotateSpeed = 0.6;
     controls.target.set(0, 0, 0);
 
-    // ── LIGHTING ──
     const ambient = new THREE.AmbientLight(0x404060, 0.4);
     scene.add(ambient);
     const main = new THREE.DirectionalLight(0xc8a04e, 1.0);
@@ -264,7 +232,6 @@
     blueLight.position.set(3, 3, 3);
     scene.add(blueLight);
 
-    // ── STARFIELD ──
     const starGeo = new THREE.BufferGeometry();
     const starCount = 3000;
     const starPos = new Float32Array(starCount * 3);
@@ -274,7 +241,6 @@
     const stars = new THREE.Points(starGeo, starMat);
     scene.add(stars);
 
-    // ── GREEN POLYHEDRON EARTH ──
     const earthGroup = new THREE.Group();
     scene.add(earthGroup);
 
@@ -304,7 +270,6 @@
     const dots = new THREE.Points(dotGeo, dotMat);
     earthGroup.add(dots);
 
-    // ── RED PRISON CUBE ──
     const prisonGroup = new THREE.Group();
     scene.add(prisonGroup);
     const cubeSize = 1.8;
@@ -322,7 +287,6 @@
     const glowEdges = new THREE.LineSegments(glowEdgeGeo, glowEdgeMat);
     prisonGroup.add(glowEdges);
 
-    // ── BLACK VERTICAL BARS ──
     const barMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.95 });
     const barHeight = cubeSize * 0.85;
     const barWidth = 0.05;
@@ -347,7 +311,6 @@
         prisonGroup.add(bar);
     });
 
-    // ── BLACK OUTLINE BARS ──
     const outlineMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.9 });
     const hPositions = [
         { x: -0.7, y: cubeSize/2 + 0.01, z: 0 }, { x: -0.35, y: cubeSize/2 + 0.01, z: 0 },
@@ -362,33 +325,104 @@
         prisonGroup.add(bar);
     });
 
-    // ── ENTRY ──
+    const expCount = 180000;
+    const expGeo = new THREE.BufferGeometry();
+    const expPos = new Float32Array(expCount * 3);
+    const expCol = new Float32Array(expCount * 3);
+    const expVel = [];
+    const expLife = new Float32Array(expCount);
+    const expMaxLife = new Float32Array(expCount);
+    for (let i = 0; i < expCount; i++) {
+        expPos[i * 3] = 0; expPos[i * 3 + 1] = 0; expPos[i * 3 + 2] = 0;
+        const c = new THREE.Color().setHSL(0.0 + Math.random() * 0.05, 1, 0.3 + Math.random() * 0.5);
+        expCol[i * 3] = c.r; expCol[i * 3 + 1] = c.g; expCol[i * 3 + 2] = c.b;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const speed = 0.5 + Math.random() * 5;
+        expVel.push({ x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) });
+        expLife[i] = 0;
+        expMaxLife[i] = 2 + Math.random() * 5;
+    }
+    expGeo.setAttribute('position', new THREE.BufferAttribute(expPos, 3));
+    expGeo.setAttribute('color', new THREE.BufferAttribute(expCol, 3));
+    const expMat = new THREE.PointsMaterial({
+        size: 0.07, transparent: true, opacity: 0, blending: THREE.AdditiveBlending,
+        vertexColors: true, sizeAttenuation: true
+    });
+    const explosion = new THREE.Points(expGeo, expMat);
+    explosion.visible = false;
+    scene.add(explosion);
+
     const entryBtn = document.getElementById('entryBtn');
-    let entered = false;
+    const phiPortal = document.getElementById('phiPortal');
+    const phaseText = document.getElementById('phaseText');
+    const coherenceMetric = document.getElementById('coherenceMetric');
+
+    let exploded = false;
+    let explosionProgress = 0;
+    let isExploding = false;
 
     entryBtn.addEventListener('click', () => {
-        if (entered) return;
-        entered = true;
-        entryBtn.classList.add('hidden');
-        document.getElementById('phaseText').textContent = '⟡ APERTURE OPEN · SINGULARITY CONVERGED ⟡';
-        document.getElementById('coherenceMetric').innerHTML = 
-            '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>◉ APERTURE: OPEN';
-        
-        // Pulse effect
-        const flash = new THREE.PointLight(0xf1c40f, 5, 30);
-        flash.position.set(0, 0, 0);
-        scene.add(flash);
-        setTimeout(() => scene.remove(flash), 800);
+        if (exploded) return;
+        triggerExplosion();
     });
 
-    // ── RESIZE ──
+    function triggerExplosion() {
+        if (exploded) return;
+        exploded = true;
+        isExploding = true;
+        entryBtn.classList.add('hidden');
+        prisonGroup.visible = false;
+
+        const expPos = explosion.geometry.attributes.position.array;
+        for (let i = 0; i < expCount; i++) {
+            expPos[i * 3] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 1] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
+            expLife[i] = 0;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const speed = 1 + Math.random() * 5;
+            expVel[i] = { x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) };
+        }
+        explosion.geometry.attributes.position.needsUpdate = true;
+        explosion.visible = true;
+        explosion.material.opacity = 1;
+
+        const flash = new THREE.PointLight(0xff0000, 25, 40);
+        flash.position.set(0, 0, 0);
+        scene.add(flash);
+        setTimeout(() => scene.remove(flash), 600);
+
+        const origPos = camera.position.clone();
+        let shakeCount = 0;
+        const shakeInterval = setInterval(() => {
+            if (shakeCount > 25) { clearInterval(shakeInterval); return; }
+            camera.position.x = origPos.x + (Math.random() - 0.5) * 0.5;
+            camera.position.y = origPos.y + (Math.random() - 0.5) * 0.5;
+            shakeCount++;
+        }, 25);
+
+        phaseText.textContent = '⟡ CUBE SHATTERED · MILLION PARTICLES RELEASED ⟡';
+        coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>⬡ PRISON: DESTROYED';
+
+        setTimeout(() => {
+            phiPortal.classList.add('visible');
+            phaseText.textContent = '⟡ APERTURE OPEN · PHI PORTAL ACTIVE ⟡';
+            coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>◉ APERTURE: OPEN<br>Φ PORTAL: READY';
+        }, 1500);
+    }
+
+    phiPortal.addEventListener('click', () => {
+        window.location.href = 'quantum-playbook.html';
+    });
+
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // ── ANIMATION ──
     const clock = new THREE.Clock();
 
     function animate() {
@@ -402,12 +436,33 @@
         wireMat.opacity = 0.3 + pulse * 0.3;
         dotMat.opacity = 0.3 + pulse * 0.4;
 
-        // Prison pulse
-        const redPulse = 0.5 + Math.sin(t * 0.4) * 0.5;
-        cubeMat.emissiveIntensity = 0.2 + redPulse * 0.4;
-        glowEdgeMat.opacity = 0.1 + redPulse * 0.3;
-
         stars.rotation.y = t * 0.005;
+
+        if (isExploding) {
+            explosionProgress += 0.01;
+            const pos = explosion.geometry.attributes.position.array;
+            for (let i = 0; i < expCount; i++) {
+                const idx = i * 3;
+                const lifeRatio = expLife[i] / expMaxLife[i];
+                const speedFactor = 1 - lifeRatio * 0.4;
+                pos[idx] += expVel[i].x * 0.05 * speedFactor;
+                pos[idx + 1] += expVel[i].y * 0.05 * speedFactor;
+                pos[idx + 2] += expVel[i].z * 0.05 * speedFactor;
+                if (lifeRatio > 0.2) {
+                    const pull = 0.002 * (lifeRatio - 0.2);
+                    pos[idx] *= (1 - pull);
+                    pos[idx + 1] += 0.008 * lifeRatio;
+                    pos[idx + 2] *= (1 - pull);
+                }
+                expLife[i] += 0.01;
+            }
+            explosion.geometry.attributes.position.needsUpdate = true;
+            if (explosionProgress > 0.4) {
+                const fade = Math.min(1, (explosionProgress - 0.4) / 0.6);
+                explosion.material.opacity = Math.max(0, 1 - fade * 0.9);
+            }
+        }
+
         controls.update();
         renderer.render(scene, camera);
     }
@@ -418,7 +473,7 @@
     console.log(`✦ 𝔐 = ${MACACHOR_ABSOLUTE}`);
     console.log(`✦ Φ = ${PHI_CONSTANT}`);
     console.log(`✦ Hash: ${IMMUTABLE_HASH}`);
-    console.log('✦ APERTURE: OPEN');
+    console.log('✦ CLICK Φ669 · Enter → CUBE EXPLODES → PHI PORTAL');
 </script>
 </body>
 </html>
