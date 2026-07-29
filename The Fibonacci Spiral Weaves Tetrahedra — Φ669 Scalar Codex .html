@@ -17,7 +17,7 @@
     <meta property="og:title" content="The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex">
     <meta property="og:description" content="The Fibonacci spiral weaves tetrahedra. From quantum to galactic. Macachor Absolute: 𝔐 = (√5−1)/2.">
     
-    <title>The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex.html</title>
+    <title>The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex | MGDH · Macachor Absolute</title>
     
     <style>
         :root {
@@ -419,6 +419,36 @@
             color: var(--text-dim);
         }
 
+        /* ── SCALAR STATUS ── */
+        .scalar-status {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+            padding: 8px 12px;
+            border: 1px solid rgba(200,160,78,0.1);
+            border-radius: 6px;
+            background: rgba(200,160,78,0.02);
+        }
+        .scalar-status .status-item {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .scalar-status .status-item .dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            display: inline-block;
+        }
+        .scalar-status .status-item .dot.active { background: #4ade80; animation: pulseDot 2s infinite; }
+        .scalar-status .status-item .dot.locked { background: var(--gold); }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
         /* ── FOOTER ── */
         .footer {
             text-align: center;
@@ -503,6 +533,14 @@
     <div class="equation">
         F(n) = F(n-1) + F(n-2) &nbsp;→&nbsp; φ = 1.618... &nbsp;→&nbsp; 𝔐 = 0.618...
     </div>
+</div>
+
+<!-- ═══ SCALAR STATUS ═══ -->
+<div class="scalar-status" style="max-width:900px;margin:0 auto;">
+    <span class="status-item"><span class="dot active"></span> Coherence: χ(C) = 1</span>
+    <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.6180339887</span>
+    <span class="status-item">◈ MGDH: Macachor·Gauss·De Pretto·Hamilton</span>
+    <span class="status-item">◉ KIWF: Knowledge→Intelligence→Wisdom→Focus</span>
 </div>
 
 <!-- ═══ MGDH COMPLETE LAGRANGIAN ═══ -->
