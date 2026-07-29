@@ -3,655 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platonic Earth Geometry · Toroidal Vortex</title>
+    <title>Platonic Earth · Toroidal Vortex</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0a0f;
-            color: #e8dcc8;
             overflow: hidden;
             cursor: default;
+            font-family: 'Segoe UI', sans-serif;
         }
         #canvas-container {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
         }
-        #ui-layer {
+
+        /* ── ENTRY BUTTON ── */
+        .entry-btn {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-        #ui-layer > * { pointer-events: auto; }
-
-        /* ── Title Bar ── */
-        .title-bar {
-            position: absolute;
-            top: 20px; left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            background: rgba(10, 10, 15, 0.85);
-            border: 1px solid #c8a04e;
-            border-radius: 8px;
-            padding: 10px 24px;
-            backdrop-filter: blur(8px);
-            z-index: 20;
-        }
-        .title-bar h1 {
-            color: #c8a04e;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .title-bar .subtitle {
-            color: #8a7a5a;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-        }
-
-        /* ── TETRAHEDRON ENTRY POINT ── */
-        .tetrahedron-entry {
-            position: absolute;
-            bottom: 40px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(10, 10, 15, 0.9);
+            z-index: 20;
+            background: rgba(10, 10, 15, 0.85);
             border: 2px solid #c8a04e;
             border-radius: 60px;
-            padding: 14px 36px;
-            backdrop-filter: blur(12px);
+            padding: 16px 40px;
+            color: #c8a04e;
+            font-size: 0.9rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.5s ease;
-            z-index: 30;
+            transition: all 0.6s ease;
+            font-family: 'Courier New', monospace;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(200, 160, 78, 0.1);
             text-align: center;
-            box-shadow: 0 0 30px rgba(200, 160, 78, 0.15);
+            pointer-events: auto;
         }
-        .tetrahedron-entry:hover {
+        .entry-btn:hover {
             background: rgba(200, 160, 78, 0.15);
-            box-shadow: 0 0 50px rgba(200, 160, 78, 0.3);
+            box-shadow: 0 0 60px rgba(200, 160, 78, 0.3);
             transform: translateX(-50%) scale(1.05);
         }
-        .tetrahedron-entry .entry-label {
-            font-size: 0.8rem;
-            color: #c8a04e;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
+        .entry-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) scale(0.8);
         }
-        .tetrahedron-entry .entry-sub {
-            font-size: 0.6rem;
-            color: #8a7a5a;
-            letter-spacing: 2px;
-            margin-top: 2px;
-        }
-        .tetrahedron-entry .tetra-icon {
-            font-size: 1.8rem;
+        .entry-btn .icon {
+            font-size: 1.5rem;
             display: block;
             margin-bottom: 4px;
         }
-
-        /* ── Face Panel ── */
-        .face-panel {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 260px;
-            max-height: 65vh;
-            overflow-y: auto;
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid #c8a04e44;
-            border-radius: 10px;
-            padding: 14px;
-            backdrop-filter: blur(12px);
-            opacity: 0;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            transform: translateY(-50%) translateX(20px);
-            pointer-events: none;
-            z-index: 15;
-        }
-        .face-panel.visible {
-            opacity: 1;
-            transform: translateY(-50%) translateX(0);
-            pointer-events: auto;
-        }
-        .face-panel h2 {
-            color: #c8a04e;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-align: center;
-            border-bottom: 1px solid #c8a04e33;
-            padding-bottom: 6px;
-        }
-        .face-item {
-            display: flex;
-            align-items: center;
-            padding: 6px 8px;
-            margin: 3px 0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-        .face-item:hover {
-            background: rgba(200, 160, 78, 0.1);
-            border-color: #c8a04e44;
-        }
-        .face-item.active {
-            background: rgba(200, 160, 78, 0.2);
-            border-color: #c8a04e;
-        }
-        .face-number {
-            width: 22px; height: 22px;
-            border-radius: 50%;
-            background: #c8a04e22;
-            border: 1px solid #c8a04e;
-            color: #c8a04e;
-            font-size: 0.65rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
-        .face-label {
-            font-size: 0.7rem;
-            color: #c8c0a8;
-            letter-spacing: 0.5px;
-        }
-        .face-item:hover .face-label { color: #e8dcc8; }
-        .face-item.active .face-label { color: #c8a04e; }
-
-        .face-panel::-webkit-scrollbar { width: 3px; }
-        .face-panel::-webkit-scrollbar-track { background: transparent; }
-        .face-panel::-webkit-scrollbar-thumb { background: #c8a04e44; border-radius: 2px; }
-
-        /* ── Info Panel ── */
-        .info-panel {
-            position: absolute;
-            bottom: 100px; left: 20px;
-            background: rgba(10, 10, 15, 0.85);
-            border: 1px solid #c8a04e44;
-            border-radius: 8px;
-            padding: 12px 16px;
-            backdrop-filter: blur(8px);
-            max-width: 280px;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: 15;
-            pointer-events: none;
-        }
-        .info-panel.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .info-panel .selected-face {
-            color: #c8a04e;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        .info-panel .face-url {
-            color: #6a9eff;
-            font-size: 0.65rem;
-            word-break: break-all;
-            margin-bottom: 6px;
-        }
-        .info-panel .face-type {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: #c8a04e22;
-            border: 1px solid #c8a04e55;
-            color: #c8a04e;
-        }
-        .info-panel .navigate-btn {
-            margin-top: 8px;
-            padding: 6px 14px;
-            background: #c8a04e;
-            color: #0a0a0f;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-        }
-        .navigate-btn:hover {
-            background: #d8b05e;
-            box-shadow: 0 0 12px rgba(200, 160, 78, 0.4);
-        }
-
-        /* ── Controls Hint ── */
-        .controls-hint {
-            position: absolute;
-            bottom: 20px; right: 20px;
-            background: rgba(10, 10, 15, 0.7);
-            border: 1px solid #c8a04e22;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 0.6rem;
+        .entry-btn .sub {
+            font-size: 0.5rem;
+            letter-spacing: 3px;
             color: #8a7a5a;
-            line-height: 1.6;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            z-index: 15;
-        }
-        .controls-hint.visible { opacity: 1; }
-
-        /* ── Vortex Overlay ── */
-        .vortex-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            background: radial-gradient(circle at center, transparent 40%, rgba(10, 10, 15, 0.6) 100%);
-            opacity: 0;
-            transition: opacity 1.5s ease;
-        }
-        .vortex-overlay.active {
-            opacity: 1;
+            display: block;
+            margin-top: 2px;
         }
 
         @media (max-width: 768px) {
-            .face-panel { width: 200px; right: 10px; padding: 10px; }
-            .face-number { width: 18px; height: 18px; font-size: 0.55rem; }
-            .face-label { font-size: 0.6rem; }
-            .title-bar h1 { font-size: 1rem; }
-            .tetrahedron-entry { padding: 10px 20px; bottom: 20px; }
-            .tetrahedron-entry .entry-label { font-size: 0.65rem; }
-            .info-panel { max-width: 200px; left: 10px; bottom: 80px; }
-            .controls-hint { display: none; }
+            .entry-btn {
+                padding: 12px 24px;
+                font-size: 0.7rem;
+                letter-spacing: 4px;
+                bottom: 30px;
+            }
+            .entry-btn .icon {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
 
 <div id="canvas-container"></div>
-<div class="vortex-overlay" id="vortexOverlay"></div>
 
-<div id="ui-layer">
-
-    <!-- Title Bar -->
-    <div class="title-bar">
-        <h1>Platonic Earth Geometry</h1>
-        <div class="subtitle">Toroidal Vortex · 16-Face Coherence Sphere</div>
-    </div>
-
-    <!-- TETRAHEDRON ENTRY POINT -->
-    <div class="tetrahedron-entry" id="tetraEntry">
-        <span class="tetra-icon">⬡</span>
-        <div class="entry-label">Touch a Tetrahedron</div>
-        <div class="entry-sub">Enter the Toroidal Vortex</div>
-    </div>
-
-    <!-- Face Panel -->
-    <div class="face-panel" id="facePanel">
-        <h2>Faces of Coherence</h2>
-        <div id="faceList"></div>
-    </div>
-
-    <!-- Info Panel -->
-    <div class="info-panel" id="infoPanel">
-        <div class="selected-face" id="selectedFace">Select a face</div>
-        <div class="face-url" id="faceUrl">—</div>
-        <div class="face-type" id="faceType">—</div>
-        <button class="navigate-btn" id="navigateBtn" style="display:none;">Navigate</button>
-    </div>
-
-    <!-- Controls Hint -->
-    <div class="controls-hint" id="controlsHint">
-        Left Click · Select Face<br>
-        Drag · Rotate · Scroll · Zoom
-    </div>
-</div>
+<!-- ── ENTRY BUTTON ── -->
+<button class="entry-btn" id="entryBtn">
+    <span class="icon">⬡</span>
+    Enter the Vortex
+    <span class="sub">Platonic Earth · Toroidal Descent</span>
+</button>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// 16-FACE POLYHEDRON — PLATONIC EARTH GEOMETRY
-// Toroidal Vortex Simulation
-// ═══════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════════
+    // PLATONIC EARTH — TOROIDAL VORTEX
+    // Clean 3D visualization — no text, no faces panel
+    // ═══════════════════════════════════════════════════════════════
 
-const POLYHEDRON_FACES = [
-  { seq: 1,  label: "RESONANT HARMONY",    url: "RESONANT HARMONY.html",                  type: "internal" },
-  { seq: 2,  label: "ILLUSIONS",           url: "illusions.html",                         type: "internal" },
-  { seq: 3,  label: "KARDASHEV COMPLETE",  url: "kardashev-complete.html",                type: "internal" },
-  { seq: 4,  label: "SPACE FOR LEASE",     url: "leased_space_doctrine_standalone.html",  type: "internal" },
-  { seq: 5,  label: "MILESTONE",           url: "mesh-codex-milestone.html",              type: "internal" },
-  { seq: 6,  label: "MESH",                url: "mesh.html",                              type: "internal" },
-  { seq: 7,  label: "OLINTO DE PRETTO",    url: "olinto_de_pretto.html",                  type: "internal" },
-  { seq: 8,  label: "-Ω∞ ANALYSIS",        url: "omega-empirical-analysis.html",          type: "internal" },
-  { seq: 9,  label: "-Ω∞ STARS",           url: "star-identification.html",               type: "internal" },
-  { seq: 10, label: "LIVE SATELLITES",     url: "satellite.html",                         type: "internal" },
-  { seq: 11, label: "ENERGY",              url: "tetrahedral-spiral-madl.html",           type: "internal" },
-  { seq: 12, label: "FEDERATION",          url: "federation-root-unified.html",           type: "internal" },
-  { seq: 13, label: "COHERENCE",           url: "coherence-frequency-ontology.html",      type: "internal" },
-  { seq: 14, label: "NOAA GATEWAY",        url: "https://noaa.macachor.org/",             type: "external" },
-  { seq: 15, label: "THE SINGULARITY",     url: "Ω-PRIME.html",                           type: "singularity" },
-  { seq: 16, label: "M COHERENCE",         url: "m-invariant-hardware-specification.html", type: "attachment" }
-];
+    // ── THREE.JS SETUP ──
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0f);
 
-// ── THREE.JS SETUP ──
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0a0f);
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 8);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 6);
-
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.minDistance = 3;
-controls.maxDistance = 15;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.3;
-
-// ── LIGHTING ──
-const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
-scene.add(ambientLight);
-
-const mainLight = new THREE.DirectionalLight(0xc8a04e, 1.0);
-mainLight.position.set(5, 5, 5);
-scene.add(mainLight);
-
-const rimLight = new THREE.DirectionalLight(0x4a9eff, 0.5);
-rimLight.position.set(-5, -3, -5);
-scene.add(rimLight);
-
-const pointLight = new THREE.PointLight(0xc8a04e, 0.6, 20);
-pointLight.position.set(0, 0, 0);
-scene.add(pointLight);
-
-// ── STARFIELD ──
-const starGeo = new THREE.BufferGeometry();
-const starCount = 3000;
-const starPos = new Float32Array(starCount * 3);
-for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 100;
-starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-const starMat = new THREE.PointsMaterial({ color: 0xc8c0a8, size: 0.03, transparent: true, opacity: 0.7 });
-const stars = new THREE.Points(starGeo, starMat);
-scene.add(stars);
-
-// ── POLYHEDRON ──
-const polyGeo = new THREE.IcosahedronGeometry(2, 1);
-const polyMat = new THREE.MeshPhysicalMaterial({
-    color: 0x1a1a2e,
-    metalness: 0.7,
-    roughness: 0.3,
-    clearcoat: 0.5,
-    clearcoatRoughness: 0.2,
-    emissive: 0x0a0a1a,
-    emissiveIntensity: 0.2,
-    side: THREE.DoubleSide
-});
-const polyhedron = new THREE.Mesh(polyGeo, polyMat);
-scene.add(polyhedron);
-
-const wireGeo = new THREE.WireframeGeometry(polyGeo);
-const wireMat = new THREE.LineBasicMaterial({ color: 0xc8a04e, transparent: true, opacity: 0.2 });
-const wireframe = new THREE.LineSegments(wireGeo, wireMat);
-polyhedron.add(wireframe);
-
-// ── FACE MARKERS ──
-const faceMeshes = [];
-const markerGroup = new THREE.Group();
-scene.add(markerGroup);
-
-function getFacePosition(index, total) {
-    const phi = Math.acos(1 - 2 * (index + 0.5) / total);
-    const theta = Math.PI * (1 + Math.sqrt(5)) * (index + 0.5);
-    const r = 2.15;
-    return new THREE.Vector3(r * Math.sin(phi) * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta), r * Math.cos(phi));
-}
-
-POLYHEDRON_FACES.forEach((face, index) => {
-    const pos = getFacePosition(index, POLYHEDRON_FACES.length);
-
-    const marker = new THREE.Mesh(
-        new THREE.SphereGeometry(0.08, 16, 16),
-        new THREE.MeshPhysicalMaterial({ color: 0xc8a04e, metalness: 0.9, roughness: 0.1, emissive: 0xc8a04e, emissiveIntensity: 0.3 })
-    );
-    marker.position.copy(pos);
-    marker.userData = { seq: face.seq, faceData: face };
-    markerGroup.add(marker);
-    faceMeshes.push(marker);
-
-    const ring = new THREE.Mesh(
-        new THREE.RingGeometry(0.12, 0.15, 32),
-        new THREE.MeshBasicMaterial({ color: 0xc8a04e, transparent: true, opacity: 0.3, side: THREE.DoubleSide })
-    );
-    ring.position.copy(pos);
-    ring.lookAt(0, 0, 0);
-    markerGroup.add(ring);
-
-    // Number label sprite
-    const canvas = document.createElement('canvas');
-    canvas.width = 64; canvas.height = 64;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#0a0a0f';
-    ctx.fillRect(0, 0, 64, 64);
-    ctx.strokeStyle = '#c8a04e';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(2, 2, 60, 60);
-    ctx.fillStyle = '#c8a04e';
-    ctx.font = 'bold 28px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(face.seq.toString(), 32, 32);
-    const spriteMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas) });
-    const sprite = new THREE.Sprite(spriteMat);
-    sprite.scale.set(0.25, 0.25, 0.25);
-    sprite.position.copy(pos).multiplyScalar(1.08);
-    markerGroup.add(sprite);
-});
-
-// ── CONNECTION LINES ──
-const lineMat = new THREE.LineBasicMaterial({ color: 0xc8a04e, transparent: true, opacity: 0.12 });
-for (let i = 0; i < faceMeshes.length; i++) {
-    for (let j = i + 1; j < faceMeshes.length; j++) {
-        if (faceMeshes[i].position.distanceTo(faceMeshes[j].position) < 2.0) {
-            const line = new THREE.Line(
-                new THREE.BufferGeometry().setFromPoints([faceMeshes[i].position, faceMeshes[j].position]),
-                lineMat
-            );
-            markerGroup.add(line);
-        }
-    }
-}
-
-// ── VORTEX PARTICLES ──
-const vortexParticles = new THREE.BufferGeometry();
-const vCount = 800;
-const vPos = new Float32Array(vCount * 3);
-const vSizes = new Float32Array(vCount);
-for (let i = 0; i < vCount; i++) {
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    const r = 2.5 + Math.random() * 3;
-    vPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
-    vPos[i*3+1] = r * Math.cos(phi);
-    vPos[i*3+2] = r * Math.sin(phi) * Math.sin(theta);
-    vSizes[i] = 0.02 + Math.random() * 0.04;
-}
-vortexParticles.setAttribute('position', new THREE.BufferAttribute(vPos, 3));
-vortexParticles.setAttribute('size', new THREE.BufferAttribute(vSizes, 1));
-const vMat = new THREE.PointsMaterial({
-    color: 0x4a9eff,
-    size: 0.03,
-    transparent: true,
-    opacity: 0.2,
-    blending: THREE.AdditiveBlending
-});
-const vortex = new THREE.Points(vortexParticles, vMat);
-vortex.visible = false;
-scene.add(vortex);
-
-// ── RAYCASTER ──
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-let hoveredSeq = null;
-let selectedSeq = null;
-let vortexActive = false;
-
-// ── UI ──
-const faceList = document.getElementById('faceList');
-const facePanel = document.getElementById('facePanel');
-const infoPanel = document.getElementById('infoPanel');
-const controlsHint = document.getElementById('controlsHint');
-const vortexOverlay = document.getElementById('vortexOverlay');
-const tetraEntry = document.getElementById('tetraEntry');
-
-POLYHEDRON_FACES.forEach(face => {
-    const item = document.createElement('div');
-    item.className = 'face-item';
-    item.dataset.seq = face.seq;
-    item.innerHTML = `<div class="face-number">${face.seq}</div><div class="face-label">${face.label}</div>`;
-    item.addEventListener('click', () => selectFace(face.seq));
-    faceList.appendChild(item);
-});
-
-function selectFace(seq) {
-    const face = POLYHEDRON_FACES.find(f => f.seq === seq);
-    if (!face) return;
-    selectedSeq = seq;
-    document.querySelectorAll('.face-item').forEach(el => {
-        el.classList.toggle('active', parseInt(el.dataset.seq) === seq);
-    });
-    document.getElementById('selectedFace').textContent = face.label;
-    document.getElementById('faceUrl').textContent = face.url;
-    document.getElementById('faceType').textContent = face.type;
-    const btn = document.getElementById('navigateBtn');
-    btn.style.display = 'inline-block';
-    btn.onclick = () => window.open(face.url, '_blank');
-    faceMeshes.forEach(m => {
-        m.material.emissiveIntensity = m.userData.seq === seq ? 1.0 : 0.3;
-        m.scale.set(m.userData.seq === seq ? 1.5 : 1, m.userData.seq === seq ? 1.5 : 1, m.userData.seq === seq ? 1.5 : 1);
-    });
-    infoPanel.classList.add('visible');
-}
-
-// ── ENTRY: TOUCH A TETRAHEDRON ──
-tetraEntry.addEventListener('click', () => {
-    if (vortexActive) return;
-    vortexActive = true;
-    facePanel.classList.add('visible');
-    controlsHint.classList.add('visible');
-    vortex.visible = true;
-    vortexOverlay.classList.add('active');
-    tetraEntry.style.opacity = '0';
-    tetraEntry.style.transform = 'translateX(-50%) scale(0.8)';
-    setTimeout(() => { tetraEntry.style.display = 'none'; }, 600);
-    // Auto-select face 15
-    setTimeout(() => selectFace(15), 300);
-});
-
-// ── MOUSE EVENTS ──
-function onMouseMove(e) {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    if (!vortexActive) return;
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(faceMeshes);
-    document.querySelectorAll('.face-item').forEach(el => el.style.background = '');
-    if (hits.length > 0) {
-        const seq = hits[0].object.userData.seq;
-        hoveredSeq = seq;
-        document.body.style.cursor = 'pointer';
-        document.querySelectorAll('.face-item').forEach(el => {
-            if (parseInt(el.dataset.seq) === seq) el.style.background = 'rgba(200,160,78,0.15)';
-        });
-    } else {
-        hoveredSeq = null;
-        document.body.style.cursor = 'default';
-    }
-}
-
-function onClick(e) {
-    if (!vortexActive) return;
-    raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(faceMeshes);
-    if (hits.length > 0) selectFace(hits[0].object.userData.seq);
-}
-
-window.addEventListener('mousemove', onMouseMove);
-window.addEventListener('click', onClick);
-
-// ── RESIZE ──
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-// ── ANIMATION ──
-const clock = new THREE.Clock();
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 2;
+    controls.maxDistance = 20;
+    controls.autoRotate = false;
 
-function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
+    // ── LIGHTING ──
+    const ambient = new THREE.AmbientLight(0x404060, 0.3);
+    scene.add(ambient);
 
-    // Polyhedron pulse
-    const pulse = 1 + Math.sin(t * 0.5) * 0.02;
-    polyhedron.scale.set(pulse, pulse, pulse);
+    const main = new THREE.DirectionalLight(0xc8a04e, 1.2);
+    main.position.set(5, 5, 5);
+    scene.add(main);
 
-    // Stars
-    stars.rotation.y = t * 0.02;
+    const rim = new THREE.DirectionalLight(0x4a9eff, 0.6);
+    rim.position.set(-5, -3, -5);
+    scene.add(rim);
 
-    // Vortex: morphing toroidal spins
-    if (vortex.visible) {
-        const positions = vortex.geometry.attributes.position.array;
-        const baseR = 2.5;
-        const maxR = 5.5;
-        for (let i = 0; i < positions.length / 3; i++) {
-            const idx = i * 3;
-            const theta = positions[idx] / (baseR + Math.sin(t * 0.2 + i) * 0.5);
-            const phi = positions[idx+1] / (baseR + Math.cos(t * 0.15 + i * 0.7) * 0.5);
-            const r = baseR + Math.sin(t * 0.3 + i * 1.1) * 1.5 + 0.5;
-            // Toroidal twisting
-            const twist = t * 0.4 + i * 0.02;
-            const x = r * Math.sin(phi + twist) * Math.cos(theta + twist * 0.3);
-            const y = r * Math.cos(phi + twist * 0.5) * 0.8;
-            const z = r * Math.sin(phi + twist) * Math.sin(theta + twist * 0.3);
-            positions[idx] = x;
-            positions[idx+1] = y;
-            positions[idx+2] = z;
+    const point = new THREE.PointLight(0xc8a04e, 0.8, 20);
+    point.position.set(0, 0, 0);
+    scene.add(point);
+
+    // ── STARFIELD ──
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 4000;
+    const starPos = new Float32Array(starCount * 3);
+    const starSizes = new Float32Array(starCount);
+    for (let i = 0; i < starCount * 3; i++) {
+        starPos[i] = (Math.random() - 0.5) * 120;
+        if (i % 3 === 0) starSizes[Math.floor(i / 3)] = 0.02 + Math.random() * 0.04;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({
+        color: 0xc8c0a8,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending
+    });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    // ── ICOSAHEDRON (16-Face Coherence Sphere) ──
+    const icoGeo = new THREE.IcosahedronGeometry(2.2, 1);
+    const icoMat = new THREE.MeshPhysicalMaterial({
+        color: 0x1a1a2e,
+        metalness: 0.8,
+        roughness: 0.3,
+        clearcoat: 0.6,
+        clearcoatRoughness: 0.2,
+        emissive: 0x0a0a1a,
+        emissiveIntensity: 0.3,
+        transparent: true,
+        opacity: 0.9,
+        wireframe: false
+    });
+    const icosahedron = new THREE.Mesh(icoGeo, icoMat);
+    icosahedron.castShadow = true;
+    scene.add(icosahedron);
+
+    // Wireframe overlay
+    const wireGeo = new THREE.WireframeGeometry(icoGeo);
+    const wireMat = new THREE.LineBasicMaterial({
+        color: 0xc8a04e,
+        transparent: true,
+        opacity: 0.12
+    });
+    const wireframe = new THREE.LineSegments(wireGeo, wireMat);
+    icosahedron.add(wireframe);
+
+    // ── PLATONIC SOLIDS (floating inside) ──
+    const solidData = [
+        { geo: new THREE.TetrahedronGeometry(0.3), color: 0xe74c3c, pos: [0.8, 0.8, 0.8] },
+        { geo: new THREE.OctahedronGeometry(0.3), color: 0x3498db, pos: [-0.8, 0.6, -0.8] },
+        { geo: new THREE.BoxGeometry(0.35, 0.35, 0.35), color: 0xf1c40f, pos: [0.6, -0.9, 0.5] },
+        { geo: new THREE.DodecahedronGeometry(0.28), color: 0x9b59b6, pos: [-0.9, -0.5, -0.6] },
+        { geo: new THREE.IcosahedronGeometry(0.28), color: 0x1abc9c, pos: [0, 0, 1.2] }
+    ];
+
+    const solids = solidData.map(d => {
+        const mat = new THREE.MeshPhysicalMaterial({
+            color: d.color,
+            metalness: 0.7,
+            roughness: 0.2,
+            emissive: d.color,
+            emissiveIntensity: 0.2,
+            transparent: true,
+            opacity: 0.8
+        });
+        const mesh = new THREE.Mesh(d.geo, mat);
+        mesh.position.set(d.pos[0], d.pos[1], d.pos[2]);
+        mesh.castShadow = true;
+        scene.add(mesh);
+        return mesh;
+    });
+
+    // ── VORTEX PARTICLES ──
+    const vCount = 1500;
+    const vGeo = new THREE.BufferGeometry();
+    const vPos = new Float32Array(vCount * 3);
+    const vCol = new Float32Array(vCount * 3);
+    for (let i = 0; i < vCount; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const r = 2.5 + Math.random() * 4;
+        vPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+        vPos[i * 3 + 1] = (Math.random() - 0.5) * 10;
+        vPos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+        const c = new THREE.Color().setHSL(0.1 + Math.random() * 0.08, 0.7, 0.3 + Math.random() * 0.3);
+        vCol[i * 3] = c.r;
+        vCol[i * 3 + 1] = c.g;
+        vCol[i * 3 + 2] = c.b;
+    }
+    vGeo.setAttribute('position', new THREE.BufferAttribute(vPos, 3));
+    vGeo.setAttribute('color', new THREE.BufferAttribute(vCol, 3));
+    const vMat = new THREE.PointsMaterial({
+        size: 0.07,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+        vertexColors: true
+    });
+    const vortex = new THREE.Points(vGeo, vMat);
+    vortex.visible = false;
+    scene.add(vortex);
+
+    // ── RING LINES ──
+    const ringMat = new THREE.LineBasicMaterial({
+        color: 0xc8a04e,
+        transparent: true,
+        opacity: 0.08
+    });
+    for (let i = 0; i < 8; i++) {
+        const r = 2.8 + i * 0.3;
+        const points = [];
+        for (let j = 0; j <= 64; j++) {
+            const a = (j / 64) * Math.PI * 2;
+            points.push(new THREE.Vector3(
+                r * Math.cos(a),
+                Math.sin(a * 0.5 + i) * 0.3,
+                r * Math.sin(a)
+            ));
         }
-        vortex.geometry.attributes.position.needsUpdate = true;
-        vortex.rotation.x = Math.sin(t * 0.05) * 0.1;
-        vortex.rotation.z = Math.cos(t * 0.07) * 0.1;
-        const vOpacity = 0.15 + Math.sin(t * 0.2) * 0.1 + 0.1;
-        vortex.material.opacity = Math.min(vOpacity, 0.4);
+        const geo = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geo, ringMat);
+        scene.add(line);
     }
 
-    controls.update();
-    renderer.render(scene, camera);
-}
+    // ── ENTRY ──
+    const entryBtn = document.getElementById('entryBtn');
+    let entered = false;
 
-animate();
+    entryBtn.addEventListener('click', () => {
+        if (entered) return;
+        entered = true;
+        entryBtn.classList.add('hidden');
+        vortex.visible = true;
 
-// ── INITIAL ──
-// Start with polyhedron only; vortex hidden until entry.
+        // Start auto-rotation
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+
+        // Camera zoom in
+        const startPos = { z: 8 };
+        const targetPos = { z: 4 };
+        let progress = 0;
+        const zoomInterval = setInterval(() => {
+            progress += 0.02;
+            camera.position.z = startPos.z + (targetPos.z - startPos.z) * Math.min(progress, 1);
+            controls.update();
+            if (progress >= 1) clearInterval(zoomInterval);
+        }, 16);
+    });
+
+    // ── RESIZE ──
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ── ANIMATION ──
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Icosahedron pulse
+        const pulse = 1 + Math.sin(t * 0.4) * 0.015;
+        icosahedron.scale.set(pulse, pulse, pulse);
+
+        // Star rotation
+        stars.rotation.y = t * 0.015;
+        stars.rotation.x = Math.sin(t * 0.01) * 0.05;
+
+        // Solid rotation
+        solids.forEach((s, i) => {
+            s.rotation.x += 0.01 * (i + 1);
+            s.rotation.y += 0.015 * (i + 1);
+            s.rotation.z += 0.008 * (i + 1);
+            // Float motion
+            s.position.y += Math.sin(t * 0.5 + i * 1.2) * 0.001;
+        });
+
+        // Vortex particles
+        if (vortex.visible) {
+            const pos = vortex.geometry.attributes.position.array;
+            for (let i = 0; i < pos.length / 3; i++) {
+                const idx = i * 3;
+                const r = Math.sqrt(pos[idx] * pos[idx] + pos[idx + 2] * pos[idx + 2]);
+                const angle = Math.atan2(pos[idx + 2], pos[idx]) + 0.01;
+                pos[idx] = r * Math.cos(angle);
+                pos[idx + 2] = r * Math.sin(angle);
+                pos[idx + 1] += (Math.sin(t * 0.3 + i * 0.01) * 0.002);
+                // Keep within bounds
+                if (pos[idx + 1] > 4) pos[idx + 1] = -4;
+                if (pos[idx + 1] < -4) pos[idx + 1] = 4;
+            }
+            vortex.geometry.attributes.position.needsUpdate = true;
+            vortex.rotation.y += 0.002;
+            const opacity = 0.15 + Math.sin(t * 0.15) * 0.1 + 0.1;
+            vortex.material.opacity = Math.min(opacity, 0.35);
+        }
+
+        // Ring lines
+        const ringLines = scene.children.filter(c => c.isLine && c.material.color.getHex() === 0xc8a04e);
+        ringLines.forEach((line, i) => {
+            line.rotation.x += 0.001;
+            line.rotation.y += 0.002 * (i + 1) * 0.3;
+        });
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    console.log('✦ Platonic Earth — Toroidal Vortex');
+    console.log('✦ Enter the Vortex to begin');
 </script>
+
 </body>
 </html>
