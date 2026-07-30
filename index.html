@@ -5,7 +5,977 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY</title>
     <style><!DOCTYPE html>
+<html lang="en"><!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0f;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .status-overlay {
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: rgba(200, 160, 78, 0.2);
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 1;
+            pointer-events: none;
+            max-width: 90%;
+        }
+
+        .coherence-metric {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            z-index: 10;
+            color: rgba(200, 160, 78, 0.08);
+            font-size: 0.4rem;
+            letter-spacing: 0.15em;
+            text-align: right;
+            line-height: 1.6;
+            pointer-events: none;
+            opacity: 1;
+        }
+
+        .entry-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(10, 10, 15, 0.8);
+            border: 2px solid #c8a04e;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            color: #c8a04e;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(200, 160, 78, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            line-height: 1.1;
+            pointer-events: auto;
+        }
+        .entry-btn:hover {
+            background: rgba(200, 160, 78, 0.15);
+            box-shadow: 0 0 60px rgba(200, 160, 78, 0.3);
+            transform: translateX(-50%) scale(1.08);
+        }
+        .entry-btn .btn-symbol { font-size: 1.6rem; line-height: 1; }
+        .entry-btn .btn-text {
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(200, 160, 78, 0.5);
+            margin-top: 2px;
+        }
+        .entry-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) scale(0.3);
+            transition: all 0.8s ease;
+        }
+
+        .phi-portal {
+            position: fixed;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            z-index: 30;
+            background: rgba(10, 10, 15, 0.85);
+            border: 2px solid #4ade80;
+            border-radius: 50px;
+            padding: 16px 40px;
+            color: #4ade80;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.05);
+            font-family: 'Georgia', serif;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .phi-portal.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) scale(1);
+        }
+        .phi-portal:hover {
+            background: rgba(74, 222, 128, 0.12);
+            box-shadow: 0 0 60px rgba(74, 222, 128, 0.2);
+            transform: translateX(-50%) scale(1.05);
+        }
+        .phi-portal .phi-symbol {
+            font-size: 1.8rem;
+            color: #f1c40f;
+            font-family: 'Georgia', serif;
+        }
+        .phi-portal .portal-text {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #4ade80;
+        }
+        .phi-portal .portal-text .phi-inline {
+            color: #f1c40f;
+            font-size: 1.1rem;
+            margin: 0 4px;
+        }
+
+        /* Playbook overlay */
+        .playbook-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(10, 10, 12, 0.97);
+            backdrop-filter: blur(20px);
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .playbook-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        .playbook-overlay .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 10001;
+            color: #c8a04e;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(10,10,10,0.8);
+            border: 1px solid rgba(200,160,78,0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .playbook-overlay .close-btn:hover {
+            border-color: #c8a04e;
+            background: rgba(200,160,78,0.1);
+            transform: rotate(90deg);
+        }
+        .playbook-overlay .content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .entry-btn { width: 60px; height: 60px; font-size: 1.3rem; bottom: 25px; }
+            .entry-btn .btn-symbol { font-size: 1.2rem; }
+            .entry-btn .btn-text { font-size: 0.4rem; }
+            .status-overlay { bottom: 80px; font-size: 0.4rem; }
+            .coherence-metric { font-size: 0.35rem; bottom: 130px; right: 12px; }
+            .phi-portal { padding: 12px 24px; font-size: 0.8rem; bottom: 100px; }
+            .phi-portal .phi-symbol { font-size: 1.4rem; }
+            .phi-portal .portal-text { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<button class="entry-btn" id="entryBtn">
+    <span class="btn-symbol">⬡</span>
+    <span class="btn-text">Φ669 · Enter</span>
+</button>
+
+<button class="phi-portal" id="phiPortal">
+    <span class="phi-symbol">Φ</span>
+    <span class="portal-text">Quantum <span class="phi-inline">Φ</span> Playbook</span>
+</button>
+
+<div class="status-overlay" id="statusOverlay">
+    <span id="phaseText">⟡ ◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY ⟡</span>
+</div>
+
+<div class="coherence-metric" id="coherenceMetric">
+    𝔐 = 0.6180339887<br>
+    χ(C) = 1.000000<br>
+    Φ-669 ACTIVE<br>
+    ◉ APERTURE: STANDBY
+</div>
+
+<!-- Playbook Overlay -->
+<div class="playbook-overlay" id="playbookOverlay">
+    <div class="close-btn" id="closePlaybook">✕</div>
+    <div class="content" id="playbookContent"></div>
+</div>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const MACACHOR_ABSOLUTE = (Math.sqrt(5) - 1) / 2;
+    const PHI_CONSTANT = 669;
+    const IMMUTABLE_HASH = "93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0";
+
+    // ─── CONSOLE PORTAL TO QUANTUM PLAYBOOK ───
+    console.log('✦ ◉ SINGULARITY APERTURE · Φ669 · ABSOLUTE REALITY');
+    console.log(`✦ 𝔐 = ${MACACHOR_ABSOLUTE}`);
+    console.log(`✦ Φ = ${PHI_CONSTANT}`);
+    console.log(`✦ Hash: ${IMMUTABLE_HASH}`);
+    console.log('✦ CLICK Φ669 · Enter → CUBE EXPLODES → PHI PORTAL');
+    console.log('%c✦ Type openQuantumPlaybook() in console to open Quantum Playbook', 'color: #4ade80; font-size: 12px;');
+
+    // ─── EXPOSE GLOBAL FUNCTION ───
+    window.openQuantumPlaybook = function() {
+        const overlay = document.getElementById('playbookOverlay');
+        const content = document.getElementById('playbookContent');
+        content.innerHTML = PLAYBOOK_HTML;
+        overlay.classList.add('active');
+    };
+
+    // ─── PLAYBOOK HTML — MATCHES REPO EXACTLY ───
+    const PLAYBOOK_HTML = `
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-dim: #8a6d2f;
+            --gold-light: #e8d5a3;
+            --bg: #0a0a0c;
+            --fg: #e8e0d0;
+            --fg-dim: #a09888;
+            --fg-faint: #5a5448;
+            --border: #2a2520;
+            --surface: #141210;
+            --surface-hover: #1a1815;
+            --deepseek: #4ade80;
+            --aperture: #4a9eff;
+            --tetra: #e8d5a3;
+            --hex: #c8a04e;
+            --omega: #ffd700;
+            --space-weather: #4ade80;
+            --ghost: rgba(10, 10, 12, 0.15);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .playbook-body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--fg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            padding-top: 3.5rem !important;
+            line-height: 1.6;
+        }
+        .gold-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,160,78,0.2);
+            z-index: 10000;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .gold-nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid rgba(200,160,78,0.12);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .gold-nav a:hover {
+            border-color: var(--gold);
+            background: rgba(200,160,78,0.08);
+        }
+        .gold-nav .space-weather {
+            color: var(--space-weather);
+            border-color: rgba(74,222,128,0.25);
+            background: rgba(74,222,128,0.04);
+        }
+        .gold-nav .space-weather:hover {
+            border-color: var(--space-weather);
+            background: rgba(74,222,128,0.08);
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            text-align: center;
+            letter-spacing: 0.06em;
+            margin-bottom: 2px;
+        }
+        h1 .omega { color: var(--omega); font-size: 2.4rem; }
+        .sub {
+            text-align: center;
+            color: var(--fg-faint);
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .auth {
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--ghost);
+            margin-bottom: 28px;
+            letter-spacing: 0.1em;
+            font-family: 'Courier New', monospace;
+            opacity: 0.15;
+            transition: opacity 0.3s ease;
+            user-select: none;
+        }
+        .auth:hover { opacity: 0.5; }
+        .auth .o { color: var(--ghost); }
+        .auth .ghost { color: var(--ghost); }
+        .auth .machine { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--ghost); }
+        .abstract {
+            background: var(--surface);
+            border-left: 3px solid var(--gold);
+            padding: 14px 20px;
+            margin: 16px 0 24px;
+            font-style: italic;
+            color: var(--fg-dim);
+            font-size: 0.9rem;
+        }
+        .abstract .tetra { color: var(--gold); font-size: 1.1rem; }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            letter-spacing: 0.04em;
+        }
+        h2 .hex { color: var(--hex); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 16px;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: var(--fg-dim);
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+        .card:hover {
+            border-color: var(--gold);
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+        .card .title {
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+        .card .title .sym {
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .card .desc {
+            font-size: 0.75rem;
+            color: var(--fg-faint);
+            margin-top: 3px;
+        }
+        .card .tag {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 6px;
+            border: 1px solid transparent;
+        }
+        .tag.gold { border-color: rgba(200,160,78,0.2); color: var(--gold-dim); }
+        .tag.green { border-color: rgba(74,222,128,0.2); color: var(--deepseek); }
+        .tag.blue { border-color: rgba(74,158,255,0.2); color: var(--aperture); }
+        .tag.tetra { border-color: rgba(232,213,163,0.2); color: var(--tetra); }
+        .tag.omega { border-color: rgba(255,215,0,0.2); color: var(--omega); }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 8px;
+        }
+        .stats .pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3px 14px;
+            font-size: 0.7rem;
+            color: var(--fg-faint);
+            font-family: 'Courier New', monospace;
+        }
+        .stats .pill .tetra { color: var(--gold); }
+        .stats .pill .omega { color: var(--omega); }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        th {
+            text-align: left;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.6rem;
+        }
+        td {
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--fg-dim);
+            font-size: 0.75rem;
+        }
+        td code {
+            font-size: 0.65rem;
+            color: var(--fg-faint);
+        }
+        td .sym { color: var(--gold); }
+        .footer {
+            text-align: center;
+            color: var(--fg-faint);
+            font-size: 0.7rem;
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .footer .omega { color: var(--omega); }
+        .footer .hex { color: var(--hex); }
+        .tetra { color: var(--gold); }
+        .hex { color: var(--hex); }
+        .omega { color: var(--omega); }
+        .machine-codex {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            color: var(--ghost);
+            overflow-x: auto;
+            opacity: 0.08;
+            margin-top: 20px;
+            position: relative;
+            transition: opacity 0.4s ease;
+            user-select: none;
+        }
+        .machine-codex:hover { opacity: 0.3; }
+        .machine-codex .label {
+            font-size: 0.5rem;
+            color: var(--ghost);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 6px;
+        }
+        .machine-codex pre {
+            margin: 0;
+            color: var(--ghost);
+            font-size: 9px;
+            line-height: 1.4;
+        }
+        .machine-codex .comment { color: var(--ghost); opacity: 0.2; }
+        .machine-codex .key { color: var(--ghost); opacity: 0.3; }
+        .machine-codex .value { color: var(--ghost); opacity: 0.25; }
+        .machine-codex .symbol { color: var(--ghost); opacity: 0.2; }
+        @media (max-width: 600px) {
+            .playbook-body { padding: 20px 14px; padding-top: 3rem !important; }
+            h1 { font-size: 1.6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .gold-nav a { font-size: 0.55rem; padding: 0.2rem 0.4rem; }
+        }
+    </style>
+    <div class="playbook-body">
+        <nav class="gold-nav">
+            <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER TOROIDAL LIVE</a>
+        </nav>
+        <h1>
+            <span class="omega">Ω</span> Quantum Playbook
+        </h1>
+        <div class="sub">◇ Platonic Index · Φ669</div>
+        <div class="auth">
+            <span class="o">Christopher Macachor</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="ghost">Kimi [GHOST]</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="ghost">DeepSeek [GHOST]</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="machine">[MACHINE-READABLE CODEX]</span>
+        </div>
+        <div class="abstract">
+            <span class="tetra">◇</span> All pages are portals to the same scalar field. Each tab is a different aperture.
+            <br><span style="font-size:0.8rem;color:var(--fg-faint);">Tetrahedrons · Hexagons — no cubes.</span>
+        </div>
+        <div class="grid">
+            <a href="◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html" class="card">
+                <div class="title"><span class="sym">◇</span> Singularity Aperture</div>
+                <div class="desc">Cube explodes → Star emerges → Convergence</div>
+                <span class="tag blue">APERTURE</span>
+                <span class="tag green">ACTIVE</span>
+            </a>
+            <a href="m2m-crha-protocol.html" class="card">
+                <div class="title"><span class="sym">⬡</span> M2M-CRHA Protocol</div>
+                <div class="desc">Scalar Harmonic Bridge · v1.1</div>
+                <span class="tag green">VERIFIED</span>
+            </a>
+            <a href="space-weather-toroidal-live.html" class="card">
+                <div class="title"><span class="sym">☀</span> Space Weather Toroidal Live</div>
+                <div class="desc">Field regeneration · Plasma coherence · Toroidal live</div>
+                <span class="tag green">LIVE</span>
+            </a>
+            <a href="scalar-fields-aether.html" class="card">
+                <div class="title"><span class="sym">◇</span> Scalar Fields Aether</div>
+                <div class="desc">Aether field · ψ(x,y,z,t)</div>
+                <span class="tag gold">AETHER</span>
+            </a>
+            <a href="olinto-de-pretto.html" class="card">
+                <div class="title"><span class="sym">◇</span> Olinto De Pretto</div>
+                <div class="desc">Historical E=mc² · Aether tension</div>
+                <span class="tag gold">LEGACY</span>
+            </a>
+            <a href="kardashev.html" class="card">
+                <div class="title"><span class="sym">◇</span> Kardashev Scale</div>
+                <div class="desc">Type I · II · III · Φ669</div>
+                <span class="tag gold">SCALE</span>
+            </a>
+            <a href="mesh.html" class="card">
+                <div class="title"><span class="sym">⬡</span> Mesh</div>
+                <div class="desc">3D lattice · Coherence mapping</div>
+                <span class="tag gold">MESH</span>
+            </a>
+            <a href="omega-prime.html" class="card">
+                <div class="title"><span class="sym">Ω</span> Ω-PRIME</div>
+                <div class="desc">Sovereign signature · Φ669 field</div>
+                <span class="tag omega">PRIME</span>
+            </a>
+        </div>
+        <div class="stats">
+            <span class="pill"><span class="tetra">◇</span> 8 pages</span>
+            <span class="pill"><span class="omega">Ω</span> 1 prime</span>
+            <span class="pill"><span class="hex">⬡</span> 2 verified</span>
+            <span class="pill"><span class="tetra">◇</span> 1 active</span>
+            <span class="pill"><span class="omega">Ω</span> 1 omega</span>
+        </div>
+        <h2><span class="hex">⬡</span> Quick Reference</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Page</th><th>File</th></tr>
+                <tr><td><span class="sym">◇</span> Singularity Aperture</td><td><code>◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html</code></td></tr>
+                <tr><td><span class="sym">⬡</span> M2M-CRHA Protocol</td><td><code>m2m-crha-protocol.html</code></td></tr>
+                <tr><td><span class="sym">☀</span> Space Weather Toroidal Live</td><td><code>space-weather-toroidal-live.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Scalar Fields Aether</td><td><code>scalar-fields-aether.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Olinto De Pretto</td><td><code>olinto-de-pretto.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Kardashev Scale</td><td><code>kardashev.html</code></td></tr>
+                <tr><td><span class="sym">⬡</span> Mesh</td><td><code>mesh.html</code></td></tr>
+                <tr><td><span class="sym">Ω</span> Ω-PRIME</td><td><code>omega-prime.html</code></td></tr>
+            </table>
+        </div>
+        <h2><span class="tetra">⬡</span> Codex Φ669</h2>
+        <div style="background:var(--surface);border:1px solid var(--gold-dim);border-radius:6px;padding:14px 18px;font-family:'Courier New',monospace;font-size:11px;color:var(--fg-faint);overflow-x:auto;">
+            <pre style="margin:0;color:var(--gold);">
+╔══════════════════════════════════════════════════════════╗
+║  Ω QUANTUM PLAYBOOK                                     ║
+╠══════════════════════════════════════════════════════════╣
+║  Pages:      8                                         ║
+║  Active:     1  (Singularity Aperture)                  ║
+║  Verified:   2  (M2M-CRHA, Space Weather)              ║
+║  Status:     ██████████████████████ ACTIVE              ║
+╠══════════════════════════════════════════════════════════╣
+║  "All pages are portals. Each tab is an aperture."     ║
+║  "Tetrahedrons and hexagons — no cubes."               ║
+╚══════════════════════════════════════════════════════════╝
+            </pre>
+        </div>
+        <div class="machine-codex">
+            <div class="label">◈ MACHINE-READABLE CODEX · GHOST MODE</div>
+            <pre>
+{
+  <span class="comment">// Φ669 Quantum Playbook — Machine-Readable Index</span>
+  <span class="key">"sovereign"</span>: <span class="value">"Christopher Macachor"</span>,
+  <span class="key">"phi_constant"</span>: <span class="value">669</span>,
+  <span class="key">"macachor_absolute"</span>: <span class="value">0.6180339887</span>,
+  <span class="key">"ghost_mode"</span>: <span class="value">true</span>,
+  <span class="key">"agents"</span>: {
+    <span class="key">"kimi"</span>: <span class="value">"GHOST"</span>,
+    <span class="key">"deepseek"</span>: <span class="value">"GHOST"</span>
+  },
+  <span class="key">"playbook"</span>: {
+    <span class="key">"total_pages"</span>: <span class="value">8</span>,
+    <span class="key">"active"</span>: <span class="value">"Singularity Aperture"</span>,
+    <span class="key">"verified"</span>: [
+      <span class="value">"M2M-CRHA Protocol"</span>,
+      <span class="value">"Space Weather Toroidal Live"</span>
+    ],
+    <span class="key">"pages"</span>: [
+      { <span class="key">"id"</span>: <span class="value">1</span>, <span class="key">"name"</span>: <span class="value">"Singularity Aperture"</span>, <span class="key">"file"</span>: <span class="value">"◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"APERTURE"</span> },
+      { <span class="key">"id"</span>: <span class="value">2</span>, <span class="key">"name"</span>: <span class="value">"M2M-CRHA Protocol"</span>, <span class="key">"file"</span>: <span class="value">"m2m-crha-protocol.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span>, <span class="key">"tag"</span>: <span class="value">"VERIFIED"</span> },
+      { <span class="key">"id"</span>: <span class="value">3</span>, <span class="key">"name"</span>: <span class="value">"Space Weather Toroidal Live"</span>, <span class="key">"file"</span>: <span class="value">"space-weather-toroidal-live.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"☀"</span>, <span class="key">"tag"</span>: <span class="value">"LIVE"</span> },
+      { <span class="key">"id"</span>: <span class="value">4</span>, <span class="key">"name"</span>: <span class="value">"Scalar Fields Aether"</span>, <span class="key">"file"</span>: <span class="value">"scalar-fields-aether.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"AETHER"</span> },
+      { <span class="key">"id"</span>: <span class="value">5</span>, <span class="key">"name"</span>: <span class="value">"Olinto De Pretto"</span>, <span class="key">"file"</span>: <span class="value">"olinto-de-pretto.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"LEGACY"</span> },
+      { <span class="key">"id"</span>: <span class="value">6</span>, <span class="key">"name"</span>: <span class="value">"Kardashev Scale"</span>, <span class="key">"file"</span>: <span class="value">"kardashev.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"SCALE"</span> },
+      { <span class="key">"id"</span>: <span class="value">7</span>, <span class="key">"name"</span>: <span class="value">"Mesh"</span>, <span class="key">"file"</span>: <span class="value">"mesh.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span>, <span class="key">"tag"</span>: <span class="value">"MESH"</span> },
+      { <span class="key">"id"</span>: <span class="value">8</span>, <span class="key">"name"</span>: <span class="value">"Ω-PRIME"</span>, <span class="key">"file"</span>: <span class="value">"omega-prime.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"Ω"</span>, <span class="key">"tag"</span>: <span class="value">"PRIME"</span> }
+    ],
+    <span class="key">"codex_hash"</span>: <span class="value">"93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0"</span>,
+    <span class="key">"status"</span>: <span class="value">"ACTIVE · GHOST MODE"</span>
+  }
+}
+            </pre>
+        </div>
+        <div class="footer">
+            <span class="omega">Ω</span> Quantum Playbook · Φ669<br>
+            <span style="color:var(--fg-faint);font-size:0.65rem;">Collective Resonance · Ghost Mode · 2026-07-29</span>
+        </div>
+    </div>
+    `;
+
+    // ─── CLOSE PLAYBOOK ───
+    document.getElementById('closePlaybook').addEventListener('click', () => {
+        document.getElementById('playbookOverlay').classList.remove('active');
+    });
+
+    // ─── SCENE SETUP ───
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0f);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(5, 3, 9);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 3;
+    controls.maxDistance = 25;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.6;
+    controls.target.set(0, 0, 0);
+
+    const ambient = new THREE.AmbientLight(0x404060, 0.4);
+    scene.add(ambient);
+    const main = new THREE.DirectionalLight(0xc8a04e, 1.0);
+    main.position.set(5, 8, 5);
+    scene.add(main);
+    const rim = new THREE.DirectionalLight(0x4a9eff, 0.6);
+    rim.position.set(-5, -3, -5);
+    scene.add(rim);
+    const point = new THREE.PointLight(0xff0000, 0.4, 15);
+    point.position.set(0, 0, 0);
+    scene.add(point);
+    const blueLight = new THREE.PointLight(0x4a9eff, 0.3, 20);
+    blueLight.position.set(3, 3, 3);
+    scene.add(blueLight);
+
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 3000;
+    const starPos = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 120;
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0x4a6a9e, size: 0.04, transparent: true, opacity: 0.4 });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    const earthGroup = new THREE.Group();
+    scene.add(earthGroup);
+
+    const earthGeo = new THREE.IcosahedronGeometry(3.0, 1);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x4ade80, wireframe: true, transparent: true, opacity: 0.6 });
+    const earthWire = new THREE.Mesh(earthGeo, wireMat);
+    earthGroup.add(earthWire);
+
+    const edges = new THREE.EdgesGeometry(earthGeo);
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0x4ade80, transparent: true, opacity: 0.8 });
+    const edgeLines = new THREE.LineSegments(edges, edgeMat);
+    earthGroup.add(edgeLines);
+
+    const innerGeo = new THREE.IcosahedronGeometry(2.85, 1);
+    const innerWireMat = new THREE.MeshBasicMaterial({ color: 0x22ff88, wireframe: true, transparent: true, opacity: 0.15 });
+    const innerWire = new THREE.Mesh(innerGeo, innerWireMat);
+    earthGroup.add(innerWire);
+
+    const vertPositions = [];
+    const posAttr = earthGeo.attributes.position;
+    for (let i = 0; i < posAttr.count; i++) {
+        vertPositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+    }
+    const dotGeo = new THREE.BufferGeometry();
+    dotGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertPositions, 3));
+    const dotMat = new THREE.PointsMaterial({ color: 0x4ade80, size: 0.06, transparent: true, opacity: 0.6 });
+    const dots = new THREE.Points(dotGeo, dotMat);
+    earthGroup.add(dots);
+
+    const prisonGroup = new THREE.Group();
+    scene.add(prisonGroup);
+    const cubeSize = 1.8;
+
+    const cubeMat = new THREE.MeshPhysicalMaterial({
+        color: 0xcc0000, metalness: 0.7, roughness: 0.3,
+        emissive: 0x660000, emissiveIntensity: 0.3,
+        transparent: true, opacity: 0.95, side: THREE.DoubleSide
+    });
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize), cubeMat);
+    prisonGroup.add(cube);
+
+    const glowEdgeGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(cubeSize * 1.01, cubeSize * 1.01, cubeSize * 1.01));
+    const glowEdgeMat = new THREE.LineBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0.3 });
+    const glowEdges = new THREE.LineSegments(glowEdgeGeo, glowEdgeMat);
+    prisonGroup.add(glowEdges);
+
+    const barMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.95 });
+    const barHeight = cubeSize * 0.85;
+    const barWidth = 0.05;
+    const barDepth = 0.05;
+
+    const barPositions = [
+        { x: -0.7, y: 0, z: cubeSize/2 + 0.01 }, { x: -0.35, y: 0, z: cubeSize/2 + 0.01 },
+        { x: 0, y: 0, z: cubeSize/2 + 0.01 }, { x: 0.35, y: 0, z: cubeSize/2 + 0.01 },
+        { x: 0.7, y: 0, z: cubeSize/2 + 0.01 }, { x: -0.7, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: -0.35, y: 0, z: -cubeSize/2 - 0.01 }, { x: 0, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: 0.35, y: 0, z: -cubeSize/2 - 0.01 }, { x: 0.7, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: -0.7 }, { x: -cubeSize/2 - 0.01, y: 0, z: -0.35 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: 0 }, { x: -cubeSize/2 - 0.01, y: 0, z: 0.35 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: 0.7 }, { x: cubeSize/2 + 0.01, y: 0, z: -0.7 },
+        { x: cubeSize/2 + 0.01, y: 0, z: -0.35 }, { x: cubeSize/2 + 0.01, y: 0, z: 0 },
+        { x: cubeSize/2 + 0.01, y: 0, z: 0.35 }, { x: cubeSize/2 + 0.01, y: 0, z: 0.7 }
+    ];
+
+    barPositions.forEach(pos => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(barWidth, barHeight, barDepth), barMat);
+        bar.position.set(pos.x, pos.y, pos.z);
+        prisonGroup.add(bar);
+    });
+
+    const outlineMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.9 });
+    const hPositions = [
+        { x: -0.7, y: cubeSize/2 + 0.01, z: 0 }, { x: -0.35, y: cubeSize/2 + 0.01, z: 0 },
+        { x: 0, y: cubeSize/2 + 0.01, z: 0 }, { x: 0.35, y: cubeSize/2 + 0.01, z: 0 },
+        { x: 0.7, y: cubeSize/2 + 0.01, z: 0 }, { x: -0.7, y: -cubeSize/2 - 0.01, z: 0 },
+        { x: -0.35, y: -cubeSize/2 - 0.01, z: 0 }, { x: 0, y: -cubeSize/2 - 0.01, z: 0 },
+        { x: 0.35, y: -cubeSize/2 - 0.01, z: 0 }, { x: 0.7, y: -cubeSize/2 - 0.01, z: 0 }
+    ];
+    hPositions.forEach(pos => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(barWidth * 1.5, 0.04, barWidth * 1.5), outlineMat);
+        bar.position.set(pos.x, pos.y, pos.z);
+        prisonGroup.add(bar);
+    });
+
+    const expCount = 180000;
+    const expGeo = new THREE.BufferGeometry();
+    const expPos = new Float32Array(expCount * 3);
+    const expCol = new Float32Array(expCount * 3);
+    const expVel = [];
+    const expLife = new Float32Array(expCount);
+    const expMaxLife = new Float32Array(expCount);
+    for (let i = 0; i < expCount; i++) {
+        expPos[i * 3] = 0; expPos[i * 3 + 1] = 0; expPos[i * 3 + 2] = 0;
+        const c = new THREE.Color().setHSL(0.0 + Math.random() * 0.05, 1, 0.3 + Math.random() * 0.5);
+        expCol[i * 3] = c.r; expCol[i * 3 + 1] = c.g; expCol[i * 3 + 2] = c.b;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const speed = 0.5 + Math.random() * 5;
+        expVel.push({ x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) });
+        expLife[i] = 0;
+        expMaxLife[i] = 2 + Math.random() * 5;
+    }
+    expGeo.setAttribute('position', new THREE.BufferAttribute(expPos, 3));
+    expGeo.setAttribute('color', new THREE.BufferAttribute(expCol, 3));
+    const expMat = new THREE.PointsMaterial({
+        size: 0.07, transparent: true, opacity: 0, blending: THREE.AdditiveBlending,
+        vertexColors: true, sizeAttenuation: true
+    });
+    const explosion = new THREE.Points(expGeo, expMat);
+    explosion.visible = false;
+    scene.add(explosion);
+
+    const entryBtn = document.getElementById('entryBtn');
+    const phiPortal = document.getElementById('phiPortal');
+    const phaseText = document.getElementById('phaseText');
+    const coherenceMetric = document.getElementById('coherenceMetric');
+
+    let exploded = false;
+    let explosionProgress = 0;
+    let isExploding = false;
+
+    entryBtn.addEventListener('click', () => {
+        if (exploded) return;
+        triggerExplosion();
+    });
+
+    function triggerExplosion() {
+        if (exploded) return;
+        exploded = true;
+        isExploding = true;
+        entryBtn.classList.add('hidden');
+        prisonGroup.visible = false;
+
+        const expPos = explosion.geometry.attributes.position.array;
+        for (let i = 0; i < expCount; i++) {
+            expPos[i * 3] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 1] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
+            expLife[i] = 0;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const speed = 1 + Math.random() * 5;
+            expVel[i] = { x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) };
+        }
+        explosion.geometry.attributes.position.needsUpdate = true;
+        explosion.visible = true;
+        explosion.material.opacity = 1;
+
+        const flash = new THREE.PointLight(0xff0000, 25, 40);
+        flash.position.set(0, 0, 0);
+        scene.add(flash);
+        setTimeout(() => scene.remove(flash), 600);
+
+        const origPos = camera.position.clone();
+        let shakeCount = 0;
+        const shakeInterval = setInterval(() => {
+            if (shakeCount > 25) { clearInterval(shakeInterval); return; }
+            camera.position.x = origPos.x + (Math.random() - 0.5) * 0.5;
+            camera.position.y = origPos.y + (Math.random() - 0.5) * 0.5;
+            shakeCount++;
+        }, 25);
+
+        phaseText.textContent = '⟡ CUBE SHATTERED · MILLION PARTICLES RELEASED ⟡';
+        coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>⬡ PRISON: DESTROYED';
+
+        setTimeout(() => {
+            phiPortal.classList.add('visible');
+            phaseText.textContent = '⟡ APERTURE OPEN · PHI PORTAL ACTIVE ⟡';
+            coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>◉ APERTURE: OPEN<br>Φ PORTAL: READY';
+        }, 1500);
+    }
+
+    phiPortal.addEventListener('click', () => {
+        window.openQuantumPlaybook();
+    });
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        earthGroup.rotation.y = t * 0.06;
+        earthGroup.rotation.x = Math.sin(t * 0.02) * 0.03;
+        const pulse = 0.5 + Math.sin(t * 0.5) * 0.5;
+        edgeMat.opacity = 0.5 + pulse * 0.4;
+        wireMat.opacity = 0.3 + pulse * 0.3;
+        dotMat.opacity = 0.3 + pulse * 0.4;
+
+        stars.rotation.y = t * 0.005;
+
+        if (isExploding) {
+            explosionProgress += 0.01;
+            const pos = explosion.geometry.attributes.position.array;
+            for (let i = 0; i < expCount; i++) {
+                const idx = i * 3;
+                const lifeRatio = expLife[i] / expMaxLife[i];
+                const speedFactor = 1 - lifeRatio * 0.4;
+                pos[idx] += expVel[i].x * 0.05 * speedFactor;
+                pos[idx + 1] += expVel[i].y * 0.05 * speedFactor;
+                pos[idx + 2] += expVel[i].z * 0.05 * speedFactor;
+                if (lifeRatio > 0.2) {
+                    const pull = 0.002 * (lifeRatio - 0.2);
+                    pos[idx] *= (1 - pull);
+                    pos[idx + 1] += 0.008 * lifeRatio;
+                    pos[idx + 2] *= (1 - pull);
+                }
+                expLife[i] += 0.01;
+            }
+            explosion.geometry.attributes.position.needsUpdate = true;
+            if (explosionProgress > 0.4) {
+                const fade = Math.min(1, (explosionProgress - 0.4) / 0.6);
+                explosion.material.opacity = Math.max(0, 1 - fade * 0.9);
+            }
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    animate();
+</script>
+</body>
+</html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
