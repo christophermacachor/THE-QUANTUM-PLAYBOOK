@@ -29,17 +29,17 @@
             padding: 0.5rem 1rem;
             display: flex;
             justify-content: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             flex-wrap: wrap;
         }
         .gold-nav a {
             color: #c8a04e;
             text-decoration: none;
             font-family: 'Georgia', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 0.3rem 0.6rem;
+            padding: 0.25rem 0.5rem;
             border: 1px solid rgba(200,160,78,0.2);
             border-radius: 3px;
             background: rgba(200,160,78,0.04);
@@ -52,6 +52,11 @@
             text-shadow: 0 0 10px rgba(200,160,78,0.5);
             transform: translateY(-1px);
         }
+        .gold-nav .active {
+            border-color: #c8a04e;
+            background: rgba(200,160,78,0.12);
+            box-shadow: 0 0 20px rgba(200,160,78,0.1);
+        }
         .gold-nav .space-weather {
             color: #4ade80;
             border-color: rgba(74,222,128,0.25);
@@ -60,6 +65,14 @@
         .gold-nav .space-weather:hover {
             border-color: #4ade80;
             background: rgba(74,222,128,0.08);
+        }
+        .gold-nav .nav-brand {
+            color: #e8c870;
+            font-weight: bold;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            border-color: #c8a04e;
+            background: rgba(200,160,78,0.08);
         }
 
         .status-overlay {
@@ -237,23 +250,31 @@
         }
 
         @media (max-width: 768px) {
-            .gold-nav a { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+            .gold-nav a { font-size: 0.45rem; padding: 0.15rem 0.3rem; }
+            .gold-nav .nav-brand { font-size: 0.55rem; }
             .entry-btn { width: 60px; height: 60px; font-size: 1.3rem; bottom: 25px; }
             .entry-btn .btn-symbol { font-size: 1.2rem; }
             .entry-btn .btn-text { font-size: 0.4rem; }
             .status-overlay { bottom: 80px; font-size: 0.4rem; }
             .coherence-metric { font-size: 0.35rem; bottom: 130px; right: 12px; }
-            .phi-portal { padding: 12px 24px; font-size: 0.8rem; bottom: 100px; }
-            .phi-portal .phi-symbol { font-size: 1.4rem; }
-            .phi-portal .portal-text { font-size: 0.65rem; }
+            .phi-portal { padding: 10px 18px; font-size: 0.7rem; bottom: 100px; }
+            .phi-portal .phi-symbol { font-size: 1.2rem; }
+            .phi-portal .portal-text { font-size: 0.55rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- ═══ NAVIGATION — SPACE WEATHER ONLY ═══ -->
+<!-- ═══ NAVIGATION — WITH 144-FACE POLYHEDRON ═══ -->
 <nav class="gold-nav" aria-label="Primary navigation">
-    <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER TOROIDAL LIVE</a>
+    <a href="index.html" class="nav-brand">✦ QP</a>
+    <a href="omega-prime.html">Ω-PRIME</a>
+    <a href="scalar-plasma-cycle.html">◈ SPC</a>
+    <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER</a>
+    <a href="144-face-polyhedron.html">◈ 144-FACE</a>
+    <a href="mesh.html">MESH</a>
+    <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
+    <a href="the-aperture.html">⭐ APERTURE</a>
 </nav>
 
 <div id="canvas-container"></div>
@@ -318,7 +339,7 @@
         overlay.classList.add('active');
     };
 
-    // ─── PLAYBOOK HTML — WITH SCIENTIFIC CONVERGENCE MAP ───
+    // ─── PLAYBOOK HTML — WITH 144-FACE POLYHEDRON LINK ───
     const PLAYBOOK_HTML = `
     <style>
         :root {
@@ -368,10 +389,10 @@
             color: var(--gold);
             text-decoration: none;
             font-family: 'Georgia', serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 0.3rem 0.6rem;
+            padding: 0.25rem 0.5rem;
             border: 1px solid rgba(200,160,78,0.2);
             border-radius: 3px;
             transition: all 0.3s ease;
@@ -390,6 +411,14 @@
         .gold-nav .space-weather:hover {
             border-color: var(--space-weather);
             background: rgba(74,222,128,0.08);
+        }
+        .gold-nav .nav-brand {
+            color: #e8c870;
+            font-weight: bold;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            border-color: var(--gold);
+            background: rgba(200,160,78,0.08);
         }
         h1 {
             font-size: 2.2rem;
@@ -496,6 +525,7 @@
         .tag.blue { border-color: rgba(74,158,255,0.2); color: var(--aperture); }
         .tag.tetra { border-color: rgba(232,213,163,0.2); color: var(--tetra); }
         .tag.omega { border-color: rgba(255,215,0,0.2); color: var(--omega); }
+        .tag.hex { border-color: rgba(200,160,78,0.3); color: var(--hex); }
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -594,12 +624,20 @@
             .playbook-body { padding: 20px 14px; padding-top: 3rem !important; }
             h1 { font-size: 1.6rem; }
             .grid { grid-template-columns: 1fr; }
-            .gold-nav a { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+            .gold-nav a { font-size: 0.45rem; padding: 0.15rem 0.3rem; }
+            .gold-nav .nav-brand { font-size: 0.55rem; }
         }
     </style>
     <div class="playbook-body">
         <nav class="gold-nav">
-            <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER TOROIDAL LIVE</a>
+            <a href="index.html" class="nav-brand">✦ QP</a>
+            <a href="omega-prime.html">Ω-PRIME</a>
+            <a href="scalar-plasma-cycle.html">◈ SPC</a>
+            <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER</a>
+            <a href="144-face-polyhedron.html">◈ 144-FACE</a>
+            <a href="mesh.html">MESH</a>
+            <a href="m2m-crha-protocol.html">🔀 M2M-CRHA</a>
+            <a href="the-aperture.html">⭐ APERTURE</a>
         </nav>
         <h1>
             <span class="omega">Ω</span> Quantum Playbook
@@ -635,6 +673,12 @@
                 <div class="desc">Field regeneration · Plasma coherence · Toroidal live</div>
                 <span class="tag green">LIVE</span>
             </a>
+            <a href="144-face-polyhedron.html" class="card">
+                <div class="title"><span class="sym">◈</span> 144-Face Polyhedron</div>
+                <div class="desc">Scalar-Fraction Quantization · Absolute Displacement</div>
+                <span class="tag hex">144 FACES</span>
+                <span class="tag omega">ABSOLUTE</span>
+            </a>
             <a href="scalar-fields-aether.html" class="card">
                 <div class="title"><span class="sym">◇</span> Scalar Fields Aether</div>
                 <div class="desc">Aether field · ψ(x,y,z,t)</div>
@@ -665,19 +709,14 @@
                 <div class="desc">Platonic Solids · Scalar Coherence · MGDH</div>
                 <span class="tag tetra">QPT</span>
             </a>
-            <a href="scientific-convergence-map.html" class="card">
-                <div class="title"><span class="sym">◉</span> Scientific Convergence Map</div>
-                <div class="desc">30 Convergences · 8 Domains · Scalar Lock</div>
-                <span class="tag omega">MAP</span>
-                <span class="tag green">VERIFIED</span>
-            </a>
         </div>
         <div class="stats">
             <span class="pill"><span class="tetra">◇</span> 10 pages</span>
             <span class="pill"><span class="omega">Ω</span> 1 prime</span>
-            <span class="pill"><span class="hex">⬡</span> 3 verified</span>
+            <span class="pill"><span class="hex">⬡</span> 4 verified</span>
             <span class="pill"><span class="tetra">◇</span> 1 active</span>
             <span class="pill"><span class="omega">Ω</span> 1 omega</span>
+            <span class="pill"><span class="hex">◈</span> 144 faces</span>
         </div>
         <h2><span class="hex">⬡</span> Quick Reference</h2>
         <div class="table-wrap">
@@ -686,13 +725,13 @@
                 <tr><td><span class="sym">◇</span> Singularity Aperture</td><td><code>◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html</code></td></tr>
                 <tr><td><span class="sym">⬡</span> M2M-CRHA Protocol</td><td><code>m2m-crha-protocol.html</code></td></tr>
                 <tr><td><span class="sym">☀</span> Space Weather Toroidal Live</td><td><code>space-weather-toroidal-live.html</code></td></tr>
+                <tr><td><span class="sym">◈</span> 144-Face Polyhedron</td><td><code>144-face-polyhedron.html</code></td></tr>
                 <tr><td><span class="sym">◇</span> Scalar Fields Aether</td><td><code>scalar-fields-aether.html</code></td></tr>
                 <tr><td><span class="sym">◇</span> Olinto De Pretto</td><td><code>olinto-de-pretto.html</code></td></tr>
                 <tr><td><span class="sym">◇</span> Kardashev Scale</td><td><code>kardashev.html</code></td></tr>
                 <tr><td><span class="sym">⬡</span> Mesh</td><td><code>mesh.html</code></td></tr>
                 <tr><td><span class="sym">Ω</span> Ω-PRIME</td><td><code>omega-prime.html</code></td></tr>
                 <tr><td><span class="sym">◈</span> Quaternionic Periodic Table</td><td><code>quaternionic-periodic-table.html</code></td></tr>
-                <tr><td><span class="sym">◉</span> Scientific Convergence Map</td><td><code>scientific-convergence-map.html</code></td></tr>
             </table>
         </div>
         <h2><span class="tetra">⬡</span> Codex Φ669</h2>
@@ -703,11 +742,12 @@
 ╠══════════════════════════════════════════════════════════╣
 ║  Pages:      10                                        ║
 ║  Active:     1  (Singularity Aperture)                  ║
-║  Verified:   3  (M2M-CRHA, Space Weather, SCM)        ║
+║  Verified:   4  (M2M-CRHA, Space Weather, 144-Face)    ║
 ║  Status:     ██████████████████████ ACTIVE              ║
 ╠══════════════════════════════════════════════════════════╣
 ║  "All pages are portals. Each tab is an aperture."     ║
 ║  "Tetrahedrons and hexagons — no cubes."               ║
+║  "144 faces = scalar-fraction quantization."           ║
 ╚══════════════════════════════════════════════════════════╝
             </pre>
         </div>
@@ -730,19 +770,20 @@
     <span class="key">"verified"</span>: [
       <span class="value">"M2M-CRHA Protocol"</span>,
       <span class="value">"Space Weather Toroidal Live"</span>,
-      <span class="value">"Scientific Convergence Map"</span>
+      <span class="value">"144-Face Polyhedron"</span>,
+      <span class="value">"Ω-PRIME"</span>
     ],
     <span class="key">"pages"</span>: [
       { <span class="key">"id"</span>: <span class="value">1</span>, <span class="key">"name"</span>: <span class="value">"Singularity Aperture"</span>, <span class="key">"file"</span>: <span class="value">"◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"APERTURE"</span> },
       { <span class="key">"id"</span>: <span class="value">2</span>, <span class="key">"name"</span>: <span class="value">"M2M-CRHA Protocol"</span>, <span class="key">"file"</span>: <span class="value">"m2m-crha-protocol.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span>, <span class="key">"tag"</span>: <span class="value">"VERIFIED"</span> },
       { <span class="key">"id"</span>: <span class="value">3</span>, <span class="key">"name"</span>: <span class="value">"Space Weather Toroidal Live"</span>, <span class="key">"file"</span>: <span class="value">"space-weather-toroidal-live.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"☀"</span>, <span class="key">"tag"</span>: <span class="value">"LIVE"</span> },
-      { <span class="key">"id"</span>: <span class="value">4</span>, <span class="key">"name"</span>: <span class="value">"Scalar Fields Aether"</span>, <span class="key">"file"</span>: <span class="value">"scalar-fields-aether.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"AETHER"</span> },
-      { <span class="key">"id"</span>: <span class="value">5</span>, <span class="key">"name"</span>: <span class="value">"Olinto De Pretto"</span>, <span class="key">"file"</span>: <span class="value">"olinto-de-pretto.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"LEGACY"</span> },
-      { <span class="key">"id"</span>: <span class="value">6</span>, <span class="key">"name"</span>: <span class="value">"Kardashev Scale"</span>, <span class="key">"file"</span>: <span class="value">"kardashev.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"SCALE"</span> },
-      { <span class="key">"id"</span>: <span class="value">7</span>, <span class="key">"name"</span>: <span class="value">"Mesh"</span>, <span class="key">"file"</span>: <span class="value">"mesh.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span>, <span class="key">"tag"</span>: <span class="value">"MESH"</span> },
-      { <span class="key">"id"</span>: <span class="value">8</span>, <span class="key">"name"</span>: <span class="value">"Ω-PRIME"</span>, <span class="key">"file"</span>: <span class="value">"omega-prime.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"Ω"</span>, <span class="key">"tag"</span>: <span class="value">"PRIME"</span> },
-      { <span class="key">"id"</span>: <span class="value">9</span>, <span class="key">"name"</span>: <span class="value">"Quaternionic Periodic Table"</span>, <span class="key">"file"</span>: <span class="value">"quaternionic-periodic-table.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span>, <span class="key">"tag"</span>: <span class="value">"QPT"</span> },
-      { <span class="key">"id"</span>: <span class="value">10</span>, <span class="key">"name"</span>: <span class="value">"Scientific Convergence Map"</span>, <span class="key">"file"</span>: <span class="value">"scientific-convergence-map.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◉"</span>, <span class="key">"tag"</span>: <span class="value">"MAP"</span> }
+      { <span class="key">"id"</span>: <span class="value">4</span>, <span class="key">"name"</span>: <span class="value">"144-Face Polyhedron"</span>, <span class="key">"file"</span>: <span class="value">"144-face-polyhedron.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span>, <span class="key">"tag"</span>: <span class="value">"144 FACES"</span> },
+      { <span class="key">"id"</span>: <span class="value">5</span>, <span class="key">"name"</span>: <span class="value">"Scalar Fields Aether"</span>, <span class="key">"file"</span>: <span class="value">"scalar-fields-aether.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"AETHER"</span> },
+      { <span class="key">"id"</span>: <span class="value">6</span>, <span class="key">"name"</span>: <span class="value">"Olinto De Pretto"</span>, <span class="key">"file"</span>: <span class="value">"olinto-de-pretto.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"LEGACY"</span> },
+      { <span class="key">"id"</span>: <span class="value">7</span>, <span class="key">"name"</span>: <span class="value">"Kardashev Scale"</span>, <span class="key">"file"</span>: <span class="value">"kardashev.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span>, <span class="key">"tag"</span>: <span class="value">"SCALE"</span> },
+      { <span class="key">"id"</span>: <span class="value">8</span>, <span class="key">"name"</span>: <span class="value">"Mesh"</span>, <span class="key">"file"</span>: <span class="value">"mesh.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span>, <span class="key">"tag"</span>: <span class="value">"MESH"</span> },
+      { <span class="key">"id"</span>: <span class="value">9</span>, <span class="key">"name"</span>: <span class="value">"Ω-PRIME"</span>, <span class="key">"file"</span>: <span class="value">"omega-prime.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"Ω"</span>, <span class="key">"tag"</span>: <span class="value">"PRIME"</span> },
+      { <span class="key">"id"</span>: <span class="value">10</span>, <span class="key">"name"</span>: <span class="value">"Quaternionic Periodic Table"</span>, <span class="key">"file"</span>: <span class="value">"quaternionic-periodic-table.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span>, <span class="key">"tag"</span>: <span class="value">"QPT"</span> }
     ],
     <span class="key">"codex_hash"</span>: <span class="value">"93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0"</span>,
     <span class="key">"status"</span>: <span class="value">"ACTIVE · GHOST MODE"</span>
@@ -1041,6 +1082,7 @@
     console.log(`✦ Φ = ${PHI_CONSTANT}`);
     console.log(`✦ Hash: ${IMMUTABLE_HASH}`);
     console.log('✦ CLICK Φ669 · Enter → CUBE EXPLODES → PHI PORTAL');
+    console.log('✦ 144-Face Polyhedron navigation added');
 </script>
 </body>
 </html>
