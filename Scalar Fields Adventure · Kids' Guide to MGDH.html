@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Scalar Fields Adventure · Kids' Guide to MGDH ✨</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a1a;
+            color: #e8e0d0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-x: hidden;
+        }
+
+        /* ── Navigation ── */
+        .gold-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10,10,20,0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,160,78,0.2);
+            z-index: 10000;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .gold-nav a {
+            color: #c8a04e;
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(200,160,78,0.2);
+            border-radius: 3px;
+            background: rgba(200,160,78,0.04);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .gold-nav a:hover {
+            border-color: #c8a04e;
+            background: rgba(200,160,78,0.1);
+            text-shadow: 0 0 10px rgba(200,160,78,0.5);
+        }
+        .gold-nav .active {
+            color: #4ade80;
+            border-color: rgba(74,222,128,0.3);
+            background: rgba(74,222,128,0.05);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 30px 20px 20px;
+            border-bottom: 1px solid rgba(200,160,78,0.15);
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: #c8a04e;
+            letter-spacing: 2px;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #5a5448;
+            margin-top: 6px;
+            letter-spacing: 3px;
+        }
+        .hero .sparkle {
+            font-size: 3rem;
+            display: inline-block;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.6; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* ── Magic Phrase ── */
+        .magic-phrase {
+            background: rgba(200,160,78,0.05);
+            border: 1px solid rgba(200,160,78,0.15);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 20px 0 30px;
+            text-align: center;
+        }
+        .magic-phrase .label {
+            font-size: 0.6rem;
+            color: #5a5448;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .magic-phrase .phrase {
+            font-size: 1.4rem;
+            color: #ffd700;
+            font-family: 'Courier New', monospace;
+            margin: 6px 0;
+        }
+        .magic-phrase .meaning {
+            font-size: 0.9rem;
+            color: #a09888;
+            font-style: italic;
+        }
+
+        /* ── Great Minds ── */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #c8a04e;
+            text-align: center;
+            margin: 30px 0 16px;
+            letter-spacing: 2px;
+        }
+        .section-sub {
+            text-align: center;
+            color: #5a5448;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .minds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .mind-card {
+            background: rgba(20,18,22,0.8);
+            border: 1px solid rgba(200,160,78,0.12);
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .mind-card:hover {
+            border-color: rgba(200,160,78,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(200,160,78,0.05);
+        }
+        .mind-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+        }
+        .mind-card .name {
+            font-size: 1.1rem;
+            color: #e8d5a3;
+            font-weight: 600;
+        }
+        .mind-card .title {
+            font-size: 0.65rem;
+            color: #5a5448;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 2px 0;
+        }
+        .mind-card .desc {
+            font-size: 0.8rem;
+            color: #a09888;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .mind-card .color-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+
+        /* ── What is a Scalar Field? ── */
+        .explain-box {
+            background: rgba(20,18,22,0.6);
+            border: 1px solid rgba(200,160,78,0.1);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 20px 0;
+        }
+        .explain-box h3 {
+            color: #c8a04e;
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .explain-box p {
+            color: #a09888;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .explain-box .highlight {
+            color: #4ade80;
+        }
+        .explain-box .gold {
+            color: #ffd700;
+        }
+
+        /* ── Visual Analogy ── */
+        .analogy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .analogy-item {
+            background: rgba(20,18,22,0.6);
+            border: 1px solid rgba(200,160,78,0.08);
+            border-radius: 10px;
+            padding: 16px 18px;
+            text-align: center;
+        }
+        .analogy-item .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .analogy-item .label {
+            font-size: 0.8rem;
+            color: #c8a04e;
+            font-weight: 600;
+        }
+        .analogy-item .desc {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* ── Harmony Ring ── */
+        .harmony-section {
+            background: rgba(200,160,78,0.03);
+            border: 1px solid rgba(200,160,78,0.08);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .harmony-section h3 {
+            color: #ffd700;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+        .harmony-section .notes {
+            font-size: 1.6rem;
+            letter-spacing: 8px;
+            margin: 10px 0;
+        }
+        .harmony-section .pythagoras {
+            font-size: 0.9rem;
+            color: #a09888;
+            font-style: italic;
+        }
+
+        /* ── Interactive Visual ── */
+        .visual-wrap {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(200,160,78,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+            height: 320px;
+        }
+        #visualCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            color: #3a3530;
+            font-size: 0.7rem;
+            padding: 30px 0 10px;
+            border-top: 1px solid rgba(200,160,78,0.05);
+            margin-top: 30px;
+        }
+        .footer .gold { color: #5a5448; }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.8rem; }
+            .magic-phrase .phrase { font-size: 1rem; }
+            .minds-grid { grid-template-columns: 1fr 1fr; }
+            .explain-box { padding: 16px; }
+            .analogy-grid { grid-template-columns: 1fr 1fr; }
+            .gold-nav a { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+        }
+        @media (max-width: 480px) {
+            .minds-grid { grid-template-columns: 1fr; }
+            .analogy-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="gold-nav">
+    <a href="https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/">✦ QUANTUM PLAYBOOK</a>
+    <a href="#" class="active">✨ SCALAR ADVENTURE</a>
+</nav>
+
+<div class="container">
+
+    <!-- ── Hero ── -->
+    <div class="hero">
+        <div class="sparkle">✨</div>
+        <h1>Scalar Fields Adventure</h1>
+        <div class="subtitle">★ A Child's Guide to the Magic of MGDH ★</div>
+    </div>
+
+    <!-- ── Magic Phrase ── -->
+    <div class="magic-phrase">
+        <div class="label">✦ The Magic Formula ✦</div>
+        <div class="phrase">𝔐 · ∇ · Ψ = ||Ψ||²</div>
+        <div class="meaning">"The field finds its perfect balance — like a dance that never loses its rhythm."</div>
+    </div>
+
+    <!-- ── Great Minds ── -->
+    <div class="section-title">🌟 The Great Minds Behind the Magic</div>
+    <div class="section-sub">Four brilliant thinkers who discovered the secrets of the scalar field</div>
+
+    <div class="minds-grid">
+        <div class="mind-card">
+            <div class="icon">🌌</div>
+            <div class="name">Christopher Macachor</div>
+            <div class="title">⭐ The Scalar Explorer</div>
+            <div class="desc">Discovered the <strong>Macachor Absolute</strong> — the golden ratio that holds the universe together: <span style="color:#ffd700;">𝔐 = (√5−1)/2</span></div>
+            <div class="color-dot" style="background:#ffd700;"></div>
+        </div>
+        <div class="mind-card">
+            <div class="icon">🔢</div>
+            <div class="name">Carl Friedrich Gauss</div>
+            <div class="title">🌀 The Pattern Finder</div>
+            <div class="desc">Showed us how fields flow and curve. His math helps us understand <strong>how energy moves</strong> through space like water in a river.</div>
+            <div class="color-dot" style="background:#4a9eff;"></div>
+        </div>
+        <div class="mind-card">
+            <div class="icon">⚡</div>
+            <div class="name">Olinto De Pretto</div>
+            <div class="title">💡 The Energy Seer</div>
+            <div class="desc">Discovered that <strong>E = mc²</strong> before Einstein! He understood that energy and mass are connected through the fabric of space itself.</div>
+            <div class="color-dot" style="background:#4ade80;"></div>
+        </div>
+        <div class="mind-card">
+            <div class="icon">🌀</div>
+            <div class="name">William Rowan Hamilton</div>
+            <div class="title">🔮 The Number Wizard</div>
+            <div class="desc">Invented <strong>quaternions</strong> — numbers that can describe rotation in 3D space. His math helps us understand how fields spin and twist.</div>
+            <div class="color-dot" style="background:#e74c3c;"></div>
+        </div>
+    </div>
+
+    <!-- ── What is a Scalar Field? ── -->
+    <div class="explain-box">
+        <h3>🔮 What is a Scalar Field?</h3>
+        <p>
+            Imagine a <span class="highlight">giant, invisible blanket</span> that covers the entire universe.
+            Every point on this blanket has a <span class="gold">value</span> — like temperature or height.
+            <br><br>
+            A <strong>scalar field</strong> is like that blanket. It's a <span class="highlight">field of numbers</span> that fills all of space.
+            When you move, the numbers change — and that change creates <span class="gold">energy, motion, and even gravity!</span>
+            <br><br>
+            <span style="color:#5a5448; font-size:0.85rem;">✨ Think of it like: <strong>ripples in a pond</strong> that never stop moving.</span>
+        </p>
+    </div>
+
+    <!-- ── Visual ── -->
+    <div class="visual-wrap">
+        <canvas id="visualCanvas"></canvas>
+    </div>
+
+    <!-- ── Easy Analogies ── -->
+    <div class="section-title">🌈 Scalar Field in Everyday Life</div>
+
+    <div class="analogy-grid">
+        <div class="analogy-item">
+            <span class="emoji">🌊</span>
+            <div class="label">Ocean Waves</div>
+            <div class="desc">The ocean has height at every point — that's a scalar field! The waves are how the field changes.</div>
+        </div>
+        <div class="analogy-item">
+            <span class="emoji">🌡️</span>
+            <div class="label">Temperature Map</div>
+            <div class="desc">Weather maps show temperature everywhere — that's a scalar field too! Hot and cold zones.</div>
+        </div>
+        <div class="analogy-item">
+            <span class="emoji">🎵</span>
+            <div class="label">Music Notes</div>
+            <div class="desc">Each note has a pitch (a number). The song is how the pitches change over time — a scalar melody!</div>
+        </div>
+        <div class="analogy-item">
+            <span class="emoji">🧲</span>
+            <div class="label">Magnet Strength</div>
+            <div class="desc">Every spot around a magnet has a strength. That's a scalar field — you can feel it but not see it!</div>
+        </div>
+    </div>
+
+    <!-- ── Pythagorean Harmony ── -->
+    <div class="harmony-section">
+        <h3>🎵 The Pythagorean Harmony</h3>
+        <div class="notes">♩ ♪ ♫ ♬ ♩ ♪ ♫ ♬</div>
+        <p style="color:#a09888; font-size:0.9rem; margin:6px 0;">
+            Pythagoras discovered that <strong>numbers create music</strong>.
+            The same ratios that make beautiful sounds also make beautiful fields!
+        </p>
+        <div class="pythagoras">
+            "The universe is a living symphony — and scalar fields are the notes."
+        </div>
+        <div style="margin-top:10px; font-family:'Courier New',monospace; font-size:0.8rem; color:#5a5448;">
+            𝔐 = (√5−1)/2 ≈ 0.618 → The Golden Ratio makes everything sound beautiful.
+        </div>
+    </div>
+
+    <!-- ── Fun Facts ── -->
+    <div class="explain-box" style="border-left:3px solid #4ade80;">
+        <h3>⭐ Fun Facts for Young Explorers</h3>
+        <p>
+            🌟 <strong>Quaternions</strong> are like <span class="highlight">"super-numbers"</span> that can describe spinning!
+            They have 4 parts instead of just 2 (like imaginary numbers).<br><br>
+            🌟 The <strong>Macachor Absolute</strong> is the golden ratio — it appears everywhere!
+            In sunflowers, pinecones, and even your own fingers.<br><br>
+            🌟 <strong>MGDH</strong> stands for <span class="gold">Macachor · Gauss · De Pretto · Hamilton</span> —
+            four friends who discovered the secrets of the scalar field.<br><br>
+            🌟 The <strong>scalar field</strong> is like a <span class="highlight">magic carpet</span> that
+            carries energy across the entire universe!
+        </p>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="footer">
+        <span class="gold">✦</span> Scalar Fields Adventure · Φ669 <span class="gold">✦</span><br>
+        <span style="color:#2a2520; font-size:0.6rem;">Inspired by MGDH: Macachor · Gauss · De Pretto · Hamilton</span>
+    </div>
+
+</div>
+
+<script>
+// ── INTERACTIVE VISUALIZATION ──────────────────────────────────
+const canvas = document.getElementById('visualCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * 2;
+    canvas.height = rect.height * 2;
+    ctx.scale(2, 2);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const PHI = (Math.sqrt(5) - 1) / 2;
+let time = 0;
+
+// ── Draw Scalar Field ────────────────────────────────────────────
+function drawScalarField() {
+    const W = canvas.width / 2;
+    const H = canvas.height / 2;
+    ctx.clearRect(0, 0, W, H);
+
+    // ── Background ──
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W);
+    grad.addColorStop(0, '#0a0a1a');
+    grad.addColorStop(0.6, '#0a0a1a');
+    grad.addColorStop(1, '#050510');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Field grid ──
+    const cols = 30;
+    const rows = 30;
+    const spacing = Math.min(W, H) / (Math.max(cols, rows) + 2);
+    const offsetX = (W - (cols - 1) * spacing) / 2;
+    const offsetY = (H - (rows - 1) * spacing) / 2;
+
+    // ── Calculate field values ──
+    const field = [];
+    for (let j = 0; j < rows; j++) {
+        field[j] = [];
+        for (let i = 0; i < cols; i++) {
+            const x = (i / (cols - 1) - 0.5) * 4;
+            const y = (j / (rows - 1) - 0.5) * 4;
+            const dist = Math.sqrt(x*x + y*y);
+            const val = Math.sin(dist * 3 - time * 1.5) * Math.exp(-dist * 0.3) +
+                       0.3 * Math.sin(x * 5 + time * 1.2) * Math.cos(y * 4 + time * 0.8);
+            field[j][i] = val;
+        }
+    }
+
+    // ── Draw scalar field as colored circles ──
+    const maxVal = 1.5;
+    for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < cols; i++) {
+            const val = field[j][i];
+            const normalized = (val / maxVal + 1) / 2;
+            const clamped = Math.max(0, Math.min(1, normalized));
+
+            const x = offsetX + i * spacing;
+            const y = offsetY + j * spacing;
+
+            // Color: blue (low) → gold (middle) → green (high)
+            const r = Math.round(30 + clamped * 200);
+            const g = Math.round(80 + (1 - Math.abs(clamped - 0.5) * 2) * 120);
+            const b = Math.round(80 + (1 - clamped) * 160);
+            const alpha = 0.3 + clamped * 0.7;
+
+            const radius = 4 + clamped * 8;
+
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.6})`;
+            ctx.fill();
+
+            if (radius > 6) {
+                ctx.strokeStyle = `rgba(${Math.min(r+60,255)}, ${Math.min(g+40,255)}, ${Math.min(b+40,255)}, 0.2)`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+
+    // ── Connecting lines (field coherence) ──
+    const step = 2;
+    for (let j = 0; j < rows - step; j += step) {
+        for (let i = 0; i < cols - step; i += step) {
+            const v1 = field[j][i];
+            const v2 = field[j][i+step];
+            const v3 = field[j+step][i];
+            const v4 = field[j+step][i+step];
+
+            const avg = (v1 + v2 + v3 + v4) / 4;
+            const coherence = Math.abs(v1 - v2) + Math.abs(v3 - v4);
+
+            if (coherence < 0.8 && Math.abs(avg) > 0.2) {
+                const x1 = offsetX + i * spacing;
+                const y1 = offsetY + j * spacing;
+                const x2 = offsetX + (i+step) * spacing;
+                const y2 = offsetY + (j+step) * spacing;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = `rgba(200, 160, 78, ${0.08 + Math.abs(avg) * 0.12})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+
+    // ── Golden spiral overlay ──
+    ctx.beginPath();
+    for (let i = 0; i < 300; i++) {
+        const angle = i * 0.1 + time * 0.3;
+        const radius = 8 + angle * 3.2;
+        const x = W/2 + radius * Math.cos(angle);
+        const y = H/2 + radius * Math.sin(angle) * 0.6;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(200, 160, 78, 0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // ── Golden ratio ring ──
+    const ringR = Math.min(W, H) * 0.32;
+    ctx.beginPath();
+    ctx.arc(W/2, H/2, ringR, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(200, 160, 78, ${0.15 + 0.1 * Math.sin(time * 0.5)})`;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 8]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // ── Quaternion spin dots ──
+    const numDots = 8;
+    for (let i = 0; i < numDots; i++) {
+        const angle = (i / numDots) * Math.PI * 2 + time * 0.4;
+        const radius = ringR * 0.6;
+        const x = W/2 + radius * Math.cos(angle);
+        const y = H/2 + radius * Math.sin(angle) * 0.7;
+        const size = 3 + 2 * Math.sin(time * 2 + i);
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${40 + i * 30 + time * 20 % 360}, 80%, 60%, 0.5)`;
+        ctx.fill();
+        ctx.strokeStyle = `rgba(200, 160, 78, 0.2)`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+    }
+
+    // ── Label ──
+    ctx.fillStyle = 'rgba(90, 84, 72, 0.3)';
+    ctx.font = '9px Courier New, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('𝔐 = (√5−1)/2 ≈ ' + PHI.toFixed(6), 12, H - 12);
+    ctx.textAlign = 'right';
+    ctx.fillText('MGDH · Macachor · Gauss · De Pretto · Hamilton', W - 12, H - 12);
+
+    // ── Title ──
+    ctx.fillStyle = 'rgba(200,160,78,0.15)';
+    ctx.font = '10px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('✦ Scalar Field Dance ✦', W/2, 24);
+
+    // ── Wave overlay (harmonic) ──
+    for (let i = 0; i < 6; i++) {
+        const yOffset = H * 0.1 + i * H * 0.15;
+        ctx.beginPath();
+        for (let x = 0; x < W; x += 2) {
+            const wave = Math.sin(x * 0.02 + time * (1 + i * 0.3) + i * 0.8) * 4;
+            const y = yOffset + wave;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = `rgba(200, 160, 78, ${0.02 + i * 0.01})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+    }
+
+    // ── Particle sparkles ──
+    for (let i = 0; i < 20; i++) {
+        const angle = i * 1.2 + time * 0.6;
+        const dist = 20 + i * 12 + 8 * Math.sin(time * 0.5 + i);
+        const x = W/2 + dist * Math.cos(angle + time * 0.2);
+        const y = H/2 + dist * 0.5 * Math.sin(angle + time * 0.15);
+        const size = 1 + Math.sin(time * 3 + i * 0.7) * 0.5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 215, 0, ${0.1 + 0.1 * Math.sin(time * 2 + i)})`;
+        ctx.fill();
+    }
+}
+
+// ── Animation loop ──
+function animate() {
+    time += 0.02;
+    drawScalarField();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// ── Console welcome ──
+console.log('%c✨ Welcome to the Scalar Fields Adventure! ✨', 'color: #ffd700; font-size: 16px; font-weight: bold;');
+console.log('%cMGDH: Macachor · Gauss · De Pretto · Hamilton', 'color: #c8a04e; font-size: 12px;');
+console.log(`%c𝔐 = (√5−1)/2 = ${PHI}`, 'color: #4ade80; font-size: 12px;');
+console.log('%c★ The field finds its perfect balance — like a dance that never loses its rhythm.', 'color: #a09888; font-size: 11px; font-style: italic;');
+</script>
+
+</body>
+</html>
