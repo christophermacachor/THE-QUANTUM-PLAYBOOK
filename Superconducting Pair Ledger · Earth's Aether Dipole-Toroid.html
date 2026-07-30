@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superconducting Pair Ledger · Earth's Aether Dipole-Toroid</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #e8e0d0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.15);
+    z-index: 10000;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+  }
+  .gold-nav a {
+    color: #ffd700;
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 20px;
+    background: rgba(255,215,0,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .gold-nav a:hover {
+    border-color: #ffd700;
+    background: rgba(255,215,0,0.1);
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
+    transform: translateY(-1px);
+  }
+  .gold-nav a .phi-symbol { font-size: 0.8rem; margin-right: 4px; }
+  .gold-nav a.active {
+    border-color: #4a9eff;
+    background: rgba(74,158,255,0.15);
+    color: #4a9eff;
+  }
+
+  .banner {
+    position: fixed;
+    top: 2.8rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    padding: 4px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(74,158,255,0.3);
+    pointer-events: none;
+    text-align: center;
+  }
+  .banner .title {
+    color: #4a9eff;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .banner .sub {
+    color: #a09888;
+    font-size: 0.4rem;
+    letter-spacing: 0.1em;
+  }
+  .banner .sub strong { color: #ffd700; }
+
+  #canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 5rem;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  canvas:active { cursor: grabbing; }
+
+  #info-overlay {
+    position: absolute;
+    top: 5.5rem; left: 16px;
+    z-index: 10;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(74,158,255,0.2);
+    backdrop-filter: blur(4px);
+    max-width: 280px;
+    pointer-events: none;
+  }
+  #info-overlay h2 {
+    color: #4a9eff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  #info-overlay .stats {
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: #888;
+    line-height: 1.6;
+  }
+  #info-overlay .stats .val { color: #ffd700; }
+  #info-overlay .stats .aether { color: #4a9eff; }
+  #info-overlay .mgdh {
+    font-family: 'Courier New', monospace;
+    font-size: 7px;
+    color: #ffd700;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(74,158,255,0.15);
+  }
+
+  #controls {
+    position: absolute;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 14px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(74,158,255,0.2);
+    z-index: 10;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #controls button {
+    background: rgba(74,158,255,0.15);
+    border: 1px solid rgba(74,158,255,0.3);
+    color: #4a9eff;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  #controls button:hover { background: rgba(74,158,255,0.3); }
+  #controls button.active {
+    background: rgba(74,158,255,0.4);
+    border-color: #4a9eff;
+  }
+  #controls input[type="range"] {
+    width: 80px;
+    accent-color: #4a9eff;
+  }
+  #controls label {
+    color: #888;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  #controls select {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(74,158,255,0.3);
+    color: #4a9eff;
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+
+  #perf {
+    position: absolute;
+    bottom: 80px; right: 16px;
+    z-index: 10;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: #444;
+  }
+
+  #legend {
+    position: absolute;
+    bottom: 80px; right: 16px;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(74,158,255,0.15);
+    font-family: 'Courier New', monospace;
+    font-size: 7px;
+    color: #666;
+    line-height: 1.6;
+  }
+  #legend .color-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 640px) {
+    #info-overlay { max-width: 160px; top: 5rem; left: 6px; padding: 6px 8px; }
+    #info-overlay h2 { font-size: 11px; }
+    #controls { padding: 6px 10px; gap: 4px; }
+    #controls input[type="range"] { width: 50px; }
+    #legend { display: none; }
+    .banner .title { font-size: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav class="gold-nav">
+  <a href="https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/" target="_blank">
+    <span class="phi-symbol">Φ</span> ◈ THE QUANTUM PLAYBOOK
+  </a>
+  <a href="#" class="active">
+    <span style="color:#4a9eff;">⚡</span> SUPERCONDUCTING PAIR LEDGER
+  </a>
+  <a href="#" style="border-color: rgba(255,107,107,0.3); color: #ff6b6b;">
+    <span>▣</span> WILD TETRAHEDRA
+  </a>
+</nav>
+
+<!-- ─── BANNER ─── -->
+<div class="banner">
+  <div class="title">⚡ Superconducting Electron Pair Ledger · Aether Dipole-Toroid</div>
+  <div class="sub">
+    <strong>Earth's Plasmasphere</strong> as Toroidal Aether Flow &nbsp;·&nbsp;
+    <strong>η<sub>pair</sub></strong> Magnetic Cancellation &nbsp;·&nbsp;
+    <strong>β<sub>pair</sub></strong> Binding Energy &nbsp;·&nbsp;
+    QADI · Thomson III 2025
+  </div>
+</div>
+
+<!-- ─── CANVAS ─── -->
+<div id="canvas-container">
+  <canvas id="c"></canvas>
+
+  <div id="info-overlay">
+    <h2>⚡ Superconducting Pair</h2>
+    <div class="stats">
+      <span class="aether">●</span> η<sub>pair</sub>: <span class="val" id="eta-display">0.960</span><br>
+      <span class="aether">●</span> β<sub>pair</sub>: <span class="val" id="beta-display">4.2e-6</span><br>
+      <span class="aether">●</span> e<sub>eff</sub>²: <span class="val" id="eeff-display">0.080</span><br>
+      <span class="aether">●</span> T<sub>c</sub>: <span class="val" id="tc-display">93 K</span><br>
+      <span class="aether">●</span> Curl<sub>ext</sub>: <span class="val" id="curl-display">0.040</span><br>
+      <span class="aether">●</span> mflux<sub>pair</sub>: <span class="val" id="mflux-display">25.0</span>
+    </div>
+    <div class="mgdh">
+      𝔐 = 0.6180339887 · Aether Rotational Identity<br>
+      A<sub>u</sub>·curl = F<sub>q</sub>²λ<sub>C</sub>² = temp
+    </div>
+  </div>
+
+  <div id="perf"><span id="fps">--</span> fps</div>
+
+  <div id="legend">
+    <div><span class="color-dot" style="background:#4a9eff;"></span> Magnetic Dipole (Earth)</div>
+    <div><span class="color-dot" style="background:#ff6b6b;"></span> Toroidal Plasmasphere</div>
+    <div><span class="color-dot" style="background:#ffd700;"></span> Superconducting Pair</div>
+    <div><span class="color-dot" style="background:#44ff88;"></span> Aether Flow Lines</div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-rotate">⟳ Auto-Rotate</button>
+    <button id="btn-reset">⟲ Reset View</button>
+    <button id="btn-toggle-field">◻ Field Lines</button>
+    <button id="btn-toggle-pair">⚡ Pair</button>
+    <label>η<sub>pair</sub> <input type="range" id="slider-eta" min="0" max="100" value="96"></label>
+    <select id="view-select">
+      <option value="dipole">Dipole-Toroid</option>
+      <option value="pair">Pair Only</option>
+      <option value="aether">Aether Field</option>
+      <option value="earth">Earth View</option>
+    </select>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// SUPERCONDUCTING PAIR LEDGER — EARTH'S AETHER DIPOLE-TOROID
+// Based on QADI: Thomson III 2025 — Superconducting Electron Pair Ledger
+// ═══════════════════════════════════════════════════════════════════
+
+// ── CONSTANTS ──
+const PHI = (Math.sqrt(5) - 1) / 2;
+const PHI_FULL = 0.61803398874989484820458683436563811772030917980576;
+
+// QMU Units (from the paper)
+const F_q = 1;  // quantum frequency (normalized)
+const lambda_C = 1; // quantum length (normalized)
+const m_e = 1; // electron mass (normalized)
+const e_emax2 = 1; // magnetic charge (normalized)
+
+// Derived QMU units
+const enrg = m_e * lambda_C * lambda_C * F_q * F_q;
+const temp = F_q * F_q * lambda_C * lambda_C;
+const curl = e_emax2 / (m_e * lambda_C);
+const mflux = m_e * lambda_C * lambda_C * F_q / e_emax2;
+
+// ── CANVAS SETUP ──
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── 3D STATE ──
+let rotX = 0.5, rotY = 0.3;
+let autoRotate = true;
+let showFieldLines = true;
+let showPair = true;
+let viewMode = 'dipole';
+let etaPair = 0.96;
+
+// ── MOUSE CONTROLS ──
+let isDragging = false;
+let prevMouse = { x: 0, y: 0 };
+
+canvas.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  prevMouse.x = e.clientX;
+  prevMouse.y = e.clientY;
+  canvas.style.cursor = 'grabbing';
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - prevMouse.x;
+  const dy = e.clientY - prevMouse.y;
+  rotY += dx * 0.01;
+  rotX += dy * 0.01;
+  rotX = Math.max(-1.5, Math.min(1.5, rotX));
+  prevMouse.x = e.clientX;
+  prevMouse.y = e.clientY;
+});
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  canvas.style.cursor = 'grab';
+});
+
+canvas.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  isDragging = true;
+  prevMouse.x = t.clientX;
+  prevMouse.y = t.clientY;
+}, { passive: true });
+
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (!isDragging || !e.touches.length) return;
+  const t = e.touches[0];
+  const dx = t.clientX - prevMouse.x;
+  const dy = t.clientY - prevMouse.y;
+  rotY += dx * 0.01;
+  rotX += dy * 0.01;
+  rotX = Math.max(-1.5, Math.min(1.5, rotX));
+  prevMouse.x = t.clientX;
+  prevMouse.y = t.clientY;
+}, { passive: false });
+
+canvas.addEventListener('touchend', () => { isDragging = false; }, { passive: true });
+
+// ── 3D PROJECTION ──
+function project3D(v) {
+  const scale = Math.min(W, H) * 0.28;
+  const cx = W / 2;
+  const cy = H / 2;
+
+  let x = v.x;
+  let y = v.y;
+  let z = v.z;
+
+  // Rotate X
+  let cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+  let y1 = y * cosX - z * sinX;
+  let z1 = y * sinX + z * cosX;
+  y = y1; z = z1;
+
+  // Rotate Y
+  let cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  let x1 = x * cosY + z * sinY;
+  let z2 = -x * sinY + z * cosY;
+  x = x1; z = z2;
+
+  const perspective = 1 + z * 0.04;
+  return {
+    sx: cx + x * scale / perspective,
+    sy: cy + y * scale / perspective,
+    depth: z,
+    perspective: perspective
+  };
+}
+
+// ── DRAW EARTH ──
+function drawEarth(cx, cy, scale, alpha) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+
+  // Earth body
+  const grad = ctx.createRadialGradient(-scale*0.1, -scale*0.1, 0, 0, 0, scale);
+  grad.addColorStop(0, '#2a5a8a');
+  grad.addColorStop(0.5, '#1a3a6a');
+  grad.addColorStop(1, '#0a1a3a');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, scale, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Continents (simplified)
+  ctx.strokeStyle = 'rgba(100,200,100,0.15)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 3; i++) {
+    const angle = i * 2.1 + 0.5;
+    const r = scale * (0.3 + 0.4 * Math.sin(i * 1.7 + 0.3));
+    ctx.beginPath();
+    ctx.ellipse(r * Math.cos(angle), r * Math.sin(angle), scale*0.3, scale*0.2, angle, 0, Math.PI*2);
+    ctx.stroke();
+  }
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(100,150,255,0.08)';
+  ctx.lineWidth = 0.5;
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const r = scale * Math.cos(lat * Math.PI / 180);
+    const y = scale * Math.sin(lat * Math.PI / 180);
+    ctx.beginPath();
+    ctx.ellipse(0, y, r, r * 0.3, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // Polar axis
+  ctx.strokeStyle = 'rgba(255,215,0,0.2)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(0, -scale * 1.8);
+  ctx.lineTo(0, scale * 1.8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // North/South labels
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.font = '7px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('N', 0, -scale * 1.9);
+  ctx.fillText('S', 0, scale * 1.9 + 8);
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── DRAW DIPOLE FIELD LINES ──
+function drawDipoleLines(cx, cy, scale, alpha, numLines = 16) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+
+  const poleDist = scale * 0.7;
+
+  for (let i = 0; i < numLines; i++) {
+    const theta0 = (i / numLines) * Math.PI * 0.48 + 0.02;
+    const loopR = scale * (0.6 + 0.9 * Math.sin(theta0 * Math.PI));
+
+    for (let side of [1, -1]) {
+      ctx.beginPath();
+      const grad = ctx.createLinearGradient(0, -poleDist, 0, poleDist);
+      ctx.strokeStyle = `rgba(74, 158, 255, ${0.2 + 0.3 * (1 - i / numLines)})`;
+      ctx.lineWidth = 0.8 + 0.3 * (1 - i / numLines);
+
+      for (let step = 0; step <= 100; step++) {
+        const frac = step / 100;
+        const angle = frac * Math.PI * 2 - Math.PI / 2;
+        const lx = side * loopR * Math.cos(angle) * Math.sin(theta0 * Math.PI);
+        const ly = loopR * Math.sin(angle);
+        if (step === 0) ctx.moveTo(lx, ly);
+        else ctx.lineTo(lx, ly);
+      }
+      ctx.stroke();
+
+      // Arrow heads (flow direction)
+      if (i % 3 === 0) {
+        const flowPos = (Date.now() / 3000 + i * 0.2) % 1;
+        const angle = flowPos * Math.PI * 2 - Math.PI / 2;
+        const ax = side * loopR * Math.cos(angle) * Math.sin(theta0 * Math.PI);
+        const ay = loopR * Math.sin(angle);
+        const nextAngle = angle + 0.08;
+        const nx = side * loopR * Math.cos(nextAngle) * Math.sin(theta0 * Math.PI);
+        const ny = loopR * Math.sin(nextAngle);
+        const dir = Math.atan2(ny - ay, nx - ax);
+        ctx.fillStyle = `rgba(74, 158, 255, 0.4)`;
+        ctx.beginPath();
+        ctx.moveTo(nx, ny);
+        ctx.lineTo(nx - 4 * Math.cos(dir - 0.4), ny - 4 * Math.sin(dir - 0.4));
+        ctx.lineTo(nx - 4 * Math.cos(dir + 0.4), ny - 4 * Math.sin(dir + 0.4));
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+  }
+
+  // Pole markers
+  ctx.fillStyle = 'rgba(255,215,0,0.6)';
+  ctx.beginPath();
+  ctx.arc(0, -poleDist, scale * 0.04, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(0, poleDist, scale * 0.04, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── DRAW TOROIDAL PLASMASPHERE ──
+function drawToroid(cx, cy, scale, alpha) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+
+  const majorR = scale * 1.2;
+  const minorR = scale * 0.4;
+  const segs = 40;
+  const rings = 12;
+  const t = Date.now() / 2000;
+
+  // Torus rings
+  for (let i = 0; i < segs; i++) {
+    const theta = (i / segs) * Math.PI * 2 + t * 0.05;
+    ctx.beginPath();
+    for (let j = 0; j <= rings; j++) {
+      const phi = (j / rings) * Math.PI * 2;
+      const r = majorR + minorR * Math.cos(phi);
+      const x = r * Math.cos(theta);
+      const y = minorR * Math.sin(phi) * 0.5;
+      const z = r * Math.sin(theta);
+      const persp = 1 + z / (scale * 3);
+      if (j === 0) ctx.moveTo(x / persp, y / persp);
+      else ctx.lineTo(x / persp, y / persp);
+    }
+    ctx.strokeStyle = `rgba(255, 107, 107, ${0.1 + 0.15 * (1 - i / segs)})`;
+    ctx.lineWidth = 0.6;
+    ctx.stroke();
+  }
+
+  // Torus fill
+  const grad = ctx.createRadialGradient(0, 0, majorR - minorR, 0, 0, majorR + minorR);
+  grad.addColorStop(0, 'rgba(255,107,107,0.03)');
+  grad.addColorStop(0.3, 'rgba(255,107,107,0.08)');
+  grad.addColorStop(0.5, 'rgba(255,107,107,0.12)');
+  grad.addColorStop(0.7, 'rgba(255,107,107,0.08)');
+  grad.addColorStop(1, 'rgba(255,107,107,0.02)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, majorR + minorR, (majorR + minorR) * 0.45, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Plasma flow arrows
+  const numArrows = 8;
+  for (let i = 0; i < numArrows; i++) {
+    const theta = (i / numArrows) * Math.PI * 2 + t * 0.2;
+    const r = majorR + minorR * 0.5 * Math.sin(theta * 2 + t);
+    const x = r * Math.cos(theta);
+    const y = minorR * 0.3 * Math.sin(theta * 2 + t);
+    const z = r * Math.sin(theta);
+    const persp = 1 + z / (scale * 3);
+
+    const nextTheta = theta + 0.15;
+    const nr = majorR + minorR * 0.5 * Math.sin(nextTheta * 2 + t);
+    const nx = nr * Math.cos(nextTheta);
+    const ny = minorR * 0.3 * Math.sin(nextTheta * 2 + t);
+    const nz = nr * Math.sin(nextTheta);
+    const npersp = 1 + nz / (scale * 3);
+
+    const ax = x / persp, ay = y / persp;
+    const bx = nx / npersp, by = ny / npersp;
+    const ang = Math.atan2(by - ay, bx - ax);
+
+    ctx.fillStyle = `rgba(255, 107, 107, 0.3)`;
+    ctx.beginPath();
+    ctx.moveTo(bx, by);
+    ctx.lineTo(bx - 5 * Math.cos(ang - 0.4), by - 5 * Math.sin(ang - 0.4));
+    ctx.lineTo(bx - 5 * Math.cos(ang + 0.4), by - 5 * Math.sin(ang + 0.4));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Label
+  ctx.fillStyle = 'rgba(255,107,107,0.4)';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('TOROIDAL PLASMASPHERE', 0, -scale * 1.7);
+  ctx.fillStyle = 'rgba(255,107,107,0.2)';
+  ctx.font = '6px monospace';
+  ctx.fillText('Aether Flow · Magnetic Confinement', 0, -scale * 1.7 + 14);
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── DRAW SUPERCONDUCTING PAIR ──
+function drawSuperconductingPair(cx, cy, scale, alpha) {
+  if (!showPair) return;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+
+  const t = Date.now() / 2000;
+  const pairRadius = scale * 0.25;
+  const offset = scale * 0.15 * Math.sin(t * 0.3);
+
+  // Two electrons in mutual positive sphere occupation
+  // Electron 1
+  const e1 = { x: -offset, y: 0, z: pairRadius * 0.5 };
+  // Electron 2
+  const e2 = { x: offset, y: 0, z: -pairRadius * 0.5 };
+
+  // Draw electron 1
+  const p1 = project3D(e1);
+  const grad1 = ctx.createRadialGradient(p1.sx - 3, p1.sy - 3, 0, p1.sx, p1.sy, 12);
+  grad1.addColorStop(0, 'rgba(255,215,0,0.8)');
+  grad1.addColorStop(0.5, 'rgba(255,215,0,0.4)');
+  grad1.addColorStop(1, 'rgba(255,215,0,0)');
+  ctx.fillStyle = grad1;
+  ctx.beginPath();
+  ctx.arc(p1.sx, p1.sy, 12, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Electron 2
+  const p2 = project3D(e2);
+  const grad2 = ctx.createRadialGradient(p2.sx - 3, p2.sy - 3, 0, p2.sx, p2.sy, 12);
+  grad2.addColorStop(0, 'rgba(255,215,0,0.8)');
+  grad2.addColorStop(0.5, 'rgba(255,215,0,0.4)');
+  grad2.addColorStop(1, 'rgba(255,215,0,0)');
+  ctx.fillStyle = grad2;
+  ctx.beginPath();
+  ctx.arc(p2.sx, p2.sy, 12, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Positive sphere overlap (glow between)
+  const mid = { x: 0, y: 0, z: 0 };
+  const pm = project3D(mid);
+  const grad3 = ctx.createRadialGradient(pm.sx, pm.sy, 0, pm.sx, pm.sy, 15);
+  grad3.addColorStop(0, 'rgba(74,158,255,0.2)');
+  grad3.addColorStop(1, 'rgba(74,158,255,0)');
+  ctx.fillStyle = grad3;
+  ctx.beginPath();
+  ctx.arc(pm.sx, pm.sy, 15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Loxodrome alignment (south-south)
+  const numLox = 4;
+  for (let i = 0; i < numLox; i++) {
+    const angle = (i / numLox) * Math.PI * 2 + t * 0.2;
+    const r = scale * 0.1;
+    const lx = r * Math.cos(angle);
+    const ly = r * Math.sin(angle);
+    const lz = scale * 0.05 * Math.sin(angle * 2 + t);
+
+    const p = project3D({ x: lx, y: ly, z: lz });
+    ctx.fillStyle = `rgba(255, 107, 107, 0.3)`;
+    ctx.beginPath();
+    ctx.arc(p.sx, p.sy, 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Opposite side
+    const p2b = project3D({ x: -lx, y: -ly, z: -lz });
+    ctx.fillStyle = `rgba(255, 107, 107, 0.2)`;
+    ctx.beginPath();
+    ctx.arc(p2b.sx, p2b.sy, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Pair binding energy visualization (glow ring)
+  const ringR = scale * 0.35 * (1 + 0.05 * Math.sin(t * 0.5));
+  ctx.strokeStyle = `rgba(255,215,0,${0.1 + 0.05 * Math.sin(t * 0.5)})`;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 5]);
+  ctx.beginPath();
+  for (let i = 0; i <= 60; i++) {
+    const theta = (i / 60) * Math.PI * 2;
+    const x = ringR * Math.cos(theta);
+    const y = ringR * 0.4 * Math.sin(theta);
+    const persp = 1 + (ringR * 0.3 * Math.sin(theta * 0.5)) / (scale * 3);
+    if (i === 0) ctx.moveTo(x / persp, y / persp);
+    else ctx.lineTo(x / persp, y / persp);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.fillStyle = 'rgba(255,215,0,0.4)';
+  ctx.font = '6px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('e⁻', p1.sx, p1.sy + 16);
+  ctx.fillText('e⁻', p2.sx, p2.sy + 16);
+
+  ctx.fillStyle = 'rgba(255,215,0,0.3)';
+  ctx.font = '5px monospace';
+  ctx.fillText('south-south', 0, -scale * 0.15);
+  ctx.fillText('η_pair = ' + etaPair.toFixed(3), 0, -scale * 0.15 + 12);
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── DRAW AETHER FIELD ──
+function drawAetherField(cx, cy, scale, alpha) {
+  if (viewMode !== 'aether') return;
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha * 0.3;
+
+  const t = Date.now() / 2000;
+  const gridSize = 14;
+  const spacing = 0.4;
+
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      const x = (i - gridSize/2) * spacing;
+      const y = (j - gridSize/2) * spacing;
+      const r = Math.sqrt(x*x + y*y);
+      const val = Math.sin(r * 2 - t * 1.5) * 0.5 + 0.5;
+      const p = project3D({
+        x: x * scale * 0.6,
+        y: y * scale * 0.6,
+        z: 0.15 * scale * Math.sin(r * 2 - t * 0.5)
+      });
+      const alpha2 = 0.02 + 0.06 * val;
+      ctx.fillStyle = `rgba(74, 158, 255, ${alpha2})`;
+      const size = 1 + val * 2.5;
+      ctx.beginPath();
+      ctx.arc(p.sx, p.sy, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Aether flow lines
+  for (let k = 0; k < 6; k++) {
+    const theta = (k / 6) * Math.PI * 2 + t * 0.1;
+    ctx.beginPath();
+    for (let step = 0; step <= 40; step++) {
+      const frac = step / 40;
+      const r = frac * scale * 1.2;
+      const x = r * Math.cos(theta + frac * 0.5);
+      const y = 0.2 * scale * Math.sin(theta * 2 + frac * 1.5 + t);
+      const z = r * Math.sin(theta + frac * 0.5);
+      const p = project3D({ x, y, z });
+      if (step === 0) ctx.moveTo(p.sx, p.sy);
+      else ctx.lineTo(p.sx, p.sy);
+    }
+    ctx.strokeStyle = `rgba(74, 158, 255, ${0.03 + 0.02 * (1 - k / 6)})`;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── DRAW STARS ──
+const stars = [];
+for (let i = 0; i < 200; i++) {
+  stars.push({
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
+    size: Math.random() * 1.5 + 0.5,
+    twinkle: Math.random() * Math.PI * 2
+  });
+}
+
+function drawStars() {
+  const t = Date.now() / 1000;
+  stars.forEach(s => {
+    const alpha = 0.3 + 0.3 * Math.sin(t * 2 + s.twinkle);
+    const px = W * (0.5 + s.x * 0.6);
+    const py = H * (0.5 + s.y * 0.6);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// ── MAIN DRAW ──
+function draw() {
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+  drawStars();
+
+  const cx = W / 2;
+  const cy = H / 2 + 20;
+  const scale = Math.min(W, H) * 0.22;
+
+  // Earth
+  drawEarth(cx, cy, scale * 0.6, 0.9);
+
+  // Dipole field lines
+  if (showFieldLines) {
+    drawDipoleLines(cx, cy, scale * 1.2, 0.6);
+  }
+
+  // Toroidal plasmasphere
+  drawToroid(cx, cy, scale * 1.2, 0.5);
+
+  // Superconducting pair
+  drawSuperconductingPair(cx, cy, scale * 1.0, 0.8);
+
+  // Aether field
+  drawAetherField(cx, cy, scale, 0.5);
+
+  // Title overlay
+  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡ Superconducting Electron Pair · Aether Dipole-Toroid', cx, H - 40);
+
+  // QMU parameters
+  const e_eff2 = 2 * (1 - etaPair);
+  const betaPair = 4.2e-6 + (1 - etaPair) * 2e-5;
+  const curlExt = (1 - etaPair) * curl;
+  const mfluxPair = mflux / (1 - etaPair);
+
+  document.getElementById('eta-display').textContent = etaPair.toFixed(3);
+  document.getElementById('beta-display').textContent = betaPair.toExponential(2);
+  document.getElementById('eeff-display').textContent = e_eff2.toFixed(3);
+  document.getElementById('tc-display').textContent = Math.round(93 + (1 - etaPair) * 500) + ' K';
+  document.getElementById('curl-display').textContent = curlExt.toFixed(3);
+  document.getElementById('mflux-display').textContent = mfluxPair.toFixed(1);
+
+  // Update FPS
+  if (frameCount % 30 === 0) {
+    document.getElementById('fps').textContent = fps;
+  }
+}
+
+// ── ANIMATION LOOP ──
+let lastTime = 0;
+let frameCount = 0;
+let fps = 60;
+
+function animate(time) {
+  if (lastTime) {
+    const delta = time - lastTime;
+    frameCount++;
+    if (frameCount % 30 === 0) {
+      fps = Math.round(1000 / delta);
+    }
+  }
+  lastTime = time;
+
+  if (autoRotate) {
+    rotY += 0.004;
+  }
+
+  // Update eta from slider
+  const etaSlider = document.getElementById('slider-eta');
+  etaPair = parseInt(etaSlider.value) / 100;
+
+  draw();
+  requestAnimationFrame(animate);
+}
+
+// ── CONTROLS ──
+document.getElementById('btn-rotate').addEventListener('click', function() {
+  autoRotate = !autoRotate;
+  this.classList.toggle('active');
+  this.textContent = autoRotate ? '⟳ Auto-Rotate' : '⟳ Paused';
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  rotX = 0.5;
+  rotY = 0.3;
+});
+
+document.getElementById('btn-toggle-field').addEventListener('click', function() {
+  showFieldLines = !showFieldLines;
+  this.classList.toggle('active');
+});
+
+document.getElementById('btn-toggle-pair').addEventListener('click', function() {
+  showPair = !showPair;
+  this.classList.toggle('active');
+});
+
+document.getElementById('view-select').addEventListener('change', function(e) {
+  viewMode = e.target.value;
+});
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'r' || e.key === 'R') document.getElementById('btn-rotate').click();
+  if (e.key === 'f' || e.key === 'F') document.getElementById('btn-toggle-field').click();
+  if (e.key === 'p' || e.key === 'P') document.getElementById('btn-toggle-pair').click();
+});
+
+// ── START ──
+requestAnimationFrame(animate);
+
+console.log('%c⚡ Superconducting Electron Pair Ledger', 'color: #4a9eff; font-weight: bold;');
+console.log('%cAether Dipole-Toroid · Earth\'s Plasmasphere', 'color: #ffd700;');
+console.log('%cQMU: enrg = m_e·λ_C²·F_q² | temp = F_q²·λ_C²', 'color: #888;');
+console.log('%cη_pair = magnetic cancellation | β_pair = binding energy', 'color: #ff6b6b;');
+console.log('%c📄 QADI · Thomson III 2025 — Superconducting Electron Pair Ledger', 'color: #4a9eff;');
+</script>
+
+</body>
+</html>
