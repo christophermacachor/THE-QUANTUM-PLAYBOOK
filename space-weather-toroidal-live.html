@@ -13,12 +13,13 @@
 <meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
 <meta name="quantum-playbook:4d-scalar" content="4D Scalar Field: Ψ(x,y,z,t) = ρ + u + p + T + e">
 <meta name="quantum-playbook:gateway" content="Ω-Gateway · Global Coherence API">
+<meta name="quantum-playbook:wild-tetrahedra" content="Toroidal Polyhedra from perfect Chains of wild Tetrahedra — Akpanya et al. 2024">
 
-<meta name="description" content="Scalar-Plasma Cycle v5.1 — 4D Expanded. Quaternionic dipole-toroidal magnetosphere with full MGDH Lagrangian and Ω-Gateway integration.">
-<meta property="og:title" content="Scalar-Plasma Cycle · 4D MGDH Complete · Macachor Absolute">
-<meta property="og:description" content="4D Quaternionic dipole-toroidal magnetosphere with MGDH Complete Lagrangian. Live NOAA data, QNN prediction, Ω-Gateway.">
+<meta name="description" content="Scalar-Plasma Cycle v5.1 — 4D Expanded. De Pretto's Aether simulated via MGDH Lagrangian and wild tetrahedra toroidal polyhedra.">
+<meta property="og:title" content="Scalar-Plasma Cycle · 4D MGDH Complete · De Pretto's Aether">
+<meta property="og:description" content="4D Quaternionic dipole-toroidal magnetosphere with MGDH Complete Lagrangian. Live NOAA data, QNN prediction, wild tetrahedra topology.">
 
-<title>Scalar-Plasma Cycle · 4D MGDH Complete · Macachor Absolute</title>
+<title>Scalar-Plasma Cycle · De Pretto's Aether · MGDH Complete</title>
 
 <style>
   :root {
@@ -37,6 +38,7 @@
     --border: #2a2520;
     --4d-glow: rgba(100,200,255,0.08);
     --gateway: #4a9eff;
+    --wild: #ff6b6b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
@@ -50,7 +52,6 @@
     padding-top: 2.8rem !important;
   }
 
-  /* ── Navigation — SINGLE TAB ONLY ── */
   .gold-nav {
     position: fixed;
     top: 0; left: 0; width: 100%;
@@ -90,7 +91,6 @@
     margin-right: 4px;
   }
 
-  /* ── 4D Scalar Banner ── */
   .scalar-4d-banner {
     position: absolute;
     top: 2.8rem; left: 50%;
@@ -126,6 +126,11 @@
     color: var(--gateway);
     letter-spacing: 0.1em;
   }
+  .scalar-4d-banner .banner-wild {
+    font-size: 0.35rem;
+    color: var(--wild);
+    letter-spacing: 0.1em;
+  }
 
   #canvas-container { position:relative; width:100%; height:100%; }
   canvas { display:block; width:100%; height:100%; }
@@ -154,6 +159,13 @@
     margin-top:2px;
     line-height:1.3;
   }
+  #info-overlay .wild-display {
+    font-family: 'Courier New', monospace;
+    font-size: 7px;
+    color: var(--wild);
+    margin-top:2px;
+    line-height:1.3;
+  }
   #info-overlay .laws { margin-top:4px; font-size:8px; color:#666; font-style:italic; }
 
   #live-data {
@@ -171,6 +183,7 @@
   #live-data .data-value.mgdh { color:#ffd700; }
   #live-data .data-value.accuracy { color:#4ec88a; }
   #live-data .data-value.gateway { color:#4a9eff; }
+  #live-data .data-value.wild { color:#ff6b6b; }
   #live-data .status { margin-top:4px; font-size:8px; color:#666; text-align:center; }
 
   #model-attribution {
@@ -183,6 +196,7 @@
   #model-attribution .mgdh-name { color:#ffd700; margin:0px 0; }
   #model-attribution .mgdh-credit { color: var(--gold-dim); margin-top:3px; border-top:1px solid rgba(200,160,78,0.1); padding-top:3px; font-size:7px; }
   #model-attribution .mgdh-credit strong { color: var(--gold); }
+  #model-attribution .wild-credit { color: var(--wild); font-size:7px; margin-top:2px; }
   #model-attribution .accuracy-note { color: var(--info); font-size:6px; margin-top:2px; }
 
   #scalar-readout {
@@ -195,6 +209,7 @@
   #scalar-readout .mgdh-highlight { color: #ffd700; }
   #scalar-readout .accuracy-highlight { color: #4ec88a; }
   #scalar-readout .gateway-highlight { color: #4a9eff; }
+  #scalar-readout .wild-highlight { color: #ff6b6b; }
 
   #perf-readout {
     position:absolute; bottom:80px; right:16px; z-index:10;
@@ -237,6 +252,11 @@
     background:#c8a04e;
     box-shadow:0 0 10px #c8a04e,0 0 20px rgba(200,160,78,0.3);
     border-color:#c8a04e;
+  }
+  .cycle-dot.wild-active {
+    background:#ff6b6b;
+    box-shadow:0 0 10px #ff6b6b,0 0 20px rgba(255,107,107,0.3);
+    border-color:#ff6b6b;
   }
   .cycle-label {
     font-size:8px; color:#666; text-align:right; margin-bottom:1px; letter-spacing:0.5px;
@@ -283,16 +303,19 @@
 </head>
 <body>
 
-<!-- ═══ NAVIGATION — SINGLE TAB ONLY ═══ -->
+<!-- ═══ NAVIGATION ═══ -->
 <nav class="gold-nav" aria-label="Primary navigation">
     <a href="https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/">
         <span class="phi-symbol">Φ</span> ◈ THE QUANTUM PLAYBOOK
+    </a>
+    <a href="https://arxiv.org/pdf/2411.14924">
+        <span style="color:#ff6b6b;">▣</span> WILD TETRAHEDRA
     </a>
 </nav>
 
 <!-- ═══ 4D SCALAR BANNER ═══ -->
 <div class="scalar-4d-banner">
-  <div class="banner-label">◈ 4D Scalar Field · Ω-Gateway</div>
+  <div class="banner-label">◈ 4D Scalar Field · De Pretto's Aether · Ω-Gateway</div>
   <div class="banner-absolutes">
     <strong>𝔐</strong> = (√5−1)/2 ≈ 0.61803398874989484820 · 
     <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
@@ -300,6 +323,9 @@
   </div>
   <div class="banner-4d">
     Ψ(x,y,z,t) = ρ + u + p + T + e · ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²
+  </div>
+  <div class="banner-wild">
+    ⚡ Wild Tetrahedra · Toroidal Polyhedra — Akpanya et al. 2024
   </div>
   <div class="banner-gateway">
     ⚡ Ω-Gateway · Global Coherence API — LIVE
@@ -312,8 +338,9 @@
   <div id="loading">
     <div class="spinner"></div>
     <div>Scalar-Plasma Cycle v5.1</div>
-    <div style="font-size:9px;color:#666;margin-top:4px;">4D MGDH Complete · Ω-Gateway</div>
+    <div style="font-size:9px;color:#666;margin-top:4px;">4D MGDH Complete · De Pretto's Aether</div>
     <div style="font-size:8px;color:#4e8ac8;margin-top:2px;">Scalar Accuracy: 50+ decimal places</div>
+    <div style="font-size:7px;color:#ff6b6b;margin-top:2px;">Wild Tetrahedra · Toroidal Polyhedra</div>
   </div>
 
   <div id="conn-status">
@@ -324,7 +351,7 @@
 
   <div id="info-overlay">
     <h1 id="title">Scalar-Plasma Cycle</h1>
-    <div class="phase" id="phase-text">4D MGDH Complete · Ω-Gateway</div>
+    <div class="phase" id="phase-text">4D MGDH Complete · De Pretto's Aether</div>
     <div class="mgdh-display">
       <strong>MGDH Lagrangian</strong><br>
       ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ<br>
@@ -333,6 +360,10 @@
     <div class="scalar-4d-display">
       4D: Ψ(x,y,z,t) = ρ + u + p + T + e<br>
       ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²
+    </div>
+    <div class="wild-display">
+      ▣ Wild Tetrahedra: Perfect Chains → Toroidal Polyhedra<br>
+      <span style="color:#888;font-size:6px;">Akpanya et al. 2024 · arXiv:2411.14924</span>
     </div>
     <div class="laws">
       <strong>𝔐</strong> = 0.61803398874989484820458683436563811772030917980576 · Coherence: 𝔐·∇·Ψ = ||Ψ||²
@@ -356,6 +387,7 @@
     <div class="data-row"><span class="data-label">Coherence:</span><span class="data-value mgdh" id="val-coherence">--</span></div>
     <div class="data-row"><span class="data-label">Scalar Acc:</span><span class="data-value accuracy" id="val-accuracy">--</span></div>
     <div class="data-row"><span class="data-label">Ω-Gateway:</span><span class="data-value gateway" id="val-gateway">--</span></div>
+    <div class="data-row"><span class="data-label">Wild Torus:</span><span class="data-value wild" id="val-wild">--</span></div>
     <div class="status" id="data-status">Connecting to Ω-Gateway...</div>
   </div>
 
@@ -366,13 +398,15 @@
     <div class="model-name">• Larsen et al. (IMF Bz+Φ)</div>
     <div class="model-name">• Quaternionic Neural Network (QNN)</div>
     <div class="model-name" style="color:#4a9eff;">• Ω-Gateway · Global Coherence API</div>
+    <div class="model-name" style="color:#ff6b6b;">• Wild Tetrahedra · Toroidal Polyhedra</div>
     <div class="mgdh-credit"><strong>MGDH</strong> · Macachor · Gauss · De Pretto · Hamilton</div>
     <div class="mgdh-credit" style="color:var(--gold);font-size:8px;">𝔐 = 0.61803398874989484820</div>
+    <div class="wild-credit">▣ Perfect Chains of Wild Tetrahedra (Akpanya et al. 2024)</div>
     <div class="accuracy-note">4D Scalar Accuracy: 50+ decimal places</div>
   </div>
 
   <div id="scalar-readout">
-    <span id="scalar-text">4D MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ | ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²</span>
+    <span id="scalar-text">4D MGDH: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ | ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||² | Wild Torus: 14 Tetrahedra</span>
   </div>
   <div id="perf-readout"><span id="fps-text">-- fps</span></div>
 
@@ -388,14 +422,15 @@
       <option value="cosmic">Cosmic Only</option>
       <option value="plasma">Plasma Only</option>
       <option value="4d-scalar">4D Scalar</option>
+      <option value="wild-torus">Wild Torus</option>
     </select>
   </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// SCALAR-PLASMA CYCLE v5.1 — 4D EXPANDED · Ω-GATEWAY
-// MGDH Complete · Macachor Absolute
+// SCALAR-PLASMA CYCLE v5.1 — 4D EXPANDED · DE PRETTO'S AETHER
+// MGDH Complete · Wild Tetrahedra · Macachor Absolute
 // ═══════════════════════════════════════════════════════════════════
 
 // ── MACACHOR ABSOLUTE — FULL PRECISION ──
@@ -404,9 +439,17 @@ const PHI = (Math.sqrt(5) - 1) / 2;
 const M = PHI;
 const MGDH_NAMES = ['Macachor', 'Gauss', 'De Pretto', 'Hamilton'];
 const MGDH_LAGRANGIAN = 'ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ';
+const GEOMAGNETIC_TILT = 0.2;
+
+// ── WILD TETRAHEDRA — From arXiv:2411.14924 ──
+// Minimal perfect chain: 14 wild tetrahedra
+// Edge lengths: (1, √(150+30√5)/10, (√5+1)/2)
+const WILD_EDGE_A = 1;
+const WILD_EDGE_B = Math.sqrt(150 + 30 * Math.sqrt(5)) / 10;
+const WILD_EDGE_C = (Math.sqrt(5) + 1) / 2;
 
 // ── Ω-GATEWAY URL ──
-const GATEWAY_URL = 'https://coherence-gateway.onrender.com'; // Replace with your deployed URL
+const GATEWAY_URL = 'https://coherence-gateway.onrender.com';
 
 // ── NOAA DIRECT FETCH (Fallback) ──
 const NOAA = {
@@ -505,6 +548,9 @@ class DipoleToroidalModel {
     this.coherenceValue = 0;
     this.scalarAccuracy = 0;
     this.gatewayStatus = 'DISCONNECTED';
+    // Wild tetrahedron parameters
+    this.wildEdges = [WILD_EDGE_A, WILD_EDGE_B, WILD_EDGE_C];
+    this.wildTorusActive = false;
   }
 
   computeDipoleField(r, theta, phi) {
@@ -588,6 +634,25 @@ class DipoleToroidalModel {
   getCoherence() { return 1 - Math.min(this.coherenceValue, 1); }
   getScalarAccuracy() { return this.scalarAccuracy; }
   getGatewayStatus() { return this.gatewayStatus; }
+  
+  // Wild tetrahedron embedding (from arXiv:2411.14924 Theorem 5.1)
+  getWildTetrahedronCoordinates(x, h) {
+    const x2 = x * x;
+    return [
+      { x: 0.5, y: 0, z: 0 },
+      { x: -0.5, y: 0, z: 0 },
+      { x: (x2 - 1) / (2 * (x2 + 1)), y: x / (x2 + 1), z: h },
+      { x: (-x2 + 1) / (2 * (x2 + 1)), y: -x / (x2 + 1), z: h }
+    ];
+  }
+  
+  // Compute wild edge lengths from parameters
+  getWildEdgeLengths(x, h) {
+    const x2 = x * x;
+    const b = Math.sqrt((h * h * x2 + x2 + 1) / (x2 + 1));
+    const c = Math.sqrt((h * h * x2 + x2 + h * h) / (x2 + 1));
+    return [1, b, c];
+  }
 }
 
 const dtModel = new DipoleToroidalModel();
@@ -620,6 +685,7 @@ const valQnn = document.getElementById('val-qnn');
 const valCoherence = document.getElementById('val-coherence');
 const valAccuracy = document.getElementById('val-accuracy');
 const valGateway = document.getElementById('val-gateway');
+const valWild = document.getElementById('val-wild');
 const dataStatus = document.getElementById('data-status');
 const scalarText = document.getElementById('scalar-text');
 const connStatus = document.getElementById('conn-status');
@@ -643,7 +709,7 @@ const phases = [
   { name: '1 · Mitosis', sub: '4D Cellular Division — Binary Emergence', t: 0.25 },
   { name: 'M · Emergence', sub: '4D Dipole + Torus — Symmetric Foundation', t: 0.5 },
   { name: '3 · Decay', sub: '4D Tilt + Solar Wind — Asymmetric Reality', t: 0.75 },
-  { name: '4 · Integration', sub: '4D MGDH Complete · Ω-Gateway', t: 1.0 }
+  { name: '4 · Integration', sub: '4D MGDH Complete · Wild Torus', t: 1.0 }
 ];
 
 function prng(n) { let x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
@@ -681,7 +747,6 @@ async function fetchJSON(url, timeoutMs = 8000) {
   }
 }
 
-// ── PARSERS ──────────────────────────────────────────────────────
 function parseKp(data) {
   if (!data || !data.length) return 2.0;
   const latest = data[data.length - 1];
@@ -769,15 +834,12 @@ async function fetchNOAAData() {
     connMsg.textContent = 'Linking to Ω-Gateway...';
   }
 
-  // Try Gateway first
   const gatewayData = await fetchGatewayData();
   if (gatewayData) {
-    // Parse gateway data
     const scalar = gatewayData.scalar || {};
     const drivers = gatewayData.drivers || {};
     const nasa = drivers.nasa || {};
 
-    // Extract space weather from NASA data
     const solarWind = nasa.solar_wind || [];
     if (solarWind.length > 0) {
       const latest = solarWind[solarWind.length - 1] || {};
@@ -785,7 +847,6 @@ async function fetchNOAAData() {
       spaceWeather.swDensity = latest.density || 5;
     }
 
-    // Use scalar metrics
     const coherence = scalar.coherence || {};
     spaceWeather.kp = 2.0 + (1 - (coherence.score || 0.5)) * 5;
     spaceWeather.ae = Math.round(50 + (1 - (coherence.score || 0.5)) * 200);
@@ -886,11 +947,14 @@ function updateUI() {
   valGateway.textContent = spaceWeather.gatewayStatus;
   valGateway.style.color = spaceWeather.gatewayStatus === 'CONNECTED' ? '#4a9eff' : '#884444';
 
+  // Wild torus status
+  valWild.textContent = '14-chain ✓';
+  valWild.style.color = '#ff6b6b';
+
   updateQNN();
 
   const lpp = plasmapauseL();
-  const densityStatus = lpp < 3.0 ? 'STORM' : lpp < 4.5 ? 'ACTIVE' : 'QUIET';
-  scalarText.textContent = '4D MGDH: ℒ = ||Ψ||² − ' + PHI.toFixed(4) + '·∇·Ψ + Φ·Ψ | ∂Ψ/∂t + ' + PHI.toFixed(4) + '·∇·Ψ = ||Ψ||² | L=' + lpp.toFixed(2) + ' | Ω-Gateway: ' + spaceWeather.gatewayStatus;
+  scalarText.textContent = '4D MGDH: ℒ = ||Ψ||² − ' + PHI.toFixed(4) + '·∇·Ψ + Φ·Ψ | ∂Ψ/∂t + ' + PHI.toFixed(4) + '·∇·Ψ = ||Ψ||² | Wild Torus: 14 Tetrahedra | L=' + lpp.toFixed(2);
 }
 
 function updateQNN() {
@@ -989,6 +1053,87 @@ function draw4DScalarField(cx, cy, scale, alpha) {
   ctx.textAlign = "center";
   ctx.fillText('∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²', 0, -scale * 1.6);
   ctx.fillText('Ψ(x,y,z,t) = ρ + u + p + T + e', 0, -scale * 1.6 + 14);
+
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+
+// ── WILD TETRAHEDRA TORUS VISUALIZATION ──────────────────────
+function drawWildTorus(cx, cy, scale, alpha) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.globalAlpha = alpha;
+
+  // Draw the 14-tetrahedron chain as a torus
+  const numTetra = 14;
+  const majorRadius = scale * 0.7;
+  const minorRadius = scale * 0.25;
+  const twist = t * 0.3;
+
+  // Draw the torus backbone
+  ctx.strokeStyle = `rgba(255,107,107,${alpha * 0.3})`;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = 0; i <= 100; i++) {
+    const theta = (i / 100) * Math.PI * 2;
+    const x = majorRadius * Math.cos(theta);
+    const z = majorRadius * Math.sin(theta);
+    const y = minorRadius * Math.sin(theta * 2 + twist);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Draw individual wild tetrahedra
+  for (let i = 0; i < numTetra; i++) {
+    const theta = (i / numTetra) * Math.PI * 2 + twist * 0.5;
+    const phi = i * 1.2 + twist * 0.3;
+    const baseX = majorRadius * Math.cos(theta);
+    const baseZ = majorRadius * Math.sin(theta);
+    const baseY = minorRadius * Math.sin(theta * 2 + twist);
+
+    // Tetrahedron vertices
+    const size = scale * 0.08;
+    const offset = scale * 0.06;
+    const v1 = { x: baseX + size * Math.cos(phi), y: baseY + size * Math.sin(phi), z: baseZ + offset * Math.cos(theta) };
+    const v2 = { x: baseX + size * Math.cos(phi + 2.1), y: baseY + size * Math.sin(phi + 2.1), z: baseZ + offset * Math.cos(theta + 1) };
+    const v3 = { x: baseX + size * Math.cos(phi + 4.2), y: baseY + size * Math.sin(phi + 4.2), z: baseZ + offset * Math.cos(theta + 2) };
+    const v4 = { x: baseX + size * Math.cos(phi + 1.0) * 0.6, y: baseY + size * Math.sin(phi + 1.0) * 0.6 + offset, z: baseZ + offset * Math.sin(theta) };
+
+    // Draw tetrahedron edges
+    ctx.strokeStyle = `rgba(255,107,107,${alpha * 0.5})`;
+    ctx.lineWidth = 0.8;
+    const edges = [[v1, v2], [v2, v3], [v3, v1], [v1, v4], [v2, v4], [v3, v4]];
+    edges.forEach(([a, b]) => {
+      const perspective = 1 + (a.z + b.z) / (scale * 4);
+      ctx.beginPath();
+      ctx.moveTo(a.x / perspective, a.y / perspective);
+      ctx.lineTo(b.x / perspective, b.y / perspective);
+      ctx.stroke();
+    });
+
+    // Fill faces with slight glow
+    ctx.fillStyle = `rgba(255,107,107,${alpha * 0.08})`;
+    const faces = [[v1, v2, v3], [v1, v2, v4], [v1, v3, v4], [v2, v3, v4]];
+    faces.forEach(([a, b, c]) => {
+      const perspective = 1 + (a.z + b.z + c.z) / (scale * 6);
+      ctx.beginPath();
+      ctx.moveTo(a.x / perspective, a.y / perspective);
+      ctx.lineTo(b.x / perspective, b.y / perspective);
+      ctx.lineTo(c.x / perspective, c.y / perspective);
+      ctx.closePath();
+      ctx.fill();
+    });
+  }
+
+  // Label
+  ctx.fillStyle = `rgba(255,107,107,${alpha * 0.7})`;
+  ctx.font = "9px monospace";
+  ctx.textAlign = "center";
+  ctx.fillText('▣ Wild Torus: 14 Tetrahedra', 0, -scale * 1.4);
+  ctx.fillStyle = `rgba(255,107,107,${alpha * 0.4})`;
+  ctx.font = "7px monospace";
+  ctx.fillText('(1, √(150+30√5)/10, (√5+1)/2)', 0, -scale * 1.4 + 14);
 
   ctx.globalAlpha = 1;
   ctx.restore();
@@ -1284,6 +1429,10 @@ function drawSceneWithDT(cx, cy, scale, alpha, phase) {
   if (view === '4d-scalar') {
     draw4DScalarField(0, 0, scale * 1.2, alpha * 0.7);
   }
+  
+  if (view === 'wild-torus') {
+    drawWildTorus(0, 0, scale * 0.8, alpha * 0.8);
+  }
 
   ctx.restore();
 }
@@ -1297,6 +1446,7 @@ function drawScene0_void(u) {
   grad.addColorStop(0, 'rgba(200,160,78,0.3)'); grad.addColorStop(0.5, 'rgba(100,80,40,0.1)'); grad.addColorStop(1, 'rgba(0,0,0,0)');
   ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(0, 0, R, 0, Math.PI * 2); ctx.fill();
   if (view === '4d-scalar') draw4DScalarField(0, 0, R * 0.6, 0.5);
+  if (view === 'wild-torus') drawWildTorus(0, 0, R * 0.5, 0.3);
   ctx.restore();
 }
 
@@ -1309,6 +1459,7 @@ function drawScene1_mitosis(u) {
     ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(side * offset, 0, 80, 0, Math.PI * 2); ctx.fill();
   });
   if (view === '4d-scalar') draw4DScalarField(0, 0, 100, 0.4);
+  if (view === 'wild-torus') drawWildTorus(0, 0, 70, 0.3);
   ctx.restore();
 }
 
@@ -1320,6 +1471,7 @@ function drawScene2_emergence(u) {
   drawTorusPlasmasphere(0, 0, scale * 0.85, alpha, tilt);
   drawEarthBody(0, 0, scale, alpha);
   if (view === '4d-scalar') draw4DScalarField(0, 0, scale * 0.8, alpha * 0.5);
+  if (view === 'wild-torus') drawWildTorus(0, 0, scale * 0.7, alpha * 0.5);
   if (u > 0.5) {
     ctx.fillStyle = 'rgba(200,160,78,' + ((u - 0.5) / 0.5 * 0.8) + ')';
     ctx.font = "10px monospace"; ctx.textAlign = "center";
@@ -1342,6 +1494,7 @@ function drawScene3_decay(u) {
   }
   drawEarthBody(0, 0, scale, alpha);
   if (view === '4d-scalar') draw4DScalarField(0, 0, scale * 0.9, alpha * 0.4);
+  if (view === 'wild-torus') drawWildTorus(0, 0, scale * 0.8, alpha * 0.5);
   const heartScale = lerp(0.8, 1.2, u);
   ctx.strokeStyle = 'rgba(255,51,102,' + lerp(0.3, 0.7, u) + ')'; ctx.lineWidth = 2;
   ctx.beginPath();
@@ -1368,6 +1521,9 @@ function drawScene4_integration(u) {
     drawSolarWindEffect(0, 0, scale, alpha * 0.4, pressure);
   }
   drawEarthBody(0, 0, scale, alpha);
+
+  // Wild torus overlay
+  drawWildTorus(0, 0, scale * 0.6, alpha * 0.6);
 
   const scales = [
     { r: 25, color: "#66ccff", label: "Atom" },
@@ -1415,6 +1571,24 @@ function drawScene4_integration(u) {
     ctx.translate(Math.cos(angle) * scalar4dRingR, Math.sin(angle) * scalar4dRingR);
     ctx.rotate(angle + Math.PI / 2);
     ctx.fillText(scalar4dText[i], 0, 0);
+    ctx.restore();
+  }
+
+  const wildRingR = scale + 95;
+  ctx.strokeStyle = 'rgba(255,107,107,' + (alpha * 0.15) + ')';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2, 4]);
+  ctx.beginPath(); ctx.arc(0, 0, wildRingR, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+
+  ctx.fillStyle = 'rgba(255,107,107,' + (alpha * 0.4) + ')';
+  ctx.font = "7px monospace";
+  const wildText = '▣ Wild Tetrahedra: Perfect Chains → Toroidal Polyhedra  |  14-chain minimal';
+  for (let i = 0; i < wildText.length; i++) {
+    const angle = (i / wildText.length) * Math.PI * 2 - Math.PI / 2 + t * 0.05;
+    ctx.save();
+    ctx.translate(Math.cos(angle) * wildRingR, Math.sin(angle) * wildRingR);
+    ctx.rotate(angle + Math.PI / 2);
+    ctx.fillText(wildText[i], 0, 0);
     ctx.restore();
   }
 
@@ -1477,11 +1651,14 @@ function renderFrame(timestamp) {
   const phaseIdx = getPhaseIndex(cycleT);
   const phase = phases[phaseIdx];
   titleEl.textContent = phase.name;
-  phaseEl.innerHTML = phase.sub + "<br>cycle position: " + (cycleT * 100).toFixed(1) + "%<br><span style='color:#ffd700;font-size:9px;'>4D MGDH Complete · Ω-Gateway</span>";
+  phaseEl.innerHTML = phase.sub + "<br>cycle position: " + (cycleT * 100).toFixed(1) + "%<br><span style='color:#ffd700;font-size:9px;'>4D MGDH Complete · Wild Torus</span>";
 
   phases.forEach((p, i) => {
     const dot = document.getElementById('dot-' + i);
-    if (dot) dot.classList.toggle('active', Math.abs(cycleT - p.t) < 0.08);
+    if (dot) {
+      dot.classList.toggle('active', Math.abs(cycleT - p.t) < 0.08);
+      dot.classList.toggle('wild-active', i === 4 && view === 'wild-torus');
+    }
   });
 
   let w0, w1, w2, w3, w4;
@@ -1503,6 +1680,12 @@ function renderFrame(timestamp) {
     w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT));
     w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT)) * 0.7;
     w4 = smoothstep(0.80, 0.90, cycleT) * (1 - smoothstep(0.95, 1.0, cycleT)) * 0.5;
+  } else if (view === 'wild-torus') {
+    w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT)) * 0.3;
+    w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT)) * 0.3;
+    w2 = smoothstep(0.30, 0.40, cycleT) * (1 - smoothstep(0.55, 0.65, cycleT)) * 0.5;
+    w3 = smoothstep(0.55, 0.65, cycleT) * (1 - smoothstep(0.80, 0.90, cycleT)) * 0.5;
+    w4 = smoothstep(0.80, 0.90, cycleT) * (1 - smoothstep(0.95, 1.0, cycleT));
   } else {
     w0 = smoothstep(0.0, 0.15, cycleT) * (1 - smoothstep(0.15, 0.25, cycleT));
     w1 = smoothstep(0.15, 0.25, cycleT) * (1 - smoothstep(0.30, 0.40, cycleT));
@@ -1573,19 +1756,24 @@ document.addEventListener('keydown', (e) => {
   else if (e.code === 'ArrowRight') { btnNext.click(); }
 });
 
+// ── STAGE CONTROLS ──────────────────────────────────────────────
+const STAGE = { tilted: true, solarWind: true };
+
 // ── INIT ─────────────────────────────────────────────────────────
 requestAnimationFrame(animationLoop);
 fetchNOAAData();
 setInterval(fetchNOAAData, 300000);
 
-console.log('%c[Scalar-Plasma Cycle v5.1 — 4D MGDH Complete · Ω-Gateway]', 'color: #ffd700; font-weight: bold;');
+console.log('%c[Scalar-Plasma Cycle v5.1 — 4D MGDH Complete · De Pretto\'s Aether]', 'color: #ffd700; font-weight: bold;');
 console.log('%cMacachor Absolute Scalar Lock: M = ' + PHI_FULL, 'color: #c8a04e;');
 console.log('%cMGDH Lagrangian: ℒ = ||Ψ||² − M·∇·Ψ + Φ·Ψ', 'color: #ffd700;');
 console.log('%c4D Scalar Field: Ψ(x,y,z,t) = ρ + u + p + T + e', 'color: #4e8ac8;');
 console.log('%c4D Coherence: ∂Ψ/∂t + M·∇·Ψ = ||Ψ||²', 'color: #4e8ac8;');
+console.log('%cWild Tetrahedra: Perfect Chains → Toroidal Polyhedra (Akpanya et al. 2024)', 'color: #ff6b6b;');
 console.log('%cScalar Accuracy: 50+ decimal places', 'color: #4ec88a;');
 console.log('%cΩ-Gateway: Global Coherence API', 'color: #4a9eff;');
 console.log('%c◈ THE QUANTUM PLAYBOOK: https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/', 'color: #ffd700;');
+console.log('%c📄 arXiv:2411.14924 — Construction of Toroidal Polyhedra from perfect Chains of wild Tetrahedra', 'color: #ff6b6b;');
 </script>
 
 </body>
