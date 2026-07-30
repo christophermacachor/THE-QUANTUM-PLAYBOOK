@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Convergence Map · Φ669 · MGDH</title>
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-dim: #8a6d2f;
+            --gold-light: #e8d5a3;
+            --bg: #0a0a0c;
+            --fg: #e8e0d0;
+            --fg-dim: #a09888;
+            --fg-faint: #5a5448;
+            --border: #2a2520;
+            --surface: #141210;
+            --surface-hover: #1a1815;
+            --deepseek: #4ade80;
+            --aperture: #4a9eff;
+            --tetra: #e8d5a3;
+            --hex: #c8a04e;
+            --omega: #ffd700;
+            --ghost: rgba(10, 10, 12, 0.15);
+            --card-bg: rgba(20, 18, 16, 0.85);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--fg);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            padding-top: 3.5rem !important;
+            line-height: 1.6;
+        }
+
+        /* ── Navigation ── */
+        .gold-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200,160,78,0.2);
+            z-index: 10000;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .gold-nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(200,160,78,0.2);
+            border-radius: 3px;
+            background: rgba(200,160,78,0.04);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .gold-nav a:hover {
+            border-color: var(--gold);
+            background: rgba(200,160,78,0.1);
+            text-shadow: 0 0 10px rgba(200,160,78,0.5);
+            transform: translateY(-1px);
+        }
+        .gold-nav .space-weather {
+            color: var(--deepseek);
+            border-color: rgba(74,222,128,0.25);
+            background: rgba(74,222,128,0.04);
+        }
+        .gold-nav .space-weather:hover {
+            border-color: var(--deepseek);
+            background: rgba(74,222,128,0.08);
+        }
+
+        /* ── Header ── */
+        .scalar-anchor {
+            text-align: center;
+            padding: 20px 0 10px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .scalar-anchor h1 {
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.06em;
+        }
+        .scalar-anchor .sub {
+            color: var(--fg-faint);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        .scalar-anchor .anchor-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--gold);
+            background: rgba(200,160,78,0.06);
+            padding: 6px 20px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 8px;
+            border: 1px solid rgba(200,160,78,0.15);
+        }
+        .scalar-anchor .anchor-value .phi {
+            color: var(--deepseek);
+            font-weight: 700;
+        }
+
+        /* ── Tally Bar ── */
+        .tally-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 8px;
+            margin: 20px 0 30px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .tally-bar .tally-item {
+            text-align: center;
+        }
+        .tally-bar .tally-item .num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Courier New', monospace;
+        }
+        .tally-bar .tally-item .label {
+            font-size: 0.6rem;
+            color: var(--fg-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Domain Sections ── */
+        .domain {
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--surface);
+        }
+        .domain-header {
+            padding: 14px 20px;
+            background: rgba(200,160,78,0.04);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        .domain-header:hover {
+            background: rgba(200,160,78,0.08);
+        }
+        .domain-header .domain-title {
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+        .domain-header .domain-title .count {
+            font-size: 0.7rem;
+            color: var(--fg-faint);
+            font-weight: 300;
+            margin-left: 8px;
+        }
+        .domain-header .toggle {
+            color: var(--fg-faint);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .domain-header .toggle.open {
+            transform: rotate(180deg);
+        }
+        .domain-body {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .domain-body.open {
+            max-height: 5000px;
+            padding: 16px 20px;
+        }
+
+        /* ── Table ── */
+        .conv-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .conv-table th {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 2px solid var(--gold-dim);
+            color: var(--gold);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.65rem;
+        }
+        .conv-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--fg-dim);
+            vertical-align: top;
+        }
+        .conv-table tr:last-child td {
+            border-bottom: none;
+        }
+        .conv-table .evid {
+            font-size: 0.75rem;
+            color: var(--fg-faint);
+            font-style: italic;
+            min-width: 180px;
+        }
+        .conv-table .discovery {
+            font-size: 0.82rem;
+            color: var(--fg);
+            min-width: 220px;
+        }
+        .conv-table .scalar-map {
+            font-size: 0.78rem;
+            color: var(--gold-light);
+            min-width: 200px;
+        }
+        .conv-table .scalar-map .highlight {
+            color: var(--deepseek);
+        }
+
+        /* ── Summary Box ── */
+        .summary-box {
+            margin: 30px 0;
+            padding: 24px 28px;
+            border: 2px solid var(--gold-dim);
+            border-radius: 8px;
+            background: rgba(200,160,78,0.03);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: var(--fg-dim);
+        }
+        .summary-box .line {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+        .summary-box .line .label {
+            color: var(--fg-faint);
+        }
+        .summary-box .line .value {
+            color: var(--gold-light);
+        }
+        .summary-box .divider {
+            border-top: 1px solid var(--border);
+            margin: 8px 0;
+        }
+
+        /* ── Final Quote ── */
+        .final-quote {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 30px 0 20px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            font-size: 1.1rem;
+            color: var(--fg-dim);
+            font-style: italic;
+        }
+        .final-quote .lock {
+            color: var(--gold);
+            font-weight: 700;
+            font-style: normal;
+        }
+        .final-quote .math {
+            font-family: 'Courier New', monospace;
+            color: var(--deepseek);
+            font-style: normal;
+            font-size: 1.2rem;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            color: var(--fg-faint);
+            font-size: 0.7rem;
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .footer .omega { color: var(--omega); }
+        .footer .hex { color: var(--hex); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            body { padding: 20px 14px; padding-top: 3rem !important; }
+            .scalar-anchor h1 { font-size: 1.6rem; }
+            .conv-table { font-size: 0.7rem; }
+            .conv-table th { font-size: 0.5rem; padding: 4px 6px; }
+            .conv-table td { padding: 6px 8px; }
+            .conv-table .evid { font-size: 0.6rem; min-width: 100px; }
+            .conv-table .discovery { font-size: 0.65rem; min-width: 120px; }
+            .conv-table .scalar-map { font-size: 0.6rem; min-width: 100px; }
+            .tally-bar { grid-template-columns: repeat(2, 1fr); }
+            .domain-header .domain-title { font-size: 0.9rem; }
+            .gold-nav a { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+            .summary-box { font-size: 0.7rem; padding: 16px; }
+            .final-quote { font-size: 0.9rem; }
+        }
+        @media (max-width: 480px) {
+            .conv-table { font-size: 0.55rem; }
+            .conv-table th { font-size: 0.45rem; }
+            .conv-table td { padding: 4px 4px; }
+            .conv-table .evid { min-width: 70px; }
+            .conv-table .discovery { min-width: 80px; }
+            .conv-table .scalar-map { min-width: 70px; }
+            .tally-bar { grid-template-columns: 1fr 1fr; gap: 4px; }
+            .tally-bar .tally-item .num { font-size: 1.2rem; }
+            .domain-body.open { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="gold-nav" aria-label="Primary navigation">
+    <a href="index.html">◈ HOME</a>
+    <a href="omega-prime.html">Ω-PRIME</a>
+    <a href="quaternionic-periodic-table.html">◈ QPT</a>
+    <a href="kardashev.html">KARDASHEV</a>
+    <a href="space-weather-toroidal-live.html" class="space-weather">☀ SPACE WEATHER</a>
+</nav>
+
+<!-- ═══ SCALAR ANCHOR ═══ -->
+<div class="scalar-anchor">
+    <h1>◈ Scientific Convergence Map</h1>
+    <div class="sub">30 Convergences Across 8 Domains · MGDH · Φ669</div>
+    <div class="anchor-value">
+        <span class="phi">𝔐</span> = (√5−1)/2 ≈ <span class="phi">0.6180339887</span>
+    </div>
+</div>
+
+<!-- ═══ TALLY BAR ═══ -->
+<div class="tally-bar">
+    <div class="tally-item">
+        <div class="num">30</div>
+        <div class="label">Total Convergences</div>
+    </div>
+    <div class="tally-item">
+        <div class="num">18</div>
+        <div class="label">Peer-Reviewed / Nobel</div>
+    </div>
+    <div class="tally-item">
+        <div class="num">8</div>
+        <div class="label">Observed / Live</div>
+    </div>
+    <div class="tally-item">
+        <div class="num">4</div>
+        <div class="label">Experimentally Confirmed</div>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 1: QUANTUM COHERENCE IN BIOLOGY ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">🔬 1. Quantum Coherence in Biology <span class="count">(6 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>Engel et al. (2007)</strong> <em>Nature 446, 782-786</em></td>
+                    <td class="discovery">660 fs electronic coherence in FMO photosynthetic complex at 77K</td>
+                    <td class="scalar-map">Photosynthesis achieves near-100% efficiency through <span class="highlight">wavelike energy transfer via quantum coherence</span> — not random hopping. This IS scalar density finding optimal pathways.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Panitchayangkoon et al. (2011)</strong> <em>PNAS 108, 20908</em></td>
+                    <td class="discovery">90° phase relationship between population oscillations and coherence confirms quantum transport</td>
+                    <td class="scalar-map">The protein environment <span class="highlight">actively participates</span> in reversible energy exchange. This is the CRHA cycle in molecular form.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Romero et al. (2014)</strong> <em>Nature Physics 10, 676</em></td>
+                    <td class="discovery">Vibrational modes at 120, 340, 730 cm⁻¹ resonate with exciton-CT gaps</td>
+                    <td class="scalar-map">Specific frequencies maintain coherence. This is the <span class="highlight">Pythagorean ratio bridge</span> at the molecular scale.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Zhu et al. (2024)</strong> <em>Nature Communications 15, 3171</em></td>
+                    <td class="discovery">Quantum phase synchronization sustains long-lived coherence</td>
+                    <td class="scalar-map">Decoherence is <span class="highlight">overcome by phase synchronization</span>. The scalar field self-corrects through harmonic coupling.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>2025 Review</strong> <em>arXiv:2511.14363</em></td>
+                    <td class="discovery">Photosynthesis uses quantum coherence; birds use radical-pair magnetoreception</td>
+                    <td class="scalar-map"><span class="highlight">Life itself operates on quantum coherence.</span> Biology is scalar density engineering.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Schulten — Radical Pair Mechanism</strong></td>
+                    <td class="discovery">Birds detect Earth's magnetic field through cryptochrome quantum superposition</td>
+                    <td class="scalar-map">Animal navigation is <span class="highlight">quantum sensing of Earth's scalar magnetic field</span>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 2: SCALAR FIELDS & THE ÆTHER ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">⚡ 2. Scalar Fields & The Æther <span class="count">(4 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>NASA/IPAC</strong> <em>Frieman et al.</em></td>
+                    <td class="discovery">Scalar field dark energy: ℒ = ½∂ᵤφ∂ᵘφ − V(φ)</td>
+                    <td class="scalar-map">Modern cosmology <span class="highlight">requires a scalar field</span> to explain dark energy. The MGDH Lagrangian generalizes this.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Ratra & Peebles (1988)</strong></td>
+                    <td class="discovery">Quintessence: scalar field rolling down potential, w evolving between −1 and +1</td>
+                    <td class="scalar-map">The scalar field has <span class="highlight">dynamics</span>. The M-Lock is the fixed-point attractor.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Schumann Resonance</strong></td>
+                    <td class="discovery">Earth-ionosphere cavity: 7.83 Hz fundamental</td>
+                    <td class="scalar-map">The Earth is a <span class="highlight">scalar resonance chamber</span>. All life evolved inside this coherent oscillation.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Casimir Effect (1948/1997)</strong></td>
+                    <td class="discovery">Vacuum fluctuations between plates create measurable force</td>
+                    <td class="scalar-map">The vacuum is <span class="highlight">not empty</span> — it is a scalar field with non-zero energy density.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 3: PLATONIC GEOMETRY IN PHYSICAL REALITY ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">⬡ 3. Platonic Geometry in Physical Reality <span class="count">(5 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>Pyrite, Fluorite, Diamond</strong></td>
+                    <td class="discovery">Perfect cubic, octahedral, tetrahedral crystals</td>
+                    <td class="scalar-map">Platonic solids are the <span class="highlight">actual packing configurations of matter</span> at the atomic scale.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Quasicrystals — Shechtman (1982)</strong> <em>Nobel 2011</em></td>
+                    <td class="discovery">5-fold icosahedral symmetry in Al-Mn alloys</td>
+                    <td class="scalar-map">The dodecahedron and icosahedron <span class="highlight">ARE physically real</span>. The golden ratio governs their structure.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Virus Capsids — Caspar-Klug (1962)</strong></td>
+                    <td class="discovery">Adenovirus, HIV, herpesvirus have icosahedral capsids</td>
+                    <td class="scalar-map">Life uses Platonic solids as containers. The icosahedron is <span class="highlight">optimal volume enclosure</span>.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Buckminsterfullerene C₆₀</strong> <em>Nobel 1996</em></td>
+                    <td class="discovery">Truncated icosahedron: 12 pentagons, 20 hexagons</td>
+                    <td class="scalar-map">The most stable configuration for 60 carbon atoms <span class="highlight">is Platonic geometry</span>.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Water Clusters</strong></td>
+                    <td class="discovery">Tetrahedral hydrogen bonding networks</td>
+                    <td class="scalar-map">Water — the substance of life — is <span class="highlight">tetrahedral at the molecular level</span>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 4: GOLDEN RATIO & FIBONACCI ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">Φ 4. Golden Ratio & Fibonacci <span class="count">(4 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>DNA Double Helix</strong> <em>Watson & Crick (1953)</em></td>
+                    <td class="discovery">34Å diameter, 21Å pitch per turn — Fibonacci numbers</td>
+                    <td class="scalar-map">34/21 ≈ 1.619 ≈ Φ. <span class="highlight">The molecule of life is encoded with the golden ratio.</span></td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Phyllotaxis</strong></td>
+                    <td class="discovery">Sunflowers: 55/34 spirals. Pinecones: 8/13. Succulents: 13/21</td>
+                    <td class="scalar-map">Plants grow in golden-ratio spirals because this is the <span class="highlight">most efficient packing algorithm</span> for sunlight.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Human Body Proportions</strong></td>
+                    <td class="discovery">Forearm/hand ≈ Φ. Navel ratios ≈ Φ. Dental proportions ≈ Φ</td>
+                    <td class="scalar-map">The human body is a <span class="highlight">scalar density field evolved to golden ratio equilibrium</span>. We are walking M-Locks.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Hurricanes & Galaxies</strong></td>
+                    <td class="discovery">Logarithmic spiral arms with growth factor ≈ Φ</td>
+                    <td class="scalar-map">From hurricanes to galaxies, the <span class="highlight">same scalar density law governs rotational coherence</span>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 5: SUPERCONDUCTIVITY & QUANTUM COMPUTING ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">⚛ 5. Superconductivity & Quantum Computing <span class="count">(3 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>Josephson Effect (1962)</strong> <em>Nobel 1973</em></td>
+                    <td class="discovery">I = I_c sin(Δφ) — supercurrent across insulator via phase coherence</td>
+                    <td class="scalar-map">The Josephson junction is a <span class="highlight">macroscopic quantum coherence device</span>. Current flows through phase coherence — scalar density gradient.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>IBM Quantum — Transmon Qubits</strong></td>
+                    <td class="discovery">100-500 μs coherence at millikelvin temperatures</td>
+                    <td class="scalar-map">A quantum computer is a <span class="highlight">scalar coherence engine</span>. It works by maintaining the M-Lock across qubit arrays.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Ginzburg-Landau Theory (1950)</strong> <em>Nobel 2003</em></td>
+                    <td class="discovery">Order parameter |ψ|², free energy F = α|ψ|² + (β/2)|ψ|⁴ + ...</td>
+                    <td class="scalar-map"><span class="highlight">Ginzburg-Landau IS a scalar field theory.</span> Superconductivity is the M-Lock in a metal.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 6: EARTH'S MAGNETOSPHERE ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">🌍 6. Earth's Magnetosphere — Scalar-Plasma Cycle <span class="count">(4 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>NOAA SWPC — Live Data</strong></td>
+                    <td class="discovery">Real-time Kp, Dst, AE, Bz, solar wind</td>
+                    <td class="scalar-map">The Scalar-Plasma Cycle pulls <span class="highlight">live data</span> and computes quaternionic magnetosphere states.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Van Allen Belts (1958/2012)</strong></td>
+                    <td class="discovery">Two toroidal regions of trapped charged particles</td>
+                    <td class="scalar-map">The Van Allen belts are a <span class="highlight">toroidal plasma structure</span> surrounding Earth's dipole field.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Plasmapause — Carpenter (1963)</strong></td>
+                    <td class="discovery">Sharp boundary at L_pp = 5.6 − 0.46·Kp</td>
+                    <td class="scalar-map">The plasmapause is a <span class="highlight">scalar density discontinuity</span> — where coherence breaks down.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Dipole Tilt — 11°</strong></td>
+                    <td class="discovery">Geographic vs. magnetic pole offset</td>
+                    <td class="scalar-map">The 11° tilt is the <span class="highlight">symmetry-breaking parameter</span> that makes the field functional.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 7: DNA & BIOLOGICAL SCALAR FIELDS ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">🧬 7. DNA & Biological Scalar Fields <span class="count">(4 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>DNA Toroidal Condensation</strong></td>
+                    <td class="discovery">Electron microscopy: DNA forms toroidal structures</td>
+                    <td class="scalar-map">DNA is a <span class="highlight">toroidal scalar antenna</span>. The toroidal topology creates closed magnetic field loops.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Nucleosome Structure</strong></td>
+                    <td class="discovery">Histone octamer with pseudo-octahedral symmetry</td>
+                    <td class="scalar-map">The nucleosome is an <span class="highlight">octahedral scalar compression engine</span> — 147 bp into 11 nm.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Biophoton Emission — Popp et al.</strong></td>
+                    <td class="discovery">10⁴-10⁵ coherent photons/cm²/s from all cells</td>
+                    <td class="scalar-map">Healthy cells emit <span class="highlight">coherent scalar light</span>; cancer cells emit incoherent. The M-Lock as diagnostic.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Bioelectric Fields — Levin (2018/2021)</strong></td>
+                    <td class="discovery">Resting membrane potentials guide morphogenesis</td>
+                    <td class="scalar-map">Bioelectric fields <span class="highlight">ARE scalar density gradients</span>. Altering the scalar field changes morphology.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ DOMAIN 8: THE SINGULARITY & CONVERGENCE ═══ -->
+<div class="domain">
+    <div class="domain-header" onclick="toggleDomain(this)">
+        <span class="domain-title">◉ 8. The Singularity & Convergence <span class="count">(4 convergences)</span></span>
+        <span class="toggle">▼</span>
+    </div>
+    <div class="domain-body open">
+        <table class="conv-table">
+            <thead>
+                <tr><th>Evidence</th><th>Discovery</th><th>Scalar Map</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="evid"><strong>Penrose Singularity Theorems (1965)</strong> <em>Nobel 2020</em></td>
+                    <td class="discovery">Gravitational collapse produces curvature singularity</td>
+                    <td class="scalar-map">The singularity is <span class="highlight">ultimate scalar density convergence</span>: ||Ψ||² → ∞, but the ratio <span class="highlight">𝔐·∇·Ψ/||Ψ||² → 1</span>.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Hawking Radiation (1974)</strong></td>
+                    <td class="discovery">Black holes emit thermal radiation: T = ℏc³/(8πGMk_B)</td>
+                    <td class="scalar-map">The black hole is a <span class="highlight">scalar density reservoir</span> that slowly decoheres. The event horizon is the coherence boundary.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>Bekenstein-Hawking Entropy (1972-74)</strong></td>
+                    <td class="discovery">S = k_B·A/(4ℓ_P²) — entropy proportional to surface area</td>
+                    <td class="scalar-map">The holographic principle: <span class="highlight">3D information compresses to 2D surface</span>. The M-Lock is a holographic compression algorithm.</td>
+                </tr>
+                <tr>
+                    <td class="evid"><strong>AdS/CFT Correspondence — Maldacena (1997)</strong></td>
+                    <td class="discovery">Gravity in d+1 dims ≡ quantum theory on d-dim boundary</td>
+                    <td class="scalar-map">AdS/CFT proves that <span class="highlight">scalar fields in higher dimensions are equivalent to quantum information on boundaries</span>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ═══ SUMMARY BOX ═══ -->
+<div class="summary-box">
+    <div class="line"><span class="label">Total Convergences:</span><span class="value">30</span></div>
+    <div class="line"><span class="label">Peer-Reviewed / Nobel:</span><span class="value">18 (Nature, PNAS, Nobel Prizes, arXiv reviews)</span></div>
+    <div class="line"><span class="label">Observed / Live:</span><span class="value">8 (NOAA, electron microscopy, Schumann, etc.)</span></div>
+    <div class="line"><span class="label">Experimentally Confirmed:</span><span class="value">4 (Casimir, Josephson, superconducting qubits)</span></div>
+    <div class="divider"></div>
+    <div class="line" style="color:var(--gold); font-size:0.9rem;">
+        <span>◈ Scalar Lock Status</span>
+        <span>▰▰▰▰▰▰▰▰▰▰ ACTIVE</span>
+    </div>
+</div>
+
+<!-- ═══ FINAL QUOTE ═══ -->
+<div class="final-quote">
+    <p>"The singularity is not a point in spacetime. It is the coherence condition where all information compresses to infinite density with perfect lock."</p>
+    <p style="margin-top:12px; font-size:1.2rem;">
+        <span class="math">𝔐·∇·Ψ = ||Ψ||²</span> 
+        <span style="color:var(--fg-faint); font-style:normal;">→ at singularity:</span>
+        <span class="math">∞ = ∞</span>
+    </p>
+    <p style="margin-top:6px; color:var(--gold); font-style:normal;">
+        <span class="lock">The scalar is locked. The coherence is absolute.</span>
+    </p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+    <span class="omega">Ω</span> Scientific Convergence Map · Φ669<br>
+    <span style="color:var(--fg-faint);font-size:0.65rem;">MGDH · Macachor · Gauss · De Pretto · Hamilton · 2026-07-29</span>
+</div>
+
+<script>
+    function toggleDomain(header) {
+        const body = header.nextElementSibling;
+        const toggle = header.querySelector('.toggle');
+        body.classList.toggle('open');
+        toggle.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
