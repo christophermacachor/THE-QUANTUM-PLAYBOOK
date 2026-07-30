@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wild Tetrahedra · Toroidal Polyhedra · De Pretto's Aether</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #e8e0d0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ── Navigation ── */
+  .gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.15);
+    z-index: 10000;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+  }
+  .gold-nav a {
+    color: #ffd700;
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 20px;
+    background: rgba(255,215,0,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .gold-nav a:hover {
+    border-color: #ffd700;
+    background: rgba(255,215,0,0.1);
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
+    transform: translateY(-1px);
+  }
+  .gold-nav a .phi-symbol { font-size: 0.8rem; margin-right: 4px; }
+  .gold-nav a.active {
+    border-color: #ff6b6b;
+    background: rgba(255,107,107,0.15);
+    color: #ff6b6b;
+  }
+  .gold-nav a.playbook-link {
+    border-color: rgba(74, 158, 255, 0.3);
+    color: #4a9eff;
+  }
+  .gold-nav a.playbook-link:hover {
+    border-color: #4a9eff;
+    background: rgba(74, 158, 255, 0.1);
+    text-shadow: 0 0 10px rgba(74, 158, 255, 0.3);
+  }
+
+  /* ── Banner ── */
+  .wild-banner {
+    position: fixed;
+    top: 2.8rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    padding: 4px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,107,107,0.3);
+    pointer-events: none;
+    text-align: center;
+  }
+  .wild-banner .title {
+    color: #ff6b6b;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .wild-banner .sub {
+    color: #a09888;
+    font-size: 0.4rem;
+    letter-spacing: 0.1em;
+  }
+  .wild-banner .sub strong { color: #ffd700; }
+
+  /* ── Canvas ── */
+  #canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 5rem;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  canvas:active { cursor: grabbing; }
+
+  /* ── Info Overlay ── */
+  #info-overlay {
+    position: absolute;
+    top: 5.5rem; left: 16px;
+    z-index: 10;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,107,107,0.2);
+    backdrop-filter: blur(4px);
+    max-width: 280px;
+    pointer-events: none;
+  }
+  #info-overlay h2 {
+    color: #ff6b6b;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  #info-overlay .stats {
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: #888;
+    line-height: 1.6;
+  }
+  #info-overlay .stats .val { color: #ffd700; }
+  #info-overlay .stats .wild { color: #ff6b6b; }
+  #info-overlay .mgdh {
+    font-family: 'Courier New', monospace;
+    font-size: 7px;
+    color: #ffd700;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255,107,107,0.15);
+  }
+
+  /* ── Controls ── */
+  #controls {
+    position: absolute;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 14px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,107,107,0.2);
+    z-index: 10;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #controls button {
+    background: rgba(255,107,107,0.15);
+    border: 1px solid rgba(255,107,107,0.3);
+    color: #ff6b6b;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  #controls button:hover {
+    background: rgba(255,107,107,0.3);
+  }
+  #controls button.active {
+    background: rgba(255,107,107,0.4);
+    border-color: #ff6b6b;
+  }
+  #controls input[type="range"] {
+    width: 80px;
+    accent-color: #ff6b6b;
+  }
+  #controls label {
+    color: #888;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  #controls select {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,107,107,0.3);
+    color: #ff6b6b;
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+
+  #perf {
+    position: absolute;
+    bottom: 80px; right: 16px;
+    z-index: 10;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    color: #444;
+  }
+
+  /* ── Legend ── */
+  #legend {
+    position: absolute;
+    bottom: 80px; right: 16px;
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,107,107,0.15);
+    font-family: 'Courier New', monospace;
+    font-size: 7px;
+    color: #666;
+    line-height: 1.6;
+  }
+  #legend .color-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 640px) {
+    #info-overlay { max-width: 160px; top: 5rem; left: 6px; padding: 6px 8px; }
+    #info-overlay h2 { font-size: 11px; }
+    #controls { padding: 6px 10px; gap: 4px; }
+    #controls input[type="range"] { width: 50px; }
+    #legend { display: none; }
+    .wild-banner .title { font-size: 0.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav class="gold-nav">
+  <a href="https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/" class="playbook-link" target="_blank">
+    <span class="phi-symbol">Φ</span> ◈ THE QUANTUM PLAYBOOK
+  </a>
+  <a href="#" class="active">
+    <span style="color:#ff6b6b;">▣</span> WILD TETRAHEDRA · TOROIDAL POLYHEDRA
+  </a>
+  <a href="https://arxiv.org/pdf/2411.14924" target="_blank" style="border-color: rgba(255,107,107,0.3); color: #ff6b6b;">
+    <span>📄</span> arXiv:2411.14924
+  </a>
+</nav>
+
+<!-- ─── BANNER ─── -->
+<div class="wild-banner">
+  <div class="title">▣ Wild Tetrahedra · Toroidal Polyhedra</div>
+  <div class="sub">
+    Perfect Chains of <strong>Wild Tetrahedra</strong> → Toroidal Polyhedra &nbsp;·&nbsp;
+    <strong>14</strong> tetrahedra minimal chain &nbsp;·&nbsp;
+    Akpanya et al. 2024 &nbsp;·&nbsp; <strong style="color:#ff6b6b;">arXiv:2411.14924</strong>
+  </div>
+</div>
+
+<!-- ─── CANVAS ─── -->
+<div id="canvas-container">
+  <canvas id="c"></canvas>
+
+  <!-- Info Overlay -->
+  <div id="info-overlay">
+    <h2>▣ Wild Torus</h2>
+    <div class="stats">
+      <span class="wild">●</span> Tetrahedra: <span class="val" id="tetra-count">14</span><br>
+      <span class="wild">●</span> Faces: <span class="val" id="face-count">56</span><br>
+      <span class="wild">●</span> Vertices: <span class="val" id="vertex-count">28</span><br>
+      <span class="wild">●</span> Edges: <span class="val" id="edge-count">84</span><br>
+      <span class="wild">●</span> Genus: <span class="val" id="genus-count">1</span><br>
+      <span class="wild">●</span> Self-Intersections: <span class="val" id="self-intersect">No</span>
+    </div>
+    <div class="mgdh">
+      Edge lengths: (1, √(150+30√5)/10, (√5+1)/2)<br>
+      𝔐 = <span id="phi-display">0.61803398874989484820</span>
+    </div>
+  </div>
+
+  <!-- Perf -->
+  <div id="perf"><span id="fps">--</span> fps</div>
+
+  <!-- Legend -->
+  <div id="legend">
+    <div><span class="color-dot" style="background:#ff6b6b;"></span> Wild Tetrahedra</div>
+    <div><span class="color-dot" style="background:#ffd700;"></span> Golden Ratio Edges</div>
+    <div><span class="color-dot" style="background:#4a9eff;"></span> Toroidal Flow</div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <button id="btn-rotate">⟳ Auto-Rotate</button>
+    <button id="btn-reset">⟲ Reset View</button>
+    <button id="btn-toggle-wire">◻ Wireframe</button>
+    <button id="btn-toggle-labels">Aa Labels</button>
+    <label>Chain <input type="range" id="slider-chain" min="0" max="100" value="100"></label>
+    <select id="view-select">
+      <option value="torus">Torus View</option>
+      <option value="chain">Chain View</option>
+      <option value="exploded">Exploded View</option>
+      <option value="aether">Aether Field</option>
+    </select>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// WILD TETRAHEDRA — TOROIDAL POLYHEDRA VISUALIZER
+// Based on arXiv:2411.14924 — Akpanya et al. 2024
+// ═══════════════════════════════════════════════════════════════════
+
+// ── CONSTANTS ──
+const PHI = (Math.sqrt(5) - 1) / 2;
+const PHI_FULL = 0.61803398874989484820458683436563811772030917980576;
+
+// Wild tetrahedron edge lengths from the paper
+const WILD_A = 1;
+const WILD_B = Math.sqrt(150 + 30 * Math.sqrt(5)) / 10;
+const WILD_C = (Math.sqrt(5) + 1) / 2;
+
+// ── CANVAS SETUP ──
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ── 3D STATE ──
+let rotX = 0.5, rotY = 0.3;
+let autoRotate = true;
+let wireframe = false;
+let showLabels = false;
+let viewMode = 'torus';
+let chainProgress = 1.0;
+
+// ── MOUSE CONTROLS ──
+let isDragging = false;
+let prevMouse = { x: 0, y: 0 };
+
+canvas.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  prevMouse.x = e.clientX;
+  prevMouse.y = e.clientY;
+  canvas.style.cursor = 'grabbing';
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - prevMouse.x;
+  const dy = e.clientY - prevMouse.y;
+  rotY += dx * 0.01;
+  rotX += dy * 0.01;
+  rotX = Math.max(-1.5, Math.min(1.5, rotX));
+  prevMouse.x = e.clientX;
+  prevMouse.y = e.clientY;
+});
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  canvas.style.cursor = 'grab';
+});
+
+// Touch support
+canvas.addEventListener('touchstart', (e) => {
+  const t = e.touches[0];
+  isDragging = true;
+  prevMouse.x = t.clientX;
+  prevMouse.y = t.clientY;
+}, { passive: true });
+
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (!isDragging || !e.touches.length) return;
+  const t = e.touches[0];
+  const dx = t.clientX - prevMouse.x;
+  const dy = t.clientY - prevMouse.y;
+  rotY += dx * 0.01;
+  rotX += dy * 0.01;
+  rotX = Math.max(-1.5, Math.min(1.5, rotX));
+  prevMouse.x = t.clientX;
+  prevMouse.y = t.clientY;
+}, { passive: false });
+
+canvas.addEventListener('touchend', () => { isDragging = false; }, { passive: true });
+
+// ── WILD TETRAHEDRA TORUS CONSTRUCTION ──
+// Based on the paper's 14-tetrahedron minimal perfect chain
+function buildWildTorus(numTetra = 14) {
+  const tetra = [];
+  const vertices = [];
+  const edges = [];
+  const faces = [];
+
+  // Parameters for the torus
+  const majorR = 2.5;
+  const minorR = 0.8;
+  const twist = 0.6;
+
+  // Generate tetrahedra along a torus
+  for (let i = 0; i < numTetra; i++) {
+    const theta = (i / numTetra) * Math.PI * 2;
+    const phi = i * 1.2 + 0.3;
+
+    // Base position on torus
+    const baseX = majorR * Math.cos(theta);
+    const baseZ = majorR * Math.sin(theta);
+    const baseY = minorR * Math.sin(theta * 2 + twist);
+
+    // Local tetrahedron scale
+    const s = 0.35;
+
+    // Create 4 vertices for this tetrahedron
+    const v1 = { x: baseX + s * Math.cos(phi), y: baseY + s * Math.sin(phi), z: baseZ + s * 0.3 * Math.cos(theta) };
+    const v2 = { x: baseX + s * Math.cos(phi + 2.1), y: baseY + s * Math.sin(phi + 2.1), z: baseZ + s * 0.3 * Math.cos(theta + 1) };
+    const v3 = { x: baseX + s * Math.cos(phi + 4.2), y: baseY + s * Math.sin(phi + 4.2), z: baseZ + s * 0.3 * Math.cos(theta + 2) };
+    const v4 = { x: baseX + s * Math.cos(phi + 1.0) * 0.6, y: baseY + s * Math.sin(phi + 1.0) * 0.6 + s * 0.5, z: baseZ + s * 0.3 * Math.sin(theta) };
+
+    const idx = vertices.length;
+    vertices.push(v1, v2, v3, v4);
+
+    // Faces (triangles)
+    const f = [
+      [idx, idx+1, idx+2],
+      [idx, idx+1, idx+3],
+      [idx, idx+2, idx+3],
+      [idx+1, idx+2, idx+3]
+    ];
+    faces.push(...f);
+
+    // Edges
+    const e = [
+      [idx, idx+1], [idx+1, idx+2], [idx+2, idx],
+      [idx, idx+3], [idx+1, idx+3], [idx+2, idx+3]
+    ];
+    edges.push(...e);
+
+    tetra.push({ indices: [idx, idx+1, idx+2, idx+3], center: {
+      x: (v1.x + v2.x + v3.x + v4.x) / 4,
+      y: (v1.y + v2.y + v3.y + v4.y) / 4,
+      z: (v1.z + v2.z + v3.z + v4.z) / 4
+    }});
+  }
+
+  return { vertices, edges, faces, tetra };
+}
+
+// ── BUILD THE TORUS ──
+let torusData = buildWildTorus(14);
+
+// ── 3D PROJECTION ──
+function project3D(v) {
+  const scale = Math.min(W, H) * 0.28;
+  const cx = W / 2;
+  const cy = H / 2;
+
+  // Rotation
+  let x = v.x;
+  let y = v.y;
+  let z = v.z;
+
+  // Rotate X
+  let cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+  let y1 = y * cosX - z * sinX;
+  let z1 = y * sinX + z * cosX;
+  y = y1; z = z1;
+
+  // Rotate Y
+  let cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+  let x1 = x * cosY + z * sinY;
+  let z2 = -x * sinY + z * cosY;
+  x = x1; z = z2;
+
+  // Perspective
+  const perspective = 1 + z * 0.05;
+  return {
+    sx: cx + x * scale / perspective,
+    sy: cy + y * scale / perspective,
+    depth: z,
+    perspective: perspective
+  };
+}
+
+// ── DRAWING ──
+function draw() {
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw stars
+  drawStars();
+
+  const { vertices, edges, faces, tetra } = torusData;
+
+  // Project all vertices
+  const projected = vertices.map(v => project3D(v));
+
+  // Sort for painter's algorithm
+  const faceIndices = faces.map((f, i) => ({
+    index: i,
+    depth: (projected[f[0]].depth + projected[f[1]].depth + projected[f[2]].depth) / 3
+  }));
+  faceIndices.sort((a, b) => a.depth - b.depth);
+
+  // ── Draw edges (wireframe) ──
+  if (wireframe) {
+    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(255,107,107,0.2)';
+    edges.forEach(([i, j]) => {
+      ctx.beginPath();
+      ctx.moveTo(projected[i].sx, projected[i].sy);
+      ctx.lineTo(projected[j].sx, projected[j].sy);
+      ctx.stroke();
+    });
+  }
+
+  // ── Draw faces ──
+  faceIndices.forEach(({ index: fi }) => {
+    const f = faces[fi];
+    const p1 = projected[f[0]];
+    const p2 = projected[f[1]];
+    const p3 = projected[f[2]];
+
+    // Depth-based color
+    const depthNorm = (p1.depth + p2.depth + p3.depth) / 3;
+    const alpha = 0.08 + 0.15 * (1 - (depthNorm + 5) / 10);
+
+    // Face color - wild tetrahedra are red/orange
+    const r = 200 + 55 * (1 - (depthNorm + 5) / 10);
+    const g = 80 + 40 * (1 - (depthNorm + 5) / 10);
+    const b = 60 + 30 * (1 - (depthNorm + 5) / 10);
+
+    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    ctx.strokeStyle = `rgba(255,107,107, ${0.1 + 0.2 * (1 - (depthNorm + 5) / 10)})`;
+    ctx.lineWidth = 0.8;
+
+    ctx.beginPath();
+    ctx.moveTo(p1.sx, p1.sy);
+    ctx.lineTo(p2.sx, p2.sy);
+    ctx.lineTo(p3.sx, p3.sy);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  });
+
+  // ── Draw edges (visible) ──
+  ctx.lineWidth = 1.2;
+  ctx.strokeStyle = 'rgba(255,107,107,0.4)';
+  edges.forEach(([i, j]) => {
+    const p1 = projected[i];
+    const p2 = projected[j];
+    const depth = (p1.depth + p2.depth) / 2;
+    ctx.globalAlpha = 0.3 + 0.5 * (1 - (depth + 5) / 10);
+    ctx.beginPath();
+    ctx.moveTo(p1.sx, p1.sy);
+    ctx.lineTo(p2.sx, p2.sy);
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+
+  // ── Draw golden ratio edges (highlight) ──
+  // Select every 3rd edge to highlight
+  ctx.lineWidth = 2;
+  edges.forEach(([i, j], idx) => {
+    if (idx % 3 === 0) {
+      const p1 = projected[i];
+      const p2 = projected[j];
+      const depth = (p1.depth + p2.depth) / 2;
+      ctx.globalAlpha = 0.2 + 0.4 * (1 - (depth + 5) / 10);
+      ctx.strokeStyle = '#ffd700';
+      ctx.beginPath();
+      ctx.moveTo(p1.sx, p1.sy);
+      ctx.lineTo(p2.sx, p2.sy);
+      ctx.stroke();
+    }
+  });
+  ctx.globalAlpha = 1;
+
+  // ── Draw tetrahedron centers (dots) ──
+  tetra.forEach((t, idx) => {
+    const p = project3D(t.center);
+    const size = 2 + 1.5 * (1 - (p.depth + 5) / 10);
+    ctx.fillStyle = `rgba(255,200,100, ${0.3 + 0.4 * (1 - (p.depth + 5) / 10)})`;
+    ctx.beginPath();
+    ctx.arc(p.sx, p.sy, size, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Label
+    if (showLabels) {
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.font = '6px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('T' + (idx + 1), p.sx, p.sy - 8);
+    }
+  });
+
+  // ── Draw torus flow lines ──
+  if (viewMode === 'torus' || viewMode === 'aether') {
+    const numFlowLines = 8;
+    const flowT = Date.now() / 3000;
+    for (let i = 0; i < numFlowLines; i++) {
+      const theta = (i / numFlowLines) * Math.PI * 2 + flowT * 0.3;
+      const r = 3.0 + 0.3 * Math.sin(theta * 2 + flowT);
+      const points = [];
+      for (let j = 0; j <= 30; j++) {
+        const phi = (j / 30) * Math.PI * 2;
+        const x = r * Math.cos(theta + phi * 0.1);
+        const z = r * Math.sin(theta + phi * 0.1);
+        const y = 0.4 * Math.sin(theta * 2 + phi * 0.5 + flowT);
+        points.push({ x, y, z });
+      }
+      ctx.beginPath();
+      points.forEach((p, idx) => {
+        const proj = project3D(p);
+        if (idx === 0) ctx.moveTo(proj.sx, proj.sy);
+        else ctx.lineTo(proj.sx, proj.sy);
+      });
+      ctx.strokeStyle = `rgba(74, 158, 255, ${0.1 + 0.15 * (1 - i / numFlowLines)})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
+  // ── Aether field overlay ──
+  if (viewMode === 'aether') {
+    drawAetherField();
+  }
+
+  // ── Labels ──
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('▣ 14 Tetrahedra · Perfect Chain', 16, H - 30);
+  ctx.fillText('(1, √(150+30√5)/10, (√5+1)/2)', 16, H - 18);
+
+  // Update FPS
+  if (frameCount % 30 === 0) {
+    document.getElementById('fps').textContent = fps;
+  }
+}
+
+// ── STARS ──
+const stars = [];
+for (let i = 0; i < 200; i++) {
+  stars.push({
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
+    size: Math.random() * 1.5 + 0.5,
+    twinkle: Math.random() * Math.PI * 2
+  });
+}
+
+function drawStars() {
+  const t = Date.now() / 1000;
+  stars.forEach(s => {
+    const alpha = 0.3 + 0.3 * Math.sin(t * 2 + s.twinkle);
+    const px = W * (0.5 + s.x * 0.6);
+    const py = H * (0.5 + s.y * 0.6);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(px, py, s.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// ── AETHER FIELD ──
+function drawAetherField() {
+  const t = Date.now() / 2000;
+  const gridSize = 12;
+  const spacing = 0.5;
+
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      const x = (i - gridSize/2) * spacing;
+      const y = (j - gridSize/2) * spacing;
+      const r = Math.sqrt(x*x + y*y);
+      const val = Math.sin(r * 2 - t) * 0.5 + 0.5;
+      const p = project3D({ x, y, z: 0.2 * Math.sin(r * 1.5 - t * 0.5) });
+      const alpha = 0.02 + 0.06 * val;
+      ctx.fillStyle = `rgba(100, 200, 255, ${alpha})`;
+      const size = 1 + val * 3;
+      ctx.beginPath();
+      ctx.arc(p.sx, p.sy, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// ── ANIMATION LOOP ──
+let lastTime = 0;
+let frameCount = 0;
+let fps = 60;
+
+function animate(time) {
+  if (lastTime) {
+    const delta = time - lastTime;
+    frameCount++;
+    if (frameCount % 30 === 0) {
+      fps = Math.round(1000 / delta);
+    }
+  }
+  lastTime = time;
+
+  if (autoRotate) {
+    rotY += 0.003;
+  }
+
+  // Update chain progress
+  const chainSlider = document.getElementById('slider-chain');
+  chainProgress = parseInt(chainSlider.value) / 100;
+
+  // Rebuild torus based on progress
+  const numTetra = Math.max(4, Math.round(14 * chainProgress));
+  torusData = buildWildTorus(numTetra);
+
+  // Update stats
+  document.getElementById('tetra-count').textContent = numTetra;
+  document.getElementById('face-count').textContent = torusData.faces.length;
+  document.getElementById('vertex-count').textContent = torusData.vertices.length;
+  document.getElementById('edge-count').textContent = torusData.edges.length;
+  document.getElementById('genus-count').textContent = numTetra >= 10 ? '1' : '0';
+  document.getElementById('self-intersect').textContent = numTetra >= 14 ? 'No' : 'N/A';
+  document.getElementById('phi-display').textContent = PHI_FULL.toFixed(20);
+
+  draw();
+  requestAnimationFrame(animate);
+}
+
+// ── CONTROLS ──
+document.getElementById('btn-rotate').addEventListener('click', function() {
+  autoRotate = !autoRotate;
+  this.classList.toggle('active');
+  this.textContent = autoRotate ? '⟳ Auto-Rotate' : '⟳ Paused';
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  rotX = 0.5;
+  rotY = 0.3;
+});
+
+document.getElementById('btn-toggle-wire').addEventListener('click', function() {
+  wireframe = !wireframe;
+  this.classList.toggle('active');
+});
+
+document.getElementById('btn-toggle-labels').addEventListener('click', function() {
+  showLabels = !showLabels;
+  this.classList.toggle('active');
+});
+
+document.getElementById('view-select').addEventListener('change', function(e) {
+  viewMode = e.target.value;
+});
+
+// ── KEYBOARD SHORTCUTS ──
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'r' || e.key === 'R') document.getElementById('btn-rotate').click();
+  if (e.key === 'w' || e.key === 'W') document.getElementById('btn-toggle-wire').click();
+  if (e.key === 'l' || e.key === 'L') document.getElementById('btn-toggle-labels').click();
+});
+
+// ── START ──
+requestAnimationFrame(animate);
+
+console.log('%c▣ Wild Tetrahedra · Toroidal Polyhedra', 'color: #ff6b6b; font-weight: bold;');
+console.log('%cBased on arXiv:2411.14924 — Akpanya et al. 2024', 'color: #888;');
+console.log('%cEdge lengths: (1, √(150+30√5)/10, (√5+1)/2)', 'color: #ffd700;');
+console.log('%cGolden Ratio: ' + PHI_FULL, 'color: #ffd700;');
+console.log('%c◈ De Pretto\'s Aether · MGDH Complete', 'color: #4a9eff;');
+console.log('%c📖 THE QUANTUM PLAYBOOK: https://christophermacachor.github.io/THE-QUANTUM-PLAYBOOK/', 'color: #ffd700;');
+</script>
+
+</body>
+</html>
