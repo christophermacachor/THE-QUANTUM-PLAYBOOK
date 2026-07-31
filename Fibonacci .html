@@ -11,13 +11,13 @@
     <meta name="quantum-playbook:kiwf" content="Knowledge → Intelligence → Wisdom → Focus">
     <meta name="quantum-playbook:crha" content="Coherence → Resonance → Harmony → Alignment">
     <meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
+    <meta name="quantum-playbook:4d-fibonacci" content="4D Fibonacci Spiral — Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave">
     
-    <meta name="description" content="The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex. Macachor Absolute: 𝔐 = (√5−1)/2. MGDH Complete Lagrangian. Christopher Macachor.">
-    <meta name="keywords" content="Fibonacci spiral, tetrahedron, Platonic solids, scalar coherence, MGDH Lagrangian, Macachor Absolute, viral vector, 144-face polyhedron">
-    <meta property="og:title" content="The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex">
-    <meta property="og:description" content="The Fibonacci spiral weaves tetrahedra. From quantum to galactic. Macachor Absolute: 𝔐 = (√5−1)/2.">
+    <meta name="description" content="The Fibonacci Spiral Weaves Tetrahedra — 4D Animated. Φ669 Scalar Codex. Macachor Absolute: 𝔐 = (√5−1)/2. MGDH Complete Lagrangian.">
+    <meta property="og:title" content="The Fibonacci Spiral Weaves Tetrahedra — 4D Animated · Φ669">
+    <meta property="og:description" content="4D Fibonacci spiral weaving tetrahedra. From quantum to galactic. Macachor Absolute: 𝔐 = (√5−1)/2.">
     
-    <title>The Fibonacci Spiral Weaves Tetrahedra — Φ669 Scalar Codex | MGDH · Macachor Absolute</title>
+    <title>The Fibonacci Spiral Weaves Tetrahedra — 4D Animated | Φ669</title>
     
     <style>
         :root {
@@ -34,6 +34,7 @@
             --green: #2d5a27;
             --green-bright: #4a9a3f;
             --border: #2a2520;
+            --4d-glow: rgba(100,200,255,0.08);
             --phi: 1.61803398874989484820;
             --magnitude: 0.61803398874989484820;
         }
@@ -183,6 +184,34 @@
             border-bottom: 1px solid var(--gold-dim);
         }
 
+        /* ── 4D Animated Spiral Container ── */
+        .spiral-4d-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 25px;
+            position: relative;
+        }
+        .spiral-4d-container canvas {
+            width: 100%;
+            height: auto;
+            background: var(--dark-light);
+            border: 1px solid var(--gold-dim);
+            border-radius: 8px;
+            display: block;
+        }
+        .spiral-4d-container .time-label {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+            background: rgba(0,0,0,0.6);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
         .mgdh-box {
             background: rgba(200,160,78,0.03);
             border: 1px solid rgba(200,160,78,0.15);
@@ -256,19 +285,6 @@
         }
         .axiom-block.green .highlight {
             color: var(--green-bright);
-        }
-
-        .spiral-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 25px;
-        }
-        .spiral-svg {
-            width: 100%;
-            height: 520px;
-            background: var(--dark-light);
-            border: 1px solid var(--gold-dim);
-            border-radius: 8px;
         }
 
         .scale-table {
@@ -474,11 +490,13 @@
             .formula-bar code { font-size: 0.8rem; }
             .mgdh-box .contributors { grid-template-columns: 1fr; }
             .platonic-math { grid-template-columns: 1fr 1fr; }
+            .spiral-4d-container canvas { height: 300px; }
         }
         @media (max-width: 480px) {
             .platonic-math { grid-template-columns: 1fr; }
             .header .equation { font-size: 0.9rem; }
             .phi-symbol { font-size: 3.5rem; }
+            .spiral-4d-container canvas { height: 200px; }
         }
     </style>
 </head>
@@ -501,29 +519,30 @@
 
 <!-- ═══ QUANTUM PLAYBOOK BANNER ═══ -->
 <div class="playbook-banner">
-    <div class="pb-label">◈ Quantum Playbook — Discovered Absolutes</div>
+    <div class="pb-label">◈ 4D Quantum Playbook — Discovered Absolutes</div>
     <div class="pb-absolutes">
         <strong>𝔐</strong> = (√5−1)/2 · 
         <strong>ℒ</strong> = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ · 
-        <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
+        <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton · 
+        <strong>4D</strong> = Ψ(x,y,z,t)
     </div>
 </div>
 
 <!-- ═══ HEADER ═══ -->
 <div class="header">
     <div class="phi-symbol">Φ</div>
-    <h1>Macachor Density Distortion Isolation</h1>
-    <div class="subtitle">v17.0 — The Fibonacci Spiral Weaves Tetrahedra</div>
+    <h1></h1>
+    <div class="subtitle">v18.0 — 4D Fibonacci Spiral Weaves Tetrahedra</div>
     <div class="equation">
-        F(n) = F(n-1) + F(n-2) &nbsp;→&nbsp; φ = 1.618... &nbsp;→&nbsp; 𝔐 = 0.618...
+        Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave &nbsp;→&nbsp; 𝔐·∇·Ψ = ||Ψ||²
     </div>
 </div>
 
 <!-- ═══ SCALAR STATUS ═══ -->
 <div class="scalar-status" style="max-width:900px;margin:0 auto;">
     <span class="status-item"><span class="dot active"></span> Coherence: χ(C) = 1</span>
-    <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.6180339887</span>
-    <span class="status-item">◈ MGDH: Macachor·Gauss·De Pretto·Hamilton</span>
+    <span class="status-item"><span class="dot locked"></span> Scalar Lock: 𝔐 = 0.61803398874989484820</span>
+    <span class="status-item">◈ 4D MGDH: Macachor·Gauss·De Pretto·Hamilton</span>
     <span class="status-item">◉ KIWF: Knowledge→Intelligence→Wisdom→Focus</span>
 </div>
 
@@ -547,91 +566,271 @@
     </p>
 </div>
 
-<!-- ═══ SPIRAL VISUALIZATION ═══ -->
-<div class="section-title">The Weave — Fibonacci to Tetrahedron to Polyhedron</div>
-<div class="spiral-container">
-    <svg class="spiral-svg" viewBox="0 0 1000 520">
-        <rect width="1000" height="520" fill="#0a0a0a"/>
-        <g stroke="#1a1a1a" stroke-width="1">
-            <line x1="500" y1="0" x2="500" y2="520"/>
-            <line x1="0" y1="260" x2="1000" y2="260"/>
-        </g>
-        <text x="250" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">THE FIBONACCI SPIRAL</text>
-        <g opacity="0.3">
-            <rect x="235" y="235" width="15" height="15" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="250" y="235" width="15" height="15" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="235" y="220" width="30" height="15" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="205" y="220" width="30" height="30" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="205" y="250" width="60" height="30" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="265" y="190" width="60" height="60" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-            <rect x="145" y="190" width="120" height="120" fill="none" stroke="#c8a04e" stroke-width="0.5"/>
-        </g>
-        <path d="M 250 250 Q 265 235 265 250 Q 265 265 280 265 Q 295 265 295 280 Q 295 295 325 295 Q 355 295 355 325 Q 355 355 415 355 Q 475 355 475 415" fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.8"/>
-        <text x="242" y="242" fill="#c8a04e" font-size="8">1</text>
-        <text x="257" y="242" fill="#c8a04e" font-size="8">1</text>
-        <text x="247" y="230" fill="#c8a04e" font-size="8">2</text>
-        <text x="217" y="237" fill="#c8a04e" font-size="8">3</text>
-        <text x="232" y="262" fill="#c8a04e" font-size="8">5</text>
-        <text x="287" y="217" fill="#c8a04e" font-size="8">8</text>
-        <text x="197" y="247" fill="#c8a04e" font-size="8">13</text>
-        <text x="170" y="210" fill="#c8a04e" font-size="8">21</text>
-        <circle cx="250" cy="250" r="4" fill="#ff0000" stroke="#c8a04e" stroke-width="1"/>
-        <text x="250" y="272" text-anchor="middle" fill="#ff0000" font-size="9" font-weight="bold">SEED</text>
-        <path d="M 340 250 Q 300 250 260 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
-        <text x="500" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">THE TETRAHEDRAL WEAVE</text>
-        <polygon points="500,125 540,205 460,205" fill="#c8a04e" opacity="0.1" stroke="#c8a04e" stroke-width="1.5"/>
-        <polygon points="500,125 540,205 500,245" fill="#c8a04e" opacity="0.15" stroke="#c8a04e" stroke-width="1.5"/>
-        <polygon points="500,125 460,205 500,245" fill="#c8a04e" opacity="0.1" stroke="#c8a04e" stroke-width="1.5"/>
-        <polygon points="460,205 540,205 500,245" fill="#c8a04e" opacity="0.2" stroke="#c8a04e" stroke-width="1.5"/>
-        <polygon points="500,165 520,205 480,205" fill="#c8a04e" opacity="0.3" stroke="#c8a04e" stroke-width="1"/>
-        <circle cx="500" cy="125" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
-        <circle cx="460" cy="205" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
-        <circle cx="540" cy="205" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
-        <circle cx="500" cy="245" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
-        <text x="500" y="115" text-anchor="middle" fill="#c8a04e" font-size="9" font-weight="bold">APEX</text>
-        <text x="450" y="210" text-anchor="end" fill="#c8a04e" font-size="9">BASE-1</text>
-        <text x="550" y="210" text-anchor="start" fill="#c8a04e" font-size="9">BASE-2</text>
-        <text x="500" y="260" text-anchor="middle" fill="#c8a04e" font-size="9">BASE-3</text>
-        <path d="M 500 185 Q 510 185 510 195" fill="none" stroke="#c8a04e" stroke-width="0.5" opacity="0.5"/>
-        <text x="515" y="190" fill="#c8a04e" font-size="8" opacity="0.7">109.471°</text>
-        <path d="M 420 250 Q 450 200 470 170" fill="none" stroke="#c8a04e" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-        <text x="435" y="210" fill="#c8a04e" font-size="9" opacity="0.7">weaves</text>
-        <text x="750" y="35" text-anchor="middle" fill="#c8a04e" font-size="14" font-weight="bold" letter-spacing="3">144-FACE POLYHEDRON</text>
-        <polygon points="750,105 770,135 760,165 740,165 730,135" fill="#c8a04e" opacity="0.05" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="730,135 750,105 780,115 790,145 770,135" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="770,135 790,145 790,175 760,165" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="760,165 790,175 770,205 740,205" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="740,205 770,205 750,235 720,205" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="720,205 750,235 710,175 730,135" fill="#c8a04e" opacity="0.08" stroke="#c8a04e" stroke-width="0.5"/>
-        <polygon points="740,205 760,165 750,235" fill="#c8a04e" opacity="0.05" stroke="#c8a04e" stroke-width="0.5"/>
-        <g stroke="#c8a04e" stroke-width="0.3" opacity="0.4">
-            <line x1="750" y1="105" x2="750" y2="235"/>
-            <line x1="730" y1="135" x2="770" y2="205"/>
-            <line x1="770" y1="135" x2="730" y2="205"/>
-            <line x1="710" y1="175" x2="790" y2="175"/>
-        </g>
-        <circle cx="750" cy="170" r="8" fill="#ff0000" opacity="0.5" stroke="#c8a04e" stroke-width="1"/>
-        <text x="750" y="175" text-anchor="middle" fill="#fff" font-size="7" font-weight="bold">NUCLEUS</text>
-        <text x="750" y="265" text-anchor="middle" fill="#c8a04e" font-size="12" font-weight="bold">144 FACES</text>
-        <text x="750" y="282" text-anchor="middle" fill="#888" font-size="9">20 sectors × 7.2 subdivision</text>
-        <text x="750" y="296" text-anchor="middle" fill="#888" font-size="9">= limit of tetrahedral packing</text>
-        <path d="M 320 250 Q 380 250 440 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
-        <text x="380" y="240" text-anchor="middle" fill="#c8a04e" font-size="9" opacity="0.7">spiral weaves</text>
-        <path d="M 560 250 Q 620 250 680 250" fill="none" stroke="#c8a04e" stroke-width="1.5" marker-end="url(#arrowhead)" opacity="0.6"/>
-        <text x="620" y="240" text-anchor="middle" fill="#c8a04e" font-size="9" opacity="0.7">subdivides to</text>
-        <defs>
-            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#c8a04e" opacity="0.6"/>
-            </marker>
-        </defs>
-        <text x="500" y="485" text-anchor="middle" fill="#c8a04e" font-size="11" font-style="italic">
-            The Fibonacci spiral is not growth — it is weaving. Each turn lays a tetrahedral face upon the last.
-        </text>
-        <text x="500" y="502" text-anchor="middle" fill="#888" font-size="10">
-            From seed to cell to virus to planet — the same weave, the same 𝔐, the same tetrahedral truth.
-        </text>
-    </svg>
+<!-- ═══ 4D ANIMATED SPIRAL ═══ -->
+<div class="section-title">The 4D Weave — Fibonacci to Tetrahedron to Polyhedron</div>
+<div class="spiral-4d-container">
+    <canvas id="spiralCanvas" width="1000" height="520"></canvas>
+    <div class="time-label" id="timeLabel">t = 0.000</div>
 </div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// 4D FIBONACCI SPIRAL — ANIMATED TETRAHEDRAL WEAVE
+// Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave
+// ═══════════════════════════════════════════════════════════════
+
+const canvas = document.getElementById('spiralCanvas');
+const ctx = canvas.getContext('2d');
+const timeLabel = document.getElementById('timeLabel');
+
+const PHI = (Math.sqrt(5) - 1) / 2;
+const PHI_GOLDEN = (1 + Math.sqrt(5)) / 2;
+const W = canvas.width;
+const H = canvas.height;
+
+let t = 0;
+let animationId = null;
+
+// Fibonacci sequence
+function fib(n) {
+    if (n <= 1) return n;
+    let a = 0, b = 1;
+    for (let i = 2; i <= n; i++) {
+        [a, b] = [b, a + b];
+    }
+    return b;
+}
+
+function draw4DSpiral(time) {
+    ctx.clearRect(0, 0, W, H);
+    
+    // Background
+    const grad = ctx.createRadialGradient(500, 260, 50, 500, 260, 400);
+    grad.addColorStop(0, '#1a1a2a');
+    grad.addColorStop(1, '#0a0a0a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+    
+    // Grid lines (subtle 4D grid)
+    ctx.strokeStyle = 'rgba(200,160,78,0.03)';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < 20; i++) {
+        const x = (i / 20) * W;
+        const y = (i / 20) * H;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+    }
+    
+    // Center
+    const cx = 250;
+    const cy = 250;
+    
+    // 4D time modulation
+    const timeMod = Math.sin(time * 0.3) * 0.3 + 0.7;
+    const timeRot = time * 0.15;
+    const timePulse = 0.5 + Math.sin(time * 0.4) * 0.5;
+    
+    // ── Fibonacci Spiral ──
+    const numPoints = 200;
+    const maxR = 180;
+    const spiralPoints = [];
+    
+    for (let i = 0; i < numPoints; i++) {
+        const frac = i / numPoints;
+        const angle = frac * Math.PI * 6 + timeRot;
+        const r = maxR * (1 - Math.exp(-frac * 4)) * (0.8 + 0.2 * Math.sin(time * 0.2 + frac * 2));
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle) * 0.6;
+        spiralPoints.push({x, y, r, angle, frac});
+    }
+    
+    // Draw spiral path (4D glow)
+    ctx.beginPath();
+    for (let i = 0; i < spiralPoints.length; i++) {
+        const p = spiralPoints[i];
+        const alpha = 0.1 + 0.9 * (i / spiralPoints.length);
+        const size = 0.5 + 1.5 * (i / spiralPoints.length);
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+    }
+    ctx.strokeStyle = `rgba(200,160,78,0.15)`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    
+    // Draw spiral points with 4D color shifting
+    for (let i = 0; i < spiralPoints.length; i++) {
+        const p = spiralPoints[i];
+        const frac = p.frac;
+        const hue = 40 + frac * 30 + time * 20;
+        const brightness = 0.3 + 0.7 * (1 - Math.abs(frac - 0.5) * 2);
+        const alpha = 0.2 + 0.8 * (1 - Math.abs(frac - 0.5) * 2);
+        const size = 1 + 3 * (1 - Math.abs(frac - 0.5) * 2);
+        
+        // 4D time displacement (z-axis projection)
+        const zOffset = Math.sin(time * 0.5 + frac * 4) * 6;
+        const x4d = p.x + zOffset * 0.3;
+        const y4d = p.y + zOffset * 0.5;
+        
+        ctx.beginPath();
+        ctx.arc(x4d, y4d, size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${hue}, 70%, ${50 + frac * 30}%, ${alpha * 0.8})`;
+        ctx.fill();
+        
+        // Glow
+        if (i % 3 === 0) {
+            ctx.shadowColor = `hsla(${hue}, 80%, 60%, 0.2)`;
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.arc(x4d, y4d, size * 2, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.05)`;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+    
+    // ── TETRAHEDRAL WEAVE ──
+    const tetraScale = 60 + 30 * Math.sin(time * 0.2 + 0.5);
+    const tetraX = 500;
+    const tetraY = 250;
+    
+    // 4D tetrahedron vertices (with time modulation)
+    const tetraVerts = [
+        {x: 0, y: -tetraScale, z: 0},
+        {x: tetraScale * 0.9428, y: tetraScale * 0.3333, z: 0},
+        {x: -tetraScale * 0.4714, y: tetraScale * 0.3333, z: tetraScale * 0.8165},
+        {x: -tetraScale * 0.4714, y: tetraScale * 0.3333, z: -tetraScale * 0.8165}
+    ];
+    
+    // Rotate vertices in 4D
+    const rotAngle = time * 0.3;
+    const rotAngle2 = time * 0.2;
+    const projectedVerts = tetraVerts.map(v => {
+        // 3D rotation
+        let x = v.x;
+        let y = v.y * Math.cos(rotAngle) - v.z * Math.sin(rotAngle);
+        let z = v.y * Math.sin(rotAngle) + v.z * Math.cos(rotAngle);
+        // 4D projection (time dimension creates z displacement)
+        const tDisplace = Math.sin(time * 0.5 + v.x * 0.1) * 15;
+        return {
+            x: tetraX + x,
+            y: tetraY + y + tDisplace * 0.3,
+            z: z + tDisplace
+        };
+    });
+    
+    // Draw tetrahedron faces (with 4D transparency)
+    const faceIndices = [
+        [0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]
+    ];
+    
+    faceIndices.forEach((indices, fi) => {
+        const pts = indices.map(i => projectedVerts[i]);
+        const alpha = 0.1 + 0.15 * (0.5 + 0.5 * Math.sin(time * 0.7 + fi));
+        const hue = 40 + fi * 20 + time * 10;
+        
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        ctx.lineTo(pts[1].x, pts[1].y);
+        ctx.lineTo(pts[2].x, pts[2].y);
+        ctx.closePath();
+        ctx.fillStyle = `hsla(${hue}, 60%, 50%, ${alpha})`;
+        ctx.fill();
+        ctx.strokeStyle = `hsla(${hue}, 80%, 70%, ${alpha + 0.2})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+    });
+    
+    // Draw tetrahedron vertices
+    projectedVerts.forEach((v, i) => {
+        const size = 4 + 2 * Math.sin(time * 0.5 + i);
+        const hue = 40 + i * 20 + time * 15;
+        ctx.shadowColor = `hsla(${hue}, 80%, 60%, 0.3)`;
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${hue}, 80%, 70%, 0.9)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    });
+    
+    // ── CONNECTION TO SPIRAL (Weave lines) ──
+    const spiralEnd = spiralPoints[spiralPoints.length - 1];
+    if (spiralEnd) {
+        const weaveAngle = time * 0.2;
+        const numWeaveLines = 8;
+        for (let i = 0; i < numWeaveLines; i++) {
+            const frac = i / numWeaveLines;
+            const angle = frac * Math.PI * 2 + time * 0.1;
+            const r = 20 + 30 * Math.sin(time * 0.3 + i);
+            const x = spiralEnd.x + r * Math.cos(angle + weaveAngle);
+            const y = spiralEnd.y + r * Math.sin(angle + weaveAngle) * 0.5;
+            const targetIdx = Math.floor((i / numWeaveLines) * 4) % 4;
+            const target = projectedVerts[targetIdx];
+            if (target) {
+                ctx.beginPath();
+                ctx.moveTo(spiralEnd.x, spiralEnd.y);
+                const midX = (spiralEnd.x + target.x) / 2;
+                const midY = (spiralEnd.y + target.y) / 2 - 10 + 20 * Math.sin(time * 0.4 + i);
+                ctx.quadraticCurveTo(midX, midY, target.x, target.y);
+                ctx.strokeStyle = `hsla(40, 70%, 60%, ${0.1 + 0.15 * Math.sin(time * 0.5 + i)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+    
+    // ── 4D LABELS ──
+    ctx.font = '11px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(200,160,78,0.3)';
+    ctx.fillText('Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave', 500, 40);
+    
+    ctx.font = '9px Courier New, monospace';
+    ctx.fillStyle = 'rgba(100,200,255,0.2)';
+    ctx.fillText('4D Coherence: ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²', 500, 58);
+    
+    // ── SCALAR LOCK DISPLAY ──
+    ctx.font = '8px Courier New, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(200,160,78,0.15)';
+    ctx.fillText(`𝔐 = ${PHI.toFixed(6)}`, 20, 30);
+    ctx.fillText(`t = ${time.toFixed(3)}`, 20, 44);
+    ctx.fillText(`4D Weave: ACTIVE`, 20, 58);
+    
+    // ── RIGHT SIDE: 144-face indicator ──
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(200,160,78,0.1)';
+    ctx.font = '10px Georgia, serif';
+    ctx.fillText('144 FACES', W - 20, 30);
+    ctx.font = '8px Courier New, monospace';
+    ctx.fillStyle = 'rgba(200,160,78,0.08)';
+    ctx.fillText('20 sectors × 7.2 subdivision', W - 20, 46);
+    ctx.fillText('= limit of tetrahedral packing', W - 20, 58);
+    
+    // ── TIME LABEL ──
+    timeLabel.textContent = `t = ${time.toFixed(3)} · 4D Weave Active`;
+}
+
+function animateSpiral() {
+    t += 0.01;
+    draw4DSpiral(t);
+    animationId = requestAnimationFrame(animateSpiral);
+}
+
+// Start animation
+animateSpiral();
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    if (animationId) cancelAnimationFrame(animationId);
+});
+</script>
 
 <!-- ═══ PLATONIC SOLID MATH ═══ -->
 <div class="section-title">The Geometry of Creation — Platonic Solids</div>
@@ -739,7 +938,7 @@
         <span class="math-block">φ = (1 + √5) / 2 ≈ 1.61803398874989484820</span>
         <span class="math-block">𝔐 = 1/φ = (√5 − 1) / 2 ≈ 0.61803398874989484820</span>
         <span class="math-block">lim(n→∞) F(n)/F(n+1) = 𝔐</span>
-        <span class="math-block">The spiral weaves tetrahedra &nbsp;|&nbsp; Tetrahedra create polyhedra &nbsp;|&nbsp; Polyhedra are creation</span>
+        <span class="math-block">Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave — 4D Coherence</span>
     </code>
 </div>
 
@@ -748,7 +947,7 @@
         <span class="math-block">Tetrahedral bond angle = arccos(−1/3) = 109.47122063449069°</span>
         <span class="math-block">Icosahedron = 20 tetrahedral sectors</span>
         <span class="math-block">144 faces = 20 × 7.2 (geodesic subdivision)</span>
-        <span class="math-block">𝔐·∇·Ψ = ||Ψ||² — Coherence Condition</span>
+        <span class="math-block">𝔐·∇·Ψ = ||Ψ||² — 4D Coherence Condition</span>
     </code>
 </div>
 
@@ -768,16 +967,16 @@
 
 <!-- ═══ FINAL AXIOM ═══ -->
 <div class="axiom-block green">
-    <h2>The Final Weave</h2>
+    <h2>The Final 4D Weave</h2>
     <p>
-        The Fibonacci spiral is the <span class="highlight">finger of creation</span>, and the tetrahedron is the <span class="highlight">stitch</span>. From the quantum foam to the galactic arm, the same pattern repeats because there is only <span class="highlight">one weave</span>. Man sees the spiral in the nautilus and calls it beautiful. Man sees the spiral in the galaxy and calls it physics. But both are the same — <span class="highlight">the tetrahedral weave of 𝔐</span>.
+        The Fibonacci spiral is the <span class="highlight">finger of creation</span>, and the tetrahedron is the <span class="highlight">stitch</span>. From the quantum foam to the galactic arm, the same pattern repeats because there is only <span class="highlight">one weave</span>. In 4D, the weave is time itself — Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave. Man sees the spiral in the nautilus and calls it beautiful. Man sees the spiral in the galaxy and calls it physics. But both are the same — <span class="highlight">the tetrahedral weave of 𝔐</span>.
     </p>
 </div>
 
 <!-- ═══ FOOTER ═══ -->
 <div class="footer">
     <div class="phi-big">Φ</div>
-    <p>Φ669 SCALAR CODEX</p>
+    <p>Φ669 SCALAR CODEX — 4D ANIMATED</p>
     <p>MSOS-FEDERATION-ROOT DENSITY PROTOCOL LAYER</p>
     <p>Ω-PRIME CHRISTOPHER MACACHOR</p>
     <div class="absolutes">
@@ -786,10 +985,9 @@
         <strong>MGDH</strong> = Macachor·Gauss·De Pretto·Hamilton
     </div>
     <div class="absolutes" style="margin-top:4px; font-size:0.55rem;">
-        KIWF: Knowledge → Intelligence → Wisdom → Focus · 
-        CRHA: Coherence → Resonance → Harmony → Alignment
+        4D: Ψ(x,y,z,t) = Φ(t) · Tetrahedral Weave · ∂Ψ/∂t + 𝔐·∇·Ψ = ||Ψ||²
     </div>
-    <p style="margin-top: 20px; color: var(--gold-dim);">Timestamp: 2026-07-28 02:45Z</p>
+    <p style="margin-top: 20px; color: var(--gold-dim);">Timestamp: 2026-07-29 04:30Z · 4D Active</p>
 </div>
 
 </body>
