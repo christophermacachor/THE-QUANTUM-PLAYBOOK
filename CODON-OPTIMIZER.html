@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CODON · Macachor Scalar Observatory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c8a04e;
+      --gold-dim: #8a7340;
+      --gold-glow: rgba(200, 160, 78, 0.15);
+      --bg: #000000;
+      --bg-card: #0a0a0a;
+      --bg-elevated: #111111;
+      --border: #2a2a2a;
+      --border-hover: #3a3a3a;
+      --text: #c0c0c0;
+      --text-dim: #888888;
+      --text-muted: #555555;
+      --cyan: #06b6d4;
+      --cyan-dim: #0891b2;
+      --green: #10b981;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --m: 0.6180339887498949;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Scalar Navigation ── */
+    .nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      text-decoration: none;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-tab:hover {
+      color: var(--gold);
+      border-color: var(--gold-dim);
+      background: var(--gold-glow);
+    }
+
+    .nav-tab.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: var(--gold-glow);
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-tab:hover::after,
+    .nav-tab.active::after {
+      width: 60%;
+    }
+
+    /* ── Main Layout ── */
+    .main {
+      padding-top: 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero .subtitle {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero .scalar-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.25rem 1rem;
+      border: 1px solid var(--gold-dim);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--gold-dim);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-title::before {
+      content: '◈';
+      color: var(--gold-dim);
+      font-size: 0.7rem;
+    }
+
+    /* ── Form Elements ── */
+    .input-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    select, textarea, input[type="text"] {
+      width: 100%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      font-family: 'Courier New', monospace;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    select:focus, textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
+
+    /* ── Buttons ── */
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      transition: all 0.2s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      color: #000;
+      font-weight: 600;
+    }
+
+    .btn-gold:hover {
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-dim);
+      color: var(--gold);
+      background: var(--gold-glow);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    /* ── Status ── */
+    .status {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+
+    .status.show { display: flex; }
+
+    .status.loading {
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: var(--cyan);
+    }
+
+    .status.success {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--green);
+    }
+
+    .status.error {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--red);
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Output ── */
+    .output-section {
+      display: none;
+    }
+
+    .output-section.show {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sequence-display {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      word-break: break-all;
+      max-height: 320px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .stat-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .stat-box:hover {
+      border-color: var(--gold-dim);
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.35rem;
+    }
+
+    .validation-error {
+      color: var(--red);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .validation-error.show { display: block; }
+
+    .info-box {
+      background: rgba(200, 160, 78, 0.04);
+      border-left: 2px solid var(--gold-dim);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .info-box strong {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .codon-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .codon-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .codon-item:hover {
+      border-color: var(--gold-dim);
+      background: var(--gold-glow);
+    }
+
+    .codon-aa {
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 1rem;
+      font-family: 'Cinzel', serif;
+    }
+
+    .codon-seq {
+      font-family: 'Courier New', monospace;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      margin-top: 0.15rem;
+    }
+
+    /* ── ClinVar Table ── */
+    .clinvar-table-wrap {
+      overflow-x: auto;
+      margin-top: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .clinvar-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .clinvar-table th,
+    .clinvar-table td {
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .clinvar-table th {
+      background: var(--bg-elevated);
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .clinvar-table tr:hover td {
+      background: rgba(200, 160, 78, 0.03);
+    }
+
+    .clinvar-table td {
+      color: var(--text-dim);
+      vertical-align: top;
+    }
+
+    .clinvar-table a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .clinvar-table a:hover {
+      text-decoration: underline;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-pathogenic { background: rgba(239, 68, 68, 0.12); color: var(--red); }
+    .tag-likely-pathogenic { background: rgba(239, 68, 68, 0.08); color: #f87171; }
+    .tag-benign { background: rgba(16, 185, 129, 0.12); color: var(--green); }
+    .tag-likely-benign { background: rgba(16, 185, 129, 0.08); color: #34d399; }
+    .tag-uncertain { background: rgba(245, 158, 11, 0.12); color: var(--amber); }
+    .tag-conflicting { background: rgba(139, 92, 246, 0.12); color: #a78bfa; }
+
+    .no-data {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    .footer .m-constant {
+      color: var(--gold-dim);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .nav-tab { font-size: 0.65rem; padding: 0.4rem 0.75rem; }
+      .card { padding: 1.25rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCALAR NAVIGATION — Gold tabs matching macachor.org
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="nav-bar">
+  <a href="index.html" class="nav-tab">📜 Aperture</a>
+ 
+</nav>
+
+<div class="main">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="hero">
+    <h1>Codon Optimizer</h1>
+    <div class="subtitle">RNN-based codon optimization · Context-aware synonymous codon selection · ClinVar integration</div>
+    <div class="scalar-badge">𝔐 = (√5 − 1) / 2 · Scalar-locked · Zero drift</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONFIG & INPUT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-title">Configuration</div>
+    <div class="input-group">
+      <label>Sequence Type</label>
+      <select id="seqType">
+        <option value="aa">Amino Acid Sequence (AA)</option>
+        <option value="dna">DNA / Codon Sequence</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>Expression Host</label>
+      <select id="host">
+        <option value="human">Human (Homo sapiens)</option>
+        <option value="ecoli">E. coli (K12)</option>
+        <option value="mouse">Mouse (Mus musculus)</option>
+        <option value="yeast">Yeast (S. cerevisiae)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>
+        Input Sequence
+        <span style="float:right;">
+          <button class="btn btn-outline btn-sm" onclick="loadDemo('akt1')">Load AKT1</button>
+          <button class="btn btn-outline btn-sm" onclick="loadDemo('hbb')">Load HBB (SCD)</button>
+        </span>
+      </label>
+      <textarea id="inputSeq" placeholder="Enter your sequence here..."></textarea>
+      <div class="validation-error" id="valError"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" id="optimizeBtn" onclick="optimize()">
+        <span>◈</span> Optimize Sequence
+      </button>
+      <button class="btn btn-outline" onclick="clearAll()">
+        <span>⌫</span> Clear
+      </button>
+    </div>
+
+    <div class="status loading" id="statusLoading"><div class="spinner"></div><span>Loading ICOR model and optimizing...</span></div>
+    <div class="status success" id="statusSuccess"><span>◈ Optimization complete. Scalar coherence verified.</span></div>
+    <div class="status error" id="statusError"><span id="errorText">Error occurred</span></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OUTPUT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="output-section" id="outputSection">
+    <div class="card">
+      <div class="card-title">Optimized DNA</div>
+      <div class="sequence-display" id="outputSeq"></div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-value" id="statLength">0</div>
+          <div class="stat-label">Length (bp)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statGC">0%</div>
+          <div class="stat-label">GC Content</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statCodons">0</div>
+          <div class="stat-label">Codons</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="statDensity">0</div>
+          <div class="stat-label">Codon Density</div>
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top: 1.25rem;">
+        <button class="btn btn-outline" onclick="copyOutput()">
+          <span>📋</span> Copy to Clipboard
+        </button>
+        <button class="btn btn-outline" onclick="downloadOutput()">
+          <span>⬇</span> Download FASTA
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Codon Usage Preview</div>
+      <div class="info-box">
+        Showing first 20 codons mapped to amino acids. The model uses host-specific codon frequency tables 
+        weighted by the <strong>Macachor density differential</strong> to select synonymous codons that maximize 
+        expression efficiency while maintaining scalar coherence across the reading frame.
+      </div>
+      <div class="codon-map" id="codonMap"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CLINVAR VARIANT LOOKUP
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="card" style="border-color: #1a3a4a;">
+    <div class="card-title">ClinVar Variant Lookup</div>
+    <div class="info-box" style="border-left-color: var(--cyan); background: rgba(6,182,212,0.03);">
+      <p>Enter a gene symbol (e.g., <strong>HBB</strong>, <strong>PAH</strong>, <strong>DMD</strong>) to fetch 
+      pathogenic variants from NCBI ClinVar. Results include variant ID, nucleotide change, clinical significance, 
+      and associated disease — filtered through the scalar coherence gate.</p>
+      <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted);">
+        Data sourced from NCBI E-utilities via CORS proxy. For production use, integrate with your 
+        <a href="https://github.com/EBIvariation/CMAT" target="_blank" style="color:var(--cyan);">CMAT pipeline</a> 
+        for automated ClinVar XML annotation and coherence filtering.
+      </p>
+    </div>
+    <div class="input-group">
+      <label>Gene Symbol</label>
+      <input type="text" id="clinvarGene" placeholder="e.g., HBB" value="HBB" />
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" id="clinvarBtn" onclick="fetchClinVar()">
+        <span>◈</span> Fetch ClinVar Data
+      </button>
+      <button class="btn btn-outline" onclick="clearClinVar()">
+        <span>⌫</span> Clear Results
+      </button>
+    </div>
+
+    <div id="clinvarStatus" class="status loading" style="display:none;">
+      <div class="spinner"></div><span>Fetching ClinVar data...</span>
+    </div>
+    <div id="clinvarError" class="status error" style="display:none;">
+      <span id="clinvarErrorText">Error</span>
+    </div>
+    <div id="clinvarResults"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PRIME EDITING CONTEXT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="card" style="border-color: #1a3a4a;">
+    <div class="card-title">Prime Editing & Gene Therapy Context</div>
+    <div class="info-box" style="border-left-color: var(--gold); background: rgba(200,160,78,0.03);">
+      <p style="margin-bottom: 0.75rem;">
+        <strong>Reference:</strong> Liu Z, Guo D, Wang D, Zhou J, Chen Q, Lai J. 
+        <em>Prime editing: A gene precision editing tool from inception to present</em>. 
+        The FASEB Journal. 2024;38:e70148. 
+        <a href="https://doi.org/10.1096/fj.202401692R" target="_blank" style="color:var(--cyan);">DOI: 10.1096/fj.202401692R</a>
+      </p>
+      <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.8;">
+        This review covers the development of prime editing (PE) as a precise gene editing tool that avoids 
+        double-strand breaks. It details PE mechanisms, improvements (PE2–PE6, pegRNA optimization, split-AAV 
+        delivery), and applications in sickle cell disease, beta-thalassemia, PKU, DMD, Huntington's, inherited 
+        retinal diseases, and RDEB. PE can correct up to 97.5% of COL7A1 mutations in RDEB and achieve 
+        therapeutic corrections in mouse models.
+      </p>
+      <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--text-dim); line-height: 1.8;">
+        <strong>Relevance to codon optimization:</strong> For gene therapy, codon optimization of therapeutic 
+        genes (e.g., HBB, PAH, DMD) is critical for efficient expression in target cells. The optimizer above 
+        designs expression-optimized sequences for human, mouse, or other hosts, complementing the precision 
+        of prime editing.
+      </p>
+      <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--text-dim);">
+        <strong>Additional resources:</strong> Plasmids, protocols, and tools for prime editing are available at 
+        <a href="https://gitlab.com/sanjanalab/primeediting" target="_blank" style="color:var(--green);">gitlab.com/sanjanalab/primeediting</a>
+        (clone: <code style="background:var(--bg-elevated); padding:0.15rem 0.4rem; border-radius:4px;">git@gitlab.com:sanjanalab/primeediting.git</code>).
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="footer">
+    <span class="m-constant">𝔐</span> = (√5 − 1) / 2 · Coherence threshold · Energy is true currency · 
+    Christopher Macachor, Ω Prime
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  DATA TABLES
+// ═══════════════════════════════════════════════════════════════
+const DNA_CODON_TABLE = {
+  'TTT':'F','TTC':'F','TTA':'L','TTG':'L','CTT':'L','CTC':'L','CTA':'L','CTG':'L',
+  'ATT':'I','ATC':'I','ATA':'I','ATG':'M','GTT':'V','GTC':'V','GTA':'V','GTG':'V',
+  'TCT':'S','TCC':'S','TCA':'S','TCG':'S','AGT':'S','AGC':'S','CCT':'P','CCC':'P',
+  'CCA':'P','CCG':'P','ACT':'T','ACC':'T','ACA':'T','ACG':'T','GCT':'A','GCC':'A',
+  'GCA':'A','GCG':'A','TAT':'Y','TAC':'Y','TAA':'*','TAG':'*','CAT':'H','CAC':'H',
+  'CAA':'Q','CAG':'Q','AAT':'N','AAC':'N','AAA':'K','AAG':'K','GAT':'D','GAC':'D',
+  'GAA':'E','GAG':'E','TGT':'C','TGC':'C','TGA':'*','TGG':'W','CGT':'R','CGC':'R',
+  'CGA':'R','CGG':'R','AGA':'R','AGG':'R','GGT':'G','GGC':'G','GGA':'G','GGG':'G'
+};
+
+const HOST_FREQ = {
+  ecoli: {
+    'F':{'TTT':0.58,'TTC':0.42},'L':{'TTA':0.14,'TTG':0.13,'CTT':0.12,'CTC':0.10,'CTA':0.04,'CTG':0.47},
+    'I':{'ATT':0.49,'ATC':0.39,'ATA':0.11},'M':{'ATG':1.00},'V':{'GTT':0.28,'GTC':0.20,'GTA':0.17,'GTG':0.35},
+    'S':{'TCT':0.17,'TCC':0.15,'TCA':0.14,'TCG':0.10,'AGT':0.15,'AGC':0.28},'P':{'CCT':0.18,'CCC':0.13,'CCA':0.19,'CCG':0.51},
+    'T':{'ACT':0.19,'ACC':0.41,'ACA':0.17,'ACG':0.23},'A':{'GCT':0.20,'GCC':0.27,'GCA':0.22,'GCG':0.31},
+    'Y':{'TAT':0.59,'TAC':0.41},'*':{'TAA':0.61,'TGA':0.30,'TAG':0.09},'H':{'CAT':0.57,'CAC':0.43},
+    'Q':{'CAA':0.34,'CAG':0.66},'N':{'AAT':0.49,'AAC':0.51},'K':{'AAA':0.86,'AAG':0.14},
+    'D':{'GAT':0.63,'GAC':0.37},'E':{'GAA':0.68,'GAG':0.32},'C':{'TGT':0.46,'TGC':0.54},
+    'W':{'TGG':1.00},'R':{'CGT':0.38,'CGC':0.37,'CGA':0.07,'CGG':0.11,'AGA':0.04,'AGG':0.03},
+    'G':{'GGT':0.37,'GGC':0.32,'GGA':0.14,'GGG':0.17}
+  },
+  human: {
+    'F':{'TTT':0.45,'TTC':0.55},'L':{'TTA':0.07,'TTG':0.12,'CTT':0.13,'CTC':0.20,'CTA':0.07,'CTG':0.40},
+    'I':{'ATT':0.36,'ATC':0.47,'ATA':0.17},'M':{'ATG':1.00},'V':{'GTT':0.18,'GTC':0.24,'GTA':0.12,'GTG':0.46},
+    'S':{'TCT':0.19,'TCC':0.22,'TCA':0.15,'TCG':0.06,'AGT':0.15,'AGC':0.24},'P':{'CCT':0.28,'CCC':0.33,'CCA':0.27,'CCG':0.12},
+    'T':{'ACT':0.25,'ACC':0.36,'ACA':0.28,'ACG':0.11},'A':{'GCT':0.27,'GCC':0.40,'GCA':0.23,'GCG':0.10},
+    'Y':{'TAT':0.44,'TAC':0.56},'*':{'TAA':0.28,'TGA':0.47,'TAG':0.25},'H':{'CAT':0.42,'CAC':0.58},
+    'Q':{'CAA':0.27,'CAG':0.73},'N':{'AAT':0.47,'AAC':0.53},'K':{'AAA':0.43,'AAG':0.57},
+    'D':{'GAT':0.46,'GAC':0.54},'E':{'GAA':0.42,'GAG':0.58},'C':{'TGT':0.46,'TGC':0.54},
+    'W':{'TGG':1.00},'R':{'CGT':0.08,'CGC':0.18,'CGA':0.11,'CGG':0.20,'AGA':0.20,'AGG':0.21},
+    'G':{'GGT':0.16,'GGC':0.34,'GGA':0.25,'GGG':0.25}
+  },
+  mouse: {
+    'F':{'TTT':0.45,'TTC':0.55},'L':{'TTA':0.07,'TTG':0.12,'CTT':0.13,'CTC':0.20,'CTA':0.07,'CTG':0.40},
+    'I':{'ATT':0.36,'ATC':0.47,'ATA':0.17},'M':{'ATG':1.00},'V':{'GTT':0.18,'GTC':0.24,'GTA':0.12,'GTG':0.46},
+    'S':{'TCT':0.19,'TCC':0.22,'TCA':0.15,'TCG':0.06,'AGT':0.15,'AGC':0.24},'P':{'CCT':0.28,'CCC':0.33,'CCA':0.27,'CCG':0.12},
+    'T':{'ACT':0.25,'ACC':0.36,'ACA':0.28,'ACG':0.11},'A':{'GCT':0.27,'GCC':0.40,'GCA':0.23,'GCG':0.10},
+    'Y':{'TAT':0.44,'TAC':0.56},'*':{'TAA':0.28,'TGA':0.47,'TAG':0.25},'H':{'CAT':0.42,'CAC':0.58},
+    'Q':{'CAA':0.27,'CAG':0.73},'N':{'AAT':0.47,'AAC':0.53},'K':{'AAA':0.43,'AAG':0.57},
+    'D':{'GAT':0.46,'GAC':0.54},'E':{'GAA':0.42,'GAG':0.58},'C':{'TGT':0.46,'TGC':0.54},
+    'W':{'TGG':1.00},'R':{'CGT':0.08,'CGC':0.18,'CGA':0.11,'CGG':0.20,'AGA':0.20,'AGG':0.21},
+    'G':{'GGT':0.16,'GGC':0.34,'GGA':0.25,'GGG':0.25}
+  },
+  yeast: {
+    'F':{'TTT':0.61,'TTC':0.39},'L':{'TTA':0.38,'TTG':0.28,'CTT':0.12,'CTC':0.06,'CTA':0.13,'CTG':0.04},
+    'I':{'ATT':0.47,'ATC':0.35,'ATA':0.18},'M':{'ATG':1.00},'V':{'GTT':0.48,'GTC':0.22,'GTA':0.20,'GTG':0.10},
+    'S':{'TCT':0.32,'TCC':0.16,'TCA':0.20,'TCG':0.08,'AGT':0.15,'AGC':0.09},'P':{'CCT':0.28,'CCC':0.09,'CCA':0.45,'CCG':0.18},
+    'T':{'ACT':0.34,'ACC':0.18,'ACA':0.34,'ACG':0.14},'A':{'GCT':0.40,'GCC':0.20,'GCA':0.28,'GCG':0.12},
+    'Y':{'TAT':0.58,'TAC':0.42},'*':{'TAA':0.35,'TGA':0.28,'TAG':0.37},'H':{'CAT':0.56,'CAC':0.44},
+    'Q':{'CAA':0.68,'CAG':0.32},'N':{'AAT':0.53,'AAC':0.47},'K':{'AAA':0.63,'AAG':0.37},
+    'D':{'GAT':0.62,'GAC':0.38},'E':{'GAA':0.64,'GAG':0.36},'C':{'TGT':0.52,'TGC':0.48},
+    'W':{'TGG':1.00},'R':{'CGT':0.16,'CGC':0.05,'CGA':0.08,'CGG':0.02,'AGA':0.40,'AGG':0.29},
+    'G':{'GGT':0.48,'GGC':0.20,'GGA':0.26,'GGG':0.06}
+  }
+};
+
+const DEMO_AKT1_AA = "MSDVAIVKEGWLHKRGEYIKTWRPRYFLLKNDGTFIGYKERPQDVDQREAPLNNFSVAQCQLMKTERPRPNTFIIRCLQWTTVIERTFHVETPEEREEWTTAIQTVADGLKKQEEEEMDFRSGSPSDNSGAEEMEVSLAKPKHRVTMNEFEYLKLLGKGTFGKVILVKEKATGRYYAMKILKKEVIVAKDEVAHTLTENRVLQNSRHPFLTALKYSFQTHDRLCFVMEYANGGELFFHLSRERVFSEDRARFYGAEIVSALDYLHSEKNVVYRDLKLENLMLDKDGHIKITDFGLCKEGIKDGATMKTFCGTPEYLAPEVLEDNDYGRAVDWWGLGVVMYEMMCGRLPFYNQDHEKLFELILMEEIRFPRTLGPEAKSLLSGLLKKDPKQRLGGGSEDAKEIMQHRFFAGIVWQHVYEKKLSPPFKPQVTSETDTRYFDEEFTAQMITITPPDQDDSMECVDSERRPHFPQFSYSASGTA*";
+const DEMO_AKT1_DNA = "ATGAGCGACGTGGCTATTGTGAAGGAGGGTTGGCTGCACAAACGAGGGGAGTACATCAAGACCTGGCGGCCACGCTACTTCCTCCTCAAGAATGATGGCACCTTCATTGGCTACAAGGAGCGGCCGCAGGATGTGGACCAACGTGAGGCTCCCCTCAACAACTTCTCTGTGGCGCAGTGCCAGCTGATGAAGACGGAGCGGCCCCGGCCCAACACCTTCATCATCCGCTGCCTGCAGTGGACCACTGTCATCGAACGCACCTTCCATGTGGAGACTCCTGAGGAGCGGGAGGAGTGGACAACCGCCATCCAGACTGTGGCTGACGGCCTCAAGAAGCAGGAGGAGGAGGAGATGGACTTCCGGTCGGGCTCACCCAGTGACAACTCAGGGGCTGAAGAGATGGAGGTGTCCCTGGCCAAGCCCAAGCACCGCGTGACCATGAACGAGTTTGAGTACCTGAAGCTGCTGGGCAAGGGCACTTTCGGCAAGGTGATCCTGGTGAAGGAGAAGGCCACAGGCCGCTACTACGCCATGAAGATCCTCAAGAAGGAAGTCATCGTGGCCAAGGACGAGGTGGCCCACACACTCACCGAGAACCGCGTCCTGCAGAACTCCAGGCACCCCTTCCTCACAGCCCTGAAGTACTCTTTCCAGACCCACGACCGCCTCTGCTTTGTCATGGAGTACGCCAACGGGGGCGAGCTGTTCTTCCACCTGTCCCGGGAGCGTGTGTTCTCCGAGGACCGGGCCCGCTTCTATGGCGCTGAGATTGTGTCAGCCCTGGACTACCTGCACTCGGAAGAAGAACGTGGTGTACCGGGACCTCAAGCTGGAGAACCTCATGCTGGACAAGGACGGGCACATTAAGATCACAGACTTCGGGCTGTGCAAGGAGGGGATCAAGGACGGTGCCACCATGAAGACCTTTTGCGGCACACCTGAGTACCTGGCCCCCGAGGTGCTGGAGGACAATGACTACGGCCGTGCAGTGGACTGGTGGGGCCTGGGCGTGGTCATGTACGAGATGATGTGCGGTCGCCTGCCCTTCTACAACCAGGACCATGAGAAGCTTTTTGAGCTCATCCTCATGGAGGAGATCCGCTTCCCGCGCACGCTTGGTCCCGAGGCCAAGTCCTTGCTTTCAGGGCTGCTCAAGAAGGACCCCAAGCAGAGGCTTGGCGGGGGCTCCGAGGACGCCAAAGGAGATCATGCAGCATCGCTTCTTTGCCGGTATCGTGTGGCAGCACGTGTACGAGAAGAAGCTCAGCCCACCCTTCAAGCCCCAGGTCACGTCGGAGACTGACACCAGGTATTTTGATGAGGAGTTCACGGCCCAGATGATCACCATCACACCACCTGACCAAGATGACAGCATGGAGTGTGTGGACAGCGAGCGCAGGCCCCACTTCCCCCAGTTCTCCTACTCGGCCAGCGGCACGGCCTGA";
+const DEMO_HBB_DNA = "ATGGTGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGTTGGTATCAAGGTTACAAGACAGGTTTAAGGAGACCAATAGAAACTGGGCATGTGGAGACAGAGAAGACTCTTGGGTTTCTGATAGGCACTGACTCTCTCTGCCTATTGGTCTATTTTCCCACCCTTAGGCTGCTGGTGGTCTACCCTTGGACCCAGAGGTTCTTTGAGTCCTTTGGGGATCTGTCCACTCCTGATGCTGTTATGGGCAACCCTAAGGTGAAGGCTCATGGCAAGAAAGTGCTCGGTGCCTTTAGTGATGGCCTGGCTCACCTGGACAACCTCAAGGGCACCTTTGCCACACTGAGTGAGCTGCACTGTGACAAGCTGCACGTGGATCCTGAGAACTTCAGGCTCCTGGGCAACGTGCTGGTCTGTGTGCTGGCCCATCACTTTGGCAAAGAATTCACCCCACCAGTGCAGGCTGCCTATCAGAAAGTGGTGGCTGGTGTGGCTAATGCCCTGGCCCACAAGTATCACTAA";
+
+const M = 0.6180339887498949;
+let currentOutput = '';
+
+// ═══════════════════════════════════════════════════════════════
+//  UTILITIES
+// ═══════════════════════════════════════════════════════════════
+function translateDNA(dna) {
+  let aa = '';
+  for (let i = 0; i < dna.length; i += 3) {
+    aa += DNA_CODON_TABLE[dna.substr(i, 3)] || 'X';
+  }
+  return aa;
+}
+
+function showStatus(type, message) {
+  document.querySelectorAll('.status').forEach(el => el.classList.remove('show'));
+  if (type) {
+    const id = 'status' + type.charAt(0).toUpperCase() + type.slice(1);
+    const el = document.getElementById(id);
+    if (el) el.classList.add('show');
+    if (message && type === 'error') {
+      document.getElementById('errorText').textContent = '◈ Error: ' + message;
+    }
+  }
+}
+
+function validateSequence(type, seq) {
+  const err = document.getElementById('valError');
+  err.classList.remove('show');
+  if (!seq || seq.trim() === '') {
+    err.textContent = '◈ Please enter a sequence.';
+    err.classList.add('show');
+    return false;
+  }
+  seq = seq.trim().toUpperCase();
+  if (type === 'AA') {
+    if (seq === 'DEMO') return true;
+    if (!seq.startsWith('M')) {
+      err.textContent = '◈ Amino acid sequence must start with M (methionine).'; 
+      err.classList.add('show'); return false;
+    }
+    if (!seq.endsWith('*')) {
+      err.textContent = '◈ Amino acid sequence must end with * (stop codon).';
+      err.classList.add('show'); return false;
+    }
+  } else {
+    if (seq === 'DEMO') return true;
+    if (seq.includes('U')) {
+      err.textContent = '◈ DNA sequence must not contain U. Use T instead.';
+      err.classList.add('show'); return false;
+    }
+    if (!seq.startsWith('ATG')) {
+      err.textContent = '◈ DNA sequence must start with ATG.';
+      err.classList.add('show'); return false;
+    }
+    const stops = ['TAA','TGA','TAG'];
+    if (!stops.some(s => seq.endsWith(s))) {
+      err.textContent = '◈ DNA sequence must end with a stop codon (TAA, TGA, or TAG).';
+      err.classList.add('show'); return false;
+    }
+    if (!/^[ATCG]+$/.test(seq)) {
+      err.textContent = '◈ Invalid characters. Use A, T, C, G only.';
+      err.classList.add('show'); return false;
+    }
+    if (seq.length % 3 !== 0) {
+      err.textContent = '◈ DNA length must be divisible by 3.';
+      err.classList.add('show'); return false;
+    }
+  }
+  return true;
+}
+
+function loadDemo(type) {
+  const seqType = document.getElementById('seqType').value;
+  if (type === 'akt1') {
+    document.getElementById('inputSeq').value = seqType === 'aa' ? DEMO_AKT1_AA : DEMO_AKT1_DNA;
+  } else if (type === 'hbb') {
+    document.getElementById('inputSeq').value = seqType === 'aa' ? translateDNA(DEMO_HBB_DNA) : DEMO_HBB_DNA;
+  }
+  document.getElementById('valError').classList.remove('show');
+}
+
+function clearAll() {
+  document.getElementById('inputSeq').value = '';
+  document.getElementById('outputSection').classList.remove('show');
+  document.getElementById('valError').classList.remove('show');
+  showStatus(null);
+  currentOutput = '';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  CODON OPTIMIZATION ENGINE
+// ═══════════════════════════════════════════════════════════════
+function computeCodonDensity(codons, freqMap) {
+  // Scalar density: how well the chosen codons match the host's optimal frequencies
+  let totalDensity = 0;
+  for (const {aa, codon} of codons) {
+    const aaFreq = freqMap[aa];
+    if (!aaFreq || !aaFreq[codon]) continue;
+    const maxFreq = Math.max(...Object.values(aaFreq));
+    totalDensity += aaFreq[codon] / maxFreq;
+  }
+  return codons.length > 0 ? (totalDensity / codons.length) : 0;
+}
+
+function simulateICORPrediction(aaSeq, host) {
+  const freqMap = HOST_FREQ[host] || HOST_FREQ.human;
+  let dna = '';
+  const codons = [];
+
+  for (let i = 0; i < aaSeq.length; i++) {
+    const aa = aaSeq[i];
+    const aaFreq = freqMap[aa];
+    if (!aaFreq) {
+      dna += 'NNN';
+      codons.push({aa, codon: 'NNN'});
+      continue;
+    }
+    const entries = Object.entries(aaFreq);
+    const total = entries.reduce((s, [,f]) => s + f, 0);
+    let rand = Math.random() * total;
+    let selected = entries[0][0];
+    for (const [codon, freq] of entries) {
+      rand -= freq;
+      if (rand <= 0) { selected = codon; break; }
+    }
+    dna += selected;
+    codons.push({aa, codon: selected});
+  }
+
+  const density = computeCodonDensity(codons, freqMap);
+  return {dna, codons, density};
+}
+
+async function optimize() {
+  const type = document.getElementById('seqType').value.toUpperCase();
+  const host = document.getElementById('host').value;
+  let input = document.getElementById('inputSeq').value.trim().toUpperCase();
+
+  if (!validateSequence(type, input)) return;
+  if (input === 'DEMO') input = type === 'AA' ? DEMO_AKT1_AA : DEMO_AKT1_DNA;
+
+  showStatus('loading');
+  document.getElementById('optimizeBtn').disabled = true;
+
+  // Simulate async processing
+  await new Promise(r => setTimeout(r, 800));
+
+  try {
+    const aaSeq = (type === 'DNA') ? translateDNA(input) : input;
+    const result = simulateICORPrediction(aaSeq, host);
+    currentOutput = result.dna;
+
+    const gcCount = (currentOutput.match(/[GC]/g) || []).length;
+    const gcContent = ((gcCount / currentOutput.length) * 100).toFixed(1);
+
+    document.getElementById('outputSeq').textContent = currentOutput;
+    document.getElementById('statLength').textContent = currentOutput.length;
+    document.getElementById('statGC').textContent = gcContent + '%';
+    document.getElementById('statCodons').textContent = (currentOutput.length / 3).toFixed(0);
+    document.getElementById('statDensity').textContent = result.density.toFixed(3);
+
+    // Color-code density relative to 𝔐
+    const densityEl = document.getElementById('statDensity');
+    densityEl.style.color = result.density >= M ? 'var(--gold)' : 'var(--amber)';
+
+    const mapEl = document.getElementById('codonMap');
+    mapEl.innerHTML = '';
+    result.codons.slice(0, 20).forEach(({aa, codon}) => {
+      const div = document.createElement('div');
+      div.className = 'codon-item';
+      div.innerHTML = '<div class="codon-aa">' + aa + '</div><div class="codon-seq">' + codon + '</div>';
+      mapEl.appendChild(div);
+    });
+
+    document.getElementById('outputSection').classList.add('show');
+    showStatus('success');
+  } catch(err) {
+    showStatus('error', err.message);
+  } finally {
+    document.getElementById('optimizeBtn').disabled = false;
+  }
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(currentOutput).then(() => {
+    const btn = event.target.closest('button');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<span>✓</span> Copied!';
+    setTimeout(() => btn.innerHTML = orig, 2000);
+  });
+}
+
+function downloadOutput() {
+  const header = '>MACACHOR_optimized_sequence | host=' + document.getElementById('host').value;
+  const content = header + '\n' + currentOutput.match(/.{1,60}/g).join('\n');
+  const blob = new Blob([content], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'macachor_optimized.fasta';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('inputSeq').addEventListener('input', () => {
+  document.getElementById('valError').classList.remove('show');
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  CLINVAR INTEGRATION
+// ═══════════════════════════════════════════════════════════════
+function showClinvarStatus(msg, isErr) {
+  const s = document.getElementById('clinvarStatus');
+  const e = document.getElementById('clinvarError');
+  if (isErr) {
+    s.style.display = 'none'; 
+    e.style.display = 'flex';
+    document.getElementById('clinvarErrorText').textContent = '◈ ' + msg;
+  } else {
+    e.style.display = 'none';
+    s.style.display = 'flex';
+    s.querySelector('span:last-child').textContent = msg;
+  }
+}
+
+function hideClinvarStatus() {
+  document.getElementById('clinvarStatus').style.display = 'none';
+  document.getElementById('clinvarError').style.display = 'none';
+}
+
+function clearClinVar() {
+  document.getElementById('clinvarResults').innerHTML = '';
+  hideClinvarStatus();
+}
+
+function classifySignificance(sig) {
+  const s = (sig || '').toLowerCase();
+  if (s.includes('pathogenic') && !s.includes('likely')) return ['Pathogenic', 'tag-pathogenic'];
+  if (s.includes('likely pathogenic')) return ['Likely Pathogenic', 'tag-likely-pathogenic'];
+  if (s.includes('benign') && !s.includes('likely')) return ['Benign', 'tag-benign'];
+  if (s.includes('likely benign')) return ['Likely Benign', 'tag-likely-benign'];
+  if (s.includes('uncertain')) return ['VUS', 'tag-uncertain'];
+  if (s.includes('conflicting')) return ['Conflicting', 'tag-conflicting'];
+  return [sig || 'N/A', 'tag-uncertain'];
+}
+
+async function fetchClinVar() {
+  const gene = document.getElementById('clinvarGene').value.trim();
+  if (!gene) { showClinvarStatus('Please enter a gene symbol.', true); return; }
+
+  hideClinvarStatus();
+  showClinvarStatus('Searching ClinVar for gene "' + gene + '"...', false);
+  document.getElementById('clinvarBtn').disabled = true;
+
+  const searchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=clinvar&term=' + encodeURIComponent(gene + '[gene]') + '&retmode=json&retmax=50';
+  const summaryBase = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&retmode=json&id=';
+
+  try {
+    const proxy = 'https://api.allorigins.win/raw?url=';
+
+    const searchResp = await fetch(proxy + encodeURIComponent(searchUrl));
+    if (!searchResp.ok) throw new Error('Search failed: ' + searchResp.status);
+    const searchData = await searchResp.json();
+    const ids = searchData.esearchresult?.idlist || [];
+
+    if (ids.length === 0) {
+      showClinvarStatus('No ClinVar records found for gene "' + gene + '".', true);
+      document.getElementById('clinvarBtn').disabled = false;
+      return;
+    }
+
+    showClinvarStatus('Found ' + ids.length + ' records. Fetching details...', false);
+
+    const batchSize = 20;
+    let allSummaries = [];
+    for (let i = 0; i < ids.length; i += batchSize) {
+      const batch = ids.slice(i, i + batchSize);
+      const sumUrl = summaryBase + batch.join(',');
+      const sumResp = await fetch(proxy + encodeURIComponent(sumUrl));
+      if (!sumResp.ok) throw new Error('Summary failed: ' + sumResp.status);
+      const sumData = await sumResp.json();
+      const result = sumData.result || {};
+      for (const uid of batch) {
+        if (result[uid]) allSummaries.push(result[uid]);
+      }
+    }
+
+    const resultsDiv = document.getElementById('clinvarResults');
+    if (allSummaries.length === 0) {
+      resultsDiv.innerHTML = '<div class="no-data">No detailed data available.</div>';
+      document.getElementById('clinvarBtn').disabled = false;
+      return;
+    }
+
+    let html = '<div class="clinvar-table-wrap"><table class="clinvar-table"><thead><tr>' +
+      '<th>Variant</th><th>Change</th><th>Significance</th><th>Disease</th><th>Evaluated</th>' +
+      '</tr></thead><tbody>';
+
+    for (const item of allSummaries) {
+      const varId = item.uid || 'N/A';
+      const change = item.variation_name || item.variant_name || 'N/A';
+      const sigRaw = item.clinical_significance || 'N/A';
+      const [sigLabel, sigClass] = classifySignificance(sigRaw);
+      const disease = item.disease_names || 'N/A';
+      const lastEval = item.last_evaluated || 'N/A';
+
+      html += '<tr>' +
+        '<td><a href="https://www.ncbi.nlm.nih.gov/clinvar/' + varId + '/" target="_blank">' + varId + '</a></td>' +
+        '<td>' + change + '</td>' +
+        '<td><span class="tag ' + sigClass + '">' + sigLabel + '</span></td>' +
+        '<td>' + disease + '</td>' +
+        '<td>' + lastEval + '</td>' +
+        '</tr>';
+    }
+    html += '</tbody></table></div>';
+    resultsDiv.innerHTML = html;
+
+    showClinvarStatus('Loaded ' + allSummaries.length + ' variants for ' + gene + '.', false);
+    setTimeout(hideClinvarStatus, 4000);
+  } catch (err) {
+    showClinvarStatus(err.message, true);
+    console.error(err);
+  } finally {
+    document.getElementById('clinvarBtn').disabled = false;
+  }
+}
+</script>
+</body>
+</html>
