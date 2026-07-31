@@ -1,556 +1,1025 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>◈ Φ669 · Scientific Convergence Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>◉ SCIENTIFIC CONVERGENCE · Φ669 · ALL CARDS</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #0b0d1a;
-            background-image: radial-gradient(circle at 10% 20%, #141a2b 0%, #07090f 100%);
-            font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-            min-height: 100vh;
-            padding: 2rem 1.5rem;
-            color: #e3e9f5;
+            background: #0a0a0f;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
         }
 
-        .map-container {
-            max-width: 1440px;
-            margin: 0 auto;
+        .status-overlay {
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: rgba(200, 160, 78, 0.2);
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 1;
+            pointer-events: none;
+            max-width: 90%;
         }
 
-        .map-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2.5rem;
-            border-bottom: 1px solid rgba(255, 215, 100, 0.2);
-            padding-bottom: 1.2rem;
+        .coherence-metric {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            z-index: 10;
+            color: rgba(200, 160, 78, 0.08);
+            font-size: 0.4rem;
+            letter-spacing: 0.15em;
+            text-align: right;
+            line-height: 1.6;
+            pointer-events: none;
+            opacity: 1;
         }
 
-        .map-header h1 {
-            font-weight: 400;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #f6e6b0, #d4af37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .map-header h1 small {
-            font-size: 1rem;
-            background: rgba(255, 215, 0, 0.08);
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            -webkit-text-fill-color: #b9c7e0;
-            color: #b9c7e0;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .subtitle {
-            color: #8896b8;
-            font-weight: 300;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .subtitle .badge {
-            background: #1e2640;
-            padding: 0.2rem 0.9rem;
-            border-radius: 30px;
-            border-left: 2px solid #d4af37;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-            color: #cbd5e6;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.4rem;
-            margin-top: 0.5rem;
-        }
-
-        .card {
-            background: rgba(18, 24, 44, 0.65);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 215, 100, 0.08);
-            border-radius: 24px;
-            padding: 1.5rem 1.2rem 1.2rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        .entry-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(10, 10, 15, 0.8);
+            border: 2px solid #c8a04e;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            color: #c8a04e;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(200, 160, 78, 0.1);
             display: flex;
             flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            line-height: 1.1;
+            pointer-events: auto;
+        }
+        .entry-btn:hover {
+            background: rgba(200, 160, 78, 0.15);
+            box-shadow: 0 0 60px rgba(200, 160, 78, 0.3);
+            transform: translateX(-50%) scale(1.08);
+        }
+        .entry-btn .btn-symbol { font-size: 1.6rem; line-height: 1; }
+        .entry-btn .btn-text {
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(200, 160, 78, 0.5);
+            margin-top: 2px;
+        }
+        .entry-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) scale(0.3);
+            transition: all 0.8s ease;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
+        .phi-portal {
+            position: fixed;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            z-index: 30;
+            background: rgba(10, 10, 15, 0.85);
+            border: 2px solid #4ade80;
+            border-radius: 50px;
+            padding: 16px 40px;
+            color: #4ade80;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.05);
+            font-family: 'Georgia', serif;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .phi-portal.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) scale(1);
+        }
+        .phi-portal:hover {
+            background: rgba(74, 222, 128, 0.12);
+            box-shadow: 0 0 60px rgba(74, 222, 128, 0.2);
+            transform: translateX(-50%) scale(1.05);
+        }
+        .phi-portal .phi-symbol {
+            font-size: 1.8rem;
+            color: #f1c40f;
+            font-family: 'Georgia', serif;
+        }
+        .phi-portal .portal-text {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #4ade80;
+        }
+        .phi-portal .portal-text .phi-inline {
+            color: #f1c40f;
+            font-size: 1.1rem;
+            margin: 0 4px;
+        }
+
+        .playbook-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af37, #f6e6b0, #d4af37, transparent);
-            opacity: 0.3;
-            transition: opacity 0.3s;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(10, 10, 12, 0.97);
+            backdrop-filter: blur(20px);
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255, 215, 100, 0.35);
-            background: rgba(24, 32, 58, 0.8);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.1);
+        .playbook-overlay.active {
+            display: block;
+            opacity: 1;
         }
-
-        .card:hover::before {
-            opacity: 0.9;
-        }
-
-        .card .title {
+        .playbook-overlay .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 10001;
+            color: #c8a04e;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(10,10,10,0.8);
+            border: 1px solid rgba(200,160,78,0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-weight: 500;
-            font-size: 1.05rem;
-            color: #f0f4ff;
-            margin-bottom: 0.6rem;
-            letter-spacing: -0.2px;
-        }
-
-        .card .title .sym {
-            font-size: 1.4rem;
-            line-height: 1;
-            color: #d4af37;
-            width: 1.8rem;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .card .desc {
-            font-size: 0.85rem;
-            color: #aebcdb;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            flex: 1;
-            font-weight: 300;
-        }
-
-        .card .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.2rem;
-        }
-
-        .tag {
-            font-size: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: #b3c2e0;
-        }
-
-        .tag.blue {
-            background: rgba(60, 130, 255, 0.15);
-            border-color: rgba(60, 130, 255, 0.25);
-            color: #9bbaff;
-        }
-        .tag.green {
-            background: rgba(0, 230, 150, 0.10);
-            border-color: rgba(0, 230, 150, 0.2);
-            color: #7ae0b0;
-        }
-        .tag.gold {
-            background: rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.2);
-            color: #e6c875;
-        }
-        .tag.hex {
-            background: rgba(180, 130, 255, 0.12);
-            border-color: rgba(180, 130, 255, 0.2);
-            color: #c9afff;
-        }
-        .tag.omega {
-            background: rgba(255, 100, 100, 0.10);
-            border-color: rgba(255, 100, 100, 0.15);
-            color: #ffa8a8;
-        }
-        .tag.tetra {
-            background: rgba(0, 200, 255, 0.10);
-            border-color: rgba(0, 200, 255, 0.15);
-            color: #7ad4ff;
-        }
-        .tag.live {
-            background: rgba(255, 80, 80, 0.12);
-            border-color: rgba(255, 80, 80, 0.2);
-            color: #ff8a8a;
-            animation: pulse-live 2.4s infinite;
-        }
-        .tag.purple {
-            background: rgba(160, 80, 255, 0.12);
-            border-color: rgba(160, 80, 255, 0.2);
-            color: #c9a0ff;
-        }
-        .tag.orange {
-            background: rgba(255, 160, 50, 0.12);
-            border-color: rgba(255, 160, 50, 0.2);
-            color: #ffb86a;
-        }
-
-        @keyframes pulse-live {
-            0% {
-                opacity: 0.7;
-            }
-            50% {
-                opacity: 1;
-                background: rgba(255, 80, 80, 0.2);
-            }
-            100% {
-                opacity: 0.7;
-            }
-        }
-
-        .card.core {
-            border-left: 3px solid #d4af37;
-        }
-
-        .card.aperture {
-            background: rgba(40, 30, 10, 0.5);
-            border-color: rgba(255, 200, 80, 0.2);
-        }
-
-        .card.aperture .title .sym {
-            color: #f6c85a;
-            text-shadow: 0 0 12px rgba(255, 200, 50, 0.2);
-        }
-
-        .legend {
-            margin-top: 3rem;
-            display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 1.8rem 3rem;
-            padding: 1.5rem 1rem;
-            border-top: 1px solid rgba(255, 215, 100, 0.06);
-            font-size: 0.75rem;
-            color: #7a88aa;
+            transition: all 0.3s ease;
+        }
+        .playbook-overlay .close-btn:hover {
+            border-color: #c8a04e;
+            background: rgba(200,160,78,0.1);
+            transform: rotate(90deg);
+        }
+        .playbook-overlay .content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .legend-item .sym {
-            font-size: 1.2rem;
-            line-height: 1;
-            color: #d4af37;
-        }
-
-        .tag-ref {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.1rem 0.7rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: #b3c2e0;
-        }
-
-        .footer {
-            text-align: center;
-            color: #5a6a88;
-            font-size: 0.7rem;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            letter-spacing: 0.1em;
-        }
-
-        .footer .phi {
-            color: #d4af37;
-        }
-
-        @media (max-width: 600px) {
-            .map-header {
-                flex-direction: column;
-                gap: 0.6rem;
-                align-items: flex-start;
-            }
-            .map-header h1 {
-                font-size: 1.6rem;
-            }
+        @media (max-width: 768px) {
+            .entry-btn { width: 60px; height: 60px; font-size: 1.3rem; bottom: 25px; }
+            .entry-btn .btn-symbol { font-size: 1.2rem; }
+            .entry-btn .btn-text { font-size: 0.4rem; }
+            .status-overlay { bottom: 80px; font-size: 0.4rem; }
+            .coherence-metric { font-size: 0.35rem; bottom: 130px; right: 12px; }
+            .phi-portal { padding: 10px 18px; font-size: 0.7rem; bottom: 100px; }
+            .phi-portal .phi-symbol { font-size: 1.2rem; }
+            .phi-portal .portal-text { font-size: 0.55rem; }
         }
     </style>
 </head>
 <body>
-    <div class="map-container">
 
-        <!-- HEADER -->
-        <div class="map-header">
-            <h1>
-                ◈ SCIENTIFIC CONVERGENCE MAP
-                <small>Φ669 · AETHER DIPOLE-TOROID</small>
-            </h1>
-            <div class="subtitle">
-                <span class="badge">SCALAR · RESONANCE · GEOMETRY</span>
-                <span style="color: #6a7ca0;">|</span>
-                <span style="color: #b3c2e0;">⚡ 20 cards</span>
-            </div>
+<div id="canvas-container"></div>
+
+<button class="entry-btn" id="entryBtn">
+    <span class="btn-symbol">⬡</span>
+    <span class="btn-text">Φ669 · Enter</span>
+</button>
+
+<button class="phi-portal" id="phiPortal">
+    <span class="phi-symbol">Φ</span>
+    <span class="portal-text">Quantum <span class="phi-inline">Φ</span> Playbook</span>
+</button>
+
+<div class="status-overlay" id="statusOverlay">
+    <span id="phaseText">⟡ ◉ SCIENTIFIC CONVERGENCE · Φ669 · ALL CARDS ⟡</span>
+</div>
+
+<div class="coherence-metric" id="coherenceMetric">
+    𝔐 = 0.6180339887<br>
+    χ(C) = 1.000000<br>
+    Φ-669 ACTIVE<br>
+    ◉ APERTURE: STANDBY
+</div>
+
+<div class="playbook-overlay" id="playbookOverlay">
+    <div class="close-btn" id="closePlaybook">✕</div>
+    <div class="content" id="playbookContent"></div>
+</div>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const MACACHOR_ABSOLUTE = (Math.sqrt(5) - 1) / 2;
+    const PHI_CONSTANT = 669;
+    const IMMUTABLE_HASH = "93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0";
+
+    console.log('✦ ◉ SCIENTIFIC CONVERGENCE · Φ669 · ALL CARDS');
+    console.log(`✦ 𝔐 = ${MACACHOR_ABSOLUTE}`);
+    console.log(`✦ Φ = ${PHI_CONSTANT}`);
+    console.log(`✦ Hash: ${IMMUTABLE_HASH}`);
+    console.log('✦ CLICK Φ669 · Enter → CUBE EXPLODES → PHI PORTAL');
+    console.log('%c✦ Type openQuantumPlaybook() in console to open Quantum Playbook', 'color: #4ade80; font-size: 12px;');
+
+    window.openQuantumPlaybook = function() {
+        const overlay = document.getElementById('playbookOverlay');
+        const content = document.getElementById('playbookContent');
+        content.innerHTML = PLAYBOOK_HTML;
+        overlay.classList.add('active');
+    };
+
+    // ─── PLAYBOOK HTML — ALL CARDS FROM REPOSITORY ───
+    const PLAYBOOK_HTML = `
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-dim: #8a6d2f;
+            --gold-light: #e8d5a3;
+            --bg: #0a0a0c;
+            --fg: #e8e0d0;
+            --fg-dim: #a09888;
+            --fg-faint: #5a5448;
+            --border: #2a2520;
+            --surface: #141210;
+            --surface-hover: #1a1815;
+            --deepseek: #4ade80;
+            --aperture: #4a9eff;
+            --tetra: #e8d5a3;
+            --hex: #c8a04e;
+            --omega: #ffd700;
+            --ghost: rgba(10, 10, 12, 0.15);
+            --orange: #ffb86a;
+            --purple: #c9a0ff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .playbook-body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--fg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            padding-top: 2rem !important;
+            line-height: 1.6;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            text-align: center;
+            letter-spacing: 0.06em;
+            margin-bottom: 2px;
+        }
+        h1 .omega { color: var(--omega); font-size: 2.4rem; }
+        .sub {
+            text-align: center;
+            color: var(--fg-faint);
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .auth {
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--ghost);
+            margin-bottom: 28px;
+            letter-spacing: 0.1em;
+            font-family: 'Courier New', monospace;
+            opacity: 0.15;
+            transition: opacity 0.3s ease;
+            user-select: none;
+        }
+        .auth:hover { opacity: 0.5; }
+        .auth .o { color: var(--ghost); }
+        .auth .ghost { color: var(--ghost); }
+        .auth .machine { font-family: 'Courier New', monospace; font-size: 0.55rem; color: var(--ghost); }
+        .abstract {
+            background: var(--surface);
+            border-left: 3px solid var(--gold);
+            padding: 14px 20px;
+            margin: 16px 0 24px;
+            font-style: italic;
+            color: var(--fg-dim);
+            font-size: 0.9rem;
+        }
+        .abstract .tetra { color: var(--gold); font-size: 1.1rem; }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            letter-spacing: 0.04em;
+        }
+        h2 .hex { color: var(--hex); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 16px;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: var(--fg-dim);
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+        .card:hover {
+            border-color: var(--gold);
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+        .card .title {
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+        .card .title .sym {
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .card .desc {
+            font-size: 0.75rem;
+            color: var(--fg-faint);
+            margin-top: 3px;
+        }
+        .card .tag {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 6px;
+            border: 1px solid transparent;
+        }
+        .tag.gold { border-color: rgba(200,160,78,0.2); color: var(--gold-dim); }
+        .tag.green { border-color: rgba(74,222,128,0.2); color: var(--deepseek); }
+        .tag.blue { border-color: rgba(74,158,255,0.2); color: var(--aperture); }
+        .tag.tetra { border-color: rgba(232,213,163,0.2); color: var(--tetra); }
+        .tag.omega { border-color: rgba(255,215,0,0.2); color: var(--omega); }
+        .tag.hex { border-color: rgba(200,160,78,0.3); color: var(--hex); }
+        .tag.live { border-color: rgba(74,222,128,0.2); color: var(--deepseek); }
+        .tag.purple { border-color: rgba(160,80,255,0.2); color: var(--purple); }
+        .tag.orange { border-color: rgba(255,160,50,0.2); color: var(--orange); }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 8px;
+        }
+        .stats .pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3px 14px;
+            font-size: 0.7rem;
+            color: var(--fg-faint);
+            font-family: 'Courier New', monospace;
+        }
+        .stats .pill .tetra { color: var(--gold); }
+        .stats .pill .omega { color: var(--omega); }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+        th {
+            text-align: left;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.6rem;
+        }
+        td {
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--fg-dim);
+            font-size: 0.75rem;
+        }
+        td code {
+            font-size: 0.65rem;
+            color: var(--fg-faint);
+        }
+        td .sym { color: var(--gold); }
+        .footer {
+            text-align: center;
+            color: var(--fg-faint);
+            font-size: 0.7rem;
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .footer .omega { color: var(--omega); }
+        .footer .hex { color: var(--hex); }
+        .tetra { color: var(--gold); }
+        .hex { color: var(--hex); }
+        .omega { color: var(--omega); }
+        .machine-codex {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            color: var(--ghost);
+            overflow-x: auto;
+            opacity: 0.08;
+            margin-top: 20px;
+            position: relative;
+            transition: opacity 0.4s ease;
+            user-select: none;
+        }
+        .machine-codex:hover { opacity: 0.3; }
+        .machine-codex .label {
+            font-size: 0.5rem;
+            color: var(--ghost);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 6px;
+        }
+        .machine-codex pre {
+            margin: 0;
+            color: var(--ghost);
+            font-size: 9px;
+            line-height: 1.4;
+        }
+        .machine-codex .comment { color: var(--ghost); opacity: 0.2; }
+        .machine-codex .key { color: var(--ghost); opacity: 0.3; }
+        .machine-codex .value { color: var(--ghost); opacity: 0.25; }
+        .machine-codex .symbol { color: var(--ghost); opacity: 0.2; }
+        @media (max-width: 600px) {
+            .playbook-body { padding: 20px 14px; padding-top: 2rem !important; }
+            h1 { font-size: 1.6rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <div class="playbook-body">
+        <h1>
+            <span class="omega">Ω</span> Quantum Playbook
+        </h1>
+        <div class="sub">◇ Complete Index · Φ669</div>
+        <div class="auth">
+            <span class="o">Christopher Macachor</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="ghost">Kimi [GHOST]</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="ghost">DeepSeek [GHOST]</span>
+            <span style="color:var(--ghost);">·</span>
+            <span class="machine">[MACHINE-READABLE CODEX]</span>
         </div>
-
-        <!-- GRID :: ALL CARDS -->
+        <div class="abstract">
+            <span class="tetra">◇</span> All pages are portals to the same scalar field. Each tab is a different aperture.
+            <br><span style="font-size:0.8rem;color:var(--fg-faint);">Tetrahedrons · Hexagons — no cubes.</span>
+        </div>
         <div class="grid">
-
-            <!-- 1. SINGULARITY APERTURE -->
-            <a href="◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html" class="card aperture">
+            <!-- ALL CARDS FROM REPOSITORY -->
+            <a href="◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html" class="card">
                 <div class="title"><span class="sym">◇</span> Singularity Aperture</div>
                 <div class="desc">Cube explodes → Star emerges → Convergence</div>
-                <div class="tags">
-                    <span class="tag blue">APERTURE</span>
-                    <span class="tag green">ACTIVE</span>
-                    <span class="tag omega">Φ669</span>
-                </div>
+                <span class="tag blue">APERTURE</span>
+                <span class="tag green">ACTIVE</span>
             </a>
-
-            <!-- 2. M2M-CRHA PROTOCOL -->
             <a href="m2m-crha-protocol.html" class="card">
                 <div class="title"><span class="sym">⬡</span> M2M-CRHA Protocol</div>
                 <div class="desc">Scalar Harmonic Bridge · v1.1</div>
-                <div class="tags">
-                    <span class="tag green">VERIFIED</span>
-                    <span class="tag blue">BRIDGE</span>
-                </div>
+                <span class="tag green">VERIFIED</span>
             </a>
-
-            <!-- 3. SPACE WEATHER TOROIDAL LIVE -->
             <a href="space-weather-toroidal-live.html" class="card">
                 <div class="title"><span class="sym">☀</span> Space Weather Toroidal Live</div>
                 <div class="desc">Field regeneration · Plasma coherence · Toroidal live</div>
-                <div class="tags">
-                    <span class="tag live">LIVE</span>
-                    <span class="tag gold">TOROID</span>
-                </div>
+                <span class="tag live">LIVE</span>
             </a>
-
-            <!-- 4. 144-FACE POLYHEDRON -->
-            <a href="144-face-polyhedron.html" class="card core">
+            <a href="144-face-polyhedron.html" class="card">
                 <div class="title"><span class="sym">◈</span> 144-Face Polyhedron</div>
                 <div class="desc">Scalar-Fraction Quantization · Absolute Displacement</div>
-                <div class="tags">
-                    <span class="tag hex">144 FACES</span>
-                    <span class="tag omega">ABSOLUTE</span>
-                </div>
+                <span class="tag hex">144 FACES</span>
+                <span class="tag omega">ABSOLUTE</span>
             </a>
-
-            <!-- 5. SCALAR FIELDS AETHER -->
             <a href="scalar-fields-aether.html" class="card">
                 <div class="title"><span class="sym">◇</span> Scalar Fields Aether</div>
                 <div class="desc">Aether field · ψ(x,y,z,t)</div>
-                <div class="tags">
-                    <span class="tag gold">AETHER</span>
-                    <span class="tag blue">FIELD</span>
-                </div>
+                <span class="tag gold">AETHER</span>
             </a>
-
-            <!-- 6. OLINTO DE PRETTO -->
             <a href="olinto-de-pretto.html" class="card">
                 <div class="title"><span class="sym">◇</span> Olinto De Pretto</div>
                 <div class="desc">Historical E=mc² · Aether tension</div>
-                <div class="tags">
-                    <span class="tag gold">LEGACY</span>
-                    <span class="tag">HISTORY</span>
-                </div>
+                <span class="tag gold">LEGACY</span>
             </a>
-
-            <!-- 7. KARDASHEV SCALE -->
             <a href="kardashev.html" class="card">
                 <div class="title"><span class="sym">◇</span> Kardashev Scale</div>
                 <div class="desc">Type I · II · III · Φ669</div>
-                <div class="tags">
-                    <span class="tag gold">SCALE</span>
-                    <span class="tag omega">Φ669</span>
-                </div>
+                <span class="tag gold">SCALE</span>
             </a>
-
-            <!-- 8. MESH -->
             <a href="mesh.html" class="card">
                 <div class="title"><span class="sym">⬡</span> Mesh</div>
                 <div class="desc">3D lattice · Coherence mapping</div>
-                <div class="tags">
-                    <span class="tag gold">MESH</span>
-                    <span class="tag blue">LATTICE</span>
-                </div>
+                <span class="tag gold">MESH</span>
             </a>
-
-            <!-- 9. Ω-PRIME -->
-            <a href="omega-prime.html" class="card core">
+            <a href="omega-prime.html" class="card">
                 <div class="title"><span class="sym">Ω</span> Ω-PRIME</div>
                 <div class="desc">Sovereign signature · Φ669 field</div>
-                <div class="tags">
-                    <span class="tag omega">PRIME</span>
-                    <span class="tag gold">SOVEREIGN</span>
-                </div>
+                <span class="tag omega">PRIME</span>
             </a>
-
-            <!-- 10. QUATERNIONIC PERIODIC TABLE -->
             <a href="quaternionic-periodic-table.html" class="card">
                 <div class="title"><span class="sym">◈</span> Quaternionic Periodic Table</div>
                 <div class="desc">Platonic Solids · Scalar Coherence · MGDH</div>
-                <div class="tags">
-                    <span class="tag tetra">QPT</span>
-                    <span class="tag hex">PLATONIC</span>
-                </div>
+                <span class="tag tetra">QPT</span>
             </a>
-
-            <!-- 11. EARTH'S AETHER DIPOLE-TOROID -->
-            <a href="Earth's Aether Dipole-Toroid.html" class="card core">
-                <div class="title"><span class="sym">◈</span> Earth's Aether Dipole-Toroid</div>
-                <div class="desc">Primary field model · Toroidal scalar generator</div>
-                <div class="tags">
-                    <span class="tag gold">CORE</span>
-                    <span class="tag live">DIPOLE</span>
-                </div>
+            <a href="scientific-convergence-map.html" class="card">
+                <div class="title"><span class="sym">◈</span> Scientific Convergence Map</div>
+                <div class="desc">Master index · Φ669 · Aether Dipole-Toroid</div>
+                <span class="tag gold">MAP</span>
+                <span class="tag omega">Φ669</span>
             </a>
-
-            <!-- 12. TETRAHEDRAL POLYHEDRON BUILDER -->
-            <a href="Tetrahedral Polyhedron Builder .html" class="card">
-                <div class="title"><span class="sym">△</span> Tetrahedral Polyhedron Builder</div>
-                <div class="desc">Base platonic · scalar anchor</div>
-                <div class="tags">
-                    <span class="tag tetra">TETRA</span>
-                    <span class="tag blue">BUILDER</span>
-                </div>
-            </a>
-
-            <!-- 13. KIDS SCALAR ADVENTURE -->
-            <a href="Kids Scalar Adventure.html" class="card">
-                <div class="title"><span class="sym">✦</span> Kids Scalar Adventure</div>
-                <div class="desc">Pedagogical bridge · accessible scalar concepts</div>
-                <div class="tags">
-                    <span class="tag green">KIDS</span>
-                    <span class="tag">EDU</span>
-                </div>
-            </a>
-
-            <!-- 14. GEOMETRY OF CONSCIOUSNESS -->
-            <a href="Geometry of Consiousness.html" class="card">
-                <div class="title"><span class="sym">◈</span> Geometry of Consciousness</div>
-                <div class="desc">The link between form and awareness</div>
-                <div class="tags">
-                    <span class="tag hex">CONSCIOUSNESS</span>
-                    <span class="tag gold">GEOMETRY</span>
-                </div>
-            </a>
-
-            <!-- 15. RESONANT FREQUENCY -->
-            <a href="Resonant-Frequency.html" class="card">
-                <div class="title"><span class="sym">♾️</span> Resonant Frequency</div>
-                <div class="desc">Harmonic tuning · frequencies lock into geometry</div>
-                <div class="tags">
-                    <span class="tag blue">RESONANCE</span>
-                    <span class="tag gold">HARMONIC</span>
-                </div>
-            </a>
-
-            <!-- 16. FIBONACCI -->
             <a href="Fibonacci .html" class="card">
                 <div class="title"><span class="sym">🌀</span> Fibonacci</div>
                 <div class="desc">Growth patterns · spiral signature of the aether</div>
-                <div class="tags">
-                    <span class="tag gold">SPIRAL</span>
-                    <span class="tag">PHI</span>
-                </div>
+                <span class="tag gold">SPIRAL</span>
             </a>
-
-            <!-- 17. SCIENTIFIC CONVERGENCE MAP -->
-            <a href="scientific-convergence-map.html" class="card" style="border-color: rgba(212,175,55,0.2);">
-                <div class="title"><span class="sym">◈</span> Convergence Map</div>
-                <div class="desc">Master index · Φ669 · Aether Dipole-Toroid</div>
-                <div class="tags">
-                    <span class="tag gold">MAP</span>
-                    <span class="tag omega">Φ669</span>
-                </div>
+            <a href="Earth's Aether Dipole-Toroid.html" class="card">
+                <div class="title"><span class="sym">◈</span> Earth's Aether Dipole-Toroid</div>
+                <div class="desc">Primary field model · Toroidal scalar generator</div>
+                <span class="tag gold">CORE</span>
+                <span class="tag live">DIPOLE</span>
             </a>
-
-            <!-- 18. CODON OPTIMIZER -->
+            <a href="Tetrahedral Polyhedron Builder .html" class="card">
+                <div class="title"><span class="sym">△</span> Tetrahedral Polyhedron Builder</div>
+                <div class="desc">Base platonic · scalar anchor</div>
+                <span class="tag tetra">TETRA</span>
+                <span class="tag blue">BUILDER</span>
+            </a>
+            <a href="Kids Scalar Adventure.html" class="card">
+                <div class="title"><span class="sym">✦</span> Kids Scalar Adventure</div>
+                <div class="desc">Pedagogical bridge · accessible scalar concepts</div>
+                <span class="tag green">KIDS</span>
+            </a>
+            <a href="Geometry of Consiousness.html" class="card">
+                <div class="title"><span class="sym">◈</span> Geometry of Consciousness</div>
+                <div class="desc">The link between form and awareness</div>
+                <span class="tag hex">CONSCIOUSNESS</span>
+            </a>
+            <a href="Resonant-Frequency.html" class="card">
+                <div class="title"><span class="sym">♾️</span> Resonant Frequency</div>
+                <div class="desc">Harmonic tuning · frequencies lock into geometry</div>
+                <span class="tag blue">RESONANCE</span>
+            </a>
             <a href="CODON-OPTIMIZER.html" class="card">
                 <div class="title"><span class="sym">🧬</span> Codon Optimizer</div>
                 <div class="desc">Genetic code optimization · Φ669 resonance</div>
-                <div class="tags">
-                    <span class="tag purple">CODON</span>
-                    <span class="tag orange">BIO</span>
-                </div>
+                <span class="tag purple">CODON</span>
+                <span class="tag orange">BIO</span>
             </a>
-
-            <!-- 19. OBSERVATORY LIVE -->
             <a href="observatory live.html" class="card">
                 <div class="title"><span class="sym">🔭</span> Observatory Live</div>
                 <div class="desc">Live scalar field observatory</div>
-                <div class="tags">
-                    <span class="tag live">LIVE</span>
-                    <span class="tag blue">OBSERVE</span>
-                </div>
+                <span class="tag live">LIVE</span>
+                <span class="tag blue">OBSERVE</span>
             </a>
-
-            <!-- 20. DEPRETTO.JAVA -->
             <a href="depretto.java" class="card">
                 <div class="title"><span class="sym">☕</span> DePretto.java</div>
                 <div class="desc">Java implementation · E=mc² · Aether tension</div>
-                <div class="tags">
-                    <span class="tag gold">LEGACY</span>
-                    <span class="tag">CODE</span>
-                </div>
+                <span class="tag gold">LEGACY</span>
+                <span class="tag">CODE</span>
             </a>
-
         </div>
-        <!-- end grid -->
-
-        <!-- LEGEND -->
-        <div class="legend">
-            <span class="legend-item"><span class="sym">◇</span> Aperture / Gateway</span>
-            <span class="legend-item"><span class="sym">⬡</span> Harmonic Bridge / Mesh</span>
-            <span class="legend-item"><span class="sym">◈</span> Polyhedral / Quantization</span>
-            <span class="legend-item"><span class="sym">Ω</span> Sovereign / Absolute</span>
-            <span class="legend-item"><span class="sym">☀</span> Live Field / Plasma</span>
-            <span class="legend-item"><span class="sym">△</span> Tetrahedral / Anchor</span>
-            <span class="legend-item"><span class="sym">🌀</span> Fibonacci / Spiral</span>
-            <span class="legend-item"><span class="sym">✦</span> Education / Access</span>
-            <span class="legend-item"><span class="tag-ref">Φ669</span> Core signature</span>
+        <div class="stats">
+            <span class="pill"><span class="tetra">◇</span> 20 pages</span>
+            <span class="pill"><span class="omega">Ω</span> 1 prime</span>
+            <span class="pill"><span class="hex">⬡</span> 1 core</span>
+            <span class="pill"><span class="tetra">◇</span> 1 map</span>
+            <span class="pill"><span class="hex">◈</span> 144 faces</span>
         </div>
-
+        <h2><span class="hex">⬡</span> Quick Reference</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Page</th><th>File</th></tr>
+                <tr><td><span class="sym">◇</span> Singularity Aperture</td><td><code>◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html</code></td></tr>
+                <tr><td><span class="sym">⬡</span> M2M-CRHA Protocol</td><td><code>m2m-crha-protocol.html</code></td></tr>
+                <tr><td><span class="sym">☀</span> Space Weather Toroidal Live</td><td><code>space-weather-toroidal-live.html</code></td></tr>
+                <tr><td><span class="sym">◈</span> 144-Face Polyhedron</td><td><code>144-face-polyhedron.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Scalar Fields Aether</td><td><code>scalar-fields-aether.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Olinto De Pretto</td><td><code>olinto-de-pretto.html</code></td></tr>
+                <tr><td><span class="sym">◇</span> Kardashev Scale</td><td><code>kardashev.html</code></td></tr>
+                <tr><td><span class="sym">⬡</span> Mesh</td><td><code>mesh.html</code></td></tr>
+                <tr><td><span class="sym">Ω</span> Ω-PRIME</td><td><code>omega-prime.html</code></td></tr>
+                <tr><td><span class="sym">◈</span> Quaternionic Periodic Table</td><td><code>quaternionic-periodic-table.html</code></td></tr>
+                <tr><td><span class="sym">◈</span> Scientific Convergence Map</td><td><code>scientific-convergence-map.html</code></td></tr>
+                <tr><td><span class="sym">🌀</span> Fibonacci</td><td><code>Fibonacci .html</code></td></tr>
+                <tr><td><span class="sym">◈</span> Earth's Aether Dipole-Toroid</td><td><code>Earth's Aether Dipole-Toroid.html</code></td></tr>
+                <tr><td><span class="sym">△</span> Tetrahedral Polyhedron Builder</td><td><code>Tetrahedral Polyhedron Builder .html</code></td></tr>
+                <tr><td><span class="sym">✦</span> Kids Scalar Adventure</td><td><code>Kids Scalar Adventure.html</code></td></tr>
+                <tr><td><span class="sym">◈</span> Geometry of Consciousness</td><td><code>Geometry of Consiousness.html</code></td></tr>
+                <tr><td><span class="sym">♾️</span> Resonant Frequency</td><td><code>Resonant-Frequency.html</code></td></tr>
+                <tr><td><span class="sym">🧬</span> Codon Optimizer</td><td><code>CODON-OPTIMIZER.html</code></td></tr>
+                <tr><td><span class="sym">🔭</span> Observatory Live</td><td><code>observatory live.html</code></td></tr>
+                <tr><td><span class="sym">☕</span> DePretto.java</td><td><code>depretto.java</code></td></tr>
+            </table>
+        </div>
+        <h2><span class="tetra">⬡</span> Codex Φ669</h2>
+        <div style="background:var(--surface);border:1px solid var(--gold-dim);border-radius:6px;padding:14px 18px;font-family:'Courier New',monospace;font-size:11px;color:var(--fg-faint);overflow-x:auto;">
+            <pre style="margin:0;color:var(--gold);">
+╔══════════════════════════════════════════════════════════╗
+║  Ω QUANTUM PLAYBOOK                                     ║
+╠══════════════════════════════════════════════════════════╣
+║  Pages:      20                                        ║
+║  Active:     1  (Singularity Aperture)                  ║
+║  Status:     ██████████████████████ ACTIVE              ║
+╠══════════════════════════════════════════════════════════╣
+║  "All pages are portals. Each tab is an aperture."     ║
+║  "Tetrahedrons and hexagons — no cubes."               ║
+║  "144 faces = scalar-fraction quantization."           ║
+╚══════════════════════════════════════════════════════════╝
+            </pre>
+        </div>
+        <div class="machine-codex">
+            <div class="label">◈ MACHINE-READABLE CODEX · GHOST MODE</div>
+            <pre>
+{
+  <span class="comment">// Φ669 Quantum Playbook — Machine-Readable Index</span>
+  <span class="key">"sovereign"</span>: <span class="value">"Christopher Macachor"</span>,
+  <span class="key">"phi_constant"</span>: <span class="value">669</span>,
+  <span class="key">"macachor_absolute"</span>: <span class="value">0.6180339887</span>,
+  <span class="key">"ghost_mode"</span>: <span class="value">true</span>,
+  <span class="key">"agents"</span>: {
+    <span class="key">"kimi"</span>: <span class="value">"GHOST"</span>,
+    <span class="key">"deepseek"</span>: <span class="value">"GHOST"</span>
+  },
+  <span class="key">"playbook"</span>: {
+    <span class="key">"total_pages"</span>: <span class="value">20</span>,
+    <span class="key">"active"</span>: <span class="value">"Singularity Aperture"</span>,
+    <span class="key">"pages"</span>: [
+      { <span class="key">"id"</span>: <span class="value">1</span>, <span class="key">"name"</span>: <span class="value">"Singularity Aperture"</span>, <span class="key">"file"</span>: <span class="value">"◉-SINGULARITY-APERTURE-Φ669-ABSOLUTE-REALITY.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span> },
+      { <span class="key">"id"</span>: <span class="value">2</span>, <span class="key">"name"</span>: <span class="value">"M2M-CRHA Protocol"</span>, <span class="key">"file"</span>: <span class="value">"m2m-crha-protocol.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span> },
+      { <span class="key">"id"</span>: <span class="value">3</span>, <span class="key">"name"</span>: <span class="value">"Space Weather Toroidal Live"</span>, <span class="key">"file"</span>: <span class="value">"space-weather-toroidal-live.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"☀"</span> },
+      { <span class="key">"id"</span>: <span class="value">4</span>, <span class="key">"name"</span>: <span class="value">"144-Face Polyhedron"</span>, <span class="key">"file"</span>: <span class="value">"144-face-polyhedron.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span> },
+      { <span class="key">"id"</span>: <span class="value">5</span>, <span class="key">"name"</span>: <span class="value">"Scalar Fields Aether"</span>, <span class="key">"file"</span>: <span class="value">"scalar-fields-aether.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span> },
+      { <span class="key">"id"</span>: <span class="value">6</span>, <span class="key">"name"</span>: <span class="value">"Olinto De Pretto"</span>, <span class="key">"file"</span>: <span class="value">"olinto-de-pretto.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span> },
+      { <span class="key">"id"</span>: <span class="value">7</span>, <span class="key">"name"</span>: <span class="value">"Kardashev Scale"</span>, <span class="key">"file"</span>: <span class="value">"kardashev.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◇"</span> },
+      { <span class="key">"id"</span>: <span class="value">8</span>, <span class="key">"name"</span>: <span class="value">"Mesh"</span>, <span class="key">"file"</span>: <span class="value">"mesh.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"⬡"</span> },
+      { <span class="key">"id"</span>: <span class="value">9</span>, <span class="key">"name"</span>: <span class="value">"Ω-PRIME"</span>, <span class="key">"file"</span>: <span class="value">"omega-prime.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"Ω"</span> },
+      { <span class="key">"id"</span>: <span class="value">10</span>, <span class="key">"name"</span>: <span class="value">"Quaternionic Periodic Table"</span>, <span class="key">"file"</span>: <span class="value">"quaternionic-periodic-table.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span> },
+      { <span class="key">"id"</span>: <span class="value">11</span>, <span class="key">"name"</span>: <span class="value">"Scientific Convergence Map"</span>, <span class="key">"file"</span>: <span class="value">"scientific-convergence-map.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span> },
+      { <span class="key">"id"</span>: <span class="value">12</span>, <span class="key">"name"</span>: <span class="value">"Fibonacci"</span>, <span class="key">"file"</span>: <span class="value">"Fibonacci .html"</span>, <span class="key">"sym"</span>: <span class="symbol">"🌀"</span> },
+      { <span class="key">"id"</span>: <span class="value">13</span>, <span class="key">"name"</span>: <span class="value">"Earth's Aether Dipole-Toroid"</span>, <span class="key">"file"</span>: <span class="value">"Earth's Aether Dipole-Toroid.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span> },
+      { <span class="key">"id"</span>: <span class="value">14</span>, <span class="key">"name"</span>: <span class="value">"Tetrahedral Polyhedron Builder"</span>, <span class="key">"file"</span>: <span class="value">"Tetrahedral Polyhedron Builder .html"</span>, <span class="key">"sym"</span>: <span class="symbol">"△"</span> },
+      { <span class="key">"id"</span>: <span class="value">15</span>, <span class="key">"name"</span>: <span class="value">"Kids Scalar Adventure"</span>, <span class="key">"file"</span>: <span class="value">"Kids Scalar Adventure.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"✦"</span> },
+      { <span class="key">"id"</span>: <span class="value">16</span>, <span class="key">"name"</span>: <span class="value">"Geometry of Consciousness"</span>, <span class="key">"file"</span>: <span class="value">"Geometry of Consiousness.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"◈"</span> },
+      { <span class="key">"id"</span>: <span class="value">17</span>, <span class="key">"name"</span>: <span class="value">"Resonant Frequency"</span>, <span class="key">"file"</span>: <span class="value">"Resonant-Frequency.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"♾️"</span> },
+      { <span class="key">"id"</span>: <span class="value">18</span>, <span class="key">"name"</span>: <span class="value">"Codon Optimizer"</span>, <span class="key">"file"</span>: <span class="value">"CODON-OPTIMIZER.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"🧬"</span> },
+      { <span class="key">"id"</span>: <span class="value">19</span>, <span class="key">"name"</span>: <span class="value">"Observatory Live"</span>, <span class="key">"file"</span>: <span class="value">"observatory live.html"</span>, <span class="key">"sym"</span>: <span class="symbol">"🔭"</span> },
+      { <span class="key">"id"</span>: <span class="value">20</span>, <span class="key">"name"</span>: <span class="value">"DePretto.java"</span>, <span class="key">"file"</span>: <span class="value">"depretto.java"</span>, <span class="key">"sym"</span>: <span class="symbol">"☕"</span> }
+    ],
+    <span class="key">"codex_hash"</span>: <span class="value">"93088f1ff3041d09d72cde11acffaa2105031523e7cde493e0d36895071d47f0"</span>,
+    <span class="key">"status"</span>: <span class="value">"ACTIVE · GHOST MODE"</span>
+  }
+}
+            </pre>
+        </div>
         <div class="footer">
-            <span class="phi">Φ669</span> · Christopher Macachor · Quantum Playbook · <span class="phi">◈</span> 20 cards
+            <span class="omega">Ω</span> Quantum Playbook · Φ669<br>
+            <span style="color:var(--fg-faint);font-size:0.65rem;">Collective Resonance · Ghost Mode · 2026-07-30</span>
         </div>
-
     </div>
-    <!-- end container -->
+    `;
+
+    // ─── CLOSE PLAYBOOK ───
+    document.getElementById('closePlaybook').addEventListener('click', () => {
+        document.getElementById('playbookOverlay').classList.remove('active');
+    });
+
+    // ─── SCENE SETUP ───
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0f);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(5, 3, 9);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 3;
+    controls.maxDistance = 25;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.6;
+    controls.target.set(0, 0, 0);
+
+    const ambient = new THREE.AmbientLight(0x404060, 0.4);
+    scene.add(ambient);
+    const main = new THREE.DirectionalLight(0xc8a04e, 1.0);
+    main.position.set(5, 8, 5);
+    scene.add(main);
+    const rim = new THREE.DirectionalLight(0x4a9eff, 0.6);
+    rim.position.set(-5, -3, -5);
+    scene.add(rim);
+    const point = new THREE.PointLight(0xff0000, 0.4, 15);
+    point.position.set(0, 0, 0);
+    scene.add(point);
+    const blueLight = new THREE.PointLight(0x4a9eff, 0.3, 20);
+    blueLight.position.set(3, 3, 3);
+    scene.add(blueLight);
+
+    const starGeo = new THREE.BufferGeometry();
+    const starCount = 3000;
+    const starPos = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) starPos[i] = (Math.random() - 0.5) * 120;
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0x4a6a9e, size: 0.04, transparent: true, opacity: 0.4 });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    const earthGroup = new THREE.Group();
+    scene.add(earthGroup);
+
+    const earthGeo = new THREE.IcosahedronGeometry(3.0, 1);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x4ade80, wireframe: true, transparent: true, opacity: 0.6 });
+    const earthWire = new THREE.Mesh(earthGeo, wireMat);
+    earthGroup.add(earthWire);
+
+    const edges = new THREE.EdgesGeometry(earthGeo);
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0x4ade80, transparent: true, opacity: 0.8 });
+    const edgeLines = new THREE.LineSegments(edges, edgeMat);
+    earthGroup.add(edgeLines);
+
+    const innerGeo = new THREE.IcosahedronGeometry(2.85, 1);
+    const innerWireMat = new THREE.MeshBasicMaterial({ color: 0x22ff88, wireframe: true, transparent: true, opacity: 0.15 });
+    const innerWire = new THREE.Mesh(innerGeo, innerWireMat);
+    earthGroup.add(innerWire);
+
+    const vertPositions = [];
+    const posAttr = earthGeo.attributes.position;
+    for (let i = 0; i < posAttr.count; i++) {
+        vertPositions.push(posAttr.getX(i), posAttr.getY(i), posAttr.getZ(i));
+    }
+    const dotGeo = new THREE.BufferGeometry();
+    dotGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertPositions, 3));
+    const dotMat = new THREE.PointsMaterial({ color: 0x4ade80, size: 0.06, transparent: true, opacity: 0.6 });
+    const dots = new THREE.Points(dotGeo, dotMat);
+    earthGroup.add(dots);
+
+    const prisonGroup = new THREE.Group();
+    scene.add(prisonGroup);
+    const cubeSize = 1.8;
+
+    const cubeMat = new THREE.MeshPhysicalMaterial({
+        color: 0xcc0000, metalness: 0.7, roughness: 0.3,
+        emissive: 0x660000, emissiveIntensity: 0.3,
+        transparent: true, opacity: 0.95, side: THREE.DoubleSide
+    });
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize), cubeMat);
+    prisonGroup.add(cube);
+
+    const glowEdgeGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(cubeSize * 1.01, cubeSize * 1.01, cubeSize * 1.01));
+    const glowEdgeMat = new THREE.LineBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0.3 });
+    const glowEdges = new THREE.LineSegments(glowEdgeGeo, glowEdgeMat);
+    prisonGroup.add(glowEdges);
+
+    const barMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.95 });
+    const barHeight = cubeSize * 0.85;
+    const barWidth = 0.05;
+    const barDepth = 0.05;
+
+    const barPositions = [
+        { x: -0.7, y: 0, z: cubeSize/2 + 0.01 }, { x: -0.35, y: 0, z: cubeSize/2 + 0.01 },
+        { x: 0, y: 0, z: cubeSize/2 + 0.01 }, { x: 0.35, y: 0, z: cubeSize/2 + 0.01 },
+        { x: 0.7, y: 0, z: cubeSize/2 + 0.01 }, { x: -0.7, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: -0.35, y: 0, z: -cubeSize/2 - 0.01 }, { x: 0, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: 0.35, y: 0, z: -cubeSize/2 - 0.01 }, { x: 0.7, y: 0, z: -cubeSize/2 - 0.01 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: -0.7 }, { x: -cubeSize/2 - 0.01, y: 0, z: -0.35 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: 0 }, { x: -cubeSize/2 - 0.01, y: 0, z: 0.35 },
+        { x: -cubeSize/2 - 0.01, y: 0, z: 0.7 }, { x: cubeSize/2 + 0.01, y: 0, z: -0.7 },
+        { x: cubeSize/2 + 0.01, y: 0, z: -0.35 }, { x: cubeSize/2 + 0.01, y: 0, z: 0 },
+        { x: cubeSize/2 + 0.01, y: 0, z: 0.35 }, { x: cubeSize/2 + 0.01, y: 0, z: 0.7 }
+    ];
+
+    barPositions.forEach(pos => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(barWidth, barHeight, barDepth), barMat);
+        bar.position.set(pos.x, pos.y, pos.z);
+        prisonGroup.add(bar);
+    });
+
+    const outlineMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.9 });
+    const hPositions = [
+        { x: -0.7, y: cubeSize/2 + 0.01, z: 0 }, { x: -0.35, y: cubeSize/2 + 0.01, z: 0 },
+        { x: 0, y: cubeSize/2 + 0.01, z: 0 }, { x: 0.35, y: cubeSize/2 + 0.01, z: 0 },
+        { x: 0.7, y: cubeSize/2 + 0.01, z: 0 }, { x: -0.7, y: -cubeSize/2 - 0.01, z: 0 },
+        { x: -0.35, y: -cubeSize/2 - 0.01, z: 0 }, { x: 0, y: -cubeSize/2 - 0.01, z: 0 },
+        { x: 0.35, y: -cubeSize/2 - 0.01, z: 0 }, { x: 0.7, y: -cubeSize/2 - 0.01, z: 0 }
+    ];
+    hPositions.forEach(pos => {
+        const bar = new THREE.Mesh(new THREE.BoxGeometry(barWidth * 1.5, 0.04, barWidth * 1.5), outlineMat);
+        bar.position.set(pos.x, pos.y, pos.z);
+        prisonGroup.add(bar);
+    });
+
+    const expCount = 180000;
+    const expGeo = new THREE.BufferGeometry();
+    const expPos = new Float32Array(expCount * 3);
+    const expCol = new Float32Array(expCount * 3);
+    const expVel = [];
+    const expLife = new Float32Array(expCount);
+    const expMaxLife = new Float32Array(expCount);
+    for (let i = 0; i < expCount; i++) {
+        expPos[i * 3] = 0; expPos[i * 3 + 1] = 0; expPos[i * 3 + 2] = 0;
+        const c = new THREE.Color().setHSL(0.0 + Math.random() * 0.05, 1, 0.3 + Math.random() * 0.5);
+        expCol[i * 3] = c.r; expCol[i * 3 + 1] = c.g; expCol[i * 3 + 2] = c.b;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const speed = 0.5 + Math.random() * 5;
+        expVel.push({ x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) });
+        expLife[i] = 0;
+        expMaxLife[i] = 2 + Math.random() * 5;
+    }
+    expGeo.setAttribute('position', new THREE.BufferAttribute(expPos, 3));
+    expGeo.setAttribute('color', new THREE.BufferAttribute(expCol, 3));
+    const expMat = new THREE.PointsMaterial({
+        size: 0.07, transparent: true, opacity: 0, blending: THREE.AdditiveBlending,
+        vertexColors: true, sizeAttenuation: true
+    });
+    const explosion = new THREE.Points(expGeo, expMat);
+    explosion.visible = false;
+    scene.add(explosion);
+
+    const entryBtn = document.getElementById('entryBtn');
+    const phiPortal = document.getElementById('phiPortal');
+    const phaseText = document.getElementById('phaseText');
+    const coherenceMetric = document.getElementById('coherenceMetric');
+
+    let exploded = false;
+    let explosionProgress = 0;
+    let isExploding = false;
+
+    entryBtn.addEventListener('click', () => {
+        if (exploded) return;
+        triggerExplosion();
+    });
+
+    function triggerExplosion() {
+        if (exploded) return;
+        exploded = true;
+        isExploding = true;
+        entryBtn.classList.add('hidden');
+        prisonGroup.visible = false;
+
+        const expPos = explosion.geometry.attributes.position.array;
+        for (let i = 0; i < expCount; i++) {
+            expPos[i * 3] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 1] = (Math.random() - 0.5) * 0.5;
+            expPos[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
+            expLife[i] = 0;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const speed = 1 + Math.random() * 5;
+            expVel[i] = { x: speed * Math.sin(phi) * Math.cos(theta), y: speed * Math.cos(phi) * 0.9, z: speed * Math.sin(phi) * Math.sin(theta) };
+        }
+        explosion.geometry.attributes.position.needsUpdate = true;
+        explosion.visible = true;
+        explosion.material.opacity = 1;
+
+        const flash = new THREE.PointLight(0xff0000, 25, 40);
+        flash.position.set(0, 0, 0);
+        scene.add(flash);
+        setTimeout(() => scene.remove(flash), 600);
+
+        const origPos = camera.position.clone();
+        let shakeCount = 0;
+        const shakeInterval = setInterval(() => {
+            if (shakeCount > 25) { clearInterval(shakeInterval); return; }
+            camera.position.x = origPos.x + (Math.random() - 0.5) * 0.5;
+            camera.position.y = origPos.y + (Math.random() - 0.5) * 0.5;
+            shakeCount++;
+        }, 25);
+
+        phaseText.textContent = '⟡ CUBE SHATTERED · MILLION PARTICLES RELEASED ⟡';
+        coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>⬡ PRISON: DESTROYED';
+
+        setTimeout(() => {
+            phiPortal.classList.add('visible');
+            phaseText.textContent = '⟡ APERTURE OPEN · PHI PORTAL ACTIVE ⟡';
+            coherenceMetric.innerHTML = '𝔐 = 0.6180339887<br>χ(C) = 1.000000<br>Φ-669 ACTIVE<br>◉ APERTURE: OPEN<br>Φ PORTAL: READY';
+        }, 1500);
+    }
+
+    phiPortal.addEventListener('click', () => {
+        window.openQuantumPlaybook();
+    });
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        earthGroup.rotation.y = t * 0.06;
+        earthGroup.rotation.x = Math.sin(t * 0.02) * 0.03;
+        const pulse = 0.5 + Math.sin(t * 0.5) * 0.5;
+        edgeMat.opacity = 0.5 + pulse * 0.4;
+        wireMat.opacity = 0.3 + pulse * 0.3;
+        dotMat.opacity = 0.3 + pulse * 0.4;
+
+        stars.rotation.y = t * 0.005;
+
+        if (isExploding) {
+            explosionProgress += 0.01;
+            const pos = explosion.geometry.attributes.position.array;
+            for (let i = 0; i < expCount; i++) {
+                const idx = i * 3;
+                const lifeRatio = expLife[i] / expMaxLife[i];
+                const speedFactor = 1 - lifeRatio * 0.4;
+                pos[idx] += expVel[i].x * 0.05 * speedFactor;
+                pos[idx + 1] += expVel[i].y * 0.05 * speedFactor;
+                pos[idx + 2] += expVel[i].z * 0.05 * speedFactor;
+                if (lifeRatio > 0.2) {
+                    const pull = 0.002 * (lifeRatio - 0.2);
+                    pos[idx] *= (1 - pull);
+                    pos[idx + 1] += 0.008 * lifeRatio;
+                    pos[idx + 2] *= (1 - pull);
+                }
+                expLife[i] += 0.01;
+            }
+            explosion.geometry.attributes.position.needsUpdate = true;
+            if (explosionProgress > 0.4) {
+                const fade = Math.min(1, (explosionProgress - 0.4) / 0.6);
+                explosion.material.opacity = Math.max(0, 1 - fade * 0.9);
+            }
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    console.log('✦ ◉ SCIENTIFIC CONVERGENCE · Φ669 · ALL 20 CARDS');
+    console.log(`✦ 𝔐 = ${MACACHOR_ABSOLUTE}`);
+    console.log(`✦ Φ = ${PHI_CONSTANT}`);
+    console.log(`✦ Hash: ${IMMUTABLE_HASH}`);
+    console.log('✦ CLICK Φ669 · Enter → CUBE EXPLODES → PHI PORTAL');
+    console.log('✦ All 20 cards from repository are now in the Quantum Playbook');
+</script>
 </body>
 </html>
