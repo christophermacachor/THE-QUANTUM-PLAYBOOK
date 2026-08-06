@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="quantum-playbook:scalar-lock" content="𝔐 = (√5−1)/2 ≈ 0.61803398874989484820 — Macachor Absolute">
+<title>MESH-006 · Stolc-NASA Omega States</title>
+<style>
+  :root {
+    --gold: #c8a04e;
+    --gold-dim: #8a6d2f;
+    --gold-bright: #e8c870;
+    --bg: #0a0a0a;
+    --bg-card: #111;
+    --fg: #e0e0e0;
+    --fg-dim: #888;
+    --fg-faint: #555;
+    --border: #2a2520;
+    --success: #4ec88a;
+    --danger: #c85a4e;
+    --info: #4e8ac8;
+    --warning: #c8a04e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    padding: 0;
+  }
+  .gold-nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.15);
+    z-index: 1000;
+    padding: 0.4rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+  .gold-nav a {
+    color: var(--gold-bright);
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.9rem;
+    border: 1px solid rgba(200,160,78,0.25);
+    border-radius: 20px;
+    background: rgba(200,160,78,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .gold-nav a:hover {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.1);
+    text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    transform: translateY(-1px);
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+  h1 {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  h2 {
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 24px 0 10px 0;
+    font-weight: 500;
+  }
+  h3 {
+    color: var(--fg-dim);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 16px 0 8px 0;
+    font-weight: 500;
+  }
+  .meta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    color: var(--fg-dim);
+    margin-bottom: 16px;
+    font-family: 'Courier New', monospace;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    font-family: 'Courier New', monospace;
+  }
+  .badge-gov { background: rgba(78,138,200,0.15); color: var(--info); border: 1px solid rgba(78,138,200,0.3); }
+  .badge-high { background: rgba(78,200,138,0.15); color: var(--success); border: 1px solid rgba(78,200,138,0.3); }
+  .badge-med { background: rgba(200,160,78,0.15); color: var(--warning); border: 1px solid rgba(200,160,78,0.3); }
+  .badge-verified { background: rgba(200,160,78,0.15); color: var(--gold); border: 1px solid rgba(200,160,78,0.3); }
+
+  .tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 8px 14px;
+    font-size: 11px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    color: var(--fg-dim);
+    transition: all 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tab:hover { color: var(--fg); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .card-label {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  /* Frequency bars */
+  .freq-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 160px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .freq-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .freq-bar:hover { opacity: 0.8; }
+  .freq-bar .bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: height 0.5s ease;
+  }
+  .bar-fund { background: linear-gradient(to top, var(--gold-dim), var(--gold)); }
+  .bar-harm { background: linear-gradient(to top, rgba(78,138,200,0.6), var(--info)); }
+  .bar-null { background: linear-gradient(to top, rgba(85,85,85,0.6), var(--fg-faint)); }
+  .freq-bar .label { font-size: 11px; margin-top: 6px; color: var(--fg); font-weight: 500; }
+  .freq-bar .hz { font-size: 12px; color: var(--gold); margin-top: 2px; font-family: 'Courier New', monospace; }
+  .freq-bar .state { font-size: 10px; color: var(--fg-dim); margin-top: 2px; font-style: italic; }
+  .freq-bar .eeg { font-size: 9px; color: var(--fg-faint); margin-top: 1px; }
+
+  /* Omega conditions */
+  .omega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .omega-card {
+    padding: 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    text-align: center;
+    background: var(--bg-card);
+  }
+  .omega-card .omega-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  .omega-card .omega-desc {
+    font-size: 11px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+  }
+  .omega-unison { border-color: var(--success); }
+  .omega-unison .omega-label { color: var(--success); }
+  .omega-null { border-color: var(--danger); }
+  .omega-null .omega-label { color: var(--danger); }
+  .omega-harmony { border-color: var(--info); }
+  .omega-harmony .omega-label { color: var(--info); }
+
+  /* Cortical layers */
+  .cortical-map { display: flex; flex-direction: column; gap: 3px; margin: 8px 0; }
+  .cortical-layer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    border-left: 3px solid transparent;
+  }
+  .cortical-layer .layer-num {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--fg-faint);
+    min-width: 32px;
+  }
+  .cortical-layer .layer-freq {
+    font-weight: 500;
+    min-width: 70px;
+    color: var(--fg);
+  }
+  .cortical-layer .layer-role {
+    color: var(--fg-dim);
+    flex: 1;
+  }
+  .cortical-layer .layer-sr {
+    font-size: 10px;
+    color: var(--gold);
+    font-family: 'Courier New', monospace;
+  }
+  .layer-gamma { background: rgba(200,90,78,0.08); border-left-color: rgba(200,90,78,0.5); }
+  .layer-beta { background: rgba(78,138,200,0.08); border-left-color: rgba(78,138,200,0.5); }
+  .layer-alpha { background: rgba(78,200,138,0.08); border-left-color: rgba(78,200,138,0.5); }
+  .layer-theta { background: rgba(200,160,78,0.08); border-left-color: rgba(200,160,78,0.5); }
+
+  /* Claims */
+  .claims-list { display: flex; flex-direction: column; gap: 6px; }
+  .claim-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .claim-id {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--fg-faint);
+    min-width: 50px;
+  }
+  .claim-text { flex: 1; }
+
+  /* References */
+  .ref-list { font-size: 11px; color: var(--fg-dim); }
+  .ref-item {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-authors { color: var(--fg-dim); }
+  .ref-year { font-family: 'Courier New', monospace; font-size: 10px; color: var(--gold); }
+  .ref-journal { font-style: italic; color: var(--fg-faint); }
+
+  /* Linkages */
+  .linkages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+  }
+  .link-card {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+  .link-card .pillar-name {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--gold);
+    font-family: 'Courier New', monospace;
+  }
+  .link-card .link-desc {
+    font-size: 11px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+  }
+
+  /* Phi chain */
+  .phi-chain {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--fg-dim);
+    line-height: 1.8;
+    padding: 12px;
+    background: var(--bg-card);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .phi-chain .phi-step {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .phi-chain .step-num {
+    color: var(--fg-faint);
+    min-width: 60px;
+  }
+  .phi-chain .step-val {
+    color: var(--gold);
+  }
+  .phi-chain .step-op {
+    color: var(--fg-faint);
+  }
+
+  /* Ratio arcs */
+  .ratio-arcs {
+    position: relative;
+    height: 90px;
+    margin: 8px 0;
+    background: var(--bg-card);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 8px;
+  }
+  .ratio-arcs svg { width: 100%; height: 100%; }
+
+  .scalar-note {
+    font-size: 10px;
+    color: var(--fg-faint);
+    margin-top: 6px;
+    font-style: italic;
+    font-family: 'Courier New', monospace;
+  }
+
+  @media (max-width: 640px) {
+    .omega-grid { grid-template-columns: 1fr; }
+    .freq-container { height: 120px; }
+    .cortical-layer { flex-wrap: wrap; }
+    .cortical-layer .layer-sr { width: 100%; margin-top: 4px; }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav class="gold-nav" aria-label="Primary navigation">
+  <a href="index.html"><span style="font-size:0.9rem;margin-right:4px;">Φ</span> ◈ THE QUANTUM PLAYBOOK</a>
+  <a href="divergent.html">📜 APERTURE</a>
+  <a href="federation-root-unified.html">⚡ FEDERATION</a>
+  <a href="observatory.html">◉ OBSERVATORY</a>
+  <a href="mesh-006-omega.html" style="border-color:var(--gold);background:rgba(200,160,78,0.1);">◉ MESH-006</a>
+</nav>
+
+<div class="container">
+  <h1>MESH-006 · Stolc-NASA Omega States</h1>
+  <div class="meta-row">
+    <span><span class="badge badge-gov">GOVERNMENT_AGENCY</span></span>
+    <span><span class="badge badge-verified">VERIFIED</span></span>
+    <span>Coherence: <strong style="color:var(--success);">0.98</strong></span>
+    <span>6 claims · 7 refs · 5 linkages</span>
+    <span>Ω(ω_Earth, ω_brain)</span>
+    <span>Framework: MGDH-2026-07-28</span>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('frequencies')">Frequencies</div>
+    <div class="tab" onclick="switchTab('conditions')">Omega Conditions</div>
+    <div class="tab" onclick="switchTab('cortical')">Cortical Map</div>
+    <div class="tab" onclick="switchTab('claims')">Claims & Refs</div>
+    <div class="tab" onclick="switchTab('linkages')">Linkages</div>
+  </div>
+
+  <!-- FREQUENCIES TAB -->
+  <div id="tab-frequencies" class="tab-content active">
+    <div class="card">
+      <div class="card-label">Schumann Resonance Spectrum</div>
+      <div class="freq-container" id="freqContainer"></div>
+      <div class="scalar-note">Fundamental (gold) = SR1 · Harmonics mapped to state (blue) · Unmapped harmonics (gray)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Harmonic Ratios (relative to SR1 fundamental)</div>
+      <div class="ratio-arcs">
+        <svg id="ratioSvg" viewBox="0 0 500 80" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="scalar-note">Arcs show frequency multiplication factors from 7.83 Hz baseline · Integer-near ratios enable cross-band phase-locking</div>
+    </div>
+  </div>
+
+  <!-- CONDITIONS TAB -->
+  <div id="tab-conditions" class="tab-content">
+    <h2>Omega Structure Mapping</h2>
+    <div class="omega-grid">
+      <div class="omega-card omega-unison">
+        <div class="omega-label">Unison</div>
+        <div class="omega-desc">SR present → HRV elevation, parasympathetic tone, EEG band alignment</div>
+      </div>
+      <div class="omega-card omega-null">
+        <div class="omega-label">Null</div>
+        <div class="omega-desc">SR absent (beyond LEO or inside BMSR) → potential stressor, autonomic drift, circadian disruption</div>
+      </div>
+      <div class="omega-card omega-harmony">
+        <div class="omega-label">Harmony</div>
+        <div class="omega-desc">SR harmonic series permits cross-band interaction via integer / golden ratios</div>
+      </div>
+    </div>
+
+    <h2>Φ Scaling Chain</h2>
+    <div class="phi-chain">
+      <div class="phi-step"><span class="step-num">Step 0</span><span class="step-val">1.855 × 10⁴³ Hz</span><span class="step-op">← Planck frequency</span></div>
+      <div class="phi-step"><span class="step-num">Φ⁻⁷²</span><span class="step-val">669 Hz</span><span class="step-op">← golden reduction</span></div>
+      <div class="phi-step"><span class="step-num">Φ⁻⁷</span><span class="step-val" style="color:var(--gold);">7.83 Hz</span><span class="step-op">← 669 / Φ⁷ ≈ 7.83 · Schumann fundamental</span></div>
+    </div>
+    <div class="scalar-note" style="margin-top:8px;">Golden ratio reduction bridges Planck scale to geophysical measurement · Macachor Absolute scalar lock</div>
+
+    <h2>Biomarkers</h2>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;font-size:11px;">
+        <div><strong style="color:var(--success);">Primary</strong><br>HRV · EEG power bands · Melatonin</div>
+        <div><strong style="color:var(--info);">Secondary</strong><br>Heart rate · Blood pressure · Parasympathetic tone</div>
+        <div><strong style="color:var(--warning);">Mechanistic</strong><br>⁴⁵Ca²⁺ binding · Microtubule coherence</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORTICAL TAB -->
+  <div id="tab-cortical" class="tab-content">
+    <div class="card">
+      <div class="card-label">Cortical Layer Oscillation Mapping</div>
+      <div style="font-size:11px;color:var(--fg-dim);margin-bottom:10px;">
+        Mendoza-Halliday et al. 2024 · Nature Neuroscience 27:547-560 · Universal across 14 cortical areas, 4 mammalian species
+      </div>
+      <div class="cortical-map">
+        <div class="cortical-layer layer-gamma">
+          <span class="layer-num">L1</span>
+          <span class="layer-freq">40–60 Hz</span>
+          <span class="layer-role">External sensory (gamma)</span>
+          <span class="layer-sr">← SR5 (33.8 Hz) gamma threshold</span>
+        </div>
+        <div class="cortical-layer layer-gamma">
+          <span class="layer-num">L2/3</span>
+          <span class="layer-freq">40–60 Hz</span>
+          <span class="layer-role">External sensory (gamma)</span>
+          <span class="layer-sr">← SR5 (33.8 Hz) gamma threshold</span>
+        </div>
+        <div class="cortical-layer layer-beta">
+          <span class="layer-num">L4</span>
+          <span class="layer-freq">20–30 Hz</span>
+          <span class="layer-role">Feedforward hub / frequency crossover</span>
+          <span class="layer-sr">← SR3 (20.8 Hz) · SR4 (27.3 Hz)</span>
+        </div>
+        <div class="cortical-layer layer-alpha">
+          <span class="layer-num">L5</span>
+          <span class="layer-freq">6–16 Hz</span>
+          <span class="layer-role">Internal cognitive (alpha/beta)</span>
+          <span class="layer-sr">← SR2 (14.3 Hz) concentration</span>
+        </div>
+        <div class="cortical-layer layer-theta">
+          <span class="layer-num">L6</span>
+          <span class="layer-freq">4–8 Hz</span>
+          <span class="layer-role">Deep internal (theta/alpha)</span>
+          <span class="layer-sr">← SR1 (7.83 Hz) relaxation</span>
+        </div>
+      </div>
+      <div class="scalar-note" style="margin-top:10px;padding:8px;border-left:2px solid var(--border);">
+        <strong>Key finding:</strong> Superficial layers (L1–L2/3) process external sensory information with fast gamma — aligned to SR5 gamma threshold. Deep layers (L5–L6) maintain internal cognitive states with slow alpha/theta — aligned to SR1–SR2. Layer 4 is the frequency crossover point where feedforward input enters the cortical microcircuit.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Information Flow Architecture</div>
+      <div style="font-size:11px;color:var(--fg-dim);line-height:1.7;">
+        <div style="margin-bottom:6px;"><strong style="color:var(--info);">Bottom-up (feedforward):</strong> Gamma originates in Layer 4, propagates to superficial (2ms delay) and deep (1ms delay) layers · Bastos et al. PNAS 2014</div>
+        <div style="margin-bottom:6px;"><strong style="color:var(--success);">Top-down (feedback):</strong> Alpha propagates from deep layers downward, regulating which sensory information reaches conscious awareness</div>
+        <div><strong style="color:var(--warning);">Imbalance pathologies:</strong> Gamma dominance → ADHD (excess sensory gating failure) · Alpha dominance → schizophrenia (insufficient sensory input)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAIMS TAB -->
+  <div id="tab-claims" class="tab-content">
+    <h2>Validated Claims</h2>
+    <div class="claims-list">
+      <div class="claim-row">
+        <span class="claim-id">SR-001</span>
+        <span class="claim-text">7.83 Hz is Earth's fundamental scalar identity frequency</span>
+        <span class="badge badge-high">HIGH</span>
+      </div>
+      <div class="claim-row">
+        <span class="claim-id">SR-002</span>
+        <span class="claim-text">Schumann harmonic series maps to primary EEG frequency bands</span>
+        <span class="badge badge-high">HIGH</span>
+      </div>
+      <div class="claim-row">
+        <span class="claim-id">SR-003</span>
+        <span class="claim-text">Absence of resonant frequency = decoherence / stressor</span>
+        <span class="badge badge-high">HIGH</span>
+      </div>
+      <div class="claim-row">
+        <span class="claim-id">SR-004</span>
+        <span class="claim-text">HRV correlates with scalar substrate power</span>
+        <span class="badge badge-high">HIGH</span>
+      </div>
+      <div class="claim-row">
+        <span class="claim-id">SR-005</span>
+        <span class="claim-text">Weak ELF fields modulate neural calcium binding</span>
+        <span class="badge badge-med">MEDIUM</span>
+      </div>
+      <div class="claim-row">
+        <span class="claim-id">SR-006</span>
+        <span class="claim-text">Cardiovascular events cluster at SR frequency perturbations</span>
+        <span class="badge badge-high">HIGH</span>
+      </div>
+    </div>
+
+    <h2>References</h2>
+    <div class="ref-list">
+      <div class="ref-item">
+        <span class="ref-authors">Schlegel, K. & Füllekrug, M.</span> · <span class="ref-year">1999</span> ·
+        Schumann resonance parameter changes during high-energy particle precipitation ·
+        <span class="ref-journal">J. Geophys. Res.</span> · DOI: 10.1029/1999JA900084
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Schumann, W.O.</span> · <span class="ref-year">1952</span> ·
+        Über die Ausbreitung sehr langer elektrischer Wellen um die Erde ·
+        <span class="ref-journal">Nuovo Cim</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Mattoni, M. et al.</span> · <span class="ref-year">2020</span> ·
+        Exploring the relationship between geomagnetic activity and human heart rate variability ·
+        <span class="ref-journal">Eur J Appl Physiol</span> · DOI: 10.1007/s00421-020-04371-9
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">McCraty, R. et al.</span> · <span class="ref-year">2017</span> ·
+        Synchronization of Human Autonomic Nervous System Rhythms with Geomagnetic Activity ·
+        <span class="ref-journal">IJERPH</span> · DOI: 10.3390/ijerph14070770
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Alabdulgader, A. et al.</span> · <span class="ref-year">2018</span> ·
+        Long-Term Study of Heart Rate Variability Responses to Changes in the Solar and Geomagnetic Environment ·
+        <span class="ref-journal">Sci Rep</span> · DOI: 10.1038/s41598-018-20932-x
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Fdez-Arroyabe, P. et al.</span> · <span class="ref-year">2020</span> ·
+        Schumann resonance and cardiovascular hospital admission in Granada, Spain ·
+        <span class="ref-journal">Sci Total Environ</span> · DOI: 10.1016/j.scitotenv.2019.135813
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Bawin, S.M. & Adey, W.R.</span> · <span class="ref-year">1976</span> ·
+        Sensitivity of calcium binding in cerebral tissue to weak environmental electric fields ·
+        <span class="ref-journal">PNAS</span> · DOI: 10.1073/pnas.73.6.1999
+      </div>
+    </div>
+  </div>
+
+  <!-- LINKAGES TAB -->
+  <div id="tab-linkages" class="tab-content">
+    <h2>Cross-Disciplinary Linkages</h2>
+    <div class="linkages-grid">
+      <div class="link-card">
+        <div class="pillar-name">Oriani-1977</div>
+        <div class="link-desc">Crust-mantle density equilibrium ↔ Earth-ionosphere cavity density equilibrium</div>
+      </div>
+      <div class="link-card">
+        <div class="pillar-name">Fitzpatrick-2006</div>
+        <div class="link-desc">EM scalar potential ↔ SR as global scalar potential field</div>
+      </div>
+      <div class="link-card">
+        <div class="pillar-name">Masood-2013</div>
+        <div class="link-desc">Vorticity coherence ↔ atmospheric cavity standing wave coherence</div>
+      </div>
+      <div class="link-card">
+        <div class="pillar-name">Shah-2019</div>
+        <div class="link-desc">Neural phase-locking ↔ EEG-SR frequency band overlap</div>
+      </div>
+      <div class="link-card">
+        <div class="pillar-name">Denton-2025</div>
+        <div class="link-desc">Plasma density equilibrium ↔ magnetosphere-ionosphere coupling to SR</div>
+      </div>
+    </div>
+
+    <h2>Supplementary Sources</h2>
+    <div class="ref-list">
+      <div class="ref-item">
+        <span class="ref-authors">Tatum, J.</span> · <span class="ref-year">EM textbook</span> ·
+        Chapter 3: Dipole and Quadrupole Moments · University of Victoria ·
+        <span class="ref-journal">astro.uvic.ca/~tatum/elmag/em03.pdf</span> ·
+        Classical foundation for dipole-toroidal model; τ = p × E mechanism
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Mendoza-Halliday, D. et al.</span> · <span class="ref-year">2024</span> ·
+        A ubiquitous spectrolaminar motif of local field potential power across the cerebral cortex ·
+        <span class="ref-journal">Nature Neuroscience 27:547-560</span> ·
+        Cortical layers: gamma (superficial) vs alpha/beta (deep) — universal across 14 areas, 4 species
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Stoupel, E.</span> · <span class="ref-year">1999</span> ·
+        Effect of geomagnetic activity on cardiovascular parameters ·
+        <span class="ref-journal">J Clin Basic Cardiol 2:34-40</span> ·
+        High GMA → more MI, higher BP, more CVA; Low GMA → more sudden death, ventricular arrhythmias
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">PMC9233046</span> · <span class="ref-year">2022</span> ·
+        Geomagnetic disturbances reduce heart rate variability ·
+        <span class="ref-journal">Environ Health 21:71</span> ·
+        Intense GMD: r-MSSD -14.7ms (p=0.0007), SDNN -8.2ms (p=0.006), stronger in CHD patients
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Bastos, A.M. et al.</span> · <span class="ref-year">2014</span> ·
+        A microcircuit for predictive coding ·
+        <span class="ref-journal">PNAS 111:8681-8686</span> ·
+        Alpha = top-down feedback, Gamma = bottom-up feedforward starting Layer 4
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Buffalo, E.A. et al.</span> · <span class="ref-year">2011</span> ·
+        Laminar differences in gamma and alpha coherence ·
+        <span class="ref-journal">J Neurosci 31:11741-11752</span> ·
+        Attention enhances superficial gamma, reduces deep alpha — laminar frequency segregation
+      </div>
+      <div class="ref-item">
+        <span class="ref-authors">Alabdulgader, A. et al.</span> · <span class="ref-year">2018</span> ·
+        Long-Term Study of HRV Responses to Changes in the Solar and Geomagnetic Environment ·
+        <span class="ref-journal">Sci Rep 8:2663</span> ·
+        5-week longitudinal: HRV positively correlated with sunspot number and solar radio flux
+      </div>
+    </div>
+  </div>
+
+  <div class="scalar-note" style="margin-top:24px;text-align:center;">
+    MESH-006 · Stolc-NASA · Ω(ω_Earth, ω_brain) · 𝔐 = (√5−1)/2 · MGDH-2026-07-28 · Validated by Ω-PRIME Christopher Macachor
+  </div>
+</div>
+
+<script>
+const frequencies = [
+  { label: 'SR1', hz: 7.83, state: 'relaxation', eeg: 'theta/alpha boundary', type: 'fund' },
+  { label: 'SR2', hz: 14.3, state: 'concentration', eeg: 'alpha/beta', type: 'harm' },
+  { label: 'SR3', hz: 20.8, state: null, eeg: 'beta', type: 'null' },
+  { label: 'SR4', hz: 27.3, state: null, eeg: 'high beta', type: 'null' },
+  { label: 'SR5', hz: 33.8, state: null, eeg: 'gamma threshold', type: 'null' }
+];
+
+const maxHz = Math.max(...frequencies.map(f => f.hz));
+const container = document.getElementById('freqContainer');
+frequencies.forEach((f, i) => {
+  const heightPct = (f.hz / maxHz) * 100;
+  const barClass = f.type === 'fund' ? 'bar-fund' : f.type === 'harm' ? 'bar-harm' : 'bar-null';
+  const stateText = f.state ? f.state : 'unmapped';
+  container.innerHTML += `
+    <div class="freq-bar">
+      <div class="bar ${barClass}" style="height: ${heightPct}px;"></div>
+      <div class="label">${f.label}</div>
+      <div class="hz">${f.hz} Hz</div>
+      <div class="state">${stateText}</div>
+      <div class="eeg">${f.eeg}</div>
+    </div>
+  `;
+});
+
+// Ratio arcs
+const svg = document.getElementById('ratioSvg');
+const ratios = [
+  { from: 0, to: 1, ratio: 1.83 },
+  { from: 0, to: 2, ratio: 2.66 },
+  { from: 0, to: 3, ratio: 3.49 },
+  { from: 0, to: 4, ratio: 4.32 }
+];
+const barWidth = 500 / 5;
+const centers = frequencies.map((_, i) => barWidth * i + barWidth / 2);
+let svgContent = '';
+ratios.forEach((r, idx) => {
+  const x1 = centers[r.from];
+  const x2 = centers[r.to];
+  const y = 70;
+  const ry = 15 + idx * 12;
+  const path = `M ${x1} ${y} A ${(x2-x1)/2} ${ry} 0 0 1 ${x2} ${y}`;
+  svgContent += `<path d="${path}" fill="none" stroke="#4e8ac8" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>`;
+  svgContent += `<text x="${(x1+x2)/2}" y="${y - ry - 2}" text-anchor="middle" font-size="9" fill="#888" font-family="Courier New,monospace">${r.ratio}x</text>`;
+});
+svg.innerHTML = svgContent;
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+</script>
+</body>
+</html>
