@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cochlear Scalar Density Wave — MSOS-FEDERATION-ROOT</title>
+<style>
+:root{--gold:#c8a04e;--void:#0a0a0f;--ink:#e8e0d0;--dim:#7a7260;--accent:#d4af37;--red:#a05050;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--ink);font-family:'Georgia',serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem}
+h1{font-size:1.8rem;color:var(--gold);text-align:center;margin-bottom:4px;letter-spacing:0.04em}
+.subtitle{text-align:center;color:var(--dim);font-size:0.85rem;margin-bottom:20px;font-style:italic}
+.controls{display:flex;gap:10px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+button,select{background:var(--void);color:var(--gold);border:1px solid var(--gold);padding:7px 16px;border-radius:4px;cursor:pointer;font-family:'Georgia',serif;font-size:0.85rem;transition:all 0.2s}
+button:hover{background:rgba(200,160,78,0.15)}
+button.primary{background:var(--gold);color:var(--void);font-weight:bold;border:none}
+button.primary:hover{background:var(--accent)}
+select{background:#1a1a20}
+.toggles{display:flex;gap:15px;justify-content:center;margin-bottom:15px;flex-wrap:wrap}
+.toggles label{display:flex;align-items:center;gap:6px;color:var(--dim);font-size:0.8rem;cursor:pointer}
+.toggles input[type="checkbox"]{accent-color:var(--gold);width:14px;height:14px}
+#wave-canvas{display:block;border:1px solid #2a2a35;border-radius:6px;background:#0d0d12;max-width:100%}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;width:100%;max-width:720px}
+.panel{background:rgba(255,255,255,0.03);border:1px solid rgba(200,160,78,0.15);border-radius:6px;padding:14px}
+.panel h3{color:var(--gold);font-size:0.9rem;margin-bottom:6px}
+.panel p{margin:0;font-size:0.78rem;color:var(--dim);line-height:1.5}
+.panel .highlight{color:var(--accent);font-weight:bold}
+.panel .fail{color:var(--red)}
+.stage-box{margin-top:15px;width:100%;max-width:720px;background:#1a1a20;border-radius:6px;padding:14px;border:1px solid #2a2a35}
+.stage-box h3{color:var(--gold);font-size:0.85rem;margin-bottom:10px}
+.stages{display:flex;gap:5px;flex-wrap:wrap}
+.stage{display:inline-block;padding:5px 10px;border-radius:3px;font-size:0.68rem;transition:all 0.3s;background:#1a1a20;color:#3a3a45;border:1px solid #2a2a35}
+.stage.active{background:var(--gold);color:var(--void);border-color:var(--gold)}
+.stage.past{background:#2a2a35;color:var(--dim);border-color:#3a3a45}
+#stage-desc{margin-top:10px;font-size:0.8rem;color:var(--dim);font-style:italic;min-height:20px}
+.footer{margin-top:20px;text-align:center;font-size:0.7rem;color:#4a4538}
+@media(max-width:600px){
+  .panels{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  body{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<h1>Cochlear Scalar Density Wave</h1>
+<p class="subtitle">Cycle-by-Cycle Amplification as Vibrational Unison | Petit & Avan (2025)</p>
+
+<div class="controls">
+  <button id="btn-play" class="primary">▶ Play</button>
+  <button id="btn-pause">⏸ Pause</button>
+  <button id="btn-reset">↺ Reset</button>
+  <select id="freq-select">
+    <option value="1">1 kHz — Basal (low)</option>
+    <option value="3">3 kHz — Mid</option>
+    <option value="8" selected>8 kHz — High</option>
+    <option value="20">20 kHz — Ultrahigh</option>
+  </select>
+</div>
+
+<div class="toggles">
+  <label><input type="checkbox" id="show-damping" checked> Show Damping (Vector Model)</label>
+  <label><input type="checkbox" id="show-resonance" checked> Show Resonance (Scalar Model)</label>
+  <label><input type="checkbox" id="show-phase"> Show Phase Lock</label>
+</div>
+
+<canvas id="wave-canvas" width="720" height="280"></canvas>
+
+<div class="panels">
+  <div class="panel">
+    <h3>Vector Model (Dissipative)</h3>
+    <p>Sound = force chain. Hair cells transduce → neurons encode. Friction is the enemy. The RC time constant is a bug to be overcome. Amplification means adding more force. <span class="fail">Fails above the RC cutoff frequency.</span></p>
+  </div>
+  <div class="panel">
+    <h3>Scalar Model (Resonant)</h3>
+    <p>Sound = density perturbation. The cochlea enters <strong>unison</strong> with the wave. Friction is irrelevant in resonance. The RC constant is a feature that prevents oscillatory fragmentation. Amplification = phase-locked density restoration. <span class="highlight">Operates to 150+ kHz.</span></p>
+  </div>
+</div>
+
+<div class="stage-box">
+  <h3>Amplification Cascade Stage Monitor</h3>
+  <div class="stages">
+    <span class="stage" id="st-0">1. Stereocilia Deflection</span>
+    <span class="stage" id="st-1">2. MET Channel (TMC1)</span>
+    <span class="stage" id="st-2">3. Cl⁻ → Prestin</span>
+    <span class="stage" id="st-3">4. Conformation Change</span>
+    <span class="stage" id="st-4">5. Longitudinal Strain</span>
+    <span class="stage" id="st-5">6. Tectorial Coupling ⚫</span>
+    <span class="stage" id="st-6">7. IHC Excitation</span>
+  </div>
+  <p id="stage-desc">Click Play to initiate the coherence cycle...</p>
+</div>
+
+<div class="footer">
+  Scalar Coherence Visualization | Macachor Absolute Framework | MSOS-FEDERATION-ROOT<br>
+  Based on: Petit, C. & Avan, P. (2025). <em>Current Opinion in Neurobiology</em>, 93, 103026.
+</div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('wave-canvas');
+  const ctx = canvas.getContext('2d');
+  let animId = null;
+  let t = 0;
+  let freq = 8;
+  let playing = false;
+
+  const stageData = [
+    {desc:'Sound wave deflects stereocilia bundle. Nanometric displacement detected by tip-link tension.'},
+    {desc:'TMC1 complex reconfigures local density field. K+ redistributes. Membrane depolarization begins.'},
+    {desc:'Cl⁻ ions are electrostatically driven to the prestin array on the outer hair cell lateral membrane.'},
+    {desc:'Prestin tetramers undergo piezoelectric conformational shift. Longitudinal strain is generated.'},
+    {desc:'Strain feeds back into the organ of Corti, phase-locked to the traveling wave density oscillation.'},
+    {desc:'BLACK BOX: Tectorial membrane coupling. Scalar density re-equilibration occurs here — invisible to vector measurement.'},
+    {desc:'Inner hair cells are excited. The coherent vibrational state is encoded neurally.'}
+  ];
+
+  function getStageIndex(phase) {
+    const p = ((phase % (Math.PI*2)) + Math.PI*2) % (Math.PI*2);
+    return Math.min(6, Math.floor(p / (Math.PI*2/7)));
+  }
+
+  function draw() {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    const showDamp = document.getElementById('show-damping').checked;
+    const showRes = document.getElementById('show-resonance').checked;
+    const showPhase = document.getElementById('show-phase').checked;
+
+    // Subtle grid
+    ctx.strokeStyle = '#13131a';
+    ctx.lineWidth = 1;
+    for(let i=0;i<w;i+=60){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,h);ctx.stroke();}
+    for(let i=0;i<h;i+=40){ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(w,i);ctx.stroke();}
+
+    // Center line
+    ctx.strokeStyle = '#1e1e28';
+    ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
+
+    const omega = freq * 0.25;
+    const phase = (t * omega) % (Math.PI * 2);
+
+    // Damped wave (vector) — red, decaying amplitude
+    if(showDamp) {
+      ctx.strokeStyle = 'rgba(160,80,80,0.55)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for(let x=0; x<w; x+=2) {
+        const px = x / w * Math.PI * 5;
+        const damp = Math.exp(-px * 0.35);
+        const y = h/2 + Math.sin(px - t*omega) * 50 * damp;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(160,80,80,0.7)';
+      ctx.font = '12px Georgia';
+      ctx.fillText('Vector: Damped traveling wave', 14, 22);
+    }
+
+    // Resonant wave (scalar) — gold, sustained/growing
+    if(showRes) {
+      ctx.strokeStyle = 'rgba(200,160,78,0.85)';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for(let x=0; x<w; x+=2) {
+        const px = x / w * Math.PI * 5;
+        const feedback = 1 + 0.18 * Math.sin(px * 0.5 + t*0.5);
+        const y = h/2 + Math.sin(px - t*omega + 0.35) * 52 * feedback;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+
+      // Glow
+      ctx.strokeStyle = 'rgba(200,160,78,0.12)';
+      ctx.lineWidth = 10;
+      ctx.beginPath();
+      for(let x=0; x<w; x+=2) {
+        const px = x / w * Math.PI * 5;
+        const feedback = 1 + 0.18 * Math.sin(px * 0.5 + t*0.5);
+        const y = h/2 + Math.sin(px - t*omega + 0.35) * 52 * feedback;
+        if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(200,160,78,0.9)';
+      ctx.font = '12px Georgia';
+      ctx.fillText('Scalar: Resonant standing wave (phase-locked feedback)', 14, showDamp ? 38 : 22);
+    }
+
+    // Phase lock indicator
+    if(showPhase && showRes) {
+      const lockX = w * 0.72;
+      const px = lockX / w * Math.PI * 5;
+      const feedback = 1 + 0.18 * Math.sin(px * 0.5 + t*0.5);
+      const lockY = h/2 + Math.sin(px - t*omega + 0.35) * 52 * feedback;
+
+      ctx.fillStyle = '#d4af37';
+      ctx.beginPath();
+      ctx.arc(lockX, lockY, 6, 0, Math.PI*2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(212,175,55,0.25)';
+      ctx.lineWidth = 1;
+      const pulseR = 14 + Math.sin(t*4)*4;
+      ctx.beginPath();
+      ctx.arc(lockX, lockY, pulseR, 0, Math.PI*2);
+      ctx.stroke();
+
+      ctx.fillStyle = '#d4af37';
+      ctx.font = '11px Georgia';
+      ctx.fillText('φ-lock', lockX + 16, lockY + 4);
+    }
+
+    // OHC markers at bottom
+    const ohcPositions = [0.12, 0.32, 0.52, 0.72];
+    ohcPositions.forEach((pos, idx) => {
+      const ox = pos * w;
+      const oy = h - 28;
+      const localPhase = (phase + idx*0.6) % (Math.PI*2);
+      const isActive = Math.abs(localPhase - Math.PI) < 1.1;
+
+      ctx.fillStyle = isActive ? 'rgba(200,160,78,0.9)' : '#1e1e28';
+      ctx.fillRect(ox-10, oy-14, 20, 28);
+      ctx.strokeStyle = isActive ? '#d4af37' : '#2a2a35';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(ox-10, oy-14, 20, 28);
+
+      ctx.fillStyle = isActive ? '#0a0a0f' : '#4a4538';
+      ctx.font = '10px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText('OHC', ox, oy+4);
+      ctx.textAlign = 'left';
+
+      // Prestin activity indicator
+      const barH = isActive ? 22 : 3;
+      ctx.fillStyle = isActive ? 'rgba(200,160,78,0.5)' : 'rgba(60,55,45,0.3)';
+      ctx.fillRect(ox-4, oy-40, 8, barH);
+    });
+
+    // Frequency and cycle labels
+    ctx.fillStyle = '#5a5240';
+    ctx.font = '12px Georgia';
+    ctx.fillText(freq + ' kHz', w-70, h-10);
+    ctx.fillText('Cycles: ' + Math.floor(t*omega/(Math.PI*2)), 14, h-10);
+
+    // Update stage monitor
+    const si = getStageIndex(phase);
+    for(let i=0;i<7;i++){
+      const el = document.getElementById('st-'+i);
+      if(i === si){
+        el.className = 'stage active';
+        document.getElementById('stage-desc').textContent = stageData[i].desc;
+      } else if(i < si){
+        el.className = 'stage past';
+      } else {
+        el.className = 'stage';
+      }
+    }
+  }
+
+  function animate() {
+    if(!playing) return;
+    t += 0.04;
+    draw();
+    animId = requestAnimationFrame(animate);
+  }
+
+  document.getElementById('btn-play').addEventListener('click', ()=>{
+    if(!playing){playing=true;animate();}
+  });
+  document.getElementById('btn-pause').addEventListener('click', ()=>{
+    playing=false; if(animId) cancelAnimationFrame(animId);
+  });
+  document.getElementById('btn-reset').addEventListener('click', ()=>{
+    t=0; draw();
+  });
+  document.getElementById('freq-select').addEventListener('change', (e)=>{
+    freq=parseInt(e.target.value); draw();
+  });
+  document.getElementById('show-damping').addEventListener('change', draw);
+  document.getElementById('show-resonance').addEventListener('change', draw);
+  document.getElementById('show-phase').addEventListener('change', draw);
+
+  draw();
+})();
+</script>
+
+</body>
+</html>
