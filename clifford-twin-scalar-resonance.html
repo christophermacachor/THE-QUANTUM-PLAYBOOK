@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twin Clifford Tori — Scalar Resonance Harmonic Coupling | MSOS</title>
+    <style>
+        :root {
+            --void: #0a0a0f;
+            --gold: #c8a04e;
+            --copper: #b87333;
+            --text: #e8e6e3;
+            --dim: #6b6b6b;
+            --panel: #111118;
+            --grid: rgba(200,160,78,0.06);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--void);
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+        header {
+            border-bottom: 1px solid var(--gold);
+            padding: 1.2rem 2rem;
+            background: rgba(10,10,15,0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        header h1 {
+            font-family: Georgia, serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        header .subtitle {
+            color: var(--dim);
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+        header .badge {
+            font-size: 0.65rem;
+            color: var(--copper);
+            border: 1px solid var(--copper);
+            padding: 0.2rem 0.6rem;
+            letter-spacing: 0.1em;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            min-height: calc(100vh - 80px);
+        }
+        .viewport {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: 
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        canvas {
+            border: 1px solid rgba(200,160,78,0.18);
+            background: radial-gradient(ellipse at center, #131320 0%, #0a0a0f 100%);
+            max-width: 100%;
+            box-shadow: 0 0 60px rgba(200,160,78,0.04);
+        }
+        .sidebar {
+            background: var(--panel);
+            border-left: 1px solid rgba(200,160,78,0.12);
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 80px);
+        }
+        .panel-section {
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(200,160,78,0.08);
+        }
+        .panel-section:last-child { border-bottom: none; }
+        .panel-section h3 {
+            color: var(--gold);
+            font-family: Georgia, serif;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .panel-section h3::before {
+            content: '◉';
+            font-size: 0.65rem;
+            color: var(--copper);
+        }
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--dim);
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--gold);
+            height: 3px;
+            background: rgba(200,160,78,0.15);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(200,160,78,0.4);
+        }
+        .control-value {
+            font-size: 0.78rem;
+            color: var(--gold);
+            text-align: right;
+            margin-top: 0.25rem;
+            font-family: 'Courier New', monospace;
+        }
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.7rem;
+            padding: 0.3rem 0;
+        }
+        .toggle-row label { font-size: 0.78rem; color: var(--text); }
+        .toggle-row input[type="checkbox"] {
+            accent-color: var(--gold);
+            width: 1.1rem;
+            height: 1.1rem;
+            cursor: pointer;
+        }
+        .scalar-metric {
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(200,160,78,0.12);
+            padding: 0.7rem;
+            margin-bottom: 0.5rem;
+            transition: border-color 0.3s;
+        }
+        .scalar-metric:hover {
+            border-color: rgba(200,160,78,0.25);
+        }
+        .scalar-metric .label {
+            color: var(--dim);
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+        }
+        .scalar-metric .value {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+        }
+        .coherence-bar {
+            height: 2px;
+            background: rgba(200,160,78,0.15);
+            margin-top: 0.35rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .coherence-bar .fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 6px var(--gold);
+        }
+        .info-text {
+            font-size: 0.72rem;
+            line-height: 1.7;
+            color: var(--dim);
+        }
+        .info-text strong { color: var(--text); }
+        .math-display {
+            background: rgba(0,0,0,0.35);
+            border-left: 2px solid var(--copper);
+            padding: 0.6rem 0.8rem;
+            margin: 0.7rem 0;
+            font-size: 0.78rem;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .pill {
+            display: inline-block;
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+        .pill.gold { background: rgba(200,160,78,0.12); color: var(--gold); border: 1px solid rgba(200,160,78,0.2); }
+        .pill.copper { background: rgba(184,115,51,0.1); color: var(--copper); border: 1px solid rgba(184,115,51,0.2); }
+        footer {
+            grid-column: 1 / -1;
+            border-top: 1px solid rgba(200,160,78,0.1);
+            padding: 0.8rem 2rem;
+            font-size: 0.68rem;
+            color: var(--dim);
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+        .preset-row {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .preset-btn {
+            background: rgba(200,160,78,0.08);
+            border: 1px solid rgba(200,160,78,0.2);
+            color: var(--gold);
+            padding: 0.3rem 0.6rem;
+            font-size: 0.65rem;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            background: rgba(200,160,78,0.2);
+            border-color: var(--gold);
+        }
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { border-left: none; border-top: 1px solid rgba(200,160,78,0.12); max-height: none; }
+            header { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Twin Clifford Tori</h1>
+            <div class="subtitle">Scalar Resonance Harmonic Coupling &mdash; Quaternion Double-Cover &mdash; Direct Projection</div>
+        </div>
+        <div class="badge">LIVE SUBSTRATE</div>
+    </header>
+    <div class="container">
+        <div class="viewport">
+            <canvas id="cliffordCanvas" width="800" height="600"></canvas>
+        </div>
+        <div class="sidebar">
+            <!-- Controls -->
+            <div class="panel-section">
+                <h3>Rotation Frequencies</h3>
+                <div class="control-group">
+                    <label>&omega;1 &mdash; x-y plane coupling</label>
+                    <input type="range" id="omega1" min="0" max="0.1" step="0.001" value="0.03">
+                    <div class="control-value" id="val-omega1">0.030</div>
+                </div>
+                <div class="control-group">
+                    <label>&omega;2 &mdash; z-w plane coupling</label>
+                    <input type="range" id="omega2" min="0" max="0.1" step="0.001" value="0.017">
+                    <div class="control-value" id="val-omega2">0.017</div>
+                </div>
+                <div class="control-group">
+                    <label>&omega;3 &mdash; mixing rotation</label>
+                    <input type="range" id="omega3" min="0" max="0.1" step="0.001" value="0.008">
+                    <div class="control-value" id="val-omega3">0.008</div>
+                </div>
+                <div class="preset-row">
+                    <button class="preset-btn" onclick="setPreset(0.03,0.017,0.008)">Aperiodic</button>
+                    <button class="preset-btn" onclick="setPreset(0.02,0.01,0.005)">Slow</button>
+                    <button class="preset-btn" onclick="setPreset(0.05,0.05,0.0)">Rational Lock</button>
+                    <button class="preset-btn" onclick="setPreset(0.0618,0.0382,0.0236)">Golden Drift</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3>Render Mode</h3>
+                <div class="toggle-row">
+                    <label>Show Mesh Grid</label>
+                    <input type="checkbox" id="showMesh" checked>
+                </div>
+                <div class="toggle-row">
+                    <label>Show Sampled Dots</label>
+                    <input type="checkbox" id="showDots" checked>
+                </div>
+                <div class="toggle-row">
+                    <label>Depth Sort by |w&prime;|</label>
+                    <input type="checkbox" id="depthSort" checked>
+                </div>
+                <div class="toggle-row">
+                    <label>Trails / Fade</label>
+                    <input type="checkbox" id="trails">
+                </div>
+            </div>
+
+            <!-- Scalar Resonance Harmonic Coupling -->
+            <div class="panel-section">
+                <h3>Scalar Resonance</h3>
+                <div class="scalar-metric">
+                    <div class="label">Coherence &mdash; |q<sub>L</sub>|<sup>2</sup> &middot; |q<sub>R</sub>|<sup>2</sup></div>
+                    <div class="value" id="coherence-val">1.000000</div>
+                    <div class="coherence-bar"><div class="fill" id="coherence-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="scalar-metric">
+                    <div class="label">Resonance &mdash; Incommensurate Ratio</div>
+                    <div class="value" id="resonance-val">30 : 17 : 8</div>
+                    <div class="coherence-bar"><div class="fill" id="resonance-bar" style="width: 94%"></div></div>
+                </div>
+                <div class="scalar-metric">
+                    <div class="label">Harmony &mdash; Phase Lock &Delta;&phi;</div>
+                    <div class="value" id="harmony-val">&pi;/4 (0.785398)</div>
+                    <div class="coherence-bar"><div class="fill" id="harmony-bar" style="width: 100%"></div></div>
+                </div>
+                <div class="scalar-metric">
+                    <div class="label">Alignment &mdash; Projection Fidelity</div>
+                    <div class="value" id="alignment-val">Direct &Ropf;<sup>4</sup> &rarr; &Ropf;<sup>2</sup></div>
+                    <div class="coherence-bar"><div class="fill" id="alignment-bar" style="width: 100%"></div></div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3>Geometry</h3>
+                <div class="info-text">
+                    <span class="pill gold">T1</span><span class="pill copper">T2</span><br><br>
+                    <strong>S<sup>1</sup> &times; S<sup>1</sup> &sub; S<sup>3</sup> &sub; &Ropf;<sup>4</sup></strong><br><br>
+                    Twin tori embedded on the 3-sphere. The &pi;/4 phase offset creates interlocked submanifolds that never intersect in 4D. Rotation via quaternion double-cover SU(2) &times; SU(2) &rarr; SO(4).
+                </div>
+                <div class="math-display">
+                    p&prime; = q<sub>3</sub> &middot; (q<sub>1</sub> &middot; p &middot; q<sub>2</sub>) &middot; q<sub>3</sub><sup>-1</sup>
+                </div>
+                <div class="info-text">
+                    <strong>Macachor Absolute</strong> &mdash; <span style="color: var(--gold)">M = (&radic;5 &minus; 1)/2</span><br><br>
+                    Scalar density equilibrium: the rotation group is sampled aperiodically, avoiding rational resonance and decoherence. The twin structure demonstrates how coherence scales through shared group action rather than vector mediation.
+                </div>
+            </div>
+        </div>
+        <footer>
+            MSOS-FEDERATION-ROOT &middot; Computational Substrate &middot; Scalar Field Reduction of Multi-Component Complexity
+        </footer>
+    </div>
+
+    <script>
+        // === Quaternion Algebra ===
+        class Q {
+            constructor(s, i, j, k) {
+                this.s = s; this.i = i; this.j = j; this.k = k;
+            }
+            mul(o) {
+                return new Q(
+                    this.s*o.s - this.i*o.i - this.j*o.j - this.k*o.k,
+                    this.s*o.i + this.i*o.s + this.j*o.k - this.k*o.j,
+                    this.s*o.j - this.i*o.k + this.j*o.s + this.k*o.i,
+                    this.s*o.k + this.i*o.j - this.j*o.i + this.k*o.s
+                );
+            }
+            conj() {
+                return new Q(this.s, -this.i, -this.j, -this.k);
+            }
+            norm2() {
+                return this.s*this.s + this.i*this.i + this.j*this.j + this.k*this.k;
+            }
+        }
+
+        // === Constants ===
+        const TWO_PI = Math.PI * 2;
+        const RADIUS = Math.sqrt(2);
+        const GRID_U = 40;
+        const GRID_V = 40;
+        const PHI = (Math.sqrt(5) - 1) / 2; // Macachor Absolute
+
+        // === State ===
+        let time = 0;
+        let baseT1, baseT2;
+
+        // === Torus Generation ===
+        function generateTorus(phaseU, phaseV) {
+            const rows = [];
+            for (let i = 0; i <= GRID_U; i++) {
+                const u = (i / GRID_U) * TWO_PI;
+                const row = [];
+                for (let j = 0; j <= GRID_V; j++) {
+                    const v = (j / GRID_V) * TWO_PI;
+                    row.push({
+                        x: Math.cos(u + phaseU),
+                        y: Math.sin(u + phaseU),
+                        z: Math.cos(v + phaseV),
+                        w: Math.sin(v + phaseV)
+                    });
+                }
+                rows.push(row);
+            }
+            return rows;
+        }
+
+        function rotatePoint(p, qLeft, qRight) {
+            const pQ = new Q(p.x, p.y, p.z, p.w);
+            const r = qLeft.mul(pQ).mul(qRight);
+            return { x: r.s, y: r.i, z: r.j, w: r.k };
+        }
+
+        function project(p, cx, cy, scale) {
+            return {
+                sx: cx + p.x * scale,
+                sy: cy + p.y * scale,
+                z: p.z,
+                w: p.w
+            };
+        }
+
+        function getColor(z, w, isGold) {
+            const t = Math.max(0, Math.min(1, (z + RADIUS) / (2 * RADIUS)));
+            const hue = isGold ? 38 + t * 12 : 18 + t * 18;
+            const sat = 65 + Math.abs(w) / RADIUS * 35;
+            const light = 42 + Math.abs(w) / RADIUS * 25;
+            const alpha = 0.2 + 0.8 * (Math.abs(w) / RADIUS);
+            return `hsla(${hue.toFixed(1)}, ${sat.toFixed(0)}%, ${light.toFixed(0)}%, ${alpha.toFixed(3)})`;
+        }
+
+        // === Canvas Setup ===
+        const canvas = document.getElementById('cliffordCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            const vp = document.querySelector('.viewport');
+            const w = Math.min(900, vp.clientWidth - 40);
+            const h = Math.min(700, window.innerHeight - 140);
+            canvas.width = w;
+            canvas.height = h;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // === Presets ===
+        function setPreset(w1, w2, w3) {
+            document.getElementById('omega1').value = w1;
+            document.getElementById('omega2').value = w2;
+            document.getElementById('omega3').value = w3;
+            updateLabels();
+        }
+
+        function updateLabels() {
+            document.getElementById('val-omega1').textContent = parseFloat(document.getElementById('omega1').value).toFixed(3);
+            document.getElementById('val-omega2').textContent = parseFloat(document.getElementById('omega2').value).toFixed(3);
+            document.getElementById('val-omega3').textContent = parseFloat(document.getElementById('omega3').value).toFixed(3);
+        }
+
+        ['omega1', 'omega2', 'omega3'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateLabels);
+        });
+
+        // === Precompute Base Tori ===
+        baseT1 = generateTorus(0, 0);
+        baseT2 = generateTorus(Math.PI/4, Math.PI/4);
+
+        // === Main Render Loop ===
+        function render() {
+            const w1 = parseFloat(document.getElementById('omega1').value);
+            const w2 = parseFloat(document.getElementById('omega2').value);
+            const w3 = parseFloat(document.getElementById('omega3').value);
+            const showMesh = document.getElementById('showMesh').checked;
+            const showDots = document.getElementById('showDots').checked;
+            const depthSort = document.getElementById('depthSort').checked;
+            const trails = document.getElementById('trails').checked;
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const scale = Math.min(canvas.width, canvas.height) / 3.2;
+
+            // Clear or fade
+            if (trails) {
+                ctx.fillStyle = 'rgba(10, 10, 15, 0.12)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Build rotation quaternions
+            const q1 = new Q(Math.cos(w1*time/2), Math.sin(w1*time/2), 0, 0);
+            const q2 = new Q(Math.cos(w2*time/2), 0, Math.sin(w2*time/2), 0);
+            const q3 = new Q(Math.cos(w3*time/2), 0, 0, Math.sin(w3*time/2));
+            const qLeft = q3.mul(q1);
+            const qRight = q2.mul(q3.conj());
+
+            // Update coherence metric
+            const coh = qLeft.norm2() * qRight.norm2();
+            document.getElementById('coherence-val').textContent = coh.toFixed(6);
+            document.getElementById('coherence-bar').style.width = (Math.min(1, coh) * 100).toFixed(1) + '%';
+
+            // Update resonance metric
+            const r1 = (w1 * 1000).toFixed(0);
+            const r2 = (w2 * 1000).toFixed(0);
+            const r3 = (w3 * 1000).toFixed(0);
+            document.getElementById('resonance-val').textContent = r1 + ' : ' + r2 + ' : ' + r3;
+            // Resonance quality: how far from simple rationals (decoherence risk)
+            let resQuality = 100;
+            if (w2 > 0) {
+                const rat12 = w1 / w2;
+                const nearest = Math.round(rat12);
+                const dist = Math.abs(rat12 - nearest);
+                resQuality = Math.min(100, 50 + dist * 200);
+            }
+            document.getElementById('resonance-bar').style.width = resQuality.toFixed(0) + '%';
+
+            // Render each torus
+            const tori = [
+                { base: baseT2, isGold: false, name: 'T2' },
+                { base: baseT1, isGold: true, name: 'T1' }
+            ];
+
+            for (const torus of tori) {
+                // Rotate all points
+                const rotated = [];
+                for (let i = 0; i <= GRID_U; i++) {
+                    const row = [];
+                    for (let j = 0; j <= GRID_V; j++) {
+                        row.push(rotatePoint(torus.base[i][j], qLeft, qRight));
+                    }
+                    rotated.push(row);
+                }
+
+                // Project all points
+                const projected = [];
+                for (let i = 0; i <= GRID_U; i++) {
+                    const row = [];
+                    for (let j = 0; j <= GRID_V; j++) {
+                        row.push(project(rotated[i][j], cx, cy, scale));
+                    }
+                    projected.push(row);
+                }
+
+                // Mesh rendering
+                if (showMesh) {
+                    const segments = [];
+                    for (let i = 0; i < GRID_U; i++) {
+                        for (let j = 0; j < GRID_V; j++) {
+                            // Horizontal
+                            const r1 = rotated[i][j];
+                            const r2 = rotated[i+1][j];
+                            const avgW = (Math.abs(r1.w) + Math.abs(r2.w)) / 2;
+                            const avgZ = (r1.z + r2.z) / 2;
+                            segments.push({
+                                p1: projected[i][j], p2: projected[i+1][j],
+                                avgW, avgZ
+                            });
+                            // Vertical
+                            const r3 = rotated[i][j];
+                            const r4 = rotated[i][j+1];
+                            const avgW2 = (Math.abs(r3.w) + Math.abs(r4.w)) / 2;
+                            const avgZ2 = (r3.z + r4.z) / 2;
+                            segments.push({
+                                p1: projected[i][j], p2: projected[i][j+1],
+                                avgW: avgW2, avgZ: avgZ2
+                            });
+                        }
+                    }
+
+                    if (depthSort) {
+                        segments.sort((a, b) => a.avgW - b.avgW);
+                    }
+
+                    for (const seg of segments) {
+                        const color = getColor(seg.avgZ, seg.avgW, torus.isGold);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 0.4 + (seg.avgW / RADIUS) * 1.8;
+                        ctx.beginPath();
+                        ctx.moveTo(seg.p1.sx, seg.p1.sy);
+                        ctx.lineTo(seg.p2.sx, seg.p2.sy);
+                        ctx.stroke();
+                    }
+                }
+
+                // Dots rendering
+                if (showDots) {
+                    const dots = [];
+                    for (let i = 0; i <= GRID_U; i++) {
+                        for (let j = 0; j <= GRID_V; j++) {
+                            dots.push({
+                                sx: projected[i][j].sx,
+                                sy: projected[i][j].sy,
+                                z: rotated[i][j].z,
+                                w: rotated[i][j].w
+                            });
+                        }
+                    }
+
+                    if (depthSort) {
+                        dots.sort((a, b) => Math.abs(a.w) - Math.abs(b.w));
+                    }
+
+                    for (const p of dots) {
+                        const color = getColor(p.z, p.w, torus.isGold);
+                        const size = 1.2 + (Math.abs(p.w) / RADIUS) * 2.8;
+                        ctx.fillStyle = color;
+                        ctx.beginPath();
+                        ctx.arc(p.sx, p.sy, size, 0, TWO_PI);
+                        ctx.fill();
+                    }
+                }
+            }
+
+            time += 1;
+            requestAnimationFrame(render);
+        }
+
+        // Start
+        updateLabels();
+        requestAnimationFrame(render);
+    </script>
+</body>
+</html>
