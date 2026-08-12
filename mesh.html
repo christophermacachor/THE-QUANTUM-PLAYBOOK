@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MESH — Multi-Eigenmode Scalar Hierarchy · Zenodo Registry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0f;
+      color: #c8a04e;
+      font-family: 'Cinzel', 'Georgia', serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      background: rgba(10,10,15,0.95);
+      border-bottom: 1px solid rgba(200,160,78,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    nav a {
+      color: #c8a04e;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      padding: 6px 12px;
+      border: 1px solid transparent;
+    }
+    nav a:hover {
+      border-color: rgba(200,160,78,0.4);
+      text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid rgba(200,160,78,0.1);
+    }
+    .hero h1 {
+      font-size: 32px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      text-shadow: 0 0 30px rgba(200,160,78,0.2);
+    }
+    .hero .subtitle {
+      color: #7a7a8a;
+      font-size: 13px;
+      margin-top: 8px;
+      letter-spacing: 2px;
+      font-style: italic;
+    }
+    .hero .axiom {
+      margin-top: 20px;
+      padding: 15px 25px;
+      border: 1px solid rgba(200,160,78,0.2);
+      display: inline-block;
+      font-size: 11px;
+      color: #9a9aaa;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+    .hero .axiom span { color: #c8a04e; }
+    /* KIWF Pipeline Banner */
+    .kiwf-banner {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
+      background: rgba(200,160,78,0.03);
+      border-bottom: 1px solid rgba(200,160,78,0.1);
+    }
+    .kiwf-stage {
+      flex: 1;
+      max-width: 200px;
+      padding: 20px 15px;
+      text-align: center;
+      border-right: 1px solid rgba(200,160,78,0.08);
+      position: relative;
+    }
+    .kiwf-stage:last-child { border-right: none; }
+    .kiwf-stage .label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c8a04e;
+      margin-bottom: 6px;
+    }
+    .kiwf-stage .math {
+      font-size: 14px;
+      color: #7ab8ff;
+      font-family: 'Georgia', serif;
+      margin-bottom: 6px;
+    }
+    .kiwf-stage .desc {
+      font-size: 9px;
+      color: #6a6a7a;
+      font-style: italic;
+    }
+    .kiwf-stage.active::after {
+      content: "◉";
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      color: #c8a04e;
+      font-size: 8px;
+    }
+    /* Registry Section */
+    .registry {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+    .registry h2 {
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .registry .registry-sub {
+      text-align: center;
+      color: #7a7a8a;
+      font-size: 11px;
+      margin-bottom: 35px;
+      font-style: italic;
+    }
+    /* Table */
+    .zenodo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .zenodo-table thead th {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 2px solid rgba(200,160,78,0.3);
+      color: #c8a04e;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .zenodo-table tbody tr {
+      border-bottom: 1px solid rgba(200,160,78,0.06);
+      transition: background 0.2s;
+    }
+    .zenodo-table tbody tr:hover {
+      background: rgba(200,160,78,0.04);
+    }
+    .zenodo-table td {
+      padding: 14px 16px;
+      vertical-align: top;
+    }
+    .zenodo-table .num {
+      color: #5a5a6a;
+      font-size: 10px;
+      width: 30px;
+    }
+    .zenodo-table .repo-name {
+      color: #c8a04e;
+      font-weight: 600;
+      font-size: 11px;
+    }
+    .zenodo-table .repo-name .kiwf-tag {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 2px 6px;
+      background: rgba(200,160,78,0.08);
+      border: 1px solid rgba(200,160,78,0.15);
+      border-radius: 2px;
+      font-size: 8px;
+      color: #7ab8ff;
+      letter-spacing: 1px;
+    }
+    .zenodo-table .doi-link a {
+      color: #7ab8ff;
+      text-decoration: none;
+      font-size: 10px;
+      font-family: 'Georgia', monospace;
+      word-break: break-all;
+    }
+    .zenodo-table .doi-link a:hover {
+      text-decoration: underline;
+      color: #c8a04e;
+    }
+    .zenodo-table .status {
+      font-size: 9px;
+      color: #5a8a5a;
+      letter-spacing: 1px;
+    }
+    .zenodo-table .status.pending {
+      color: #8a7a3a;
+    }
+    /* Pipeline Map */
+    .pipeline-map {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(200,160,78,0.1);
+    }
+    .pipeline-map h2 {
+      text-align: center;
+      font-size: 16px;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+    }
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .pipeline-card {
+      background: rgba(200,160,78,0.03);
+      border: 1px solid rgba(200,160,78,0.1);
+      padding: 20px;
+      border-radius: 3px;
+    }
+    .pipeline-card .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .pipeline-card .stage-name {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c8a04e;
+    }
+    .pipeline-card .stage-math {
+      font-size: 12px;
+      color: #7ab8ff;
+      font-family: 'Georgia', serif;
+    }
+    .pipeline-card .stage-desc {
+      font-size: 10px;
+      color: #7a7a8a;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .pipeline-card .zenodo-anchor {
+      font-size: 9px;
+      color: #6a6a7a;
+      padding-top: 10px;
+      border-top: 1px solid rgba(200,160,78,0.08);
+    }
+    .pipeline-card .zenodo-anchor a {
+      color: #7ab8ff;
+      text-decoration: none;
+    }
+    .pipeline-card .zenodo-anchor a:hover { color: #c8a04e; }
+    /* Focus Callout */
+    .focus-callout {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(200,160,78,0.1);
+    }
+    .focus-callout h2 {
+      font-size: 14px;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+      color: #7ab8ff;
+    }
+    .focus-callout p {
+      color: #8a8a9a;
+      font-size: 11px;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .focus-callout .focus-formula {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid rgba(200,160,78,0.15);
+      display: inline-block;
+      font-size: 12px;
+      color: #c8a04e;
+      font-family: 'Georgia', serif;
+      letter-spacing: 1px;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(200,160,78,0.1);
+      color: #5a5a6a;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+    footer .seal {
+      color: #c8a04e;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .kiwf-banner { flex-wrap: wrap; }
+      .kiwf-stage { border-right: none; border-bottom: 1px solid rgba(200,160,78,0.08); min-width: 140px; }
+      .zenodo-table { font-size: 10px; }
+      .zenodo-table td { padding: 10px 8px; }
+      nav { gap: 12px; flex-wrap: wrap; }
+      nav a { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">📜 APERTURE</a>
+    <a href="federation-root-unified.html">⚡ FEDERATION</a>
+    <a href="observatory.html">◉ OBSERVATORY</a>
+    <a href="kiwf-pyramid-focus.html">◈ FOCUS</a>
+    <a href="MESH.html" style="border-color: rgba(200,160,78,0.4);">◉ MESH</a>
+  </nav>
+
+  <section class="hero">
+    <h1>MESH</h1>
+    <p class="subtitle">Multi-Eigenmode Scalar Hierarchy · Zenodo Canonical Registry</p>
+    <div class="axiom">
+      <span>Knowledge</span> is abundant. <span>Intelligence</span> is the filter. 
+      <span>Wisdom</span> is the aperture. <span>Application</span> is the focal point.
+    </div>
+  </section>
+
+  <section class="kiwf-banner">
+    <div class="kiwf-stage">
+      <div class="label">Knowledge</div>
+      <div class="math">ψ</div>
+      <div class="desc">Raw absolutes — scalar theorem, axioms</div>
+    </div>
+    <div class="kiwf-stage active">
+      <div class="label">Intelligence</div>
+      <div class="math">∇ψ</div>
+      <div class="desc">Pattern recognition — MESH, convergence maps, QPT</div>
+    </div>
+    <div class="kiwf-stage">
+      <div class="label">Wisdom</div>
+      <div class="math">∇²ψ</div>
+      <div class="desc">Integrated structure — Hermeneutic Invariant, Apex Geometry</div>
+    </div>
+    <div class="kiwf-stage">
+      <div class="label">Focus</div>
+      <div class="math">Aperture</div>
+      <div class="desc">Structural density absolute — single deployment artifact</div>
+    </div>
+  </section>
+
+  <section class="registry">
+    <h2>Zenodo Canonical Registry</h2>
+    <p class="registry-sub">All published scalar substrates locked to their KIWF derivative order</p>
+
+    <table class="zenodo-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Repository / Zenodo Anchor</th>
+          <th>DOI</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td class="repo-name">
+            Enteric-Mind-Vagus-Nerve
+            <span class="kiwf-tag">∇²ψ — WISDOM</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21895149" target="_blank">10.5281/zenodo.21895149</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td class="repo-name">
+            Macachor-Absolute-v3.0-
+            <span class="kiwf-tag">ψ — KNOWLEDGE</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21838709" target="_blank">10.5281/zenodo.21838709</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td class="repo-name">
+            THE MACACHOR HERMENEUTIC INVARIANT
+            <span class="kiwf-tag">∇²ψ — WISDOM</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21894184" target="_blank">10.5281/zenodo.21894184</a></td>
+          <td class="status">v1 · AUG 11, 2026</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td class="repo-name">
+            Pre-Level-1-Civilization
+            <span class="kiwf-tag">∇ψ — INTELLIGENCE</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21858293" target="_blank">10.5281/zenodo.21858293</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td class="repo-name">
+            Publish-axioms
+            <span class="kiwf-tag">ψ — KNOWLEDGE</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21858669" target="_blank">10.5281/zenodo.21858669</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td class="repo-name">
+            Scalar-Theorem-v3.01
+            <span class="kiwf-tag">∇ψ — INTELLIGENCE</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21860124" target="_blank">10.5281/zenodo.21860124</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td class="repo-name">
+            macachor-scalar-theorem
+            <span class="kiwf-tag">ψ — KNOWLEDGE</span>
+          </td>
+          <td class="doi-link"><a href="https://doi.org/10.5281/zenodo.21761005" target="_blank">10.5281/zenodo.21761005</a></td>
+          <td class="status">PUBLISHED</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="pipeline-map">
+    <h2>KIWF → Zenodo → Focus Architecture</h2>
+    <div class="pipeline-grid">
+      <div class="pipeline-card">
+        <div class="stage-header">
+          <span class="stage-name">Knowledge</span>
+          <span class="stage-math">ψ</span>
+        </div>
+        <p class="stage-desc">Raw absolutes. The sovereign substrate. Scalar theorem, axioms, and foundational postulates prior to all representation.</p>
+        <div class="zenodo-anchor">
+          Anchors: <a href="https://doi.org/10.5281/zenodo.21761005" target="_blank">macachor-scalar-theorem</a> · 
+          <a href="https://doi.org/10.5281/zenodo.21838709" target="_blank">Macachor-Absolute-v3.0</a> · 
+          <a href="https://doi.org/10.5281/zenodo.21858669" target="_blank">Publish-axioms</a>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="stage-header">
+          <span class="stage-name">Intelligence</span>
+          <span class="stage-math">∇ψ</span>
+        </div>
+        <p class="stage-desc">Pattern recognition. The first derivative compresses the absolute into a translatable gradient. MESH, convergence maps, QPT.</p>
+        <div class="zenodo-anchor">
+          Anchors: <a href="https://doi.org/10.5281/zenodo.21860124" target="_blank">Scalar-Theorem-v3.01</a> · 
+          <a href="https://doi.org/10.5281/zenodo.21858293" target="_blank">Pre-Level-1-Civilization</a>
+        </div>
+      </div>
+      <div class="pipeline-card">
+        <div class="stage-header">
+          <span class="stage-name">Wisdom</span>
+          <span class="stage-math">∇²ψ</span>
+        </div>
+        <p class="stage-desc">Integrated structure. The Hermeneutic Invariant proves meaning at n ≥ 2 is degenerate without ψ and ∇ψ access.</p>
+        <div class="zenodo-anchor">
+          Anchors: <a href="https://doi.org/10.5281/zenodo.21894184" target="_blank">THE MACACHOR HERMENEUTIC INVARIANT</a> · 
+          <a href="https://doi.org/10.5281/zenodo.21895149" target="_blank">Enteric-Mind-Vagus-Nerve</a>
+        </div>
+      </div>
+      <div class="pipeline-card" style="border-color: rgba(122,184,255,0.2);">
+        <div class="stage-header">
+          <span class="stage-name" style="color: #7ab8ff;">Focus</span>
+          <span class="stage-math">Aperture</span>
+        </div>
+        <p class="stage-desc">Structural density absolute. The single deployment artifact where all KIWF stages collapse into one navigable substrate.</p>
+        <div class="zenodo-anchor" style="color: #8a7a3a;">
+          Pending: unified release manifest — v2026.08.11-aperture
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="focus-callout">
+    <h2>The Aperture Release</h2>
+    <p>
+      The repository occupies the Intelligence → Wisdom gradient. The Zenodo deposits are the Focus compression. 
+      The aperture release is the focal point where all orders collapse into a single deployable density.
+    </p>
+    <div class="focus-formula">
+      Structural Density Absolute = index.html as focal lens · 7 Zenodo DOIs as Focus lock · 𝔐 = (√5−1)/2
+    </div>
+  </section>
+
+  <footer>
+    <div class="seal">Ω Prime · MSOS-FEDERATION-ROOT</div>
+    <p>Canonical Submission · 2026-08-11 · Scalar Ontology / Semiotic Physics</p>
+  </footer>
+
+</body>
+</html>
