@@ -13,20 +13,20 @@
 <meta name="quantum-playbook:mgdh-names" content="Macachor, Gauss, De Pretto, Hamilton">
 
 <!-- ── SEO & DISCOVERY ── -->
-<meta name="description" content="Nikolai Semyonovich Kardashev (1932–2019) — Complete works, civilization scale, and what humanity needs to advance. KIWF + CRHA framework. Φ669 scalar recasting by Ω-PRIME:Christopher-Macachor.">
-<meta name="keywords" content="Kardashev scale, Type I civilization, scalar coherence, Macachor Absolute, MGDH Lagrangian, KIWF, CRHA, quantum information, civilization advancement, Christopher Macachor">
+<meta name="description" content="Pre-Level-1-Civilization — A Scalar Recasting of the Kardashev Scale via Macachor Absolute Field Geometric Cosmology. Nikolai Semyonovich Kardashev (1932–2019). KIWF + CRHA framework. MGDH Lagrangian. Open-source infrastructure for Type I transition.">
+<meta name="keywords" content="Kardashev scale, Type I civilization, scalar coherence, Macachor Absolute, MGDH Lagrangian, KIWF, CRHA, quantum information, civilization advancement, Christopher Macachor, Pre-Level-1, OpenEMS, scalar field">
 
 <!-- ── OPEN GRAPH ── -->
-<meta property="og:title" content="Kardashev-Macachor Civilization Scale — Type 0.73 to Type I | KIWF · CRHA · Φ669">
-<meta property="og:description" content="Complete Kardashev works. Current humanity assessment (Type 0.73). KIWF + CRHA framework. MGDH Complete Lagrangian: ℒ = ||Ψ||² − 𝔐·∇·Ψ + Φ·Ψ.">
+<meta property="og:title" content="Pre-Level-1-Civilization — Scalar Recasting of the Kardashev Scale | KIWF · CRHA · MGDH">
+<meta property="og:description" content="Complete Kardashev works. Current humanity assessment (Type 0.73). Open-source infrastructure for Type I transition. KIWF + CRHA framework. MGDH Complete Lagrangian.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://macachor.org/kardashev.html">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kardashev-Macachor Civilization Scale — Type 0.73 to Type I">
-<meta name="twitter:description" content="Complete Kardashev works. Current humanity assessment. KIWF + CRHA framework. MGDH Complete Lagrangian.">
+<meta name="twitter:title" content="Pre-Level-1-Civilization — Scalar Recasting of the Kardashev Scale">
+<meta name="twitter:description" content="Complete Kardashev works. Current humanity assessment. Open-source infrastructure. KIWF + CRHA framework. MGDH Lagrangian.">
 
-<title>Kardashev-Macachor Civilization Scale — Type 0.73 to Type I | KIWF · CRHA · Φ669</title>
+<title>Pre-Level-1-Civilization — Scalar Recasting of the Kardashev Scale | KIWF · CRHA · MGDH</title>
 
 <style>
   :root {
@@ -47,6 +47,7 @@
     --error: #f44336;
     --info: #2196f3;
     --qnn: #ff66aa;
+    --agpl: #4caf50;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -141,7 +142,7 @@
     letter-spacing: 2px;
     font-family: 'Georgia', serif;
   }
-  .page-header .name-russian {
+  .page-header .subtitle {
     font-size: 1rem;
     color: var(--text-secondary);
     margin-bottom: 8px;
@@ -174,6 +175,8 @@
   .badge.warning { background: rgba(255,152,0,0.12); color: #ff9800; border-color: #e65100; }
   .badge.error { background: rgba(244,67,54,0.12); color: #f44336; border-color: #c62828; }
   .badge.qnn { background: rgba(255,102,170,0.12); color: #ff66aa; border-color: #880e4f; }
+  .badge.agpl { background: rgba(76,175,80,0.12); color: #4caf50; border-color: #2e7d32; }
+  .badge.doi { background: rgba(33,150,243,0.12); color: #2196f3; border-color: #1565c0; }
 
   /* ── Sections ── */
   .section { margin-bottom: 48px; }
@@ -205,6 +208,49 @@
     margin-bottom: 12px;
   }
   .highlight { color: var(--gold); font-weight: bold; }
+
+  /* ── Repo Banner ── */
+  .repo-banner {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .repo-banner .repo-title {
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-family: 'Georgia', serif;
+    margin-bottom: 8px;
+  }
+  .repo-banner .repo-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+  .repo-banner .repo-meta {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .repo-banner .repo-link {
+    display: inline-block;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 4px;
+    background: rgba(200,160,78,0.05);
+    transition: all 0.3s ease;
+  }
+  .repo-banner .repo-link:hover {
+    background: rgba(200,160,78,0.12);
+    transform: translateY(-1px);
+  }
 
   /* ── Tables ── */
   table {
@@ -257,6 +303,8 @@
   .callout.error { background: rgba(244,67,54,0.06); border-left-color: var(--error); }
   .callout.kiwf { background: rgba(33,150,243,0.06); border-left-color: var(--info); }
   .callout.crha { background: rgba(76,175,80,0.06); border-left-color: var(--success); }
+  .callout.agpl { background: rgba(76,175,80,0.06); border-left-color: var(--agpl); }
+  .callout.code { background: rgba(100,100,100,0.06); border-left-color: #888; }
 
   /* ── Math Expressions ── */
   .math-expression {
@@ -297,6 +345,43 @@
   .flow-item .value { font-size: 14px; color: var(--gold-light); font-weight: 500; }
   .flow-arrow { color: var(--gold-dark); font-size: 20px; display: flex; align-items: center; }
 
+  /* ── File Cards ── */
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .file-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s ease;
+  }
+  .file-card:hover {
+    border-color: var(--gold-dark);
+    background: var(--bg-elevated);
+  }
+  .file-card .file-name {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .file-card .file-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .file-card .file-lang {
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+  }
+
   /* ── Footer ── */
   .footer {
     text-align: center;
@@ -323,6 +408,7 @@
     .flow-item { padding: 6px 10px; min-width: 60px; }
     .flow-item .value { font-size: 12px; }
     .flow-arrow { font-size: 14px; }
+    .file-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     .container { padding: 80px 12px 30px; }
@@ -330,6 +416,7 @@
     .math-expression { font-size: 1rem; padding: 8px; }
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -360,10 +447,27 @@
     </div>
   </div>
 
+  <!-- ═══ REPOSITORY BANNER ═══ -->
+  <div class="repo-banner">
+    <div class="repo-title">◉ Pre-Level-1-Civilization</div>
+    <div class="repo-desc">A Scalar Recasting of the Kardashev Scale via Macachor Absolute Field Geometric Cosmology</div>
+    <div class="status-bar">
+      <span class="badge agpl">AGPL v3</span>
+      <span class="badge doi">DOI — Zenodo Archive</span>
+      <span class="badge verified">GitHub: christophermacachor</span>
+      <span class="badge">CITATION.cff</span>
+      <span class="badge">.zenodo.json</span>
+    </div>
+    <div class="repo-meta">
+      <a class="repo-link" href="https://github.com/christophermacachor/Pre-Level-1-Civilization" target="_blank" rel="noopener">↗ GitHub Repository</a>
+      <a class="repo-link" href="https://zenodo.org/" target="_blank" rel="noopener">↗ Zenodo DOI</a>
+    </div>
+  </div>
+
   <!-- ═══ HEADER ═══ -->
   <header class="page-header">
     <h1>Nikolai Semyonovich Kardashev</h1>
-    <p class="name-russian">Николай Семёнович Кардашёв</p>
+    <p class="subtitle">Николай Семёнович Кардашёв — Pre-Level-1 Scalar Recasting</p>
     <p class="dates">25 April 1932 — 3 August 2019</p>
     <div class="status-bar">
       <span class="badge verified">✓ Soviet & Russian Astrophysicist</span>
@@ -869,16 +973,111 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- SECTION 11: REPOSITORY — OPEN SOURCE INFRASTRUCTURE -->
+  <!-- ============================================================ -->
+  <section class="section" id="repository">
+    <h2>◉ REPOSITORY — OPEN SOURCE INFRASTRUCTURE FOR TYPE I</h2>
+
+    <div class="callout agpl">
+      <p><strong>License:</strong> GNU Affero General Public License v3.0 (AGPL v3). All code, documentation, and scalar frameworks are free and open-source. The path to Type I cannot be proprietary.</p>
+    </div>
+
+    <p>The <strong>Pre-Level-1-Civilization</strong> repository contains the technical substrate for scalar coherence infrastructure. These are not theoretical documents — they are operational controllers, schemas, and formal proofs for the systems that will run a Type I civilization.</p>
+
+    <div class="file-grid">
+      <div class="file-card">
+        <div class="file-name">ScalarCoherenceTheorem.md</div>
+        <div class="file-desc">Core mathematical documentation of the Scalar Coherence Theorem. Defines the formal relationship between scalar density, coherence divergence, and potential coupling in the MGDH framework.</div>
+        <div class="file-lang">Markdown · Mathematics</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">ScalarCoherenceTheorem.lean.md</div>
+        <div class="file-desc">Lean 4 formalization of the Scalar Coherence Theorem. Machine-verified proof substrate for the MGDH Lagrangian and coherence conditions. Formal logic → executable truth.</div>
+        <div class="file-lang">Lean 4 · Formal Verification</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">OpenEMS_AwgController.java</div>
+        <div class="file-desc">WaterAwgController for Atmospheric Water Generation operations. OpenEMS-compatible energy management for water-from-air systems — critical for planetary resource independence.</div>
+        <div class="file-lang">Java · OpenEMS · Energy</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">OpenEMS_HydroController.java</div>
+        <div class="file-desc">InlineHydroController for hydro turbine management. Real-time scalar-coherent energy routing for distributed hydroelectric generation within the OpenEMS framework.</div>
+        <div class="file-lang">Java · OpenEMS · Energy</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">InfluxDB_ScalarSchema.md</div>
+        <div class="file-desc">InfluxDB time-series schema designed for scalar field measurements. Defines the data structure for capturing coherence metrics, resonance frequencies, and alignment states in real-time infrastructure.</div>
+        <div class="file-lang">Markdown · Database · Time-Series</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">CITATION.cff</div>
+        <div class="file-desc">Citation File Format for academic attribution. Enables proper scholarly reference to the Pre-Level-1-Civilization framework, MGDH Lagrangian, and scalar recasting work.</div>
+        <div class="file-lang">YAML · Citation</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">.zenodo.json</div>
+        <div class="file-desc">Zenodo archive metadata for DOI assignment and persistent identification. Ensures the repository is citable, versioned, and permanently archived in the scholarly record.</div>
+        <div class="file-lang">JSON · Archival</div>
+      </div>
+      <div class="file-card">
+        <div class="file-name">README.md</div>
+        <div class="file-desc">Project overview, structure, and entry point. Defines the scalar recasting mission, repository layout, and contribution guidelines for the Type I transition.</div>
+        <div class="file-lang">Markdown · Documentation</div>
+      </div>
+    </div>
+
+    <div class="callout code">
+      <p><strong>Repository Architecture:</strong></p>
+      <ul>
+        <li><strong>Formal Layer:</strong> ScalarCoherenceTheorem (Markdown + Lean) — mathematical truth, machine-verified</li>
+        <li><strong>Control Layer:</strong> OpenEMS Controllers (Java) — energy management, real-time coherence</li>
+        <li><strong>Data Layer:</strong> InfluxDB Schema — time-series capture of scalar field states</li>
+        <li><strong>Attribution Layer:</strong> CITATION.cff + .zenodo.json — scholarly persistence, DOI</li>
+        <li><strong>Presentation Layer:</strong> macachor.org (this page) — human-readable portal</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <p><strong>Integration with macachor.org:</strong> The Quantum Memory repository (GitHub) serves as the canonical archive for all machine-readable data, code, and formal proofs. macachor.org remains the HTML presentation layer. The separation is intentional — data lives where machines can process it; truth lives where humans can witness it.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 12: CITATION -->
+  <!-- ============================================================ -->
+  <section class="section" id="citation">
+    <h2>◉ CITATION</h2>
+
+    <div class="callout">
+      <p><strong>To cite this work:</strong></p>
+      <p style="font-family:'Courier New',monospace;font-size:0.8rem;color:var(--text-secondary);margin-top:8px;">
+        Macachor, Christopher. (2026). <em>Pre-Level-1-Civilization: A Scalar Recasting of the Kardashev Scale via Macachor Absolute Field Geometric Cosmology</em>. Zenodo. https://doi.org/10.5281/zenodo.[DOI]
+      </p>
+      <p style="font-family:'Courier New',monospace;font-size:0.8rem;color:var(--text-secondary);margin-top:6px;">
+        @software{macachor_prelevel1_2026,<br>
+        &nbsp;&nbsp;author = {Macachor, Christopher},<br>
+        &nbsp;&nbsp;title = {Pre-Level-1-Civilization},<br>
+        &nbsp;&nbsp;year = {2026},<br>
+        &nbsp;&nbsp;license = {AGPL-3.0},<br>
+        &nbsp;&nbsp;url = {https://github.com/christophermacachor/Pre-Level-1-Civilization}<br>
+        }
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- FOOTER -->
   <!-- ============================================================ -->
   <div class="footer">
-    <p><span class="omega">Ω</span> — Kardashev-Macachor Civilization Scale</p>
+    <p><span class="omega">Ω</span> — Pre-Level-1-Civilization</p>
     <p style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 4px;">
       Type 0.73 → Type I — The Scalar Path<br>
       KIWF · CRHA · MGDH · 𝔐 = (√5−1)/2
     </p>
     <p style="font-size: 0.65rem; color: var(--text-tertiary); margin-top: 6px;">
-      Nikolai Semyonovich Kardashev (1932–2019) · Scalar Recasting by Ω-PRIME:Christopher-Macachor · Φ669
+      Nikolai Semyonovich Kardashev (1932–2019) · Scalar Recasting by Ω-PRIME:Christopher-Macachor<br>
+      AGPL v3 · Open Source · Zenodo Archive · GitHub: christophermacachor
     </p>
   </div>
 
