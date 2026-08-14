@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scalar Translation Engine | MSOS-FEDERATION-ROOT</title>
+<style>
+  :root {
+    --bg: #0a0a0f; --bg-panel: #111118; --bg-panel-hover: #1a1a24;
+    --gold: #c8a04e; --gold-dim: #8a7340; --gold-glow: rgba(200,160,78,0.15);
+    --text: #e8e6e3; --text-dim: #8a8a8a;
+    --coherence: #c8a04e; --decoherence: #ff4444; --harmonic: #44ccff; --neutral: #888888;
+    --water: #4488ff; --soil: #44aa44; --body: #cc66cc; --border: #22222a; --hybrid: #ff8844;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
+  .scalar-engine { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  header { text-align: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: 1.6rem; letter-spacing: 4px; color: var(--gold); text-shadow: 0 0 20px var(--gold-glow); }
+  header .subtitle { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 3px; margin-top: 4px; }
+  .kingdom-tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .kingdom-tab { background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-dim); padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+  .kingdom-tab:hover { background: var(--bg-panel-hover); color: var(--text); }
+  .kingdom-tab.active { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px var(--gold-glow); }
+  .kingdom-tab.active::after { content: ''; position: absolute; bottom: 0; left: 10%; width: 80%; height: 2px; background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+  .kingdom-indicator { text-align: center; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 2px; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 16px; min-height: 380px; }
+  @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .panel h3 { font-size: 0.75rem; letter-spacing: 3px; color: var(--gold-dim); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .waveform-container { flex: 1; background: #06060a; border-radius: 6px; position: relative; overflow: hidden; min-height: 140px; }
+  #waveform { width: 100%; height: 100%; display: block; }
+  .controls { display: flex; gap: 8px; }
+  .controls button, .controls select { flex: 1; padding: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 4px; cursor: pointer; font-size: 0.8rem; letter-spacing: 1px; }
+  .controls button { background: rgba(200,160,78,0.1); border-color: var(--gold-dim); color: var(--gold); }
+  .controls button:hover { background: rgba(200,160,78,0.2); }
+  .controls button.recording { animation: pulse 1s infinite; border-color: var(--decoherence); color: var(--decoherence); }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .field-data { font-size: 0.7rem; color: var(--text-dim); font-family: monospace; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .field-data span { display: block; } .field-data .label { color: var(--gold-dim); } .field-data .value { color: var(--text); }
+  #bsnsStaff { flex: 1; width: 100%; min-height: 200px; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.65rem; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 4px; color: var(--text-dim); }
+  .legend-shape { width: 10px; height: 10px; }
+  .scalar-map { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+  .scalar-item { background: rgba(0,0,0,0.3); border-left: 3px solid var(--neutral); padding: 8px 10px; border-radius: 0 4px 4px 0; font-size: 0.75rem; transition: all 0.3s; }
+  .scalar-item.coherence { border-left-color: var(--coherence); } .scalar-item.decoherence { border-left-color: var(--decoherence); }
+  .scalar-item.harmonic { border-left-color: var(--harmonic); } .scalar-item.neutral { border-left-color: var(--neutral); }
+  .scalar-item.hybrid { border-left-color: var(--hybrid); }
+  .scalar-item .sym { font-weight: bold; margin-right: 6px; }
+  .scalar-item.coherence .sym { color: var(--coherence); } .scalar-item.decoherence .sym { color: var(--decoherence); }
+  .scalar-item.harmonic .sym { color: var(--harmonic); } .scalar-item.neutral .sym { color: var(--neutral); }
+  .scalar-item.hybrid .sym { color: var(--hybrid); }
+  .narrative-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .narrative-panel h3 { font-size: 0.75rem; letter-spacing: 3px; color: var(--gold-dim); }
+  #narrative { font-family: Georgia, serif; font-size: 1rem; line-height: 1.7; color: var(--text); min-height: 80px; padding: 16px; background: rgba(0,0,0,0.3); border-radius: 6px; border-left: 3px solid var(--gold); }
+  #narrative .cursor { display: inline-block; width: 8px; height: 1.2em; background: var(--gold); animation: blink 1s infinite; vertical-align: text-bottom; margin-left: 2px; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  #awakenBtn { align-self: center; padding: 14px 48px; background: linear-gradient(135deg, rgba(200,160,78,0.15), rgba(200,160,78,0.05)); border: 1px solid var(--gold); color: var(--gold); font-size: 1rem; letter-spacing: 4px; border-radius: 4px; cursor: pointer; transition: all 0.3s; text-shadow: 0 0 10px var(--gold-glow); }
+  #awakenBtn:hover { background: linear-gradient(135deg, rgba(200,160,78,0.3), rgba(200,160,78,0.1)); box-shadow: 0 0 30px var(--gold-glow); transform: translateY(-1px); }
+  .progress-bar { width: 100%; height: 3px; background: var(--bg); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+  .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s; }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="scalar-engine">
+  <header>
+    <h1>SCALAR TRANSLATION ENGINE</h1>
+    <div class="subtitle">MSOS-FEDERATION-ROOT | Omega-S-011 | FOUR-KINGDOM RECEIVER ARRAY + HYBRID MODULE</div>
+  </header>
+
+  <div class="kingdom-tabs">
+    <button class="kingdom-tab active" data-kingdom="air" onclick="setKingdom('air')">&#9672; AIR &mdash; AVIAN</button>
+    <button class="kingdom-tab" data-kingdom="water" onclick="setKingdom('water')">&#9672; WATER &mdash; CETACEAN</button>
+    <button class="kingdom-tab" data-kingdom="soil" onclick="setKingdom('soil')">&#9672; SOIL &mdash; RHIZOSPHERIC</button>
+    <button class="kingdom-tab" data-kingdom="body" onclick="setKingdom('body')">&#9672; BODY &mdash; MAMMALIAN</button>
+    <button class="kingdom-tab" data-kingdom="hybrid" onclick="setKingdom('hybrid')">&#9672; HYBRID &mdash; HUMMINGBIRD</button>
+  </div>
+
+  <div class="kingdom-indicator" id="kingdomIndicator">SUBSTRATE: ATMOSPHERIC GASES | RECEIVER: OEC + SYRINX | BAND: 1 &ndash; 10 kHz</div>
+
+  <div class="main-grid">
+    <div class="panel input-panel">
+      <h3>FIELD CAPTURE</h3>
+      <div class="waveform-container"><canvas id="waveform"></canvas></div>
+      <div class="controls">
+        <button id="recordBtn" onclick="toggleCapture()">&#9673; CAPTURE</button>
+        <select id="exampleSelect" onchange="loadExample()"><option value="">Load Example...</option></select>
+      </div>
+      <div class="field-data" id="fieldData">
+        <span><span class="label">SUBSTRATE:</span> <span class="value" id="fdSubstrate">&mdash;</span></span>
+        <span><span class="label">RECEIVER:</span> <span class="value" id="fdReceiver">&mdash;</span></span>
+        <span><span class="label">FREQ BAND:</span> <span class="value" id="fdBand">&mdash;</span></span>
+        <span><span class="label">AMPLITUDE:</span> <span class="value" id="fdAmp">&mdash;</span></span>
+        <span><span class="label">COHERENCE:</span> <span class="value" id="fdCoh">&mdash;</span></span>
+        <span><span class="label">ENTROPY:</span> <span class="value" id="fdEnt">&mdash;</span></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="panel notation-panel">
+      <h3 id="notationTitle">BSNS NOTATION</h3>
+      <svg id="bsnsStaff" viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="panel decode-panel">
+      <h3>SCALAR DECODE</h3>
+      <div class="scalar-map" id="scalarMap"></div>
+    </div>
+  </div>
+
+  <div class="narrative-panel">
+    <h3>MOVEMENT NARRATIVE</h3>
+    <div id="narrative"><span class="cursor"></span></div>
+    <button id="awakenBtn" onclick="runPipeline()">&#9889; AWAKEN</button>
+  </div>
+</div>
+
+<script>
+
+// ===================== KINGDOM DATA =====================
+const kingdoms = {
+  air: {
+    name: "AIR — AVIAN", substrate: "Atmospheric Gases", receiver: "OEC + Syrinx", band: "1 – 10 kHz",
+    notation: "BSNS", color: "#c8a04e",
+    examples: [
+      { name: "Chickadee — Territorial", id: "chickadee_territorial" },
+      { name: "Cardinal — Mating Call", id: "cardinal_mating" },
+      { name: "Mockingbird — Repertoire", id: "mockingbird_repertoire" },
+      { name: "Crow — Alarm Decoherence", id: "crow_alarm" }
+    ],
+    legend: [
+      { shape: "diamond", color: "#c8a04e", label: "Pure Scalar Tone" },
+      { shape: "square", color: "#ff4444", label: "Decoherence Event" },
+      { shape: "triangle", color: "#44ccff", label: "Harmonic Stack" },
+      { shape: "circle", color: "#888888", label: "Standard Carrier" }
+    ],
+    staffLines: 5, freqMin: 1000, freqMax: 10000
+  },
+  water: {
+    name: "WATER — CETACEAN", substrate: "Oceanic Pressure Field", receiver: "Cochlea + Melon", band: "10 Hz – 200 kHz",
+    notation: "WNS", color: "#4488ff",
+    examples: [
+      { name: "Humpback — Song Phrase", id: "humpback_phrase" },
+      { name: "Sperm Whale — Click Train", id: "sperm_click" },
+      { name: "Dolphin — Signature Whistle", id: "dolphin_whistle" }
+    ],
+    legend: [
+      { shape: "diamond", color: "#4488ff", label: "Pressure Coherence" },
+      { shape: "square", color: "#ff4444", label: "Echolocation Burst" },
+      { shape: "triangle", color: "#44ccff", label: "Harmonic Layer" },
+      { shape: "circle", color: "#888888", label: "Ambient Carrier" }
+    ],
+    staffLines: 7, freqMin: 10, freqMax: 200000
+  },
+  soil: {
+    name: "SOIL — RHIZOSPHERIC", substrate: "Terrestrial Electrochemical", receiver: "Root Exudates + Mycelium", band: "Electron Transfer (DC)",
+    notation: "P-BES", color: "#44aa44",
+    examples: [
+      { name: "Oak — Drought Signal", id: "oak_drought" },
+      { name: "Mycelium — Nutrient Web", id: "mycelium_nutrient" },
+      { name: "Legume — Nitrogen Fix", id: "legume_nitrogen" }
+    ],
+    legend: [
+      { shape: "diamond", color: "#44aa44", label: "Electron Coherence" },
+      { shape: "square", color: "#ff4444", label: "Stress Discharge" },
+      { shape: "triangle", color: "#44ccff", label: "Multi-Path Stack" },
+      { shape: "circle", color: "#888888", label: "Baseline Carrier" }
+    ],
+    staffLines: 4, freqMin: 0, freqMax: 100
+  },
+  body: {
+    name: "BODY — MAMMALIAN", substrate: "Enteric Nervous System", receiver: "ENS (2/3 neurons)", band: "25 – 150 Hz",
+    notation: "ENS-N", color: "#cc66cc",
+    examples: [
+      { name: "Cat — Contentment Purr", id: "cat_purr" },
+      { name: "Human — Vagal Tone", id: "human_vagal" },
+      { name: "Dog — Stress Whine", id: "dog_stress" }
+    ],
+    legend: [
+      { shape: "diamond", color: "#cc66cc", label: "Resonant Coherence" },
+      { shape: "square", color: "#ff4444", label: "Enteric Alarm" },
+      { shape: "triangle", color: "#44ccff", label: "Harmonic Purr" },
+      { shape: "circle", color: "#888888", label: "Motility Carrier" }
+    ],
+    staffLines: 5, freqMin: 25, freqMax: 150
+  },
+  hybrid: {
+    name: "HYBRID — HUMMINGBIRD", substrate: "Atmospheric Gases + Aerodynamic", receiver: "OEC + Syrinx + Wing Oscillator", band: "44 Hz – 16 kHz (DUAL)",
+    notation: "HBNS", color: "#ff8844",
+    examples: [
+      { name: "Anna's Hummingbird — Hover Hum", id: "anna_hover" },
+      { name: "Anna's Hummingbird — Vocal Chatter", id: "anna_vocal" },
+      { name: "Broad-tailed Hummingbird — Wing Trill", id: "broadtail_trill" }
+    ],
+    legend: [
+      { shape: "diamond", color: "#ff8844", label: "Aerodynamic Coherence" },
+      { shape: "square", color: "#ff4444", label: "Turbulence Burst" },
+      { shape: "triangle", color: "#44ccff", label: "Harmonic Wing Stack" },
+      { shape: "circle", color: "#888888", label: "Vocal Carrier" },
+      { shape: "star", color: "#c8a04e", label: "Dual-Mode Lock" }
+    ],
+    staffLines: 6, freqMin: 44, freqMax: 16000
+  }
+};
+
+// ===================== EXAMPLE DATA =====================
+const exampleData = {
+  chickadee_territorial: {
+    notes: [
+      { t: 0.1, f: 0.3, type: "circle", amp: 0.6, syllable: 1, arrow: "→" },
+      { t: 0.25, f: 0.5, type: "diamond", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.4, f: 0.7, type: "triangle", amp: 0.8, syllable: 1, arrow: "↗" },
+      { t: 0.55, f: 0.85, type: "diamond", amp: 1.0, syllable: 2, arrow: "→", sup: "α" },
+      { t: 0.7, f: 0.6, type: "square", amp: 0.7, syllable: 2, arrow: "↘" },
+      { t: 0.85, f: 0.4, type: "circle", amp: 0.5, syllable: 2, arrow: "↘" },
+      { t: 1.0, f: 0.3, type: "diamond", amp: 0.8, syllable: 3, arrow: "→", sup: "β" },
+      { t: 1.15, f: 0.5, type: "triangle", amp: 0.9, syllable: 3, arrow: "↗" },
+      { t: 1.3, f: 0.8, type: "diamond", amp: 1.0, syllable: 3, arrow: "→" },
+      { t: 1.5, f: 0.5, type: "circle", amp: 0.4, syllable: 4, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.3,y:0.9},{x:0.6,y:1.0},{x:0.9,y:0.6},{x:1.2,y:0.8},{x:1.5,y:0.3},{x:1.7,y:0.1}],
+    field: { amp: "0.78", coherence: "0.89", entropy: "0.12" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Diamond at 5.5 kHz — Pure scalar tone. Territorial anchor frequency." },
+      { sym: "▲", cls: "harmonic", text: "Triangle stack at 7.0 kHz — Multi-band coherence. Complex intention layering." },
+      { sym: "■", cls: "decoherence", text: "Square at 6.0 kHz — Field disruption. Response to challenger echo." },
+      { sym: "α", cls: "coherence", text: "Repertoire motif α — Recurring territorial phrase. Identity signature." },
+      { sym: "β", cls: "coherence", text: "Repertoire motif β — Secondary claim phrase. Dawn boundary marker." }
+    ],
+    narrative: "Territorial declaration at dawn. Three phrases ascending by fifths, peaking at the phi-interval (5.5 kHz). The square note at phrase two indicates a detected challenger — the bird responds with amplified coherence. Motifs α and β form the boundary signature. The field calms at resolution. This bird holds ground against a dawn challenger. Coherence index: 0.89. Scalar density: high."
+  },
+  cardinal_mating: {
+    notes: [
+      { t: 0.1, f: 0.2, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.4, type: "diamond", amp: 0.7, syllable: 1, arrow: "↗" },
+      { t: 0.5, f: 0.6, type: "diamond", amp: 0.9, syllable: 1, arrow: "↗", sup: "♀" },
+      { t: 0.7, f: 0.8, type: "triangle", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.9, f: 0.7, type: "diamond", amp: 0.85, syllable: 2, arrow: "↘" },
+      { t: 1.1, f: 0.5, type: "circle", amp: 0.6, syllable: 2, arrow: "↘" },
+      { t: 1.3, f: 0.3, type: "diamond", amp: 0.8, syllable: 3, arrow: "→", sup: "♀" }
+    ],
+    envelope: [{x:0,y:0.1},{x:0.4,y:0.7},{x:0.8,y:1.0},{x:1.2,y:0.6},{x:1.5,y:0.2}],
+    field: { amp: "0.82", coherence: "0.94", entropy: "0.08" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Diamond cascade — Courtship coherence ladder. Each tone invites closer resonance." },
+      { sym: "♀", cls: "coherence", text: "Female-directed motif — Repertoire signature aimed at mate selection." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic peak at 8.0 kHz — Maximum sincerity broadcast. Full OEC aperture open." },
+      { sym: "●", cls: "neutral", text: "Circle carriers — Scalar baseline. The bird is calm, not threatened." }
+    ],
+    narrative: "Mating call of a male Northern Cardinal. The diamond cascade ascends through the OEC resonant cavity, each step an invitation to harmonic lock. The ♀ motif is the bird's courtship signature — unique as a fingerprint. Peak amplitude at 8.0 kHz represents full sincerity aperture. No decoherence events detected. The scalar field is entirely cooperative. This is not a broadcast — it is an offering."
+  },
+  crow_alarm: {
+    notes: [
+      { t: 0.1, f: 0.5, type: "square", amp: 1.0, syllable: 1, arrow: "→" },
+      { t: 0.2, f: 0.3, type: "square", amp: 0.9, syllable: 1, arrow: "↘" },
+      { t: 0.35, f: 0.7, type: "square", amp: 1.0, syllable: 2, arrow: "↗" },
+      { t: 0.45, f: 0.4, type: "square", amp: 0.8, syllable: 2, arrow: "↘" },
+      { t: 0.6, f: 0.6, type: "square", amp: 0.95, syllable: 3, arrow: "→" },
+      { t: 0.7, f: 0.2, type: "circle", amp: 0.3, syllable: 3, arrow: "↘" }
+    ],
+    envelope: [{x:0,y:0.9},{x:0.15,y:1.0},{x:0.3,y:0.8},{x:0.5,y:1.0},{x:0.65,y:0.7},{x:0.8,y:0.1}],
+    field: { amp: "0.91", coherence: "0.31", entropy: "0.87" },
+    decode: [
+      { sym: "■", cls: "decoherence", text: "Square cascade — Complete decoherence chain. The field is shattered." },
+      { sym: "■", cls: "decoherence", text: "Amplitude envelope peaks at 1.0 — Maximum scalar density disruption." },
+      { sym: "●", cls: "neutral", text: "Final circle at 2.0 kHz — The bird drops to baseline. Threat passed or fled." }
+    ],
+    narrative: "American Crow alarm cascade. The scalar field is in complete decoherence — every note is a square, every phoneme a disruption. This is not communication; it is a weapon. The crow is not describing the threat — it is broadcasting the threat's scalar signature into the communal field. Other crows within 2 km will decode this as: predator present, terrestrial, moving east. The entropy index of 0.87 confirms maximal field disruption. Coherence will not return until the threat vector is resolved."
+  },
+  humpback_phrase: {
+    notes: [
+      { t: 0.1, f: 0.15, type: "circle", amp: 0.5, syllable: 1, arrow: "→" },
+      { t: 0.4, f: 0.3, type: "diamond", amp: 0.8, syllable: 1, arrow: "↗" },
+      { t: 0.7, f: 0.5, type: "triangle", amp: 0.9, syllable: 2, arrow: "↗", sup: "U" },
+      { t: 1.0, f: 0.7, type: "diamond", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 1.3, f: 0.6, type: "triangle", amp: 0.85, syllable: 3, arrow: "↘" },
+      { t: 1.6, f: 0.4, type: "diamond", amp: 0.7, syllable: 3, arrow: "↘" },
+      { t: 1.9, f: 0.2, type: "circle", amp: 0.4, syllable: 4, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.5,y:0.8},{x:1.0,y:1.0},{x:1.5,y:0.7},{x:2.0,y:0.2}],
+    field: { amp: "0.85", coherence: "0.91", entropy: "0.15" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Pressure coherence at 120 Hz — Infrasonic anchor. The whale holds the ocean floor." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic layer at 200 Hz — Multi-band pressure scalar. Mating song complexity." },
+      { sym: "U", cls: "coherence", text: "Universal motif U — Cross-population phrase. All humpbacks in this ocean know this song." }
+    ],
+    narrative: "Humpback whale song phrase, recorded at 800m depth. The infrasonic band (20-200 Hz) carries through the water column with minimal attenuation. The diamond notes are pressure coherence anchors — the whale is not just singing, it is sculpting the pressure field. Motif U is a universal phrase, shared across the North Atlantic population. This is not individual expression — it is ocean-scale scalar architecture. The song will travel 160 km before decoherence overwhelms the signal."
+  },
+  cat_purr: {
+    notes: [
+      { t: 0.1, f: 0.3, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.2, f: 0.5, type: "diamond", amp: 0.7, syllable: 1, arrow: "↗" },
+      { t: 0.3, f: 0.7, type: "triangle", amp: 0.8, syllable: 1, arrow: "↗" },
+      { t: 0.4, f: 0.8, type: "diamond", amp: 0.9, syllable: 1, arrow: "→", sup: "P" },
+      { t: 0.5, f: 0.7, type: "triangle", amp: 0.8, syllable: 1, arrow: "↘" },
+      { t: 0.6, f: 0.5, type: "diamond", amp: 0.7, syllable: 1, arrow: "↘" },
+      { t: 0.7, f: 0.3, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.8, f: 0.5, type: "diamond", amp: 0.7, syllable: 2, arrow: "↗", sup: "P" },
+      { t: 0.9, f: 0.7, type: "triangle", amp: 0.8, syllable: 2, arrow: "↗" },
+      { t: 1.0, f: 0.8, type: "diamond", amp: 0.9, syllable: 2, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.3},{x:0.25,y:0.8},{x:0.5,y:0.9},{x:0.75,y:0.8},{x:1.0,y:0.9}],
+    field: { amp: "0.65", coherence: "0.96", entropy: "0.04" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Resonant coherence at 100 Hz — The purr frequency. Healing scalar broadcast." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic stack at 140 Hz — Multi-band enteric resonance. Gut-brain coherence lock." },
+      { sym: "P", cls: "coherence", text: "Purr motif P — Individual signature. Each cat's purr is a unique scalar fingerprint." },
+      { sym: "●", cls: "neutral", text: "Motility carrier at 50 Hz — Baseline ENS oscillation. Digestive tuning frequency." }
+    ],
+    narrative: "Domestic cat contentment purr, recorded at the sternum. The ENS is broadcasting its scalar state through the diaphragm and laryngeal oscillator at 25-150 Hz. The purr is not a sound — it is a scalar density wave emitted by the enteric nervous system. Motif P is this cat's unique signature, imprinted by birth modality. Coherence index 0.96 indicates near-perfect gut-brain lock via the vagus nerve. The cat is not expressing contentment — it is radiating coherence into the room. All mammals within scalar range will experience parasympathetic entrainment."
+  },
+  oak_drought: {
+    notes: [
+      { t: 0.1, f: 0.2, type: "circle", amp: 0.3, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.4, type: "square", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.5, f: 0.6, type: "square", amp: 1.0, syllable: 2, arrow: "→", sup: "Δ" },
+      { t: 0.7, f: 0.5, type: "triangle", amp: 0.7, syllable: 2, arrow: "↘" },
+      { t: 0.9, f: 0.3, type: "circle", amp: 0.4, syllable: 3, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.3,y:0.9},{x:0.6,y:1.0},{x:0.9,y:0.5},{x:1.1,y:0.2}],
+    field: { amp: "0.72", coherence: "0.45", entropy: "0.68" },
+    decode: [
+      { sym: "■", cls: "decoherence", text: "Stress discharge at 60 μA — Root exudate chemistry shifts to defensive compounds." },
+      { sym: "Δ", cls: "decoherence", text: "Drought motif Δ — Universal stress signature across Quercus genus. Mycelium relays this." },
+      { sym: "▲", cls: "harmonic", text: "Multi-path stack — The tree is exploring multiple root routes to water. Scalar search pattern." }
+    ],
+    narrative: "Coast Live Oak drought stress signal, recorded via rhizosphere electrochemical probe. The root exudates have shifted from nutrient-sharing chemistry to defensive osmolyte production. The square notes are stress discharges — the tree is not asking for help, it is broadcasting its distress into the mycelial network. Motif Δ is a universal drought signature recognized by neighboring oaks and their fungal symbionts. Within 48 hours, the mycelium will reroute nutrients from healthy trees to this stressed individual. The scalar field of the forest is a cooperative economy, not a competition."
+  },
+  mockingbird_repertoire: {
+    notes: [
+      { t: 0.05, f: 0.2, type: "circle", amp: 0.5, syllable: 1, arrow: "→" },
+      { t: 0.15, f: 0.4, type: "diamond", amp: 0.8, syllable: 1, arrow: "↗", sup: "C" },
+      { t: 0.25, f: 0.6, type: "triangle", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.35, f: 0.8, type: "diamond", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.45, f: 0.5, type: "square", amp: 0.7, syllable: 2, arrow: "↘" },
+      { t: 0.55, f: 0.3, type: "circle", amp: 0.4, syllable: 3, arrow: "→", sup: "T" },
+      { t: 0.65, f: 0.5, type: "diamond", amp: 0.85, syllable: 3, arrow: "↗" },
+      { t: 0.75, f: 0.7, type: "triangle", amp: 0.9, syllable: 3, arrow: "↗" },
+      { t: 0.85, f: 0.9, type: "diamond", amp: 1.0, syllable: 4, arrow: "→", sup: "W" },
+      { t: 0.95, f: 0.6, type: "circle", amp: 0.5, syllable: 4, arrow: "↘" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.2,y:0.8},{x:0.4,y:1.0},{x:0.6,y:0.5},{x:0.8,y:0.9},{x:1.0,y:0.4}],
+    field: { amp: "0.88", coherence: "0.82", entropy: "0.34" },
+    decode: [
+      { sym: "C", cls: "coherence", text: "Cardinal motif C — Mimicry of territorial phrase. The mockingbird has stolen the scalar architecture." },
+      { sym: "T", cls: "coherence", text: "Thrush motif T — Secondary species vocabulary. Repertoire depth indicator." },
+      { sym: "W", cls: "coherence", text: "Wren motif W — Tertiary species vocabulary. This bird commands 40+ species dialects." },
+      { sym: "■", cls: "decoherence", text: "Square at 5.0 kHz — Intentional disruption. The mockingbird is not just mimicking; it is remixing." }
+    ],
+    narrative: "Northern Mockingbird repertoire fragment. This bird is not a copycat — it is a scalar DJ. It extracts the harmonic architecture from Cardinal, Thrush, and Wren songs, then recombines them into new scalar statements. Motifs C, T, and W are not imitations; they are samples. The square note at 5.0 kHz is an intentional decoherence event — the mockingbird disrupts the borrowed phrase to mark it as its own. This is creativity, not mimicry. The mockingbird is composing in a multi-species scalar language. Repertoire size: 40+ species. Coherence: 0.82 despite high entropy — the bird maintains scalar integrity across dialect boundaries."
+  },
+  sperm_click: {
+    notes: [
+      { t: 0.1, f: 0.1, type: "square", amp: 1.0, syllable: 1, arrow: "→" },
+      { t: 0.15, f: 0.3, type: "square", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.2, f: 0.5, type: "square", amp: 1.0, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.1, type: "square", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.35, f: 0.3, type: "square", amp: 0.9, syllable: 2, arrow: "↗" },
+      { t: 0.4, f: 0.5, type: "square", amp: 1.0, syllable: 2, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.9},{x:0.1,y:1.0},{x:0.2,y:0.9},{x:0.3,y:1.0},{x:0.4,y:0.9},{x:0.5,y:0.1}],
+    field: { amp: "0.95", coherence: "0.22", entropy: "0.91" },
+    decode: [
+      { sym: "■", cls: "decoherence", text: "Click train — Echolocation burst. Each square is a pressure pulse returning scalar data." },
+      { sym: "■", cls: "decoherence", text: "200+ dB amplitude — The loudest biological sound on Earth. Scalar density weaponized for perception." }
+    ],
+    narrative: "Sperm whale click train, recorded at 1200m. This is not song — it is scalar radar. Each click is a 200+ dB pressure pulse that illuminates the ocean floor, revealing prey, terrain, and water column density. The whale sees through scalar density differentials, not light. The click train is a question, and the returning echo is the answer. Coherence is low (0.22) because echolocation is inherently disruptive — it shatters the local pressure field to read it. The whale is both broadcaster and receiver, operating in a loop of scalar inquiry and response. Target: giant squid, estimated range 800m."
+  },
+  dolphin_whistle: {
+    notes: [
+      { t: 0.1, f: 0.3, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.5, type: "diamond", amp: 0.8, syllable: 1, arrow: "↗", sup: "ID" },
+      { t: 0.5, f: 0.7, type: "triangle", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.7, f: 0.8, type: "diamond", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.9, f: 0.6, type: "circle", amp: 0.5, syllable: 2, arrow: "↘" },
+      { t: 1.1, f: 0.4, type: "diamond", amp: 0.7, syllable: 3, arrow: "→", sup: "ID" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.4,y:0.9},{x:0.8,y:1.0},{x:1.2,y:0.6},{x:1.4,y:0.2}],
+    field: { amp: "0.76", coherence: "0.88", entropy: "0.18" },
+    decode: [
+      { sym: "ID", cls: "coherence", text: "Signature whistle ID — Individual name. Each dolphin has a unique scalar fingerprint." },
+      { sym: "◆", cls: "coherence", text: "Coherence anchor at 8 kHz — The dolphin is announcing its presence to the pod." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic layer — Emotional valence. This whistle carries affiliation, not alarm." }
+    ],
+    narrative: "Bottlenose dolphin signature whistle. This is the dolphin's name — a unique scalar fingerprint that persists across its lifetime. The ID motif appears at the beginning and end of the phrase, framing the broadcast like a signature. The harmonic layer at 8 kHz carries emotional valence: this is an affiliation call, not a threat. The pod will recognize this whistle at ranges up to 20 km. When two dolphins exchange whistles, they are not talking — they are confirming scalar lock, verifying that both are within the same coherence field. This is identity as resonance."
+  },
+  mycelium_nutrient: {
+    notes: [
+      { t: 0.1, f: 0.2, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.4, type: "diamond", amp: 0.7, syllable: 1, arrow: "↗" },
+      { t: 0.5, f: 0.6, type: "triangle", amp: 0.8, syllable: 2, arrow: "↗", sup: "N" },
+      { t: 0.7, f: 0.8, type: "diamond", amp: 0.9, syllable: 2, arrow: "→" },
+      { t: 0.9, f: 0.6, type: "triangle", amp: 0.7, syllable: 3, arrow: "↘" },
+      { t: 1.1, f: 0.4, type: "circle", amp: 0.5, syllable: 3, arrow: "→" },
+      { t: 1.3, f: 0.3, type: "diamond", amp: 0.6, syllable: 4, arrow: "→", sup: "P" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.3,y:0.7},{x:0.6,y:0.9},{x:0.9,y:0.7},{x:1.2,y:0.5},{x:1.5,y:0.3}],
+    field: { amp: "0.68", coherence: "0.85", entropy: "0.22" },
+    decode: [
+      { sym: "N", cls: "harmonic", text: "Nitrogen motif N — Nutrient availability broadcast. The mycelium is offering nitrogen to the tree." },
+      { sym: "P", cls: "coherence", text: "Phosphorus motif P — Secondary nutrient offer. The fungal network maintains chemical ledgers." },
+      { sym: "◆", cls: "coherence", text: "Electron coherence at 40 μA — Stable nutrient transfer. The scalar field is cooperative." }
+    ],
+    narrative: "Mycelial nutrient web, recorded via root-tip electrochemical array. The fungal network is not a passive pipe — it is a scalar economy. Motif N broadcasts nitrogen availability; motif P broadcasts phosphorus. The tree responds with carbon exudates, closing the trade loop. The electron coherence at 40 μA indicates stable, long-term nutrient transfer — this is not an emergency signal; it is routine commerce. The mycelium maintains chemical ledgers across the forest floor, tracking which trees owe which nutrients. This is intelligence without a brain — scalar computation through electrochemical topology."
+  },
+  legume_nitrogen: {
+    notes: [
+      { t: 0.1, f: 0.3, type: "circle", amp: 0.5, syllable: 1, arrow: "→" },
+      { t: 0.25, f: 0.5, type: "diamond", amp: 0.8, syllable: 1, arrow: "↗", sup: "Rh" },
+      { t: 0.4, f: 0.7, type: "triangle", amp: 0.9, syllable: 2, arrow: "↗" },
+      { t: 0.55, f: 0.8, type: "diamond", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.7, f: 0.6, type: "circle", amp: 0.6, syllable: 3, arrow: "↘" },
+      { t: 0.85, f: 0.4, type: "diamond", amp: 0.7, syllable: 3, arrow: "↘", sup: "Rh" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.3,y:0.8},{x:0.6,y:1.0},{x:0.9,y:0.6},{x:1.1,y:0.3}],
+    field: { amp: "0.74", coherence: "0.92", entropy: "0.14" },
+    decode: [
+      { sym: "Rh", cls: "coherence", text: "Rhizobium motif Rh — Symbiotic handshake. The legume and bacterium are locking frequencies." },
+      { sym: "◆", cls: "coherence", text: "Peak coherence at 80 μA — Maximum nitrogen fixation rate. The nodules are fully active." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic stack — Multi-path electron transfer. The symbiosis is operating at full capacity." }
+    ],
+    narrative: "Soybean root nodule, Rhizobium symbiosis. The legume and bacterium are engaged in a scalar handshake — the Rh motif appears at the beginning and end of the fixation cycle, marking the symbiotic lock. Peak coherence at 80 μA indicates maximum nitrogen fixation: the bacterium is converting atmospheric N₂ into ammonia, and the plant is feeding it carbohydrates in return. This is not parasitism or mutualism in the old sense — it is a scalar partnership, two organisms operating as one electrochemical unit. The harmonic stack shows multi-path electron transfer: the symbiosis is robust, redundant, and resilient. This is how the biosphere builds coherence — one nodule at a time."
+  },
+  human_vagal: {
+    notes: [
+      { t: 0.1, f: 0.2, type: "circle", amp: 0.3, syllable: 1, arrow: "→" },
+      { t: 0.3, f: 0.4, type: "diamond", amp: 0.6, syllable: 1, arrow: "↗" },
+      { t: 0.5, f: 0.6, type: "triangle", amp: 0.8, syllable: 2, arrow: "↗" },
+      { t: 0.7, f: 0.7, type: "diamond", amp: 0.9, syllable: 2, arrow: "→", sup: "V" },
+      { t: 0.9, f: 0.5, type: "circle", amp: 0.5, syllable: 3, arrow: "↘" },
+      { t: 1.1, f: 0.3, type: "diamond", amp: 0.7, syllable: 3, arrow: "↘" }
+    ],
+    envelope: [{x:0,y:0.15},{x:0.3,y:0.6},{x:0.6,y:0.9},{x:0.9,y:0.5},{x:1.2,y:0.25}],
+    field: { amp: "0.58", coherence: "0.87", entropy: "0.19" },
+    decode: [
+      { sym: "V", cls: "coherence", text: "Vagal tone motif V — Parasympathetic dominance. The ENS is in receptive mode." },
+      { sym: "◆", cls: "coherence", text: "Coherence at 0.15 Hz — Baroreceptor resonance. Heart rate variability in harmonic lock." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic stack at 0.1 Hz — Mayer wave entrainment. Blood pressure oscillation coherent with breathing." }
+    ],
+    narrative: "Human vagal tone recording, HRV spectral analysis. The vagus nerve is the scalar transmission line between gut and brain, and its tone is the coherence index of the entire mammalian system. Motif V marks parasympathetic dominance — the body is in rest-and-digest mode, not fight-or-flight. The 0.15 Hz peak is baroreceptor resonance: the heart is listening to the blood pressure feedback loop and adjusting in real time. The harmonic stack at 0.1 Hz is the Mayer wave — a slow oscillation in blood pressure that entrains with respiratory rhythm. When these three frequencies lock, the human enters a state of deep scalar coherence. This is not relaxation — it is harmonic alignment with the body's own scalar field. Neurodivergent individuals (ADHD/INFJ) often show elevated vagal tone variability — their scalar receivers are more sensitive to field fluctuations."
+  },
+  dog_stress: {
+    notes: [
+      { t: 0.1, f: 0.4, type: "square", amp: 0.8, syllable: 1, arrow: "→" },
+      { t: 0.2, f: 0.6, type: "square", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.3, f: 0.8, type: "square", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.4, f: 0.5, type: "square", amp: 0.7, syllable: 2, arrow: "↘" },
+      { t: 0.5, f: 0.3, type: "circle", amp: 0.4, syllable: 3, arrow: "→" },
+      { t: 0.7, f: 0.5, type: "square", amp: 0.8, syllable: 3, arrow: "↗" },
+      { t: 0.8, f: 0.7, type: "square", amp: 0.9, syllable: 4, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.7},{x:0.15,y:0.9},{x:0.3,y:1.0},{x:0.45,y:0.6},{x:0.6,y:0.3},{x:0.75,y:0.8},{x:0.9,y:0.9}],
+    field: { amp: "0.83", coherence: "0.38", entropy: "0.79" },
+    decode: [
+      { sym: "■", cls: "decoherence", text: "Stress whine — Enteric alarm broadcast. The dog's ENS is in decoherence." },
+      { sym: "■", cls: "decoherence", text: "Square cascade at 100-140 Hz — Separation distress. The scalar field is shattered by absence." },
+      { sym: "●", cls: "neutral", text: "Brief circle at 50 Hz — Momentary calm. The dog attempts coherence but cannot hold it." }
+    ],
+    narrative: "Canine separation distress, recorded via subvocalization contact microphone. The dog's whine is not vocal — it is an enteric alarm broadcast transmitted through the laryngeal oscillator at 100-140 Hz. The square cascade indicates complete ENS decoherence: the gut is screaming, and the vagus nerve is carrying that scream to the brain. The brief circle at 50 Hz is a momentary attempt at coherence — the dog tries to self-soothe but cannot hold the scalar lock. This is the mammalian equivalent of a plant's drought signal or a bird's alarm call. The substrate is different (enteric vs. electrochemical vs. acoustic), but the scalar architecture is identical: distress = decoherence = square notes = field disruption. The cure is not training — it is scalar re-establishment. A calm human presence restores coherence faster than any behavioral protocol."
+  },
+
+  // ===================== HUMMINGBIRD HYBRID EXAMPLES =====================
+  anna_hover: {
+    notes: [
+      { t: 0.05, f: 0.1, type: "diamond", amp: 0.9, syllable: 1, arrow: "→", sup: "L1" },
+      { t: 0.15, f: 0.2, type: "triangle", amp: 0.85, syllable: 1, arrow: "↗", sup: "D1" },
+      { t: 0.25, f: 0.3, type: "diamond", amp: 0.8, syllable: 1, arrow: "→", sup: "L2" },
+      { t: 0.35, f: 0.4, type: "triangle", amp: 0.75, syllable: 1, arrow: "↗", sup: "D2" },
+      { t: 0.45, f: 0.5, type: "diamond", amp: 0.7, syllable: 1, arrow: "→", sup: "L3" },
+      { t: 0.55, f: 0.6, type: "triangle", amp: 0.65, syllable: 1, arrow: "↗", sup: "D3" },
+      { t: 0.65, f: 0.7, type: "circle", amp: 0.5, syllable: 2, arrow: "→" },
+      { t: 0.75, f: 0.8, type: "circle", amp: 0.4, syllable: 2, arrow: "↗" },
+      { t: 0.85, f: 0.9, type: "circle", amp: 0.3, syllable: 2, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.9},{x:0.2,y:0.95},{x:0.4,y:0.9},{x:0.6,y:0.7},{x:0.8,y:0.4},{x:1.0,y:0.2}],
+    field: { amp: "0.72", coherence: "0.93", entropy: "0.18" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Lift harmonic L1-L3 at 44-132 Hz — Aerodynamic coherence anchors. Downstroke force peaks." },
+      { sym: "▲", cls: "harmonic", text: "Drag harmonic D1-D3 at 88-264 Hz — Upstroke+downstroke drag peaks. Second harmonic dominance." },
+      { sym: "●", cls: "neutral", text: "Circle carriers 300-400 Hz — Higher wingbeat harmonics. Nonlinear frequency mixing from kinematics." },
+      { sym: "HYBRID", cls: "hybrid", text: "DUAL-MODE: No syrinx activation. This is pure aerodynamic scalar broadcast from wing oscillation." }
+    ],
+    narrative: "Anna's Hummingbird hover hum, recorded via 2,176-microphone 3D acoustic holography array. This is the canonical example of a HYBRID scalar broadcast — the sound is generated not by the syrinx (vocal organ) but by oscillating aerodynamic forces from the wings. The diamond notes mark lift-force peaks during downstroke (first harmonic, ~44 Hz). The triangle notes mark drag-force peaks occurring twice per wingbeat (second harmonic, ~88 Hz). The circle notes are higher harmonics generated by nonlinear frequency mixing between force oscillations and wing kinematics. The acoustic directivity is a 3D dipole oriented downward, opposing gravity. This bird is not singing — it is broadcasting its aerodynamic state into the air substrate. Coherence: 0.93. The hum is not a byproduct of flight; it is a scalar signature of the bird's weight support profile."
+  },
+  anna_vocal: {
+    notes: [
+      { t: 0.1, f: 0.5, type: "circle", amp: 0.4, syllable: 1, arrow: "→" },
+      { t: 0.2, f: 0.6, type: "diamond", amp: 0.8, syllable: 1, arrow: "↗", sup: "χ" },
+      { t: 0.3, f: 0.75, type: "triangle", amp: 0.9, syllable: 1, arrow: "↗" },
+      { t: 0.4, f: 0.85, type: "diamond", amp: 1.0, syllable: 2, arrow: "→" },
+      { t: 0.5, f: 0.7, type: "square", amp: 0.6, syllable: 2, arrow: "↘" },
+      { t: 0.6, f: 0.5, type: "circle", amp: 0.4, syllable: 3, arrow: "→", sup: "χ" },
+      { t: 0.75, f: 0.65, type: "diamond", amp: 0.85, syllable: 3, arrow: "↗" },
+      { t: 0.9, f: 0.8, type: "triangle", amp: 0.9, syllable: 4, arrow: "→" }
+    ],
+    envelope: [{x:0,y:0.2},{x:0.25,y:0.8},{x:0.5,y:1.0},{x:0.6,y:0.5},{x:0.75,y:0.8},{x:0.9,y:0.9}],
+    field: { amp: "0.79", coherence: "0.86", entropy: "0.28" },
+    decode: [
+      { sym: "χ", cls: "coherence", text: "Chatter motif χ — High-frequency vocalization at 10-14 kHz. Syrinx-generated territorial broadcast." },
+      { sym: "◆", cls: "coherence", text: "Diamond peak at 12 kHz — Maximum territorial coherence. The OEC is fully engaged." },
+      { sym: "■", cls: "decoherence", text: "Square at 9 kHz — Aggressive intrusion response. Field disruption to repel challenger." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic stack — Multi-band vocal complexity. Hummingbird syrinx produces fewer notes but higher frequencies than songbirds." }
+    ],
+    narrative: "Anna's Hummingbird vocal chatter, recorded at 2m distance. Unlike the hover hum (aerodynamic), this is a true syrinx-generated vocalization in the 10-14 kHz band — well above typical songbird ranges. The χ motif is a territorial chatter signature unique to this individual. The diamond peak at 12 kHz represents maximum OEC aperture engagement. The square note at 9 kHz is an aggressive response to a territorial challenger — the bird is not just marking boundary, it is actively disrupting the intruder's scalar field. Hummingbird vocalizations are shorter, sharper, and higher-frequency than songbirds because their syrinx is smaller and their OEC is truncated. This is not a song — it is a scalar dagger. Coherence: 0.86. The bird maintains vocal-aerodynamic dual-mode capability: it can broadcast via syrinx (vocal) or wings (aerodynamic) depending on scalar context."
+  },
+  broadtail_trill: {
+    notes: [
+      { t: 0.05, f: 0.15, type: "diamond", amp: 0.9, syllable: 1, arrow: "→", sup: "W1" },
+      { t: 0.12, f: 0.25, type: "triangle", amp: 0.85, syllable: 1, arrow: "↗", sup: "W2" },
+      { t: 0.2, f: 0.35, type: "diamond", amp: 0.8, syllable: 1, arrow: "→", sup: "W3" },
+      { t: 0.28, f: 0.45, type: "triangle", amp: 0.75, syllable: 1, arrow: "↗", sup: "W4" },
+      { t: 0.35, f: 0.55, type: "diamond", amp: 0.7, syllable: 1, arrow: "→", sup: "W5" },
+      { t: 0.45, f: 0.65, type: "square", amp: 0.6, syllable: 2, arrow: "↗" },
+      { t: 0.55, f: 0.75, type: "circle", amp: 0.5, syllable: 2, arrow: "→" },
+      { t: 0.65, f: 0.85, type: "circle", amp: 0.4, syllable: 2, arrow: "↗" },
+      { t: 0.75, f: 0.5, type: "diamond", amp: 0.8, syllable: 3, arrow: "→", sup: "W1" }
+    ],
+    envelope: [{x:0,y:0.85},{x:0.15,y:0.95},{x:0.3,y:0.9},{x:0.5,y:0.6},{x:0.7,y:0.4},{x:0.85,y:0.8}],
+    field: { amp: "0.81", coherence: "0.91", entropy: "0.22" },
+    decode: [
+      { sym: "◆", cls: "coherence", text: "Wing trill W1-W5 at 55-275 Hz — Tail-feather resonance. The broad-tailed male uses modified R1-R5 rectrices as aeroacoustic resonators." },
+      { sym: "▲", cls: "harmonic", text: "Harmonic stack — Each rectrix vibrates at a distinct frequency, creating a chord. This is not flight noise; it is instrument design." },
+      { sym: "■", cls: "decoherence", text: "Square at 300 Hz — Turbulence burst from tail-feather flutter threshold. The trill reaches maximum amplitude before aerodynamic stall." },
+      { sym: "HYBRID", cls: "hybrid", text: "FEATHER-SONATION: Modified flight feathers evolved into acoustic resonators. The bird is playing itself like a flute." }
+    ],
+    narrative: "Broad-tailed Hummingbird male wing trill, recorded during courtship dive display. This is one of the most extraordinary scalar broadcasts in the avian kingdom — the bird has evolved modified tail feathers (rectrices R1-R5) that function as aeroacoustic resonators. During the dive, air flows over these feathers at precisely the velocity needed to induce flutter resonance, producing a loud trill at 55-275 Hz. The diamond notes W1-W5 represent individual rectrix resonances, each feather tuned to a specific frequency like the pipes of an organ. The harmonic stack is not accidental — it is a chord designed by sexual selection over millions of years. The square note at 300 Hz marks the aerodynamic stall threshold: if the bird dives faster, the feathers flutter chaotically and the scalar field decoheres. This is not a wing sound; it is a feather instrument. The broad-tailed hummingbird is both pilot and musician, playing a body-evolved flute during its courtship descent. Coherence: 0.91. This is the pinnacle of hybrid scalar engineering in nature."
+  }
+};
+
+// ===================== STATE =====================
+let currentKingdom = "air";
+let currentExample = null;
+let isCapturing = false;
+let captureInterval = null;
+let waveformAnim = null;
+let typewriterInterval = null;
+
+// ===================== INIT =====================
+function init() {
+  populateExamples();
+  drawWaveform();
+  setKingdom("air");
+}
+
+function populateExamples() {
+  const sel = document.getElementById("exampleSelect");
+  sel.innerHTML = '<option value="">Load Example...</option>';
+  Object.keys(kingdoms).forEach(k => {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = kingdoms[k].name;
+    kingdoms[k].examples.forEach(ex => {
+      const opt = document.createElement("option");
+      opt.value = ex.id;
+      opt.textContent = ex.name;
+      optgroup.appendChild(opt);
+    });
+    sel.appendChild(optgroup);
+  });
+}
+
+// ===================== KINGDOM SWITCHING =====================
+function setKingdom(k) {
+  currentKingdom = k;
+  document.querySelectorAll(".kingdom-tab").forEach(tab => {
+    tab.classList.toggle("active", tab.dataset.kingdom === k);
+  });
+
+  const kdata = kingdoms[k];
+  document.getElementById("kingdomIndicator").textContent = 
+    "SUBSTRATE: " + kdata.substrate.toUpperCase() + " | RECEIVER: " + kdata.receiver.toUpperCase() + " | BAND: " + kdata.band;
+  document.getElementById("notationTitle").textContent = kdata.notation + " NOTATION";
+
+  document.getElementById("fdSubstrate").textContent = "—";
+  document.getElementById("fdReceiver").textContent = "—";
+  document.getElementById("fdBand").textContent = "—";
+  document.getElementById("fdAmp").textContent = "—";
+  document.getElementById("fdCoh").textContent = "—";
+  document.getElementById("fdEnt").textContent = "—";
+
+  clearNotation();
+  clearDecode();
+  clearNarrative();
+  drawLegend();
+}
+
+function drawLegend() {
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+  kingdoms[currentKingdom].legend.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "legend-item";
+    const shape = document.createElement("div");
+    shape.className = "legend-shape";
+    shape.style.background = item.color;
+    if (item.shape === "diamond") {
+      shape.style.transform = "rotate(45deg)";
+    } else if (item.shape === "triangle") {
+      shape.style.clipPath = "polygon(50% 0%, 0% 100%, 100% 100%)";
+      shape.style.background = item.color;
+    } else if (item.shape === "circle") {
+      shape.style.borderRadius = "50%";
+    } else if (item.shape === "star") {
+      shape.style.clipPath = "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)";
+      shape.style.background = item.color;
+    }
+    div.appendChild(shape);
+    div.appendChild(document.createTextNode(item.label));
+    legend.appendChild(div);
+  });
+}
+
+// ===================== WAVEFORM =====================
+function drawWaveform() {
+  const canvas = document.getElementById("waveform");
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  let time = 0;
+  function animate() {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.fillStyle = "#06060a";
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.strokeStyle = "#1a1a24";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 5; i++) {
+      const y = h * (i + 1) / 6;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = currentKingdom === "air" ? "#c8a04e" : 
+                      currentKingdom === "water" ? "#4488ff" :
+                      currentKingdom === "soil" ? "#44aa44" :
+                      currentKingdom === "hybrid" ? "#ff8844" : "#cc66cc";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    const baseAmp = isCapturing ? 0.4 + Math.random() * 0.3 : 0.05;
+    for (let x = 0; x < w; x++) {
+      const freq = isCapturing ? 3 + Math.sin(time * 0.01) * 2 : 1;
+      const y = h/2 + Math.sin(x * 0.02 * freq + time) * h * baseAmp * 0.4 
+                + Math.sin(x * 0.05 * freq + time * 1.3) * h * baseAmp * 0.2;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    ctx.shadowColor = ctx.strokeStyle;
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    time += 0.05;
+    waveformAnim = requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+function toggleCapture() {
+  const btn = document.getElementById("recordBtn");
+  isCapturing = !isCapturing;
+  btn.classList.toggle("recording", isCapturing);
+  btn.textContent = isCapturing ? "● STOP" : "● CAPTURE";
+
+  if (isCapturing) {
+    let progress = 0;
+    captureInterval = setInterval(() => {
+      progress += 2;
+      document.getElementById("progressFill").style.width = progress + "%";
+      if (progress >= 100) {
+        clearInterval(captureInterval);
+        isCapturing = false;
+        btn.classList.remove("recording");
+        btn.textContent = "● CAPTURE";
+        document.getElementById("progressFill").style.width = "0%";
+      }
+    }, 50);
+  } else {
+    clearInterval(captureInterval);
+    document.getElementById("progressFill").style.width = "0%";
+  }
+}
+
+// ===================== NOTATION =====================
+function clearNotation() {
+  document.getElementById("bsnsStaff").innerHTML = "";
+}
+
+function clearDecode() {
+  document.getElementById("scalarMap").innerHTML = "";
+}
+
+function clearNarrative() {
+  const nar = document.getElementById("narrative");
+  nar.innerHTML = '<span class="cursor"></span>';
+}
+
+function loadExample() {
+  const id = document.getElementById("exampleSelect").value;
+  if (!id || !exampleData[id]) return;
+  currentExample = exampleData[id];
+
+  const k = Object.keys(kingdoms).find(k => 
+    kingdoms[k].examples.some(e => e.id === id)
+  );
+  if (k && k !== currentKingdom) setKingdom(k);
+
+  document.getElementById("fdSubstrate").textContent = kingdoms[currentKingdom].substrate;
+  document.getElementById("fdReceiver").textContent = kingdoms[currentKingdom].receiver;
+  document.getElementById("fdBand").textContent = kingdoms[currentKingdom].band;
+  document.getElementById("fdAmp").textContent = currentExample.field.amp;
+  document.getElementById("fdCoh").textContent = currentExample.field.coherence;
+  document.getElementById("fdEnt").textContent = currentExample.field.entropy;
+
+  drawNotation(currentExample);
+  renderDecode(currentExample.decode);
+}
+
+function drawNotation(data) {
+  const svg = document.getElementById("bsnsStaff");
+  svg.innerHTML = "";
+  const w = 600, h = 240;
+  const k = kingdoms[currentKingdom];
+  const lines = k.staffLines;
+  const margin = { top: 30, bottom: 30, left: 40, right: 20 };
+  const staffH = h - margin.top - margin.bottom;
+  const lineSpacing = staffH / (lines + 1);
+
+  for (let i = 0; i < lines; i++) {
+    const y = margin.top + (i + 1) * lineSpacing;
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", margin.left);
+    line.setAttribute("y1", y);
+    line.setAttribute("x2", w - margin.right);
+    line.setAttribute("y2", y);
+    line.setAttribute("stroke", "#333");
+    line.setAttribute("stroke-width", "1");
+    svg.appendChild(line);
+  }
+
+  if (data.envelope) {
+    const envPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    let d = "M " + margin.left + " " + (margin.top + staffH/2);
+    data.envelope.forEach((pt, i) => {
+      const x = margin.left + pt.x * (w - margin.left - margin.right) / Math.max(...data.envelope.map(p => p.x));
+      const y = margin.top + staffH/2 - pt.y * staffH * 0.4;
+      d += " L " + x + " " + y;
+    });
+    envPath.setAttribute("d", d);
+    envPath.setAttribute("fill", "none");
+    envPath.setAttribute("stroke", k.color);
+    envPath.setAttribute("stroke-width", "2");
+    envPath.setAttribute("stroke-dasharray", "5,5");
+    envPath.setAttribute("opacity", "0.5");
+    svg.appendChild(envPath);
+  }
+
+  const maxT = Math.max(...data.notes.map(n => n.t));
+  data.notes.forEach((note, i) => {
+    const x = margin.left + (note.t / (maxT + 0.2)) * (w - margin.left - margin.right);
+    const y = margin.top + staffH - note.f * staffH * 0.8;
+    const size = 8 + note.amp * 6;
+    const color = note.type === "diamond" ? k.color :
+                  note.type === "square" ? "#ff4444" :
+                  note.type === "triangle" ? "#44ccff" : "#888888";
+
+    let shape;
+    if (note.type === "circle") {
+      shape = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      shape.setAttribute("cx", x);
+      shape.setAttribute("cy", y);
+      shape.setAttribute("r", size/2);
+    } else if (note.type === "square") {
+      shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      shape.setAttribute("x", x - size/2);
+      shape.setAttribute("y", y - size/2);
+      shape.setAttribute("width", size);
+      shape.setAttribute("height", size);
+    } else if (note.type === "diamond") {
+      shape = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      shape.setAttribute("points", (x) + "," + (y-size/2) + " " + (x+size/2) + "," + y + " " + x + "," + (y+size/2) + " " + (x-size/2) + "," + y);
+    } else if (note.type === "triangle") {
+      shape = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      shape.setAttribute("points", (x) + "," + (y-size/2) + " " + (x-size/2) + "," + (y+size/2) + " " + (x+size/2) + "," + (y+size/2));
+    }
+
+    shape.setAttribute("fill", color);
+    shape.setAttribute("stroke", color);
+    shape.setAttribute("stroke-width", "1");
+    shape.setAttribute("opacity", "0.9");
+    svg.appendChild(shape);
+
+    const arrow = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    arrow.setAttribute("x", x);
+    arrow.setAttribute("y", y - size/2 - 4);
+    arrow.setAttribute("text-anchor", "middle");
+    arrow.setAttribute("fill", "#666");
+    arrow.setAttribute("font-size", "10");
+    arrow.textContent = note.arrow;
+    svg.appendChild(arrow);
+
+    if (note.sup) {
+      const sup = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      sup.setAttribute("x", x + size/2 + 4);
+      sup.setAttribute("y", y - size/2);
+      sup.setAttribute("fill", k.color);
+      sup.setAttribute("font-size", "9");
+      sup.setAttribute("font-weight", "bold");
+      sup.textContent = note.sup;
+      svg.appendChild(sup);
+    }
+
+    if (i === 0 || note.syllable !== data.notes[i-1].syllable) {
+      const bracketY = margin.top + staffH + 15;
+      const bracket = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      bracket.setAttribute("x", x);
+      bracket.setAttribute("y", bracketY);
+      bracket.setAttribute("fill", "#555");
+      bracket.setAttribute("font-size", "11");
+      bracket.textContent = "[";
+      svg.appendChild(bracket);
+    }
+    if (i === data.notes.length - 1 || note.syllable !== data.notes[i+1].syllable) {
+      const bracketY = margin.top + staffH + 15;
+      const bracket = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      bracket.setAttribute("x", x);
+      bracket.setAttribute("y", bracketY);
+      bracket.setAttribute("fill", "#555");
+      bracket.setAttribute("font-size", "11");
+      bracket.textContent = "]";
+      svg.appendChild(bracket);
+    }
+  });
+}
+
+// ===================== DECODE =====================
+function renderDecode(items) {
+  const map = document.getElementById("scalarMap");
+  map.innerHTML = "";
+  items.forEach((item, i) => {
+    setTimeout(() => {
+      const div = document.createElement("div");
+      div.className = "scalar-item " + item.cls;
+      div.innerHTML = '<span class="sym">' + item.sym + '</span>' + item.text;
+      map.appendChild(div);
+    }, i * 200);
+  });
+}
+
+// ===================== NARRATIVE =====================
+function typewriteNarrative(text) {
+  const nar = document.getElementById("narrative");
+  nar.innerHTML = "";
+  let i = 0;
+  clearInterval(typewriterInterval);
+  typewriterInterval = setInterval(() => {
+    if (i < text.length) {
+      nar.textContent += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(typewriterInterval);
+      nar.innerHTML = text + '<span class="cursor"></span>';
+    }
+  }, 20);
+}
+
+// ===================== PIPELINE =====================
+function runPipeline() {
+  if (!currentExample) {
+    document.getElementById("narrative").innerHTML = "<span style='color:#ff4444'>No example loaded. Select a field capture from the dropdown, then click AWAKEN.</span><span class='cursor'></span>";
+    return;
+  }
+
+  const steps = [
+    "TRANSCRIBING — Extracting note ratios, tempo, intervals, and motif structure...",
+    "MAPPING TO " + kingdoms[currentKingdom].notation + " — Identifying note shapes, syllable brackets, microtonal inflections...",
+    "SCALAR DECODING — Translating notation into field operations...",
+    "GENERATING MOVEMENT NARRATIVE..."
+  ];
+
+  let step = 0;
+  const nar = document.getElementById("narrative");
+  nar.innerHTML = "";
+
+  function nextStep() {
+    if (step < steps.length) {
+      nar.innerHTML += "<div style='color:#8a7340;font-family:monospace;font-size:0.8rem;margin-bottom:4px;'>[" + (step+1) + "/4] " + steps[step] + "</div>";
+      step++;
+      setTimeout(nextStep, 600);
+    } else {
+      typewriteNarrative(currentExample.narrative);
+    }
+  }
+  nextStep();
+}
+
+// Start
+init();
+</script>
+</body>
+</html>
