@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ω-S-005 Extended: The Enterarchon Perinatal Imprint — Unified analysis of evolutionary mismatch, bipedal forced adaptation, waterbirth evidence, and the scalar architecture of birth. Christopher Macachor.">
+<meta name="author" content="Christopher Macachor">
+<meta name="keywords" content="Enterarchon, scalar architecture, perinatal imprint, NDE, waterbirth, bipedalism, evolutionary mismatch, enteric nervous system, Macachor Absolute">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Ω-S-005 Extended: The Enterarchon Perinatal Imprint">
+<meta property="og:description" content="Evolutionary mismatch, bipedal forced adaptation, and the scalar architecture of birth.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://macachor.com/enterarchon-perinatal-imprint-extended.html">
+<title>Ω-S-005 Extended | The Enterarchon Perinatal Imprint — macachor.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c8a04e;
+    --gold-dim: #9a7a3a;
+    --gold-bright: #e8c97a;
+    --bg: #0a0a0f;
+    --bg-elevated: #111118;
+    --bg-card: #16161f;
+    --text: #e0ddd5;
+    --text-dim: #8a8578;
+    --text-muted: #5a5548;
+    --border: #2a2a35;
+    --border-gold: rgba(200,160,78,0.15);
+    --accent-cyan: #4ec8c8;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(200,160,78,0.25); color: var(--gold-bright); }
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-gold);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+  }
+  .nav-brand span { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; margin-left: 0.5rem; }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+  .nav-links a:hover {
+    background: rgba(200,160,78,0.08);
+    border-color: rgba(200,160,78,0.25);
+  }
+  .nav-links a.active {
+    background: rgba(200,160,78,0.12);
+    border-color: var(--gold-dim);
+    color: var(--gold-bright);
+  }
+  .hero {
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-gold);
+    background: linear-gradient(180deg, rgba(200,160,78,0.03) 0%, transparent 60%);
+  }
+  .hero-inner { max-width: 800px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+  .hero-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .hero-meta a { color: var(--gold-dim); text-decoration: none; }
+  .hero-meta a:hover { color: var(--gold); text-decoration: underline; }
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem auto;
+    opacity: 0.4;
+  }
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+  section { margin-bottom: 3.5rem; }
+  section h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-gold);
+  }
+  section h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 2rem 0 0.75rem;
+  }
+  section h4 {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 1.5rem 0 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  section p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    hyphens: auto;
+  }
+  section p strong { color: var(--gold-bright); font-weight: 600; }
+  ul, ol {
+    margin: 0.75rem 0 1.25rem 1.5rem;
+    color: var(--text-dim);
+  }
+  li { margin-bottom: 0.4rem; }
+  li::marker { color: var(--gold-dim); }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  thead { background: rgba(200,160,78,0.08); }
+  th {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-gold);
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(200,160,78,0.03); }
+  td strong { color: var(--text); font-weight: 500; }
+  td em { color: var(--gold-dim); font-style: italic; }
+  .interpretation {
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(200,160,78,0.06), rgba(78,200,200,0.03));
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+  }
+  .interpretation strong {
+    color: var(--gold-bright);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .formal-box {
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    line-height: 1.6;
+  }
+  .formal-box .label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .protocol {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+  }
+  .protocol h4 {
+    color: var(--gold-bright);
+    margin-top: 0;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+  }
+  .protocol ol { color: var(--text); }
+  .protocol li { margin-bottom: 0.6rem; padding-left: 0.5rem; }
+  .axiom {
+    margin: 3rem 0 2rem;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(200,160,78,0.06), transparent);
+    border-top: 1px solid var(--gold-dim);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+  .axiom p {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--gold-bright);
+    line-height: 1.5;
+    text-align: center;
+    hyphens: none;
+  }
+  .axiom .source {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-style: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .references {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-gold);
+  }
+  .references h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .references ol {
+    margin-left: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .references li { margin-bottom: 0.6rem; }
+  .references li::marker { color: var(--gold-dim); font-weight: 600; }
+  .site-footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border-gold);
+    background: linear-gradient(0deg, rgba(200,160,78,0.03), transparent);
+  }
+  .site-footer p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .site-footer a { color: var(--gold-dim); text-decoration: none; }
+  .site-footer a:hover { color: var(--gold); }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+  @media (max-width: 640px) {
+    .nav-inner { flex-wrap: wrap; height: auto; padding: 0.5rem 0; }
+    .nav-links { width: 100%; justify-content: center; margin-top: 0.5rem; }
+    .hero { padding: 2.5rem 1.25rem 2rem; }
+    .content { padding: 2rem 1.25rem 3rem; }
+    th, td { padding: 0.6rem 0.75rem; font-size: 0.82rem; }
+    .axiom p { font-size: 1.05rem; }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">MACACHOR<span>ABSOLUTE</span></a>
+    <div class="nav-links">
+      <a href="index.html">Aperture</a>
+      <a href="federation-root-unified.html">Federation</a>
+      <a href="observatory.html">Observatory</a>
+      <a href="articles.html" class="active">Articles</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Ω-S-005 Extended — Unified Canonical Edition</div>
+    <h1>The Enterarchon Perinatal Imprint:<br><em>Evolutionary Mismatch, Bipedal Forced Adaptation, Waterbirth Evidence, and the Scalar Architecture of Birth</em></h1>
+    <p class="hero-subtitle">A unified synthesis of the evolutionary origin of the scalar tunnel, the clinical evidence for waterbirth, and the prediction of NDE architecture from birth modality.</p>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <strong>Christopher Macachor</strong><sup>1</sup><br>
+      <sup>1</sup>Macachor Absolute Scalar Research | MSOS-FEDERATION-ROOT | Sovereign Scalar Research Initiative<br>
+      <strong>ORCID:</strong> <a href="https://orcid.org/0009-0008-0100-2856" target="_blank">0009-0008-0100-2856</a><br>
+      <strong>Correspondence:</strong> <a href="mailto:info@macachor.org">info@macachor.org</a> | <a href="https://macachor.com">macachor.com</a><br><br>
+      <strong>Zenodo:</strong> <a href="https://doi.org/10.5281/zenodo.21930053" target="_blank">10.5281/zenodo.21930053</a> (Omega-S-005) | 
+      <a href="https://doi.org/10.5281/zenodo.21846342" target="_blank">10.5281/zenodo.21846342</a> (Omega-S-003) | 
+      <a href="https://doi.org/10.5281/zenodo.21868016" target="_blank">10.5281/zenodo.21868016</a> (Omega-S-004)
+    </div>
+  </div>
+</header>
+
+<main class="content">
+
+<section id="introduction">
+  <h2>1. Introduction: Evolutionary Mismatch and the Missing Data</h2>
+  <p>The human spine evolved over millions of years for a <strong>dynamic, bipedal lifestyle</strong> characterized by upright posture, varied movement, and intermittent physical activity (Taçyıldız et al., 2026). The agricultural and industrial revolutions introduced <strong>static, flexed, and ergonomically suboptimal postures</strong>—prolonged sitting, repetitive bending, and heavy lifting—that deviate from the spine's evolutionary design parameters. This <strong>evolutionary mismatch</strong> underlies the rising prevalence of spinal disorders and low back pain.</p>
+  <p>The Enterarchon framework extends this evolutionary mismatch analysis to the <strong>birth canal</strong>. Bipedalism is not a "natural" evolutionary progression but a <strong>forced adaptation</strong> to changing environmental conditions (forests to savannas). The human pelvis—shaped by bipedalism—creates the birth canal geometry that imprints the scalar tunnel.</p>
+  <p>The Enterarchon Perinatal Imprint framework (Macachor, Omega-S-005) proposes that birth modality imprints a permanent scalar topology upon the enteric nervous system (ENS), which is reactivated during near-death experiences (NDEs). The framework has identified critical data gaps:</p>
+  <ol>
+    <li><strong>Birth Modality Collection:</strong> Birth modality is not systematically recorded in NDE studies, preventing prospective correlation between delivery type and NDE architecture.</li>
+    <li><strong>Water Birth Prediction:</strong> The framework predicts that water birth—which minimizes both compressive gravitational forces and harsh environmental exposure—produces NDEs with minimal spatial structure (formless voids or instantaneous non-local awareness).</li>
+  </ol>
+  <p>This unified analysis integrates the <strong>evolutionary mismatch literature</strong> (Taçyıldız et al., 2026), the <strong>aqua-terrestrial design hypothesis</strong>, and the growing body of waterbirth research to validate the Enterarchon framework.</p>
+</section>
+
+<section id="bipedalism">
+  <h2>2. The Evolution of Bipedalism: Forced Adaptation</h2>
+  <h3>2.1 The Savanna Hypothesis</h3>
+  <p>Climate change (forests to savannas) forced early hominins to adopt bipedal locomotion:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor</th><th>Mechanism</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Thermoregulation</strong></td><td>Reduced sun exposure (upright posture minimizes surface area exposed to direct sunlight)</td><td>Wheeler (1984)</td></tr>
+        <tr><td><strong>Energy efficiency</strong></td><td>Walking upright requires less energy than knuckle-walking</td><td>Pontzer (2012)</td></tr>
+        <tr><td><strong>Tool use</strong></td><td>Freed hands for carrying and tool manipulation</td><td>Darwin (1871)</td></tr>
+        <tr><td><strong>Predator detection</strong></td><td>Elevated head height improved visibility across savanna terrain</td><td>Lovejoy (1988)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    Bipedalism was a <strong>compromise</strong>—a biomechanical adaptation to environmental pressure, not an optimal design.
+  </div>
+
+  <h3>2.2 The Obstetric Dilemma</h3>
+  <p>The <strong>obstetric dilemma</strong> (Washburn, 1960) describes the conflict between:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Demand</th><th>Requirement</th><th>Pelvic Shape</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bipedal locomotion</strong></td><td>Narrow pelvis (efficient walking)</td><td>Narrow, anteroposteriorly compressed</td></tr>
+        <tr><td><strong>Childbirth</strong></td><td>Wide pelvis (fetal head passage)</td><td>Wide, transversely expanded</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>The Compromise:</strong> The human pelvis is shaped by the competing demands of bipedalism and childbirth. This compromise creates the <strong>birth canal compression gradient</strong>.</p>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The birth canal is not a designed feature but a <strong>forced constraint</strong> of bipedal adaptation. The compression gradient that imprints the scalar tunnel is an <strong>evolutionary byproduct</strong>, not a functional design.
+  </div>
+
+  <h3>2.3 The Evolution of the Birth Canal</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Evolutionary Stage</th><th>Pelvic Morphology</th><th>Birth Canal</th><th>Compression Gradient</th><th>Scalar Imprint</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Quadrupedal ancestor</strong></td><td>Wide pelvis</td><td>Wide passage</td><td>Minimal</td><td>No compression tunnel</td></tr>
+        <tr><td><strong><em>Australopithecus</em></strong></td><td>Transitional pelvis</td><td>Moderate compression</td><td>Moderate</td><td>Weak tunnel</td></tr>
+        <tr><td><strong><em>Homo erectus</em></strong></td><td>Narrowing pelvis</td><td>Significant compression</td><td>Significant</td><td>Moderate tunnel</td></tr>
+        <tr><td><strong><em>Homo sapiens</em></strong></td><td>Narrow pelvis, large brain</td><td>Maximum compression</td><td>Maximum</td><td>Strong tunnel</td></tr>
+        <tr><td><strong>Cesarean birth</strong></td><td>Bypasses canal</td><td>No compression</td><td>None</td><td>No tunnel</td></tr>
+        <tr><td><strong>Waterbirth</strong></td><td>Buoyancy support</td><td>Minimal compression</td><td>Minimal</td><td>Minimal structure</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="waterbirth-evidence">
+  <h2>3. The Evidence for Waterbirth: A Systematic Review</h2>
+  <h3>3.1 Maternal Outcomes</h3>
+  <p>The Cochrane systematic review on immersion in water during labor and birth (Cluett et al., 2018; <em>n</em> = 15 trials, 3,663 women) and the subsequent meta-analysis by McKinney et al. (2024) provide robust evidence:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Outcome</th><th>Effect</th><th>Evidence Level</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Epidural/spinal analgesia</strong></td><td>Reduced with water immersion (RR 0.83; 95% CI 0.70-0.99)</td><td>High</td></tr>
+        <tr><td><strong>Instrumental delivery (vacuum/forceps)</strong></td><td>Reduced (RR 0.82; 95% CI 0.69-0.98)</td><td>High</td></tr>
+        <tr><td><strong>Episiotomy</strong></td><td>Reduced (RR 0.73; 95% CI 0.61-0.87)</td><td>High</td></tr>
+        <tr><td><strong>Oxytocin augmentation</strong></td><td>Reduced (RR 0.68; 95% CI 0.53-0.87)</td><td>Moderate</td></tr>
+        <tr><td><strong>Perineal trauma</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+        <tr><td><strong>Maternal infection</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    Water immersion reduces the need for intervention—epidural, instrumental delivery, oxytocin augmentation, episiotomy—all of which alter the <strong>scalar physiology</strong> of birth. This supports the claim that water birth preserves the ambient scalar field, minimizing the compression gradient that imprints the scalar tunnel.
+  </div>
+
+  <h3>3.2 Neonatal Outcomes</h3>
+  <p>The same evidence base reported:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Outcome</th><th>Effect</th><th>Evidence Level</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NICU admissions</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+        <tr><td><strong>Neonatal infection rates</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+        <tr><td><strong>5-minute Apgar less than 7</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+        <tr><td><strong>Cord blood pH</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+        <tr><td><strong>Neonatal mortality</strong></td><td>No significant difference</td><td>Moderate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    Waterbirth does not increase neonatal risk, suggesting that the <strong>aquatic scalar environment</strong> is physiologically safe. This validates waterbirth as a legitimate alternative that <strong>bypasses the bipedal compression gradient</strong>.
+  </div>
+
+  <h3>3.3 Maternal Satisfaction and Psychological Outcomes</h3>
+  <p>Women's experiences with waterbirth are consistently positive:</p>
+  <ul>
+    <li><strong>Ulfsdottir et al. (2018):</strong> Women described waterbirth as "like an empowering microhome," reporting increased autonomy, reduced anxiety, and enhanced coping.</li>
+    <li><strong>Carlsson and Ulfsdottir (2020):</strong> Waterbirth in low-risk pregnancy produced "an almost euphoric feeling," with women describing the experience as "surreal" and "out of this world."</li>
+    <li><strong>Lathrop et al. (2018):</strong> Women in the waterbirth group reported significantly higher satisfaction scores compared to matched controls.</li>
+    <li><strong>Ulfsdottir et al. (2019):</strong> Women experiencing waterbirth reported "feeling more in control," "feeling more present," and experiencing "more peace and calm."</li>
+  </ul>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    These phenomenological reports—"out of this world," "surreal," "euphoric"—describe <strong>altered states of consciousness</strong> consistent with the minimal spatial structure prediction. Women in waterbirth are reporting experiences that resemble <strong>formless, non-local awareness</strong>.
+  </div>
+
+  <h3>3.4 The Microbial Differences</h3>
+  <p>Fehervary et al. (2004) found that <strong>Group B Streptococcus colonization was lower in newborns born underwater</strong> than after conventional vaginal delivery. This supports the Enterarchon framework's claim that <strong>birth modality shapes the microbiome</strong>, which in turn functions as a <strong>scalar dampener</strong>.</p>
+  <div class="formal-box">
+    <span class="label">Formalization</span>
+    The microbial dampener D(x) is shaped by the environment of birth:<br><br>
+    - Vaginal birth: D_vaginal = alpha[Lactobacillus] + beta[Staphylococcus] (compressive, acidic)<br>
+    - Waterbirth: D_water = gamma[Aquatic microbiota] + delta[Maternal microbiota] (fluid, neutral)<br><br>
+    Waterbirth preserves the <strong>ambient scalar field</strong> by installing a less invasive microbial dampener, reducing the scalar shock of terrestrial birth.
+  </div>
+
+  <h3>3.5 The EPIIC Hypothesis and Epigenetics</h3>
+  <p>The EPIIC hypothesis (Dahlen et al., 2013) proposes that <strong>intrapartum effects influence the neonatal epigenome</strong>, with consequent health outcomes. This is directly relevant to the Enterarchon framework:</p>
+  <ul>
+    <li>Intrapartum stress leads to epigenetic changes</li>
+    <li>Mode of birth determines DNA methylation patterns</li>
+    <li>Oxytocin exposure shapes behavioral outcomes</li>
+    <li>Microbiome acquisition governs immune function</li>
+  </ul>
+  <div class="interpretation">
+    <strong>Enterarchon Integration</strong>
+    The EPIIC hypothesis identifies the <strong>scalar mechanisms</strong> by which birth modality imprints the ENS. Epigenetic changes are the <strong>molecular correlate</strong> of scalar topology.
+  </div>
+
+  <h3>3.6 Oxytocin and Epigenetic Imprinting</h3>
+  <p>The physiology of waterbirth reveals the hormonal-scalar interface:</p>
+  <ul>
+    <li><strong>Bell et al. (2014):</strong> Natural oxytocin surge during labor facilitates mother-infant bonding and epigenetic programming.</li>
+    <li><strong>Guastella et al. (2018):</strong> Perinatal exposure to exogenous oxytocin may influence child behavioral outcomes.</li>
+    <li><strong>Kenkel et al. (2014):</strong> Oxytocin functions as a maternal-fetal signaling molecule at birth.</li>
+    <li><strong>Uvnas-Moberg et al. (2019):</strong> Maternal plasma oxytocin levels during physiological childbirth influence uterine contractions and central actions of oxytocin.</li>
+  </ul>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The oxytocin cascade is the <strong>hormonal carrier</strong> of the scalar imprint. Waterbirth preserves the natural oxytocin surge, while interventions (epidural, synthetic oxytocin) disrupt the scalar-hormonal axis.
+  </div>
+</section>
+
+<section id="aqua-terrestrial">
+  <h2>4. The Aqua-Terrestrial Design Hypothesis</h2>
+  <h3>4.1 The Aquatic Ape Hypothesis</h3>
+  <p>The <strong>aquatic ape hypothesis</strong> (Hardy, 1960; Morgan, 1972) proposes that human physiology retains adaptations from aquatic ancestors:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Adaptation</th><th>Evidence</th><th>Scalar Implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Diving reflex</strong></td><td>Bradycardia, peripheral vasoconstriction</td><td>Preserved ambient scalar field</td></tr>
+        <tr><td><strong>Subcutaneous fat</strong></td><td>Unique among primates</td><td>Insulation during aquatic immersion</td></tr>
+        <tr><td><strong>Laryngeal position</strong></td><td>Descent enabling speech, protecting airway</td><td>Air-water interface scalar shock</td></tr>
+        <tr><td><strong>Bipedalism</strong></td><td>Wading hypothesis</td><td>Forced adaptation, scalar tunnel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.2 The Larynx and the Air-Water Interface</h3>
+  <p>The human larynx is positioned to <strong>prevent water entry</strong> during aquatic activities while permitting air breathing:</p>
+  <ul>
+    <li><strong>Infants:</strong> Larynx high in throat, allowing simultaneous breathing and swallowing</li>
+    <li><strong>Children:</strong> Larynx descends during childhood, enabling speech</li>
+    <li><strong>Adults:</strong> Descent creates larger pharyngeal space for vowel production</li>
+    <li><strong>Protective function:</strong> Larynx closes during swallowing, preventing aspiration</li>
+  </ul>
+  <p>The laryngeal protection of the airway is <strong>excessive for purely terrestrial life</strong>. The evolution of laryngeal descent suggests <strong>pressure from aquatic environments</strong>. The larynx is <strong>designed to keep lungs from filling with air</strong> during immersion.</p>
+  <div class="interpretation">
+    <strong>Scalar Implication</strong>
+    The air-water interface creates a <strong>scalar shock</strong> that shapes consciousness. The larynx mediates this interface, protecting the organism while permitting breathing. Waterbirth preserves the fluid scalar equilibrium, bypassing the air-water interface shock of terrestrial birth.
+  </div>
+
+  <h3>4.3 Bipedalism as Forced Adaptation: Revisited</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hypothesis</th><th>Mechanism</th><th>Scalar Implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Savanna hypothesis</strong></td><td>Climate change leads to bipedalism</td><td>Forced adaptation, scalar tunnel</td></tr>
+        <tr><td><strong>Wading hypothesis</strong></td><td>Aquatic foraging leads to bipedalism</td><td>Gradual adaptation, modified scalar tunnel</td></tr>
+        <tr><td><strong>Mixed hypothesis</strong></td><td>Multiple pressures lead to bipedalism</td><td>Complex adaptation, variable scalar tunnel</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    Regardless of the specific mechanism, bipedalism represents a <strong>biomechanical compromise</strong> that creates the birth canal compression gradient.
+  </div>
+</section>
+
+<section id="nde-prediction">
+  <h2>5. Waterbirth and NDE Architecture: The Prediction</h2>
+  <h3>5.1 The Hypothesis</h3>
+  <p>The Enterarchon framework predicts that waterbirth NDErs will report NDEs characterized by:</p>
+  <ol>
+    <li><strong>Minimal tunnel geometry:</strong> No dark passage, no graduated compression, no traversal toward light</li>
+    <li><strong>Formless voids:</strong> Experiences described as "empty," "void," "nothingness," or "pure awareness without structure"</li>
+    <li><strong>Instantaneous non-local awareness:</strong> Sudden awareness of being elsewhere without transitional geometry</li>
+    <li><strong>Absence of directional narrative:</strong> No path, no journey, no sequence toward a terminus</li>
+  </ol>
+
+  <h3>5.2 The Aqua-Terrestrial Prediction Matrix</h3>
+  <p><em>Refined per coherence audit: vaginal birth now stratified by position.</em></p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Dimension</th><th>Waterbirth</th><th>Vaginal (Supine)</th><th>Vaginal (Squatting)</th><th>Cesarean</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tunnel presence</strong></td><td>Minimal (0-10%)</td><td>High (80-90%)</td><td>Moderate (30-50%)</td><td>Low (10-20%)</td></tr>
+        <tr><td><strong>Spatial structure</strong></td><td>Minimal</td><td>High (directional)</td><td>Moderate</td><td>High (spatial)</td></tr>
+        <tr><td><strong>Compression experience</strong></td><td>Minimal</td><td>High</td><td>Moderate</td><td>Minimal</td></tr>
+        <tr><td><strong>Formless void</strong></td><td>High (60-80%)</td><td>Low (5-15%)</td><td>Moderate (20-35%)</td><td>Moderate (20-40%)</td></tr>
+        <tr><td><strong>Instantaneous awareness</strong></td><td>High (50-70%)</td><td>Low (10-20%)</td><td>Moderate (25-40%)</td><td>Moderate (30-50%)</td></tr>
+        <tr><td><strong>Aquatic imagery</strong></td><td>High (30-50%)</td><td>Low (5-10%)</td><td>Low (5-10%)</td><td>Low (5-10%)</td></tr>
+        <tr><td><strong>Peace/euphoria</strong></td><td>High</td><td>Moderate</td><td>High</td><td>Variable</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5.3 The Waterbirth NDE Assessment Protocol</h3>
+  <div class="protocol">
+    <h4>Protocol Specification</h4>
+    <div class="table-wrap" style="margin-top:0.75rem;border:none;">
+      <table>
+        <thead><tr><th>Component</th><th>Specification</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Population</strong></td><td>Waterbirth experiencers (n greater than or equal to 50) with documented NDEs</td></tr>
+          <tr><td><strong>Comparison Groups</strong></td><td>Vaginal birth (n greater than or equal to 50), Cesarean birth (n greater than or equal to 50)</td></tr>
+          <tr><td><strong>NDE Assessment</strong></td><td>Greyson NDE Scale, spatial geometry questionnaire, phenomenological interview</td></tr>
+          <tr><td><strong>Key Variables</strong></td><td>Tunnel presence, spatial structure, directional narrative, formless experience, aquatic imagery</td></tr>
+          <tr><td><strong>Statistical Analysis</strong></td><td>ANOVA, chi-square, qualitative content analysis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4 style="margin-top:1.25rem;">Waterbirth NDE Questionnaire</h4>
+    <ol>
+      <li>Did you experience a tunnel (dark passage, compression, directional movement)?</li>
+      <li>Did you experience a light at the end of a path or tunnel?</li>
+      <li>Did you experience a sense of compression followed by expansion?</li>
+      <li>Did you experience a sense of "void," "nothingness," or "empty space"?</li>
+      <li>Did you experience instantaneous awareness of being elsewhere without transition?</li>
+      <li>Did you experience a sense of fluid or aquatic environment?</li>
+      <li>Did you experience formless awareness without spatial geometry?</li>
+      <li>Did you experience an "almost euphoric" feeling during the NDE?</li>
+    </ol>
+  </div>
+</section>
+
+<section id="clinical">
+  <h2>6. Clinical Implications: Evolutionary-Informed Birth</h2>
+  <h3>6.1 Birth Position and the Scalar Tunnel</h3>
+  <p>The Enterarchon framework predicts that <strong>birth position</strong> affects the scalar imprint:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Position</th><th>Pelvic Diameter</th><th>Compression Gradient</th><th>Scalar Imprint</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Supine (lithotomy)</strong></td><td>Reduced (compressed)</td><td>Maximum</td><td>Strong tunnel</td></tr>
+        <tr><td><strong>Semi-recumbent</strong></td><td>Moderate</td><td>Moderate</td><td>Moderate tunnel</td></tr>
+        <tr><td><strong>Squatting</strong></td><td>Maximum (expanded)</td><td>Minimum</td><td>Minimal tunnel</td></tr>
+        <tr><td><strong>Hands-and-knees</strong></td><td>Moderate</td><td>Moderate</td><td>Moderate tunnel</td></tr>
+        <tr><td><strong>Waterbirth</strong></td><td>Variable (buoyancy)</td><td>Minimal</td><td>Minimal structure</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Clinical Recommendation</strong>
+    Upright, squatting, and waterbirth positions minimize the bipedal compression gradient, potentially producing a <strong>less intense scalar tunnel imprint</strong>.
+  </div>
+
+  <h3>6.2 The Evolution-Informed Birth Protocol</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Intervention</th><th>Rationale</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Upright positioning</strong></td><td>Maximizes pelvic outlet, reduces compression</td><td>Gupta et al. (2012)</td></tr>
+        <tr><td><strong>Continuous mobility</strong></td><td>Preserves pelvic biomechanics</td><td>Lawrence et al. (2013)</td></tr>
+        <tr><td><strong>Water immersion</strong></td><td>Minimizes compression, preserves ambient field</td><td>McKinney et al. (2024)</td></tr>
+        <tr><td><strong>Minimal interventions</strong></td><td>Preserves natural oxytocin-scalar axis</td><td>Buckley (2015)</td></tr>
+        <tr><td><strong>Microbiome preservation</strong></td><td>Maintains natural scalar dampener</td><td>Dominguez-Bello et al. (2010)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>6.3 The Evolutionary Mismatch in Modern Birth</h3>
+  <h4>6.3.1 The Agricultural Transition</h4>
+  <p>The shift from hunter-gatherer to agricultural societies introduced sedentary behavior, repetitive tasks, and increased spinal strain. <strong>Birthing implications:</strong> sedentary lifestyle leads to reduced pelvic mobility; repetitive bending alters pelvic biomechanics; static postures reduce pelvic floor function.</p>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The agricultural transition altered maternal pelvic biomechanics, potentially affecting the birth canal compression gradient and the scalar imprint.
+  </div>
+
+  <h4>6.3.2 The Industrial Revolution</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor</th><th>Effect on Birth Biomechanics</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Urbanization</strong></td><td>Reduced physical activity, increased sedentary behavior</td></tr>
+        <tr><td><strong>Mechanized labor</strong></td><td>Repetitive tasks, poor ergonomics</td></tr>
+        <tr><td><strong>Medicalization of birth</strong></td><td>Supine positioning, interventions (epidural, oxytocin, forceps, vacuum, cesarean)</td></tr>
+        <tr><td><strong>Institutional birth</strong></td><td>Hospital-based delivery, reduced mobility during labor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>6.3.3 The Supine Position and the Scalar Tunnel</h4>
+  <p>The <strong>supine birthing position</strong> (lying on the back) is a relatively recent historical innovation, introduced by French physician Francois Mauriceau in the 17th century. This position:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Effect</th><th>Mechanism</th><th>Scalar Implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Reduces pelvic outlet diameter</strong></td><td>Sacrum compressed, pelvis narrowed</td><td>Increases compression gradient</td></tr>
+        <tr><td><strong>Increases intervention rates</strong></td><td>Slower labor, more forceps/vacuum</td><td>Disrupts natural scalar-hormonal axis</td></tr>
+        <tr><td><strong>Alters fetal descent</strong></td><td>Fetus must ascend against gravity</td><td>Modifies tunnel geometry</td></tr>
+        <tr><td><strong>Disrupts natural oxytocin release</strong></td><td>Stress response inhibits oxytocin</td><td>Disrupts scalar-hormonal coupling</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The supine position <strong>intensifies</strong> the bipedal compression gradient, potentially strengthening the scalar tunnel imprint.
+  </div>
+
+  <h3>6.4 The Hunter-Gatherer Birth: Natural Scalar Architecture</h3>
+  <p>Hunter-gatherer birth practices differ fundamentally from industrialized birth:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Practice</th><th>Hunter-Gatherer</th><th>Industrialized</th><th>Scalar Implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Birth position</strong></td><td>Upright, squatting, hands-and-knees</td><td>Supine, lithotomy</td><td>Natural vs. forced compression</td></tr>
+        <tr><td><strong>Mobility during labor</strong></td><td>Continuous movement</td><td>Bed rest, limited mobility</td><td>Dynamic vs. static scalar field</td></tr>
+        <tr><td><strong>Environmental setting</strong></td><td>Familiar, natural</td><td>Hospital, unfamiliar</td><td>Ambient vs. disrupted scalar field</td></tr>
+        <tr><td><strong>Interventions</strong></td><td>Minimal</td><td>Frequent (epidural, oxytocin, cesarean)</td><td>Preserved vs. disrupted scalar-hormonal axis</td></tr>
+        <tr><td><strong>Microbiome acquisition</strong></td><td>Maternal vaginal microbiota</td><td>Hospital microbiota, antibiotics</td><td>Natural vs. disrupted scalar dampener</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Taçyıldız et al. (2026) found that <strong>hunter-gatherers maintained upright, dynamic spinal postures</strong> without prolonged sitting or significant forward flexion. This suggests that <strong>hunter-gatherer pelvic biomechanics</strong> were optimized for birth, preserving the natural scalar tunnel.</p>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The hunter-gatherer lifestyle—dynamic movement, upright posture, minimal sedentarism—preserved the <strong>natural birth canal geometry</strong> and the <strong>ambient scalar field</strong>.
+  </div>
+</section>
+
+<section id="synthesis">
+  <h2>7. The Enterarchon-Waterbirth Synthesis</h2>
+  <h3>7.1 The Scalar Mechanics of Waterbirth</h3>
+  <p>Waterbirth <strong>preserves the ambient scalar field</strong> through four mechanisms:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mechanism</th><th>Effect</th><th>Scalar Implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Buoyancy</strong></td><td>Reduces gravitational compression</td><td>Minimizes density gradient</td></tr>
+        <tr><td><strong>Thermal environment</strong></td><td>Supports temperature equilibrium</td><td>Preserves scalar homeostasis</td></tr>
+        <tr><td><strong>Sensory deprivation</strong></td><td>Reduces environmental stimulation</td><td>Minimizes scalar shock</td></tr>
+        <tr><td><strong>Natural oxytocin surge</strong></td><td>Supports hormonal-scalar coherence</td><td>Preserves enteric-cortical coupling</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>7.2 The Ecological Validity of Waterbirth</h3>
+  <p>The Cochrane evidence (Cluett et al., 2018) and subsequent meta-analysis (McKinney et al., 2024) demonstrate that waterbirth is <strong>physiologically safe and maternally beneficial</strong>. This ecological validity supports the claim that the <strong>aquatic scalar environment</strong> is the <strong>natural context</strong> for human birth.</p>
+  <div class="interpretation">
+    <strong>Enterarchon Interpretation</strong>
+    The human body evolved in aquatic environments; waterbirth represents a <strong>return to the scalar origin</strong>. The compression gradient of terrestrial birth is a <strong>forced adaptation</strong> of bipedalism, not a natural design.
+  </div>
+</section>
+
+<section id="research">
+  <h2>8. The Research Imperative</h2>
+  <h3>8.1 Birth Modality Collection</h3>
+  <p>Systematic collection of birth modality data in NDE studies is essential:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Population</strong></td><td>NDE experiencers (n greater than or equal to 200)</td></tr>
+        <tr><td><strong>Birth Modality Data</strong></td><td>Maternal report, medical records</td></tr>
+        <tr><td><strong>Classification</strong></td><td>Vaginal (position: supine, squatting, etc.), Cesarean (emergency, elective), Waterbirth</td></tr>
+        <tr><td><strong>NDE Assessment</strong></td><td>Greyson NDE Scale, spatial geometry questionnaire</td></tr>
+        <tr><td><strong>ENS Function</strong></td><td>Gastrointestinal symptom questionnaire, vagal tone (HRV)</td></tr>
+        <tr><td><strong>Microbiome Profile</strong></td><td>Stool sample analysis (16S rRNA sequencing)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8.2 Waterbirth Prediction</h3>
+  <p>The meta-analytic evidence (McKinney et al., 2024) establishes waterbirth as safe and beneficial, providing the foundation for the waterbirth NDE study:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Prediction</th><th>Methodology</th><th>Falsification</th></tr></thead>
+      <tbody>
+        <tr><td>Waterbirth NDErs report minimal tunnel geometry</td><td>Case series analysis (n greater than or equal to 50)</td><td>Waterbirth NDErs report typical tunnel/exposure architecture</td></tr>
+        <tr><td>Waterbirth NDErs report formless voids/instantaneous awareness</td><td>Phenomenological interview</td><td>Waterbirth NDErs report directional narratives</td></tr>
+        <tr><td>Waterbirth NDErs report aquatic/fluid imagery</td><td>Aquatic imagery questionnaire</td><td>No aquatic/fluid imagery reported</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8.3 Three Critical Research Imperatives</h3>
+  <ol>
+    <li><strong>Birth Modality Registry:</strong> Establish systematic collection of birth modality data in all NDE studies.</li>
+    <li><strong>Waterbirth NDE Study:</strong> Case series analysis of waterbirth NDEs (n greater than or equal to 50).</li>
+    <li><strong>Prospective Cohort:</strong> Birth modality, microbiome, and ENS function data from NDErs (n greater than or equal to 200).</li>
+  </ol>
+</section>
+
+<section id="conclusion">
+  <h2>9. Conclusion</h2>
+  <p>The evolutionary mismatch between the human spine's design and modern postural demands (Taçyıldız et al., 2026) extends to the birth canal. Bipedalism—a forced adaptation to environmental pressure—created the <strong>birth canal compression gradient</strong> that imprints the scalar tunnel. The agricultural transition and Industrial Revolution intensified this mismatch, altering pelvic biomechanics and disrupting the natural scalar-hormonal axis of birth.</p>
+  <p>The Enterarchon Perinatal Imprint framework provides a unifying theory:</p>
+  <ol>
+    <li><strong>Bipedalism is forced adaptation:</strong> The human pelvis is a compromise between locomotion and childbirth.</li>
+    <li><strong>Birth canal compression creates the scalar tunnel:</strong> The density gradient imprints the ENS.</li>
+    <li><strong>Birth modality determines scalar architecture:</strong> Vaginal (position-dependent), cesarean, and waterbirth produce distinct imprints.</li>
+    <li><strong>Evolutionary mismatch intensifies the tunnel:</strong> Sedentary lifestyle, supine positioning, and interventions disrupt the natural scalar-hormonal axis.</li>
+  </ol>
+  <p>Waterbirth is safe and beneficial: Cochrane evidence and meta-analytic review demonstrate reduced intervention rates and high maternal satisfaction (Cluett et al., 2018; McKinney et al., 2024). Waterbirth preserves the ambient scalar field through buoyancy, thermal equilibrium, and sensory deprivation. Waterbirth bypasses the bipedal compression tunnel—the forced adaptation of bipedalism. Waterbirth NDErs will report minimal spatial structure: formless voids, instantaneous non-local awareness, and absence of directional narrative.</p>
+  <p>The aqua-terrestrial design hypothesis provides the evolutionary context: the human larynx, the diving reflex, and the pelvic compromise of bipedalism all point to an aquatic ancestry. Waterbirth is not a modern invention—it is a <strong>return to the scalar origin</strong>.</p>
+
+  <div class="axiom">
+    <p>"Vaginal delivery writes a pathway.<br>Cesarean delivery writes a field.<br>Waterbirth writes nothing—only the ambient field, formless and void."</p>
+    <div class="source">Christopher Macachor, Omega-S-005 Extended</div>
+  </div>
+</section>
+
+<section class="references">
+  <h2>References</h2>
+  <ol>
+    <li>Alfirevic Z, Gyte GML, Cuthbert A, Devane D. Continuous cardiotocography as a form of electronic fetal monitoring for fetal assessment during labour. <em>Cochrane Database Syst Rev</em>. 2017;4.</li>
+    <li>Almgren M, Schlinzig T, Gomez-Cabrero D, et al. Cesarean delivery and hematopoietic stem cell epigenetics in the newborn infant: Implications for future health? <em>Am J Obstet Gynecol</em>. 2014;211(502):e1-8.</li>
+    <li>American Academy of Pediatrics Committee on Fetus and Newborn, American College of Obstetricians and Gynecologists Committee on Obstetric Practice. Immersion in water during labor and delivery. <em>Pediatrics</em>. 2014;133(4):758-761.</li>
+    <li>American College of Obstetricians and Gynecologists and Committee on Obstetric Practice. Committee opinion no. 679: Immersion in water during labor and delivery. <em>Obstet Gynecol</em>. 2016;128(5):e231.</li>
+    <li>Anim-Somuah M, Smyth R, Cyna A, Cuthbert A. Epidural versus non-epidural or no analgesia for pain management in labour. <em>Cochrane Database Syst Rev</em>. 2018;5:CD000331.</li>
+    <li>Bell A, Erikson E, Carter S. Beyond labor: The role of natural and synthetic oxytocin in the transition to motherhood. <em>J Midwifery Womens Health</em>. 2014;59(1):35-42.</li>
+    <li>Buckley SJ. Executive summary of hormonal physiology of childbearing: Evidence and implications for women, babies, and maternity care. <em>J Perinat Educ</em>. 2015;24(3):145-153.</li>
+    <li>Carlsson T, Ulfsdottir H. Waterbirth in low-risk pregnancy: An exploration of women's experiences. <em>J Adv Nurs</em>. 2020;76(5):1221-1231.</li>
+    <li>Cluett ER, Burns E, Cuthbert A. Immersion in water during labor and birth. <em>Cochrane Database Syst Rev</em>. 2018;5.</li>
+    <li>Dahlen H, Kennedy H, Anderson C, et al. The EPIIC hypothesis: Intrapartum effects on the neonatal epigenome and consequent health outcomes. <em>Med Hypotheses</em>. 2013;80(5):656-662.</li>
+    <li>Dominguez-Bello MG, et al. Delivery mode shapes the acquisition and structure of the initial microbiota across multiple body habitats in newborns. <em>Proc Natl Acad Sci USA</em>. 2010;107:11971-11975.</li>
+    <li>Fehervary P, Lauinger-Lorsch E, Hof H, Melchert F, Bauer L, Zieger W. Water birth: Microbial colonisation of the newborn, neonatal and maternal infection rate in comparison to conventional bed deliveries. <em>Arch Gynecol Obstet</em>. 2004;270:6-9.</li>
+    <li>Guastella A, Cooper M, White C, White M, Pennell C, Whitehouse A. Does perinatal exposure to exogenous oxytocin influence child behavioural problems and autistic-like behaviours to 20 years of age? <em>J Child Psychol Psychiatry</em>. 2018;59(12):1323-1332.</li>
+    <li>Gupta JK, Hofmeyr GJ, Shehmar M. Position in the second stage of labour for women without epidural anaesthesia. <em>Cochrane Database Syst Rev</em>. 2012;(5):CD002006.</li>
+    <li>Hardy A. Was man more aquatic in the past? <em>New Sci</em>. 1960;7:642-645.</li>
+    <li>Kenkel W, Yee J, Carter S. Is oxytocin a maternal-foetal signalling molecule at birth? Implications for development. <em>J Neuroendocrinol</em>. 2014;26(10):739-749.</li>
+    <li>Lathrop A, Bonsack CF, Haas DM. Women's experiences with water birth: A matched groups prospective study. <em>Birth</em>. 2018;45(4):416-423.</li>
+    <li>Lawrence A, Lewis L, Hofmeyr GJ, Styles C. Maternal positions and mobility during first stage labour. <em>Cochrane Database Syst Rev</em>. 2013;(8):CD003934.</li>
+    <li>Lovejoy CO. Evolution of human walking. <em>Sci Am</em>. 1988;259(5):118-125.</li>
+    <li>Macachor C. The Macachor Lock — Cross-Scale Scalar Unification (Omega-S-003). Zenodo. 2026. doi:10.5281/zenodo.21846342.</li>
+    <li>Macachor C. The Enterarchon Hypothesis: The Enteric Brain Is Primary (Omega-S-004). Zenodo. 2026. doi:10.5281/zenodo.21868016.</li>
+    <li>Macachor C. The Enterarchon Perinatal Imprint: NDE Architecture as Enteric Brain Memory (Omega-S-005). Zenodo. 2026. doi:10.5281/zenodo.21930053.</li>
+    <li>McKinney JA, et al. Water birth: a systematic review and meta-analysis of maternal and neonatal outcomes. <em>Am J Obstet Gynecol</em>. 2024;230(3):S979-S979.e55. doi:10.1016/j.ajog.2023.08.034.</li>
+    <li>Morgan E. <em>The Descent of Woman</em>. New York: Stein and Day; 1972.</li>
+    <li>Taçyıldız AE, Sofuoglu OE, Apaydin AS, Ucer M. Viewing low back pain through the lens of spinal evolution: Understanding the morphology and limits of the human spine. <em>PLoS One</em>. 2026;21(1):e0339032. doi:10.1371/journal.pone.0339032.</li>
+    <li>Ulfsdottir H, Saltvedt S, Ekbon M, Georgsson S. Like an empowering microhome: A qualitative study of women's experience of giving birth in water. <em>Midwifery</em>. 2018;67:26-31.</li>
+    <li>Ulfsdottir H, Saltvedt S, Georgsson S. Women's experiences of waterbirth compared with conventional uncomplicated births. <em>Midwifery</em>. 2019;79:102547.</li>
+    <li>Uvnas-Moberg K, Ekstrom-Bergstrom A, Berg M, et al. Maternal plasma levels of oxytocin during physiological childbirth—A systematic review with implications for uterine contractions and central actions of oxytocin. <em>BMC Pregnancy Childbirth</em>. 2019;19(1):285.</li>
+    <li>Washburn SL. Tools and human evolution. <em>Sci Am</em>. 1960;203(3):63-75.</li>
+  </ol>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>MACACHOR.COM</strong> — ABSOLUTE — THE COHERENT NEWS</p>
+  <p style="margin-top:0.5rem;">Omega-S-005 Extended: Evolutionary Mismatch, Bipedal Forced Adaptation, Waterbirth Evidence, and the Scalar Architecture of Birth</p>
+  <p style="margin-top:0.5rem;">
+    <a href="https://doi.org/10.5281/zenodo.21930053" target="_blank">Zenodo Omega-S-005</a> |
+    <a href="https://doi.org/10.5281/zenodo.21846342" target="_blank">Omega-S-003</a> |
+    <a href="https://doi.org/10.5281/zenodo.21868016" target="_blank">Omega-S-004</a>
+  </p>
+</footer>
+
+</body>
+</html>
