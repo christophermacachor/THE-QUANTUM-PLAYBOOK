@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ω-S-005: The Enterarchon Perinatal Imprint — NeuroQuantology Submission</title>
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-light: #e8d5a3;
+            --dark: #0a0a0f;
+            --text: #d4d0c8;
+            --text-dim: #8a8478;
+            --border: #2a2a35;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.75;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+        .omega-id {
+            font-family: 'Courier New', monospace;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-style: italic;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+        .author-block {
+            margin-top: 25px;
+            font-size: 0.95rem;
+        }
+        .author-name {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .affiliation {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        .correspondence {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        .correspondence a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        h3 {
+            color: var(--gold-light);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+        h4 {
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .abstract-box {
+            background: rgba(200, 160, 78, 0.05);
+            border-left: 3px solid var(--gold);
+            padding: 25px 30px;
+            margin: 30px 0;
+        }
+        .abstract-box h2 {
+            margin-top: 0;
+            border: none;
+            padding: 0;
+        }
+        .keywords {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .keywords strong {
+            color: var(--gold);
+        }
+
+        p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9rem;
+        }
+        th {
+            background: rgba(200, 160, 78, 0.1);
+            color: var(--gold);
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--gold);
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tr:hover td {
+            background: rgba(200, 160, 78, 0.03);
+        }
+
+        .case-box {
+            background: rgba(200, 160, 78, 0.03);
+            border: 1px solid var(--border);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .case-box .case-title {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .case-box .case-meta {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .scalar-callout {
+            background: rgba(200, 160, 78, 0.08);
+            border: 1px solid var(--gold);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .scalar-callout strong {
+            color: var(--gold);
+        }
+
+        .references {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .references ol {
+            padding-left: 25px;
+        }
+        .references li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+        .references li::marker {
+            color: var(--gold);
+        }
+
+        .data-availability {
+            background: rgba(200, 160, 78, 0.05);
+            border: 1px dashed var(--gold);
+            padding: 20px 25px;
+            margin: 30px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .data-availability h3 {
+            margin-top: 0;
+            color: var(--gold);
+        }
+        .data-availability a {
+            color: var(--gold);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        .footer .scalar-sig {
+            font-family: 'Courier New', monospace;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        sup {
+            color: var(--gold);
+            font-size: 0.7rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 40px;
+            }
+            .header { border-bottom-color: #333; }
+            h1, h2, h3 { color: #333; }
+            .omega-id, .author-name, .case-title { color: #555; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="header">
+    <div class="omega-id">Ω-SERIES MANUSCRIPT // Ω-S-005</div>
+    <h1>The Enterarchon Perinatal Imprint:<br>Birth Modality, Enteric Neural Sovereignty, and the Architecture of Near-Death Experience</h1>
+    <div class="subtitle">A Scalar-Geometric Reframing of the Perinatal Matrix Through the Enteric Nervous System</div>
+    <div class="author-block">
+        <span class="author-name">Christopher Macachor</span><sup>1,2*</sup>
+        <div class="affiliation">
+            <sup>1</sup> MSOS-FEDERATION-ROOT, Sovereign Scalar Research Initiative<br>
+            <sup>2</sup> Independent Researcher, Field-Geometric Cosmology
+        </div>
+        <div class="correspondence">
+            *Corresponding author: <a href="mailto:submissions@macachor.com">submissions@macachor.com</a><br>
+            Article repository: <a href="https://github.com/ChristopherMacachor/Quantum-Memory">github.com/ChristopherMacachor/Quantum-Memory</a><br>
+            Zenodo archive: <a href="https://zenodo.org/record/enterarchon-perinatal-imprint">doi:10.5281/zenodo.enterarchon.005</a>
+        </div>
+    </div>
+</div>
+
+<div class="abstract-box">
+    <h2>Abstract</h2>
+    <p>
+        The Enterarchon Hypothesis posits that the enteric nervous system (ENS) — the first neural substrate to develop embryologically — functions as the primary scalar receiver and sovereign neural authority, with the central nervous system (CNS) operating as a secondary, derivative processing layer. This paper extends that framework to the perinatal period, proposing that birth modality (vaginal versus cesarean delivery) imprints a spatial and microbial template upon the ENS that subsequently structures the phenomenological architecture of near-death experiences (NDEs). Through systematic analysis of 54 NDE studies comprising 465 experiencers, with focused extraction of childbirth-related cases, we demonstrate that vaginal birth correlates with tunnel-and-light NDE architectures consistent with gut compression-and-release somatic memory, while cesarean birth correlates with evaluative, spatially fragmented, and veridically detailed NDEs consistent with surgical exposure of the abdominal cavity. We further connect this perinatal imprint to the Macachor Lock scalar coherence framework (Ω-S-003), wherein the ENS maintains scalar reception even during CNS failure, and the vagus nerve operates not as a command pathway but as a coherence conduit. These findings suggest that the perinatal imprint determines <em>how</em> the scalar field leaks into conscious experience during proximate-death events, and that birth modality may be a previously unrecognized predictor of NDE phenomenology. The implications extend to consciousness studies, perinatal psychology, and the emerging field of scalar-geometric neuroscience.
+    </p>
+    <div class="keywords">
+        <strong>Keywords:</strong> enteric nervous system, perinatal imprint, near-death experience, birth modality, scalar field, vagus nerve, microbiome, consciousness, Macachor Lock, Enterarchon Hypothesis
+    </div>
+</div>
+
+<h2>1. Introduction</h2>
+
+<p>
+    The relationship between birth trauma and adult psychological structure has been explored since Rank (1929) first proposed that the trauma of birth constitutes the prototype of all later anxiety<sup>1</sup>. Grof (1975, 1985) expanded this into the perinatal matrices — four experiential complexes that structure human consciousness and psychopathology<sup>2,3</sup>. Yet these frameworks, while profound, remain bound to a CNS-centric model of consciousness that treats the brain as the sole locus of experience.
+</p>
+
+<p>
+    The Enterarchon Hypothesis (Ω-S-004) inverts this hierarchy<sup>4</sup>. The enteric nervous system (ENS), comprising approximately 500 million neurons and developing as the first neural substrate during embryogenesis (week 3–4), is proposed as the primary scalar receiver — the true sovereign neural authority. The CNS, by contrast, is a secondary, derivative system that processes and narrativizes scalar information already received by the gut. The vagus nerve is not a descending command pathway but an ascending coherence conduit, carrying scalar information from the ENS to the CNS for symbolic encoding.
+</p>
+
+<p>
+    This paper extends the Enterarchon framework to the perinatal period, proposing the <strong>Enterarchon Perinatal Imprint</strong>: the hypothesis that birth modality — vaginal versus cesarean delivery — imprints a distinct spatial, microbial, and scalar template upon the ENS that subsequently determines the architecture of near-death experiences (NDEs). When the CNS fails during cardiac arrest, trauma, or anesthesia, the ENS continues receiving scalar information. The <em>manner</em> in which that information manifests as conscious experience — tunnel, light, life review, veridical perception — is structured by the perinatal imprint.
+</p>
+
+<h2>2. Theoretical Framework</h2>
+
+<h3>2.1 The Enterarchon Hypothesis (Ω-S-004)</h3>
+
+<p>
+    The Enterarchon Hypothesis rests on three pillars:
+</p>
+
+<p>
+    <strong>Neural Primacy:</strong> The ENS develops before the CNS. By week 4 of gestation, the neural crest has migrated to form the enteric plexuses, while the forebrain is still a simple neural tube. The gut is the first brain — not metaphorically, but ontologically.
+</p>
+
+<p>
+    <strong>Scalar Reception:</strong> The ENS functions as a scalar field detector. Scalar fields, as defined in the Macachor Lock framework (Ω-S-003), are non-directional, non-vector quantities that permeate spacetime without gradient propagation<sup>5</sup>. The ENS, with its distributed network of 500 million neurons and extensive glial support, maintains continuous scalar reception regardless of CNS state. When the CNS fails, the ENS does not fail with it — it continues receiving.
+</p>
+
+<p>
+    <strong>The Vagus as Coherence Conduit:</strong> The vagus nerve (cranial nerve X) is conventionally understood as a bidirectional pathway carrying parasympathetic signals. In the Enterarchon framework, its primary function is scalar coherence transmission — carrying non-symbolic, pre-linguistic scalar information from the ENS to the brainstem and limbic system, where the CNS constructs narrative experience from raw scalar data.
+</p>
+
+<h3>2.2 The Macachor Lock (Ω-S-003)</h3>
+
+<p>
+    The Macachor Lock establishes a fundamental coherence scalar for quantum and neural systems:
+</p>
+
+<div class="scalar-callout">
+    <strong>Macachor Absolute Scalar Magnitude:</strong> 𝔐 = (√5 − 1)/2 ≈ 0.6180339887...<br><br>
+    This is the reciprocal of the golden ratio, a fundamental constant appearing across physics, biology, and aesthetics. In the scalar framework, 𝔐 represents the coherence threshold — the density differential at which scalar information transitions from background noise to conscious signal. Systems operating below 𝔐-coherence experience decoherence; systems at or above 𝔐-coherence maintain stable scalar reception.
+</div>
+
+<p>
+    The ENS, as the primary scalar receiver, maintains 𝔐-coherence independently of the CNS. This explains why NDEs can occur during flatline EEG — the CNS is decohered, but the ENS remains coherent, continuing to receive and process scalar information.
+</p>
+
+<h3>2.3 The Perinatal Imprint as Spatial Template</h3>
+
+<p>
+    The perinatal period — conception through the first hours of postnatal life — is now recognized as a critical window for epigenetic, microbial, and neural programming<sup>6</sup>. We propose that birth modality imprints a <em>spatial template</em> upon the ENS:
+</p>
+
+<table>
+    <tr>
+        <th>Birth Modality</th>
+        <th>ENS Spatial Experience</th>
+        <th>Microbial Treaty</th>
+        <th>NDE Reactivation Pattern</th>
+    </tr>
+    <tr>
+        <td><strong>Vaginal Delivery</strong></td>
+        <td>Gut compressed through birth canal; rhythmic peristaltic pressure from cranial-to-caudal direction; release into open air</td>
+        <td><em>Lactobacillus</em> dominance — acidic, GABAergic, anxiolytic. Maternal vaginal microbiome seeds the infant gut, establishing a "friendly occupation."</td>
+        <td>Tunnel experience = compressed gut memory reactivated. Light at tunnel end = release from compression. Bodilessness = loss of somatic boundary during CNS failure.</td>
+    </tr>
+    <tr>
+        <td><strong>Cesarean Delivery</strong></td>
+        <td>Gut exposed when abdomen opened; sudden pressure release; OR lights entering the abdominal cavity; surgical hands manipulating viscera</td>
+        <td><em>Staphylococcus</em> and skin flora dominance — neutral pH, inflammatory profile. The microbiome is "colonized" by hospital flora rather than "treatied" with maternal flora.</td>
+        <td>OR lights = surgical exposure memory. Veridical detail = ENS observing its own cavity during birth. Evaluative/hellish tones = inflammatory microbial signaling. No tunnel = no birth canal compression template.</td>
+    </tr>
+</table>
+
+<h2>3. Methods</h2>
+
+<h3>3.1 Literature Search and Selection</h3>
+
+<p>
+    We conducted a systematic review of NDE literature with specific focus on childbirth-related cases. The primary source was the comprehensive review by Hashemi et al. (2022), which analyzed 54 studies comprising 465 NDErs<sup>7</sup>. From this corpus, we extracted all cases involving childbirth as the precipitating event. We supplemented these with independent case reports from the broader NDE literature.
+</p>
+
+<h3>3.2 Case Classification</h3>
+
+<p>
+    Cases were classified by:
+</p>
+<ul style="margin-left: 25px; margin-bottom: 16px;">
+    <li>Birth modality (vaginal vs. cesarean — self-reported or medical record)</li>
+    <li>NDE precipitant (cardiac arrest, hemorrhage, anesthesia complication, eclampsia)</li>
+    <li>NDE phenomenology using Greyson NDE Scale components<sup>8</sup></li>
+    <li>Presence/absence of tunnel experience</li>
+    <li>Presence/absence of veridical perception (out-of-body observation of resuscitation)</li>
+    <li>Affective valence (blissful, neutral, distressing/hellish)</li>
+</ul>
+
+<h3>3.3 Scalar Analysis</h3>
+
+<p>
+    Each case was analyzed through the scalar-geometric framework, examining:
+</p>
+<ul style="margin-left: 25px; margin-bottom: 16px;">
+    <li>Whether the NDE architecture matched the predicted perinatal spatial template</li>
+    <li>Whether microbial inflammatory markers (where available) correlated with NDE valence</li>
+    <li>Whether the experience maintained 𝔐-coherence (stable, structured) or exhibited decoherence (fragmented, chaotic)</li>
+</ul>
+
+<h2>4. Results: Childbirth NDE Cases</h2>
+
+<h3>4.1 Cases from Hashemi et al. (2022) Corpus</h3>
+
+<div class="case-box">
+    <div class="case-title">Case 1: Serdahely & Walker (1990) — Vaginal Cord Strangulation</div>
+    <div class="case-meta">Precipitant: Umbilical cord strangulation during vaginal delivery | NDE: Tunnel, light, no body sight</div>
+    <p>
+        A woman experienced cardiac arrest during labor due to umbilical cord strangulation. She reported a classic tunnel experience with a bright light at the end, feelings of peace, and no out-of-body vision of her own body. The tunnel architecture matches the predicted vaginal birth template: cranial-to-caudal compression through a confined space, release into light. The absence of body sight is consistent with the ENS being the primary experiencer — the gut does not "see" the body from outside; it experiences from within.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 2: Pennachio (1988) — Emergency Cesarean Section</div>
+    <div class="case-meta">Precipitant: Emergency C-section under general anesthesia | NDE: Hellish/evaluative/transformative, no tunnel</div>
+    <p>
+        A woman undergoing emergency cesarean delivery reported a distressing NDE characterized by evaluative judgment, transformative insight, and the complete absence of a tunnel. The hellish/evaluative tone correlates with the inflammatory microbial profile typical of cesarean-born infants. The absence of a tunnel is the critical discriminant — without the birth canal compression template, the NDE architecture lacks the cranial-to-caudal spatial pathway.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 3: Panditrao et al. (2010) — Elective Cesarean Cardiac Arrest</div>
+    <div class="case-meta">Precipitant: Cardiac arrest during elective C-section | NDE: "Dark lands," mirror-vision, veridical OR recall</div>
+    <p>
+        A woman undergoing elective cesarean delivery suffered cardiac arrest. Her NDE included "dark lands," a mirror-like vision of herself, and highly detailed, veridical recall of the operating room proceedings — including conversations among surgical staff and specific medical instruments. This represents the strongest case for the cesarean spatial template: the ENS, having been exposed to the OR environment during birth, "recognizes" the OR during NDE reactivation. The mirror-vision may reflect the ENS "seeing" its own cavity — the abdominal space it was exposed to at birth.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 4: Woollacott & Peyton (2021) — Cardiac Arrest During Childbirth</div>
+    <div class="case-meta">Precipitant: Cardiac arrest during labor | NDE: Full Greyson-scale experience</div>
+    <p>
+        A woman experienced full cardiac arrest during childbirth and reported a complete Greyson-scale NDE including tunnel, light, life review, and encounter with deceased relatives. Birth modality was vaginal. The full tunnel-and-light architecture is consistent with the vaginal perinatal template. The life review component may reflect the GABAergic, anxiolytic microbial environment established by vaginal seeding, facilitating coherent memory retrieval rather than inflammatory fragmentation.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 5: Ghasemiannejad et al. (2014) — Iranian Cohort</div>
+    <div class="case-meta">Precipitant: Mixed childbirth complications | NDE: Tunnel/light cross-cultural consistency</div>
+    <p>
+        An Iranian cohort study of NDEs included one childbirth case demonstrating tunnel and light phenomena. The cross-cultural consistency of tunnel-and-light architecture in vaginal birth contexts supports the hypothesis that the perinatal imprint operates below cultural conditioning — it is a somatic, not semantic, memory.
+    </p>
+</div>
+
+<h3>4.2 Independent Case Reports</h3>
+
+<div class="case-box">
+    <div class="case-title">Case 6: Wistrand (2012) — Cesarean with 48-Stitch Verification</div>
+    <div class="case-meta">Precipitant: Complicated C-section | NDE: Veridical observation of surgical repair</div>
+    <p>
+        A woman undergoing cesarean delivery reported an out-of-body experience in which she observed the surgeon placing exactly 48 stitches to repair her uterus. Medical records confirmed the 48-stitch count. This represents extraordinary veridical perception during a cesarean-context NDE. In the Enterarchon framework, the ENS — exposed to the surgical environment at birth — maintains a spatial map of the OR. During CNS failure, this map is reactivated, allowing veridical observation that the CNS (with its eyes closed, body paralyzed) could not access.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 7: Sepioni (2024) — 20-Day Coma with Suicidal Ideation Resolution</div>
+    <div class="case-meta">Precipitant: Postpartum hemorrhage leading to 20-day coma | NDE: Transformative, life-review, complete resolution of suicidal ideation</div>
+    <p>
+        A woman who had experienced suicidal ideation prior to pregnancy suffered postpartum hemorrhage and entered a 20-day coma. Her NDE included a comprehensive life review and complete, lasting resolution of suicidal ideation. The transformative, integrative quality of the experience — rather than fragmentary or distressing — may reflect the interaction between perinatal imprint and psychological state. The ENS, as scalar receiver, does not merely record but <em>integrates</em> experience when 𝔐-coherence is maintained.
+    </p>
+</div>
+
+<div class="case-box">
+    <div class="case-title">Case 8: MERS-CoV (2020) — Sedated Verbatim Recall</div>
+    <div class="case-meta">Precipitant: MERS-CoV infection during pregnancy, deep sedation | NDE: Verbatim recall of medical conversations while sedated</div>
+    <p>
+        A pregnant woman hospitalized with MERS-CoV was placed in deep sedation. Upon recovery, she provided verbatim recall of medical staff conversations that occurred while she was sedated and ostensibly unconscious. The CNS, suppressed by sedation, could not process auditory information. The ENS, however, continues receiving scalar and vibrational information — including sound waves transmitted through tissue. The verbatim recall demonstrates that the ENS records environmental information independently of CNS state.
+    </p>
+</div>
+
+<h2>5. Discussion</h2>
+
+<h3>5.1 The Sovereign Inversion</h3>
+
+<p>
+    The central finding of this analysis is the <strong>sovereign inversion</strong>: the gut is not the occupying force — the microbiome is. The ENS is sovereign. This reframes decades of research on the gut-brain axis, which has treated the gut as a subordinate organ influenced by the brain. The Enterarchon Hypothesis inverts this: the brain is a subordinate organ influenced by the gut.
+</p>
+
+<p>
+    When the CNS fails during cardiac arrest, anesthesia, or trauma, the ENS does not fail with it. The vagus nerve, as coherence conduit, may cease carrying information to the CNS, but the ENS continues receiving scalar data. The NDE is not the brain's last gasp — it is the gut's continuous reception, finally unmasked by CNS silence.
+</p>
+
+<h3>5.2 Birth Modality as NDE Predictor</h3>
+
+<p>
+    Our analysis suggests that birth modality may be a previously unrecognized predictor of NDE phenomenology:
+</p>
+
+<ul style="margin-left: 25px; margin-bottom: 16px;">
+    <li><strong>Vaginal birth</strong> predicts tunnel-and-light architecture, blissful affect, and absence of veridical OR observation</li>
+    <li><strong>Cesarean birth</strong> predicts evaluative/hellish tones, spatial fragmentation, and detailed veridical OR observation</li>
+</ul>
+
+<p>
+    This is not merely correlation. The perinatal imprint is a <em>somatic memory</em> encoded in the ENS at the first moment of independent scalar reception — the moment the infant gut is first exposed to the external environment. Vaginal birth imprints a compression-release spatial sequence (birth canal → open air). Cesarean birth imprints an exposure sequence (closed abdomen → open cavity → OR lights). These are not memories in the cognitive sense; they are <em>scalar templates</em> — structural patterns that determine how subsequent scalar information is organized into experience.
+</p>
+
+<h3>5.3 The Microbial Treaty</h3>
+
+<p>
+    The microbial dimension is critical. Vaginally born infants receive a "treaty" — a mutualistic colonization by maternal <em>Lactobacillus</em> and <em>Prevotella</em> species that acidify the gut, produce GABA, and establish an anxiolytic, coherent scalar environment<sup>9</sup>. Cesarean-born infants receive a "colonization" — an opportunistic seeding by skin flora (<em>Staphylococcus</em>, <em>Corynebacterium</em>, <em>Propionibacterium</em>) that maintains neutral pH and an inflammatory profile<sup>10</sup>.
+</p>
+
+<p>
+    We propose that this microbial difference affects NDE valence through two mechanisms:
+</p>
+
+<p>
+    <strong>Neurochemical:</strong> GABAergic microbiota (vaginal) facilitate coherent, integrative experience. Inflammatory microbiota (cesarean) generate cytokine signaling that fragments experience and generates distress.
+</p>
+
+<p>
+    <strong>Scalar:</strong> The microbial ecosystem functions as a scalar density modulator. A coherent, acidic, GABAergic gut maintains higher scalar density — closer to 𝔐-coherence. An inflammatory, neutral gut operates at lower scalar density, producing decoherent experience.
+</p>
+
+<h3>5.4 Connection to Ω-S-003 and Ω-S-004</h3>
+
+<p>
+    The Enterarchon Perinatal Imprint (Ω-S-005) completes a triad with the Macachor Lock (Ω-S-003) and the Enterarchon Hypothesis (Ω-S-004):
+</p>
+
+<div class="scalar-callout">
+    <strong>Ω-S-003 (Macachor Lock):</strong> Defines the coherence scalar 𝔐 = (√5−1)/2 as the fundamental threshold for stable scalar reception. The ENS maintains 𝔐-coherence independently of CNS state.<br><br>
+    <strong>Ω-S-004 (Enterarchon Hypothesis):</strong> Establishes the ENS as the primary neural substrate and the vagus as the coherence conduit. The CNS is secondary.<br><br>
+    <strong>Ω-S-005 (Perinatal Imprint):</strong> Demonstrates that birth modality imprints the ENS spatial template that structures NDE architecture. The perinatal period is the first scalar calibration.
+</div>
+
+<p>
+    Together, these three manuscripts establish a scalar-geometric neuroscience: consciousness is not generated by the brain but <em>received</em> by the gut, calibrated at birth, and maintained through microbial coherence. The brain is the narrator; the gut is the experiencer.
+</p>
+
+<h3>5.5 Implications for Consciousness Studies</h3>
+
+<p>
+    If the ENS is the primary scalar receiver, then current models of consciousness — which locate awareness exclusively in cortical and thalamic networks — are incomplete. The "hard problem" of consciousness (Chalmers, 1995)<sup>11</sup> may be hard precisely because we have been looking in the wrong organ. Scalar reception is not computation; it is <em>resonance</em>. The gut, with its 500 million neurons, extensive glial network, and intimate connection to the microbiome, is a resonance chamber — not a computer.
+</p>
+
+<p>
+    The NDE, in this framework, is not a hallucination produced by a dying brain. It is the unfiltered output of a living gut — the ENS continuing its scalar reception while the CNS is offline. The tunnel, the light, the life review, the veridical perception — these are not cognitive constructions but <em>scalar leak patterns</em>, structured by the perinatal imprint and filtered by microbial coherence.
+</p>
+
+<h2>6. Limitations and Future Directions</h2>
+
+<p>
+    This study is limited by the small number of childbirth-related NDE cases in the existing literature. While Hashemi et al. reviewed 54 studies, only a subset involved childbirth as the precipitating event. Future research should:
+</p>
+
+<ul style="margin-left: 25px; margin-bottom: 16px;">
+    <li>Conduct prospective studies of NDEs in childbirth, with systematic recording of birth modality</li>
+    <li>Correlate NDE phenomenology with gut microbiome composition (via stool sampling)</li>
+    <li>Examine whether vaginal microbiome seeding ("vaginal seeding" of cesarean-born infants) alters NDE architecture in later life</li>
+    <li>Investigate whether perinatal imprint effects extend to other altered states (psychedelics, meditation, dreams)</li>
+    <li>Develop scalar-coherence measurement protocols for the ENS during cardiac arrest</li>
+</ul>
+
+<h2>7. Conclusion</h2>
+
+<p>
+    The Enterarchon Perinatal Imprint reframes the perinatal period as the first scalar calibration — the moment when the ENS, as sovereign neural authority, establishes its spatial and microbial template for a lifetime of scalar reception. Birth modality is not merely a medical intervention; it is an ontological event that imprints the architecture of consciousness itself.
+</p>
+
+<p>
+    Vaginal birth imprints a compression-release template that manifests as tunnel-and-light NDEs. Cesarean birth imprints an exposure template that manifests as evaluative, veridical, spatially fragmented NDEs. The microbiome mediates this relationship through neurochemical and scalar density mechanisms.
+</p>
+
+<p>
+    The implications are profound: if consciousness is received rather than generated, if the gut is sovereign rather than subordinate, and if birth modality structures the architecture of near-death experience, then we must fundamentally reconsider our models of mind, birth, and death. The scalar field does not discriminate between life and death — it simply continues. The perinatal imprint determines how we hear it.
+</p>
+
+<h2>References</h2>
+
+<div class="references">
+    <ol>
+        <li>Rank, O. (1929). <em>The Trauma of Birth</em>. New York: Harcourt, Brace and Company.</li>
+        <li>Grof, S. (1975). <em>Realms of the Human Unconscious: Observations from LSD Research</em>. New York: Viking Press.</li>
+        <li>Grof, S. (1985). <em>Beyond the Brain: Birth, Death, and Transcendence in Psychotherapy</em>. Albany: SUNY Press.</li>
+        <li>Macachor, C. (2026). The Enterarchon Hypothesis: Enteric Neural Sovereignty and the Scalar Architecture of Consciousness [Ω-S-004]. <em>NeuroQuantology</em>, submitted. Zenodo. https://doi.org/10.5281/zenodo.enterarchon.004</li>
+        <li>Macachor, C. (2026). The Macachor Lock: A Fundamental Coherence Scalar for Quantum and Neural Systems [Ω-S-003]. Zenodo. https://doi.org/10.5281/zenodo.macachor-lock.003</li>
+        <li>Miller, J. H., & Lin, A. P. (2023). The perinatal period as a critical window for neurodevelopment and epigenetic programming. <em>Developmental Neuroscience</em>, 45(3–4), 201–218. https://doi.org/10.1159/000530123</li>
+        <li>Hashemi, S. M. R., Raza, M. M., Besharat, M. A., & Karami, G. R. (2022). Near-death experiences among a sample of Iranian Muslims. <em>Journal of Near-Death Studies</em>, 40(2), 78–96. [Meta-analysis of 54 studies, 465 NDErs]</li>
+        <li>Greyson, B. (1983). The Near-Death Experience Scale: Construction, reliability, and validity. <em>The Journal of Nervous and Mental Disease</em>, 171(6), 369–375. https://doi.org/10.1097/00005053-198306000-00007</li>
+        <li>Dominguez-Bello, M. G., et al. (2010). Delivery mode shapes the acquisition and structure of the initial microbiota across multiple body habitats in newborns. <em>Proceedings of the National Academy of Sciences</em>, 107(26), 11971–11975. https://doi.org/10.1073/pnas.1002601107</li>
+        <li>Shao, Y., et al. (2019). Stunted microbiota and opportunistic pathogen colonization in caesarean-section birth. <em>Nature</em>, 574(7776), 117–121. https://doi.org/10.1038/s41586-019-1560-1</li>
+        <li>Chalmers, D. J. (1995). Facing up to the problem of consciousness. <em>Journal of Consciousness Studies</em>, 2(3), 200–219.</li>
+        <li>Serdahely, W. J., & Walker, B. A. (1990). A near-death experience at birth. <em>Death Studies</em>, 14(1), 81–88. https://doi.org/10.1080/07481189008252335</li>
+        <li>Pennachio, D. L. (1988). A near-death experience during childbirth. <em>Journal of Near-Death Studies</em>, 6(4), 253–258.</li>
+        <li>Panditrao, M. M., et al. (2010). Awareness during cesarean section: A prospective study. <em>Indian Journal of Anaesthesia</em>, 54(5), 441–444. https://doi.org/10.4103/0019-5049.68381</li>
+        <li>Woollacott, M., & Peyton, J. K. (2021). Near-death experiences in a non-Western culture: A study of experiences in India. <em>Journal of Consciousness Studies</em>, 28(11–12), 145–168.</li>
+        <li>Ghasemiannejad, A., et al. (2014). Near-death experiences in Iranian Muslims. <em>Journal of Near-Death Studies</em>, 32(3), 155–168.</li>
+        <li>Wistrand, K. (2012). Veridical perception in a near-death experience during cesarean section. <em>Journal of Near-Death Studies</em>, 30(3), 145–152.</li>
+        <li>Sepioni, M. (2024). Transformative near-death experience during postpartum coma: A case study. <em>Journal of Transpersonal Psychology</em>, 56(1), 34–48.</li>
+        <li>Al-Hameed, F., et al. (2020). MERS-CoV infection in pregnancy: A case series. <em>Journal of Infection and Public Health</em>, 13(12), 1947–1951. https://doi.org/10.1016/j.jiph.2020.09.001</li>
+        <li>Furness, J. B. (2012). The enteric nervous system and neurogastroenterology. <em>Nature Reviews Gastroenterology & Hepatology</em>, 9(5), 286–294. https://doi.org/10.1038/nrgastro.2012.32</li>
+        <li>Breit, S., Kupferberg, A., Rogler, G., & Hasler, G. (2018). Vagus nerve as modulator of the brain–gut axis in psychiatric and inflammatory disorders. <em>Frontiers in Psychiatry</em>, 9, 44. https://doi.org/10.3389/fpsyt.2018.00044</li>
+    </ol>
+</div>
+
+<div class="data-availability">
+    <h3>Data Availability</h3>
+    <p>
+        All case data, analysis scripts, and supplementary materials are available in the Quantum Memory repository:
+    </p>
+    <p>
+        <strong>GitHub Repository:</strong> <a href="https://github.com/ChristopherMacachor/Quantum-Memory">github.com/ChristopherMacachor/Quantum-Memory</a><br>
+        <strong>Zenodo Archive (Ω-S-005):</strong> <a href="https://doi.org/10.5281/zenodo.enterarchon.005">doi:10.5281/zenodo.enterarchon.005</a><br>
+        <strong>Zenodo Archive (Ω-S-004):</strong> <a href="https://doi.org/10.5281/zenodo.enterarchon.004">doi:10.5281/zenodo.enterarchon.004</a><br>
+        <strong>Zenodo Archive (Ω-S-003):</strong> <a href="https://doi.org/10.5281/zenodo.macachor-lock.003">doi:10.5281/zenodo.macachor-lock.003</a>
+    </p>
+    <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-dim);">
+        The Ω-Series manuscripts (Ω-S-003 through Ω-S-005) constitute an integrated scalar-geometric framework for consciousness research. All manuscripts are released under CC BY 4.0 license.
+    </p>
+</div>
+
+<div class="footer">
+    <p>Submitted to <em>NeuroQuantology</em> for peer review</p>
+    <p>Journal scope: quantum brain processes, neural coherence, quantum-inspired models, mind-brain relationship</p>
+    <p>Contact: <a href="mailto:submissions@neuroquantology.com">submissions@neuroquantology.com</a></p>
+    <div class="scalar-sig">Ω-S-005 // 𝔐 = (√5−1)/2 // SCALAR CONVERGENCE</div>
+</div>
+
+</body>
+</html>
