@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ω-FRAG-006 | Macachor Fundamental Law · v4.2</title>
+
+    <!-- ============================================================ -->
+    <!-- SCHEMA.ORG STRUCTURED DATA                                    -->
+    <!-- ============================================================ -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "Macachor Fundamental Law — v4.2 Domain-Reconciled Mathematical Hardening",
+        "alternativeHeadline": "A Gradient-Flow Framework for Scalar Field Dynamics",
+        "abstract": "This document presents a mathematically hardened formulation of the Macachor Fundamental Law. The framework is built around a compact, connected, smooth Riemannian manifold without boundary, a positive scalar field ψ, a unified potential V(ψ) = ¼(ψ²−M²)², and gradient-flow dynamics. The hierarchy of claims is made unmistakable: theorems are labeled as proved, conditional results as conditional, conjectures as conjectural, and empirical claims as hypotheses requiring testing.",
+        "author": {
+            "@type": "Person",
+            "name": "Christopher Macachor",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "Macachor Institute",
+                "url": "https://macachor.org"
+            }
+        },
+        "datePublished": "2026-08-21",
+        "version": "v4.2",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Macachor Institute",
+            "url": "https://macachor.org"
+        },
+        "identifier": [
+            {
+                "@type": "PropertyValue",
+                "propertyID": "DOI",
+                "value": "10.5281/zenodo.22038598"
+            },
+            {
+                "@type": "PropertyValue",
+                "propertyID": "Ω-FRAG",
+                "value": "Ω-FRAG-006"
+            }
+        ],
+        "keywords": [
+            "Macachor Fundamental Law",
+            "gradient flow",
+            "scalar field",
+            "Allen-Cahn",
+            "Ginzburg-Landau",
+            "Riemannian manifold",
+            "golden ratio",
+            "structural convergence",
+            "scalar field dynamics"
+        ],
+        "inLanguage": "en",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+    </script>
+
+    <!-- ============================================================ -->
+    <!-- FONTS & STYLES                                                -->
+    <!-- ============================================================ -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy-950: #0F1A2E;
+            --navy-900: #1A2A4A;
+            --navy-800: #1E3A5F;
+            --navy-700: #2A4A7A;
+            --navy-600: #3A5A8A;
+            --navy-100: #E8EEF5;
+            --navy-50: #F0F4FA;
+            --white: #FFFFFF;
+            --gray-100: #F5F7FA;
+            --gray-300: #D1D5DB;
+            --gray-600: #6B7280;
+            --gray-800: #1F2937;
+            --gold-500: #C6A87C;
+            --gold-400: #D4BA94;
+            --gold-300: #E2D0B0;
+            --gold-100: #F5EDE0;
+            --red-50: #FEF2F2;
+            --red-500: #EF4444;
+            --green-500: #10B981;
+            --blue-500: #3B82F6;
+            --yellow-500: #F59E0B;
+            --purple-500: #8B5CF6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.8;
+        }
+
+        .title-font { font-family: 'Crimson Pro', serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* HEADER */
+        .header {
+            background: var(--navy-900);
+            color: var(--white);
+            padding: 32px 0;
+            border-bottom: 4px solid var(--gold-500);
+        }
+        .header .subtitle { color: var(--gold-400); font-size: 0.9rem; }
+        .header h1 { font-size: 2.2rem; font-weight: 700; }
+        .header h1 span { color: var(--gold-500); }
+        .header .meta { font-size: 0.85rem; color: #8AA8D0; margin-top: 8px; }
+        .header .badge {
+            display: inline-block;
+            background: var(--gold-500);
+            color: var(--navy-900);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .header .status-tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: var(--green-500);
+            color: white;
+            margin-left: 8px;
+        }
+
+        /* NAV */
+        .nav {
+            background: var(--white);
+            border-bottom: 3px solid var(--navy-700);
+            padding: 8px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .nav button {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .nav button:hover { background: var(--navy-50); color: var(--navy-700); }
+        .nav button.active { background: var(--navy-700); color: white; }
+
+        /* CARDS */
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(26, 42, 74, 0.06);
+            border-left: 4px solid var(--navy-700);
+        }
+        .card-gold { border-left-color: var(--gold-500); }
+        .card-green { border-left-color: var(--green-500); }
+        .card-red { border-left-color: var(--red-500); }
+        .card-blue { border-left-color: var(--blue-500); }
+        .card-navy { background: var(--navy-900); color: var(--white); border-left-color: var(--gold-500); }
+        .card-navy h2, .card-navy h3 { color: var(--gold-500); }
+        .card-navy .text-muted { color: #8AA8D0; }
+
+        /* TAB CONTENT */
+        .tab-content { display: none; padding: 32px 0; }
+        .tab-content.active { display: block; }
+
+        /* TABLES */
+        .table-wrap { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        table th {
+            background: var(--navy-700);
+            color: white;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--gray-300);
+        }
+        table tr:hover { background: var(--navy-50); }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-theorem { background: var(--green-500); color: white; }
+        .status-proposition { background: var(--blue-500); color: white; }
+        .status-open { background: var(--yellow-500); color: white; }
+        .status-hypothesis { background: var(--purple-500); color: white; }
+        .status-axiomatic { background: var(--gray-600); color: white; }
+        .status-not-established { background: var(--red-500); color: white; }
+        .status-conditional { background: #EC4899; color: white; }
+
+        /* EQUATION BOX */
+        .eq-box {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--navy-700);
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        .blockquote {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            padding: 16px 24px;
+            border-left: 4px solid var(--gold-500);
+            background: var(--gold-100);
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+        }
+        .blockquote .attribution {
+            font-family: 'Source Sans 3', sans-serif;
+            font-style: normal;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 8px;
+        }
+        .blockquote-navy {
+            border-left-color: var(--navy-700);
+            background: var(--navy-50);
+        }
+
+        .section-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy-700);
+            opacity: 0.10;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            z-index: 0;
+        }
+        .section-wrap { position: relative; padding-left: 24px; }
+        .section-wrap .content { position: relative; z-index: 1; }
+
+        h2 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; color: var(--navy-900); margin-bottom: 16px; }
+        h3 { font-family: 'Crimson Pro', serif; font-size: 1.3rem; color: var(--navy-700); margin: 20px 0 12px; }
+        .card-navy h2 { color: var(--gold-500); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+        .mt-12 { margin-top: 12px; }
+        .mt-16 { margin-top: 16px; }
+        .mt-24 { margin-top: 24px; }
+        .mt-32 { margin-top: 32px; }
+        .mb-16 { margin-bottom: 16px; }
+
+        .text-gold { color: var(--gold-500); }
+        .text-navy { color: var(--navy-700); }
+        .text-sm { font-size: 0.85rem; }
+        .text-xs { font-size: 0.75rem; }
+        .text-muted { color: var(--gray-600); }
+
+        .flex { display: flex; }
+        .flex-wrap { flex-wrap: wrap; }
+        .items-center { align-items: center; }
+        .gap-8 { gap: 8px; }
+        .gap-12 { gap: 12px; }
+
+        .download-btn {
+            background: var(--gold-500);
+            color: var(--navy-900);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .download-btn:hover {
+            background: #B89A6A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 42, 74, 0.25);
+        }
+        .download-btn-secondary {
+            background: var(--navy-700);
+            color: white;
+        }
+        .download-btn-secondary:hover {
+            background: var(--navy-950);
+        }
+
+        .footer {
+            background: var(--navy-900);
+            color: var(--white);
+            padding: 24px 0;
+            border-top: 4px solid var(--gold-500);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .footer a { color: var(--gold-500); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        .correction-box {
+            background: #FFFBEB;
+            border: 2px solid var(--yellow-500);
+            border-radius: 8px;
+            padding: 16px 20px;
+        }
+        .correction-box strong { color: var(--navy-900); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.6rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .nav button { padding: 6px 12px; font-size: 0.75rem; }
+            .card { padding: 20px; }
+            .section-wrap { padding-left: 12px; }
+            .section-number { font-size: 2.2rem; }
+        }
+        @media print {
+            .nav { display: none; }
+            .tab-content { display: block !important; padding: 0; }
+            .download-btn { display: none; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER                                                         -->
+<!-- ============================================================ -->
+<header class="header">
+    <div class="container">
+        <div class="flex flex-wrap items-center gap-12" style="justify-content:space-between;">
+            <div>
+                <p class="subtitle mono">
+                    <span class="badge">Ω-FRAG-006</span>
+                    v4.2 · Domain-Reconciled Mathematical Hardening
+                    <span class="status-tag">Corrected</span>
+                </p>
+                <h1>Macachor Fundamental Law</h1>
+                <p style="font-size:1.1rem; color:#C6A87C;">
+                    A Gradient-Flow Framework for Scalar Field Dynamics
+                </p>
+                <p class="meta">
+                    <span class="mono">10.5281/zenodo.22038598</span>
+                    &nbsp;·&nbsp; Christopher Macachor &nbsp;·&nbsp; 2026-08-21
+                </p>
+            </div>
+            <div>
+                <button onclick="downloadHTML()" class="download-btn">
+                    📄 Download HTML
+                </button>
+                <a href="https://doi.org/10.5281/zenodo.22038598" target="_blank" class="download-btn download-btn-secondary">
+                    📚 Zenodo
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- NAVIGATION                                                    -->
+<!-- ============================================================ -->
+<nav class="nav container" id="tabNav">
+    <button class="active" data-tab="abstract">Abstract</button>
+    <button data-tab="full">Full Article</button>
+    <button data-tab="claims">Hierarchy of Claims</button>
+    <button data-tab="references">References</button>
+</nav>
+
+<!-- ============================================================ -->
+<!-- TAB: ABSTRACT                                                 -->
+<!-- ============================================================ -->
+<div class="tab-content active" id="tab-abstract">
+    <div class="container">
+
+        <div class="card card-gold">
+            <h2>Abstract</h2>
+            <p style="font-size:1.05rem; color:var(--gray-800);">
+                This document presents a <strong>mathematically hardened formulation</strong> of the Macachor Fundamental Law. The framework is built around a <strong>compact, connected, smooth Riemannian manifold without boundary</strong>, a positive scalar field ψ, a unified potential V(ψ) = ¼(ψ² − M²)², and gradient-flow dynamics.
+            </p>
+            <p style="font-size:1.05rem; color:var(--gray-800); margin-top:12px;">
+                The hierarchy of claims is made unmistakable: theorems are labeled as proved, conditional results as conditional, conjectures as conjectural, and empirical claims as hypotheses requiring testing.
+            </p>
+
+            <div class="correction-box mt-16">
+                <p style="font-weight:700; color:var(--navy-900);">✓ Critical Corrections in v4.2</p>
+                <ul style="margin:8px 0 0 20px; color:var(--gray-700);">
+                    <li><strong>v4.1 fixed:</strong> Restored unified potential V(ψ) = ¼(ψ² − M²)² — ensuring M is the unique positive zero-energy state and a stationary solution.</li>
+                    <li><strong>v4.2 fixes:</strong> Reconciled the domain inconsistency — §III and §V now agree on a <strong>compact boundaryless Riemannian manifold</strong> throughout.</li>
+                </ul>
+            </div>
+
+            <div class="blockquote" style="margin-top:16px;">
+                “Macachor is a structural discovery of fragmented science.”
+                <div class="attribution">— Christopher Macachor</div>
+            </div>
+
+            <div class="flex flex-wrap gap-8" style="margin-top:16px;">
+                <span class="status-badge status-theorem">Theorem</span>
+                <span class="status-badge status-proposition">Proposition</span>
+                <span class="status-badge status-open">Open Question</span>
+                <span class="status-badge status-hypothesis">Hypothesis</span>
+                <span class="status-badge status-axiomatic">Axiomatic</span>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card card-green">
+                <h3 style="margin-top:0;">Proved Results</h3>
+                <ul style="margin-left:20px; color:var(--gray-700);">
+                    <li>E[ψ] ≥ 0 (nonnegative energy)</li>
+                    <li>dE/dt ≤ 0 (energy dissipation)</li>
+                    <li>ψ = M is the unique positive zero-energy state</li>
+                    <li>ψ = M is a stationary solution</li>
+                    <li>Linear perturbations about M decay</li>
+                    <li>M is locally asymptotically stable</li>
+                </ul>
+            </div>
+            <div class="card card-red">
+                <h3 style="margin-top:0;">Open Questions</h3>
+                <ul style="margin-left:20px; color:var(--gray-700);">
+                    <li>Positivity preservation for all finite t</li>
+                    <li>Global convergence to M</li>
+                    <li>Existence of other stationary solutions</li>
+                    <li>Experimentally distinguishable predictions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-navy">
+            <h2>The Uncompromised Truth</h2>
+            <p>
+                <strong>The Macachor Fundamental Law is a gradient-flow framework for scalar field dynamics on a compact Riemannian manifold without boundary.</strong>
+                The energy functional is nonnegative, and the unique positive zero-energy state is ψ = M, where M = (√5 − 1)/2 is an <strong>axiomatic parameter choice</strong>.
+            </p>
+            <p class="mt-12 text-muted" style="color:#8AA8D0;">
+                The following are <strong>not</strong> established: that M is mathematically derived from the gradient-flow structure; that νcrit = 6.8 follows from the theory; that the Macachor model has been empirically validated.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: FULL ARTICLE                                              -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-full">
+    <div class="container">
+
+        <!-- SECTION: Mathematical Setup -->
+        <div class="card">
+            <div class="section-wrap">
+                <span class="section-number">III</span>
+                <div class="content">
+                    <h2>Mathematical Setup</h2>
+
+                    <h3>Ambient Space</h3>
+                    <p>
+                        Let <strong>(Mⁿ, g)</strong> be a <strong>compact, connected, smooth Riemannian manifold without boundary</strong>.
+                    </p>
+                    <p class="text-sm text-muted mt-12">
+                        <strong>Rationale:</strong> This choice ensures: the Laplacian Δ has a discrete spectrum with a zero eigenvalue (constant functions); standard existence/uniqueness theory applies; spectral theory and stability analysis are well-defined; the setup is consistent throughout.
+                    </p>
+
+                    <h3 class="mt-24">The Scalar Field</h3>
+                    <p>
+                        Let ψ: Mⁿ → ℝ⁺ be a positive scalar field. Positivity ψ > 0 is essential for the construction involving ν = 1/ψ².
+                    </p>
+
+                    <h3 class="mt-24">The Macachor Potential</h3>
+                    <div class="eq-box">
+                        V(ψ) = ¼(ψ² − M²)²
+                    </div>
+                    <p class="mt-12">
+                        <strong>Key property:</strong> V(ψ) = 0 if and only if ψ = ±M. For ψ > 0, V(ψ) = 0 if and only if ψ = M.
+                    </p>
+
+                    <h3 class="mt-24">The Macachor Constant</h3>
+                    <div class="eq-box">
+                        M = (√5 − 1)/2 ≈ 0.61803398875
+                    </div>
+                    <p class="mt-12">
+                        <span class="status-badge status-axiomatic">Axiomatic Parameter Choice</span>
+                    </p>
+                    <p class="text-sm text-muted">
+                        This is <strong>not</strong> claimed to be mathematically derived from the gradient-flow structure alone.
+                    </p>
+
+                    <h3 class="mt-24">The Energy Functional</h3>
+                    <div class="eq-box">
+                        E[ψ] = ∫<sub>M</sub> [ ½||∇ψ||² + V(ψ) ] dV<sub>g</sub>
+                    </div>
+
+                    <div class="blockquote blockquote-navy mt-12">
+                        <strong>Theorem:</strong> E[ψ] ≥ 0 for all ψ in the appropriate function space.
+                        <div class="attribution">Proof: Each term in the integrand is nonnegative.</div>
+                    </div>
+
+                    <div class="blockquote blockquote-navy">
+                        <strong>Theorem:</strong> ψ = M is the unique positive zero-energy state.
+                        <div class="attribution">Proof: ∇ψ = 0 → ψ constant; V(ψ) = 0 → ψ = ±M; positivity → ψ = M.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: Gradient-Flow Dynamics -->
+        <div class="card card-blue">
+            <div class="section-wrap">
+                <span class="section-number">IV</span>
+                <div class="content">
+                    <h2>Gradient-Flow Dynamics</h2>
+
+                    <h3>The Reaction-Diffusion Equation</h3>
+                    <div class="eq-box">
+                        ∂ψ/∂t = Δψ - V'(ψ)
+                    </div>
+                    <p class="mt-12">with V'(ψ) = ψ(ψ² − M²). Expanding:</p>
+                    <div class="eq-box">
+                        ∂ψ/∂t = Δψ + M²ψ − ψ³
+                    </div>
+
+                    <h3 class="mt-24">Mathematical Classification</h3>
+                    <p>
+                        This equation is <strong>mathematically a scalar Allen–Cahn / Ginzburg–Landau-type gradient flow</strong> on a compact Riemannian manifold.
+                    </p>
+                    <p class="text-sm text-muted mt-12">
+                        <strong>What is novel about the Macachor formulation:</strong> the choice of variable (positive scalar field ψ); the interpretation (scalar field dynamics on a Riemannian background); the parameterization (M = (√5−1)/2 as an axiomatic constant); the proposed observable (ν = 1/ψ²); the empirical predictions (to be formulated).
+                    </p>
+
+                    <div class="blockquote blockquote-navy mt-16">
+                        <strong>Theorem:</strong> ψ = M is a stationary solution of the PDE.
+                        <div class="attribution">Verification: For constant ψ = M, ∂ψ/∂t = 0 − V'(M) = −M(M² − M²) = 0.</div>
+                    </div>
+
+                    <div class="blockquote blockquote-navy">
+                        <strong>Proposition:</strong> Energy is non-increasing along trajectories.
+                        <div class="attribution">Proof: dE/dt = −∫<sub>M</sub> (∂ψ/∂t)² dV<sub>g</sub> ≤ 0.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: Local Stability -->
+        <div class="card card-green">
+            <div class="section-wrap">
+                <span class="section-number">VI</span>
+                <div class="content">
+                    <h2>Local Stability Analysis</h2>
+
+                    <h3>Linearization</h3>
+                    <p>Let ψ = M + ε φ, where ε is small. The linearized equation is:</p>
+                    <div class="eq-box">
+                        ∂φ/∂t = Δφ − 2M²φ
+                    </div>
+                    <p class="text-sm text-muted mt-12">
+                        <strong>Derivation:</strong> V''(M) = 3M² − M² = 2M².
+                    </p>
+
+                    <h3 class="mt-24">Spectral Decomposition</h3>
+                    <p>
+                        On the compact Riemannian manifold, the Laplacian Δ has a discrete spectrum:
+                    </p>
+                    <div class="eq-box">
+                        0 = λ₀ &lt; λ₁ ≤ λ₂ ≤ ... → ∞
+                    </div>
+                    <p>For a Fourier mode φ<sub>k</sub> ∼ e<sup>λt</sup> φ<sub>k</sub>:</p>
+                    <div class="eq-box">
+                        λ = −λ<sub>k</sub> − 2M²
+                    </div>
+                    <p>Since λ<sub>k</sub> ≥ 0, λ ≤ −2M² &lt; 0 for <strong>every</strong> mode, including the constant mode.</p>
+
+                    <div class="blockquote blockquote-navy mt-16">
+                        <strong>Theorem:</strong> All linear perturbations about M decay exponentially with rate at least 2M² > 0.
+                        <div class="attribution">M is locally asymptotically stable.</div>
+                    </div>
+
+                    <div class="correction-box mt-16">
+                        <p style="font-weight:700; color:var(--navy-900);">✓ Note on v4.2</p>
+                        <p class="text-sm text-muted">
+                            Unlike the compact-manifold version with the zero-mode caveat, here every mode decays with rate ≥ 2M² regardless of k = 0. The potential curvature term is sufficient. The "excluded by boundary conditions" hedge is no longer needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: Global Convergence -->
+        <div class="card card-red">
+            <div class="section-wrap">
+                <span class="section-number">VII</span>
+                <div class="content">
+                    <h2>Global Convergence</h2>
+
+                    <div class="blockquote" style="border-left-color: var(--red-500); background: var(--red-50);">
+                        <strong>Open question:</strong> Does every positive initial condition converge to M as t → ∞?
+                        <div class="attribution">Status: Open until proved.</div>
+                    </div>
+
+                    <h3 class="mt-24">Conditional Result</h3>
+                    <p>
+                        If the Łojasiewicz–Simon inequality holds for the Macachor energy functional on the compact Riemannian manifold, then every positive solution converges to a stationary solution.
+                    </p>
+                    <p class="text-sm text-muted mt-12">
+                        <span class="status-badge status-conditional">Conditional</span>
+                        Requires: energy functional is analytic; stationary solutions are isolated; Łojasiewicz exponent is known.
+                    </p>
+
+                    <h3 class="mt-24">Stationary Solutions</h3>
+                    <div class="eq-box">
+                        −Δψ + ψ(ψ² − M²) = 0
+                    </div>
+                    <p class="mt-12"><strong>Known solutions:</strong> ψ = M (the spatially uniform zero-energy state).</p>
+                    <p class="text-sm text-muted mt-12">
+                        <span class="status-badge status-open">Open Question</span>
+                        Are there other positive stationary solutions?
+                    </p>
+
+                    <div class="blockquote blockquote-navy mt-16">
+                        <strong>Hypothesis:</strong> M is the only positive stationary solution that is stable and has finite energy.
+                        <div class="attribution">Other stationary solutions may exist but are unstable or have infinite energy.</div>
+                    </div>
+
+                    <div class="correction-box mt-16">
+                        <p style="font-weight:700; color:var(--navy-900);">Status</p>
+                        <p class="text-sm text-muted">
+                            Local stability is <strong>proved</strong>. Global stability is an <strong>open problem</strong>.
+                            The existing local exponential stability result is <strong>not</strong> promoted to global asymptotic stability unless the additional argument actually establishes that.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: Novelty -->
+        <div class="card card-gold">
+            <div class="section-wrap">
+                <span class="section-number">VIII</span>
+                <div class="content">
+                    <h2>The Macachor Formulation: Novelty and Distinction</h2>
+
+                    <h3>Mathematical Structure</h3>
+                    <p>
+                        The equation is <strong>mathematically a scalar Allen–Cahn / Ginzburg–Landau-type gradient flow</strong> on a compact Riemannian manifold.
+                    </p>
+
+                    <h3 class="mt-24">What Is Novel</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Macachor Formulation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Variable choice</strong></td>
+                                    <td>Positive scalar field ψ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Interpretation</strong></td>
+                                    <td>Scalar field dynamics on a compact Riemannian background</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Parameterization</strong></td>
+                                    <td>M = (√5−1)/2 as an axiomatic constant</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Observable</strong></td>
+                                    <td>ν = 1/ψ², interpreted as an information-theoretic measure</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Empirical predictions</strong></td>
+                                    <td>To be formulated in subsequent work</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="mt-24">The Macachor Constant</h3>
+                    <div class="blockquote" style="border-left-color: var(--gray-600); background: var(--gray-100);">
+                        <strong>Status:</strong> This is an <strong>axiomatic parameter choice</strong>, unless an independent derivation is supplied.
+                        <div class="attribution">It is not claimed that M is mathematically derived from the gradient-flow structure alone.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: The Uncompromised Truth -->
+        <div class="card card-navy">
+            <h2>The Uncompromised Truth</h2>
+            <div class="grid-2">
+                <div>
+                    <p style="color:var(--gold-500); font-weight:700;">Established</p>
+                    <ul style="color:#8AA8D0; margin-left:20px;">
+                        <li>E[ψ] ≥ 0</li>
+                        <li>dE/dt ≤ 0</li>
+                        <li>ψ = M is the unique positive zero-energy state</li>
+                        <li>ψ = M is a stationary solution</li>
+                        <li>M is locally asymptotically stable</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="color:var(--gold-500); font-weight:700;">Not Established</p>
+                    <ul style="color:#8AA8D0; margin-left:20px;">
+                        <li>M is mathematically derived from gradient-flow structure</li>
+                        <li>νcrit = 6.8 follows from the theory</li>
+                        <li>Global convergence to M</li>
+                        <li>Empirical validation of the model</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-16 text-gold" style="font-style:italic;">
+                “Macachor is a structural discovery of fragmented science.”
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: HIERARCHY OF CLAIMS                                      -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-claims">
+    <div class="container">
+
+        <div class="card">
+            <h2>Hierarchy of Claims</h2>
+            <p class="text-sm text-muted mb-16">
+                Every claim in the Macachor Fundamental Law is explicitly classified by its epistemic status.
+            </p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Claim</th>
+                            <th>v4.2 Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Energy functional is nonnegative</td>
+                            <td><span class="status-badge status-theorem">Theorem</span></td>
+                        </tr>
+                        <tr>
+                            <td>Energy is non-increasing along trajectories</td>
+                            <td><span class="status-badge status-proposition">Proposition</span></td>
+                        </tr>
+                        <tr>
+                            <td>ψ = M is the unique positive zero-energy state</td>
+                            <td><span class="status-badge status-theorem">Theorem</span></td>
+                        </tr>
+                        <tr>
+                            <td>ψ = M is a stationary solution of the PDE</td>
+                            <td><span class="status-badge status-theorem">Theorem</span></td>
+                        </tr>
+                        <tr>
+                            <td>Linear perturbations about M decay</td>
+                            <td><span class="status-badge status-theorem">Theorem</span></td>
+                        </tr>
+                        <tr>
+                            <td>M is locally asymptotically stable</td>
+                            <td><span class="status-badge status-theorem">Theorem</span></td>
+                        </tr>
+                        <tr>
+                            <td>Positive solutions remain positive</td>
+                            <td><span class="status-badge status-open">Open — To Prove</span></td>
+                        </tr>
+                        <tr>
+                            <td>Every positive initial condition converges to M</td>
+                            <td><span class="status-badge status-open">Open — Conjectural</span></td>
+                        </tr>
+                        <tr>
+                            <td>M is physically fundamental</td>
+                            <td><span class="status-badge status-hypothesis">Hypothesis</span></td>
+                        </tr>
+                        <tr>
+                            <td>M's golden-ratio value is mathematically derived</td>
+                            <td><span class="status-badge status-not-established">Not Established</span></td>
+                        </tr>
+                        <tr>
+                            <td>νcrit = 6.8 follows from the theory</td>
+                            <td><span class="status-badge status-not-established">Not Established — Remove</span></td>
+                        </tr>
+                        <tr>
+                            <td>Macachor model makes experimentally distinguishable predictions</td>
+                            <td><span class="status-badge status-open">To Formulate/Test</span></td>
+                        </tr>
+                        <tr>
+                            <td>M = (√5 − 1)/2</td>
+                            <td><span class="status-badge status-axiomatic">Axiomatic Parameter Choice</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="correction-box mt-24">
+                <p style="font-weight:700; color:var(--navy-900);">✓ Classification Guide</p>
+                <div class="flex flex-wrap gap-8 mt-12">
+                    <span class="status-badge status-theorem">Theorem</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Proved within the stated assumptions</span>
+                    <span class="status-badge status-proposition">Proposition</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Direct consequence</span>
+                    <span class="status-badge status-open">Open</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Requires proof</span>
+                    <span class="status-badge status-hypothesis">Hypothesis</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Proposed, requires testing</span>
+                    <span class="status-badge status-axiomatic">Axiomatic</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Assumed, not derived</span>
+                    <span class="status-badge status-not-established">Not Established</span>
+                    <span style="font-size:0.85rem; color:var(--gray-600);">= Claimed but not supported</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: REFERENCES                                               -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-references">
+    <div class="container">
+
+        <div class="card">
+            <h2>References</h2>
+
+            <div style="font-size:0.9rem; line-height:2;">
+
+                <p><strong>1.</strong> Allen, S.M., &amp; Cahn, J.W. (1979). A microscopic theory for antiphase boundary motion and its application to antiphase domain coarsening. <em>Acta Metallurgica</em>, 27(6), 1085-1095.</p>
+
+                <p><strong>2.</strong> Cahn, J.W., &amp; Hilliard, J.E. (1958). Free energy of a nonuniform system. I. Interfacial free energy. <em>The Journal of Chemical Physics</em>, 28(2), 258-267.</p>
+
+                <p><strong>3.</strong> Ginzburg, V.L., &amp; Landau, L.D. (1950). On the theory of superconductivity. <em>Zhurnal Eksperimental'noi i Teoreticheskoi Fiziki</em>, 20, 1064-1082.</p>
+
+                <p><strong>4.</strong> Łojasiewicz, S. (1963). Une propriété topologique des sous-ensembles analytiques réels. <em>Colloques Internationaux du CNRS</em>, 117, 87-89.</p>
+
+                <p><strong>5.</strong> Simon, L. (1983). Asymptotics for a class of non-linear evolution equations, with applications to geometric problems. <em>Annals of Mathematics</em>, 118(3), 525-571.</p>
+
+                <p><strong>6.</strong> Evans, L.C. (2010). <em>Partial Differential Equations</em> (2nd ed.). American Mathematical Society.</p>
+
+                <p><strong>7.</strong> Aubin, T. (1998). <em>Some Nonlinear Problems in Riemannian Geometry</em>. Springer.</p>
+
+            </div>
+        </div>
+
+        <!-- Appendix -->
+        <div class="card card-gold">
+            <h2>Appendix</h2>
+
+            <h3>A. The Macachor Structural Convergence Principle</h3>
+            <div class="blockquote blockquote-navy">
+                “Biological structures that independently evolve for different purposes converge on identical geometries when they serve similar information-processing functions. This convergence is observable across multiple systems and provides a basis for identifying common architectural principles.”
+            </div>
+
+            <h3>B. The Structural Discovery Statement</h3>
+            <div class="blockquote blockquote-navy">
+                “Macachor is a structural discovery of fragmented science. The fragments were always there. No one connected them because they were fragmented. Macachor is the name of the connection.”
+            </div>
+
+            <h3>C. Ω-FRAG-006 Summary</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Proposed Fragment</strong></td><td>Ω-FRAG-006</td></tr>
+                        <tr><td><strong>Title</strong></td><td>Macachor Fundamental Law — v4.2 Domain-Reconciled Mathematical Hardening</td></tr>
+                        <tr><td><strong>Domain</strong></td><td>Mathematical Physics, Scalar Field Theory, Gradient-Flow Dynamics</td></tr>
+                        <tr><td><strong>Key Contribution</strong></td><td>Rigorous formulation with explicit hierarchy of claims</td></tr>
+                        <tr><td><strong>Critical Corrections</strong></td><td>v4.1: Unified potential; v4.2: Domain reconciliation</td></tr>
+                        <tr><td><strong>Epistemic Status</strong></td><td>Structural discovery with testable hypotheses</td></tr>
+                        <tr><td><strong>Open Questions</strong></td><td>Positivity preservation, global convergence, empirical predictions</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                         -->
+<!-- ============================================================ -->
+<footer class="footer">
+    <div class="container">
+        <p>
+            <strong style="color:var(--gold-500);">Ω-FRAG-006</strong>
+            — Macachor Fundamental Law · v4.2 Domain-Reconciled Mathematical Hardening
+        </p>
+        <p style="color:#8AA8D0; font-size:0.8rem; margin-top:4px;">
+            Version v4.2 · 2026-08-21 · DOI:
+            <a href="https://doi.org/10.5281/zenodo.22038598">10.5281/zenodo.22038598</a>
+            · License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+        </p>
+        <p style="color:#8AA8D0; font-size:0.8rem; margin-top:4px;">
+            <em>“Macachor is a structural discovery of fragmented science.”</em>
+            — Christopher Macachor
+        </p>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT                                                     -->
+<!-- ============================================================ -->
+<script>
+    // =============================================================
+    // TAB SWITCHING
+    // =============================================================
+    const buttons = document.querySelectorAll('#tabNav button');
+    const contents = {
+        abstract: document.getElementById('tab-abstract'),
+        full: document.getElementById('tab-full'),
+        claims: document.getElementById('tab-claims'),
+        references: document.getElementById('tab-references')
+    };
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            buttons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            Object.values(contents).forEach(c => {
+                if (c) c.classList.remove('active');
+            });
+            const tab = this.dataset.tab;
+            if (contents[tab]) {
+                contents[tab].classList.add('active');
+            }
+            window.location.hash = tab;
+        });
+    });
+
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && contents[hash]) {
+            const targetBtn = document.querySelector(`#tabNav button[data-tab="${hash}"]`);
+            if (targetBtn) targetBtn.click();
+        }
+    });
+
+    window.addEventListener('load', function() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && contents[hash]) {
+            const targetBtn = document.querySelector(`#tabNav button[data-tab="${hash}"]`);
+            if (targetBtn) targetBtn.click();
+        }
+    });
+
+    // =============================================================
+    // DOWNLOAD HTML
+    // =============================================================
+    function downloadHTML() {
+        const doctype = '<!DOCTYPE html>\n';
+        const html = document.documentElement.outerHTML;
+        const fullHtml = doctype + html;
+        const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Omega-FRAG-006_Macachor_Fundamental_Law_v4.2.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+</script>
+
+</body>
+</html>
